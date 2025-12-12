@@ -723,13 +723,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 141862681727959697, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_Size.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 141862681727959697, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_Size.z
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 141862681727959697, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_Center.y
+      value: 0.38
+      objectReference: {fileID: 0}
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.56622
       objectReference: {fileID: 0}
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.031
       objectReference: {fileID: 0}
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.z
@@ -763,6 +775,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6039700855833780170, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039700855833780170, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699487354763606064, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212563134540830779, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 917b93eb0b266104c95000a6955ce2dd, type: 2}
     - target: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_Name
       value: Beaver
