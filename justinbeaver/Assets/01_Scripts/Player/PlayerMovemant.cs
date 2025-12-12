@@ -1,64 +1,97 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
-public class PlayerMovemant : MonoBehaviour
-{
-    public float moveSpeed = 5f;
-    public float jumpHeight = 2f;
-    public float gravity = -9.81f;
 
-    private CharacterController controller;
+public class PlayerMovement : MonoBehaviour
+{
+
+    [Header("이동/점프 설정")]
+    public float moveSpeed = 6f;
+    public float jumpForce = 5f;
+    public float groundCheckDistance = 1.0f;
+    public float groundOffset = 0.1f;
+
+    [Header("회전 설정")]
+    public float rotateSpeed = 10f;
+
+
+    private Rigidbody rigid;
     private Vector2 moveInput;
-    private Vector3 velocity;
+    private bool isGrounded;
+
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        rigid = GetComponent<Rigidbody>();
+        rigid.freezeRotation = true;
     }
 
-    private void Update()
+
+
+    private void FixedUpdate()
     {
+        GroundCheck();
         Move();
-        ApplyGravity();
     }
 
-    private void Move()
-    {
-        Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        controller.Move((moveDir * moveSpeed + new Vector3(0, velocity.y, 0)) * Time.deltaTime);
-    }
-
-    private void ApplyGravity()
-    {
-        if (controller.isGrounded && velocity.y < 0f)
-        {
-            velocity.y = -1f;  // 살짝 눌러 붙게
-        }
-        else
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-    }
 
     private void Jump()
     {
-        if (controller.isGrounded)
+        Vector3 vel = rigid.linearVelocity;
+        vel.y = 0f;
+        rigid.linearVelocity = vel;
+
+        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+
+
+    private void Move()
+    {
+        Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        // 정규화
+        if (move.sqrMagnitude > 1f)
+            move.Normalize();
+
+        // 이동
+        Vector3 currentVel = rigid.linearVelocity;
+        Vector3 targetVel = move * moveSpeed;
+
+        rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
+
+        
+        if (move.sqrMagnitude > 0.001f)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Quaternion targetRot = Quaternion.LookRotation(move);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRot,
+                rotateSpeed * Time.fixedDeltaTime
+            );
         }
     }
 
-    // Input System 콜백
-    public void OnMove(InputAction.CallbackContext context)
+
+    private void GroundCheck()
     {
-        moveInput = context.ReadValue<Vector2>();
+        Vector3 origin = transform.position + Vector3.up * groundOffset;
+        isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance);
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+
+
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (context.performed)
+        moveInput = ctx.ReadValue<Vector2>();
+    }
+
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && isGrounded)
+        {
             Jump();
+        }
     }
 }
