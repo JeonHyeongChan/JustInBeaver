@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Test : MonoBehaviour
+public class Test2 : MonoBehaviour
 {
     //한글 되는지 테스트
 }
