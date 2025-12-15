@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckDistance = 1.0f;
     public float groundOffset = 0.1f;
 
-
     [Header("구르기 설정")]
     public float rollSpeed = 10f;        //구르기 시 속도
     public float rollDuration = 0.35f;   //구르기 지속 시간
@@ -153,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger(HashRoll);
         }
     }
+
 
     private void RollUpdate()
     {
