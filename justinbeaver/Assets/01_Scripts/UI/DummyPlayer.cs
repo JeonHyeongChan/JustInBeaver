@@ -8,7 +8,7 @@ public class DummyPlayer : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.gKey.isPressed)
+        if (Keyboard.current.xKey.isPressed)
         {
             gatherGauge.gameObject.SetActive(true);
 
