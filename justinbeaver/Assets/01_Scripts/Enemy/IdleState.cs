@@ -1,19 +1,50 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class IdleState : IEnemyState
 {
+    private EnemyStatePattern enemy;
+    private NavMeshAgent agent;
+    private float updateInterval;
+    private float timeSinceLastUpdate;
+    private Transform player;
+    private float detectRange;
+    public IdleState(EnemyStatePattern Enemy)
+    {
+        enemy = Enemy;
+        agent = enemy.Agent;
+        updateInterval = enemy.UpdateInterval;
+        timeSinceLastUpdate = enemy.TimeSinceLastUpdate;
+        player = enemy.PlayerTrf;
+        detectRange = enemy.DetectRange;
+    }
+
     public void Enter()
     {
-        throw new System.NotImplementedException();
+        timeSinceLastUpdate = updateInterval;
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Update()
     {
-        throw new System.NotImplementedException();
+        timeSinceLastUpdate += Time.deltaTime;
+        if (timeSinceLastUpdate >= updateInterval)
+        {
+            Vector3 randomPosition = enemy.GetRandomPositionNavMesh();
+            agent.SetDestination(randomPosition);
+            timeSinceLastUpdate = 0f;
+        }
+
+        float distance = Vector3.Distance(enemy.transform.position, player.position);
+        if (distance <= detectRange)
+        {
+            enemy.SetState(new ChaseState(enemy));
+        }
+        //만약 비버 갈무리 이벤트 발생시?
+        //enemy.SetState(new ChaseState(enemy));
     }
 }

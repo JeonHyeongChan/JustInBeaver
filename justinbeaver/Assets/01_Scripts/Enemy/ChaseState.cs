@@ -10,7 +10,8 @@ public class ChaseState : IEnemyState
     private float attackRange;
     private Animator animator;
     private float detectRange;
-
+    private float beaverSpottedTime;
+    private float beaverSpottedLastUpdate;
     public ChaseState(EnemyStatePattern Enemy)
     {
         enemy = Enemy;
@@ -20,10 +21,14 @@ public class ChaseState : IEnemyState
         animator = enemy.Animator;
         agent = enemy.Agent;
         detectRange = enemy.DetectRange;
+        beaverSpottedTime = enemy.BeaverSpottedTime;
+        beaverSpottedLastUpdate = enemy.BeaverSpottedLastUpdate;
     }
 
     public void Enter()
     {
+        beaverSpottedLastUpdate = 0f;
+
         agent.SetDestination(player.position);
         agent.isStopped = false;
         agent.speed = moveSpeed;
@@ -39,6 +44,7 @@ public class ChaseState : IEnemyState
 
     public void Update()
     {
+     
         agent.SetDestination(player.position);
         float distance = Vector3.Distance(enemy.transform.position, player.position);
         if (distance <= attackRange)
@@ -49,7 +55,15 @@ public class ChaseState : IEnemyState
         }
         if (distance > detectRange)
         {
-            //enemy.SetState(new IdleState(enemy));
+            beaverSpottedLastUpdate += Time.deltaTime;
+        }
+        else
+        {
+            beaverSpottedLastUpdate = 0f;
+        }
+        if (beaverSpottedLastUpdate >= 3)
+        {
+            enemy.SetState(new IdleState(enemy));
         }
     }
 }

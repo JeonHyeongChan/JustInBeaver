@@ -422,10 +422,16 @@ MonoBehaviour:
   detectRange: 8
   attackRange: 1.7
   moveSpeed: 4
-  agent: {fileID: 0}
+  agent: {fileID: 374745869}
   attackCooldown: 2
-  attackDamage: 0
-  isAttacking: 0
+  attackDamage: 1
+  updateInterval: 2
+  beaverSpottedTime: 3
+--- !u!195 &374745869 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1024078895, guid: eec9152d9762751468df23d17b14bc97, type: 3}
+  m_PrefabInstance: {fileID: 1731479722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1024078894, guid: eec9152d9762751468df23d17b14bc97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2167044
+      value: -6.6
       objectReference: {fileID: 0}
     - target: {fileID: 1024078894, guid: eec9152d9762751468df23d17b14bc97, type: 3}
       propertyPath: m_LocalPosition.y
