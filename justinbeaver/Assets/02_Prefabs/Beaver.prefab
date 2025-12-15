@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 1749290515242333918}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.145, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -772,12 +772,15 @@ GameObject:
   - component: {fileID: 5205576479530401321}
   - component: {fileID: 7212563134540830779}
   - component: {fileID: 2673229912768098829}
+  - component: {fileID: 7351101819128119874}
   - component: {fileID: 2026462963143823724}
+  - component: {fileID: 6522455464424817664}
+  - component: {fileID: 2700360685821782904}
   - component: {fileID: 6039700855833780170}
   - component: {fileID: 141862681727959697}
   m_Layer: 0
   m_Name: Beaver
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -832,7 +835,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4280414273166944684}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!95 &7212563134540830779
 Animator:
   serializedVersion: 7
@@ -843,7 +846,7 @@ Animator:
   m_GameObject: {fileID: 8852819285662168690}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 877d9429060ffb64ba67e3186775ac0c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 51222106d8f6cc94fa52f3ee3ad30608, type: 2}
+  m_Controller: {fileID: 9100000, guid: 917b93eb0b266104c95000a6955ce2dd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -980,11 +983,44 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2026462963143823724}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnRoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b0a6e44b-ab5f-4017-b627-73f2a7f2d871
+    m_ActionName: 'Player/Rool[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7351101819128119874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c9b97d1b1e8ba4c8fe8b9dbf51076e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerContext
+  playerMovement: {fileID: 2026462963143823724}
+  playerAnimator: {fileID: 7212563134540830779}
+  playerRigid: {fileID: 6039700855833780170}
+  playerhealth: {fileID: 6522455464424817664}
+  playerStateMachine: {fileID: 2700360685821782904}
 --- !u!114 &2026462963143823724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,10 +1034,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovemant
   moveSpeed: 5
-  jumpForce: 5
+  jumpForce: 4.5
   groundCheckDistance: 1
   groundOffset: 0.1
+  rollSpeed: 0.05
+  rollDuration: 0.01
+  rollCooldown: 0.3
   rotateSpeed: 10
+  animator: {fileID: 7212563134540830779}
+--- !u!114 &6522455464424817664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1285c7f083b541e47b5df0659ef80eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 3
+--- !u!114 &2700360685821782904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c21b03b045bcc4e9a7d4469322705f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
 --- !u!54 &6039700855833780170
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1048,8 +1113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.61, y: 0.55, z: 1}
-  m_Center: {x: 0, y: 0.37, z: 0}
+  m_Size: {x: 0.61, y: 0.66, z: 1.29}
+  m_Center: {x: 0, y: 0.38, z: 0}
 --- !u!1 &8943125863728703080
 GameObject:
   m_ObjectHideFlags: 0
