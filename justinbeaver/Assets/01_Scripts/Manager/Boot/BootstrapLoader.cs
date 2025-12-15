@@ -4,6 +4,6 @@ public class BootstrapLoader : MonoBehaviour
 {
     private void Start()
     {
-        SceneController.Instance.LoadScene(SceneType.BeaverHouse);
+        SceneController.Instance.LoadScene(SceneType.Title);
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public enum SceneType
 {
+    Title,
     BeaverHouse,
     HumanHouse
 }
@@ -17,6 +18,7 @@ public class SceneController : MonoBehaviour
     private static readonly Dictionary<SceneType, string> SceneMap = 
         new Dictionary<SceneType, string>
         {
+            { SceneType.Title, "TitleScene" },
             { SceneType.BeaverHouse, "BeaverHouseScene" },
             { SceneType.HumanHouse, "HumanHouseScene" }
         };
