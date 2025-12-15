@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -27,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
 
-    private bool jumpLocked;   // 점프 후 착지 전까지 재점프 금지
-    private bool wasGrounded;  // 착지 판정용
+    private bool jumpLocked;            //점프 후 착지 전까지 재점프 금지
+    private bool wasGrounded;           //착지 판정용
 
     private bool isRolling;
     private float rollEndTime;
@@ -86,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         vel.y = 0f;
         rigid.linearVelocity = vel;
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
         jumpLocked = true; //점프 소비(착지 전까지 재점프 금지)
     }
 
@@ -163,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 rollVel = rollDir * rollSpeed;
         rigid.linearVelocity = new Vector3(rollVel.x, currentVel.y, rollVel.z);
 
+
         //구르는 동안 방향 고정 회전
         Quaternion targetRot = Quaternion.LookRotation(rollDir);
         transform.rotation = Quaternion.Slerp(
@@ -216,10 +215,9 @@ public class PlayerMovement : MonoBehaviour
         if (isRolling)
         {
             return;
-        }    
+        }
 
-        
-        if (isGrounded)
+        if (isGrounded && !jumpLocked)
         {
             Jump();
         }
