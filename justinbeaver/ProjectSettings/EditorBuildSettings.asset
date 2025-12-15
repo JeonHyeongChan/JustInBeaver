@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/03_Scenes/Test/KTY/BootstrapScene.unity
+    path: Assets/03_Scenes/BootstrapScene.unity
     guid: 8530e9781e4050441a82abd1690ae1e9
   - enabled: 1
-    path: Assets/03_Scenes/Test/KTY/TitleScene.unity
+    path: Assets/03_Scenes/TitleScene.unity
     guid: 28b4a9d4bc8697f4a81886b336b4525e
   - enabled: 1
-    path: Assets/03_Scenes/Test/KTY/BeaverHouseScene.unity
+    path: Assets/03_Scenes/BeaverHouseScene.unity
     guid: 2d791d44658228e44827678dcab5fae3
   - enabled: 1
-    path: Assets/03_Scenes/Test/KTY/HumanHouseScene.unity
+    path: Assets/03_Scenes/HumanHouseScene.unity
     guid: 9a73d686ab2c95b40931c25abc0bb5ae
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
