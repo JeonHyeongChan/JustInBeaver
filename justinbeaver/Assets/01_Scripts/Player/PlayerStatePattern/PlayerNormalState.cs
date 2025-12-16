@@ -9,7 +9,7 @@
 
     public void Enter()
     {
-        playerContext.playerMovement.enabled = true;
+        playerContext.playerController.enabled = true;
     }
 
     public void Update() {}

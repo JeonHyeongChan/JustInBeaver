@@ -14,9 +14,9 @@ public class PlayerDieState : IPlayerState
 
     public void Enter()
     {
-        if (playerContext.playerMovement)
+        if (playerContext.playerController)
         {
-            playerContext.playerMovement.enabled = false;
+            playerContext.playerController.enabled = false;
         }
 
         if (playerContext.playerRigid)

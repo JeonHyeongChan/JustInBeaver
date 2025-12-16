@@ -3,7 +3,7 @@
 public class PlayerContext : MonoBehaviour
 {
     [Header("참조")]
-    public PlayerMovement playerMovement;
+    public PlayerController playerController;
     public Animator playerAnimator;
     public Rigidbody playerRigid;
     public PlayerHealth playerhealth;
@@ -16,9 +16,9 @@ public class PlayerContext : MonoBehaviour
             playerRigid = GetComponent<Rigidbody>();
         }    
             
-        if (!playerMovement)
+        if (!playerController)
         {
-            playerMovement = GetComponent<PlayerMovement>();
+            playerController = GetComponent<PlayerController>();
         }
 
         if (!playerAnimator)
