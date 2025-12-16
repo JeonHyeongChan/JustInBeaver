@@ -1,17 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
-    public GameObject root;
+    public GameObject inventoryPanel;
 
-    public void Toggle()
+    void Update()
     {
-        root.SetActive(!root.activeSelf);
-    }
-
-    public void UpdateWeight(float current, float max)
-    {
-        // TMP 텍스트 갱신
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+            Time.timeScale = inventoryPanel.activeSelf ? 0f : 1f;
+        }
     }
 }

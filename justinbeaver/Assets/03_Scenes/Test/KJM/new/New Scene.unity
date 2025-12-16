@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180a4112d3cc064ea91ef1142ce5e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DummyPlayer
-  gatherGauge: {fileID: 0}
+  gatherGauge: {fileID: 1815329251}
 --- !u!135 &130484970
 SphereCollider:
   m_ObjectHideFlags: 0
