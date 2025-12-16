@@ -1,63 +1,50 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System;
 
 public class UIManager : MonoBehaviour
 {
+    public event Action<bool> OnInventoryVisibilityChanged;
+
+    public void RequestToggleInventory()
+    {
+        if (!inventoryUI) return;
+
+        bool open = !inventoryUI.activeSelf;
+        inventoryUI.SetActive(open);
+        hudUI?.SetActive(true);
+
+        OnInventoryVisibilityChanged?.Invoke(open);
+    }
+
+
+
     public static UIManager Instance;
 
-    [Header("InGame")]
     public GameObject hudUI;
     public GameObject inventoryUI;
-    public GameObject gatherGaugeUI;
-    public GameObject escapeResultUI;
-    public UI_GatherGauge gatherGauge;
 
-    [Header("OutGame")]
-    public GameObject shopUI;
-    public GameObject upgradeUI;
-
-    [Header("Common")]
-    public GameObject gameOverUI;
-    public GameObject victoryUI;
+    public event Action<bool> OnInventoryVisibilityChanged;
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         HideAllUI();
     }
 
-    public void ShowEscapeResultUI(int reward, bool success)
+    public void RequestToggleInventory()
     {
-        HideAllUI();
-        escapeResultUI.SetActive(true);
-    }
+        if (!inventoryUI) return;
 
+        bool isOpen = inventoryUI.activeSelf;
+        inventoryUI.SetActive(!isOpen);
+        hudUI?.SetActive(true);
 
-    public UI_HUD hud;
-
-    public void ShowGameUI()
-    {
-        HideAllUI();
-        hudUI.SetActive(true);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            Time.timeScale = inventoryUI.activeSelf ? 0f : 1f;
-        }
-    }
-
-    public void HideAllUI()
-    {
-        if (hudUI) hudUI.SetActive(false);
-        if (inventoryUI) inventoryUI.SetActive(false);
-        if (gatherGaugeUI) gatherGaugeUI.SetActive(false);
-        if (escapeResultUI) escapeResultUI.SetActive(false);
-        if (shopUI) shopUI.SetActive(false);
-        if (upgradeUI) upgradeUI.SetActive(false);
-        if (gameOverUI) gameOverUI.SetActive(false);
-        if (victoryUI) victoryUI.SetActive(false);
+        OnInventoryVisibilityChanged?.Invoke(!isOpen);
     }
 }
