@@ -28,7 +28,7 @@ public class AttackState : IEnemyState
 
     public void Exit()
     {
-       
+        enemy.hitBox.SetActive(false);
         enemy.StopAttackCooldown();
     }
 

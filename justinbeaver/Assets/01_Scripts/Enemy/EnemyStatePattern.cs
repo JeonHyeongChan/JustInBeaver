@@ -17,9 +17,9 @@ public class EnemyStatePattern : MonoBehaviour
     bool isAttacking = false;
     public float updateInterval;
     private float timeSinceLastUpdate;
-
     public float beaverSpottedTime;
     private float beaverSpottedLastUpdate;
+    public GameObject hitBox;
 
     Vector3 alertTargetPos;
 
@@ -45,7 +45,7 @@ public class EnemyStatePattern : MonoBehaviour
     private void Start()
     {
         SetState(new IdleState(this));
-       
+       hitBox.SetActive(false);
     }
     private void Update()
     {
@@ -62,10 +62,12 @@ public class EnemyStatePattern : MonoBehaviour
     }
     IEnumerator AttackDelay()
     {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        float animLength = state.length;
         while (isAttacking)
         {
             Attack(attackDamage);
-            yield return new WaitForSeconds(attackCooldown);
+            yield return new WaitForSeconds(animLength);
         }
     }
 
@@ -84,7 +86,20 @@ public class EnemyStatePattern : MonoBehaviour
 
         isAttackAnimPlaying = false;
     }
+    IEnumerator HitboxWindow()
+    {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        float animLength = state.length;
+        // 킥이 실제로 맞는 프레임까지 약간 대기
+        yield return new WaitForSeconds(animLength);
 
+        hitBox.SetActive(true);
+
+        // 판정 유지 시간
+        yield return new WaitForSeconds(animLength);
+
+        hitBox.SetActive(false);
+    }
     public void StartAttackCooldown()
     {
         if (isAttacking) { return; }
@@ -108,8 +123,9 @@ public class EnemyStatePattern : MonoBehaviour
         animator.ResetTrigger("isKicking");
         animator.SetTrigger("isKicking");
         //플레이어 데미지 처리
+        
         StartCoroutine(AttackAnimLock());
-
+        StartCoroutine(HitboxWindow());
     }
 
     public void Sleep()
