@@ -35,7 +35,8 @@ public class EnemyStatePattern : MonoBehaviour
     public float BeaverSpottedLastUpdate => beaverSpottedLastUpdate;
     public Vector3 AlertTargetPos => alertTargetPos;
 
-
+    private bool isAttackAnimPlaying = false;
+    public bool IsAttackAnimPlaying => isAttackAnimPlaying;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -68,6 +69,22 @@ public class EnemyStatePattern : MonoBehaviour
         }
     }
 
+    IEnumerator AttackAnimLock()
+    {
+        // Animator 반영 대기
+        yield return null;
+
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        float animLength = state.length;
+
+        if (animLength < 0.1f)
+            animLength = 0.3f; // 안전장치
+
+        yield return new WaitForSeconds(animLength);
+
+        isAttackAnimPlaying = false;
+    }
+
     public void StartAttackCooldown()
     {
         if (isAttacking) { return; }
@@ -83,9 +100,16 @@ public class EnemyStatePattern : MonoBehaviour
 
     void Attack(int Damage)
     {
-   
-        //플레이어 데미지 처리
+        if (currentState is IdleState) return;
+        if (isAttackAnimPlaying) return;
+        isAttackAnimPlaying = true;
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        animator.ResetTrigger("isKicking");
         animator.SetTrigger("isKicking");
+        //플레이어 데미지 처리
+        StartCoroutine(AttackAnimLock());
+
     }
 
     public void Sleep()

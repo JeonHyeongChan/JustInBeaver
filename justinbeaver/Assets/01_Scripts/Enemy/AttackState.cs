@@ -34,9 +34,9 @@ public class AttackState : IEnemyState
 
     public void Update()
     {
-
+        if (enemy.IsAttackAnimPlaying) return;
         float distance = Vector3.Distance(enemy.transform.position, player.position);
-        if (distance >= attackRange)
+        if (distance > attackRange)
         {
             enemy.SetState(new ChaseState(enemy));
         }
