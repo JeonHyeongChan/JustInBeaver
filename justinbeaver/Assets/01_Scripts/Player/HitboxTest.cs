@@ -14,6 +14,7 @@ public class HitboxTest: MonoBehaviour
         {
             return;
         }
+
         health.TakeDamage();
         Debug.Log("체력 감소");
     }
