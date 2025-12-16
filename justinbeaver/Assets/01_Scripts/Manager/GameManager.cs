@@ -47,4 +47,22 @@ public class GameManager : MonoBehaviour
         //맵 초기화 (인간포함)
         //spawner.InitializeSpawner();
     }
+
+    public void EndingAfterReturnToTitle()
+    {
+        Debug.Log("Ending and To Title");
+
+        CleanGameState();
+
+        UIManager.Instance.HideAllUI();
+
+        SceneController.Instance.LoadScene(SceneType.Title);
+    }
+
+    private void CleanGameState()
+    {
+        //RuleManager 리셋
+        //플레이어 상태 저장
+        //등등
+    }
 }
