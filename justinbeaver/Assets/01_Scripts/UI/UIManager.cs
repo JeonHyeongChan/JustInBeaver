@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,10 +19,17 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    void Awake()
+    private void Awake()
     {
-        Instance = this;
-        HideAllUI();
+        if (Instance == null)
+        {
+            Instance = this;
+            HideAllUI();
+        }
+        else
+        {
+            Destroy(gameObject);    // 싱글톤으로 수정
+        }
     }
 
     public void ShowEscapeResultUI(int reward, bool success)
