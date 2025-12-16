@@ -30,10 +30,21 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Scene Loaded: {scene.name}");
 
+        bool isTitle = scene.name == "TitleScene";
+
+        Beaver.Instance.gameObject.SetActive(!isTitle); // TitleScene에서는 비활성화 (추락으로 인한 물리연산 적용 안되게)
+
+        //비버 Spawn 처리
+        if (!isTitle && BeaverSpawnPoint.Current != null)
+        {
+            Beaver.Instance.transform.position = BeaverSpawnPoint.Current.position;
+        }
+
+        //게임 초기화
         if (scene.name == "BeaverHouseScene")
         {
             InitializeGame();
-        }
+        }        
     }
 
     private void InitializeGame()

@@ -769,6 +769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5007452303679095742}
+  - component: {fileID: -8047579269919317896}
   - component: {fileID: 5205576479530401321}
   - component: {fileID: 7212563134540830779}
   - component: {fileID: 2673229912768098829}
@@ -805,6 +806,18 @@ Transform:
   - {fileID: 8035022597506640880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8047579269919317896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe41fbcddc9a4bd40974bc30b789b7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Beaver
 --- !u!205 &5205576479530401321
 LODGroup:
   m_ObjectHideFlags: 0
