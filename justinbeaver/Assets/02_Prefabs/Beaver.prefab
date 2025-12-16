@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 2026462963143823724}
   - component: {fileID: 6522455464424817664}
   - component: {fileID: 2700360685821782904}
+  - component: {fileID: 6437610915515269419}
   - component: {fileID: 6039700855833780170}
   - component: {fileID: 141862681727959697}
   m_Layer: 0
@@ -999,6 +1000,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b0a6e44b-ab5f-4017-b627-73f2a7f2d871
     m_ActionName: 'Player/Rool[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2026462963143823724}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnGather
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f2a74d5f-aec1-4ce3-9923-de3ccfed202b
+    m_ActionName: 'Player/Gather[/Keyboard/x]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -1016,11 +1033,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c9b97d1b1e8ba4c8fe8b9dbf51076e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerContext
-  playerMovement: {fileID: 2026462963143823724}
+  playerController: {fileID: 2026462963143823724}
   playerAnimator: {fileID: 7212563134540830779}
   playerRigid: {fileID: 6039700855833780170}
   playerhealth: {fileID: 6522455464424817664}
   playerStateMachine: {fileID: 2700360685821782904}
+  playerGatherDetector: {fileID: 6437610915515269419}
+  gatherGauge: {fileID: 0}
+  isGatherHolding: 1
+  gatherCancelDistance: 1
+  gatherResumeWindow: 1
+  lastGatherTarget: {fileID: 0}
+  lastGatherProgress: 0
+  lastGatherCancelTime: 0
 --- !u!114 &2026462963143823724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,6 +1092,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c21b03b045bcc4e9a7d4469322705f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
+--- !u!114 &6437610915515269419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec8ec38291ebe746b70cbe34e71d5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGatherDetector
 --- !u!54 &6039700855833780170
 Rigidbody:
   m_ObjectHideFlags: 0
