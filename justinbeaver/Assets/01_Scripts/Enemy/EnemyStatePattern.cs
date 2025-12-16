@@ -20,8 +20,11 @@ public class EnemyStatePattern : MonoBehaviour
     public float beaverSpottedTime;
     private float beaverSpottedLastUpdate;
     public GameObject hitBox;
+    public LightView lightView;
+    public float movementRange;
 
     Vector3 alertTargetPos;
+    Vector3 lightInEnemy;
 
     public float MoveSpeed => moveSpeed;
     public float DetectRange => detectRange;
@@ -37,10 +40,13 @@ public class EnemyStatePattern : MonoBehaviour
 
     private bool isAttackAnimPlaying = false;
     public bool IsAttackAnimPlaying => isAttackAnimPlaying;
+    public LightView LightView => lightView;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        lightView = GetComponent<LightView>();
     }
     private void Start()
     {
@@ -59,6 +65,10 @@ public class EnemyStatePattern : MonoBehaviour
     public void SetAlertTargetPos(Vector3 pos)
     {
         alertTargetPos = pos;
+    }
+    public void LightViewTargetPos(Vector3 pos)
+    {
+       lightInEnemy = pos;
     }
     IEnumerator AttackDelay()
     {
@@ -135,11 +145,11 @@ public class EnemyStatePattern : MonoBehaviour
  
     public Vector3 GetRandomPositionNavMesh()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * detectRange;
+        Vector3 randomDirection = Random.insideUnitSphere * movementRange;
         randomDirection += transform.position;
 
         NavMeshHit navHit;
-        if (NavMesh.SamplePosition(randomDirection, out navHit, detectRange, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomDirection, out navHit, movementRange, NavMesh.AllAreas))
         {
             return navHit.position;
         }

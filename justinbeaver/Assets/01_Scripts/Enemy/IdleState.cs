@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class IdleState : IEnemyState
 {
@@ -9,6 +10,7 @@ public class IdleState : IEnemyState
     private float timeSinceLastUpdate;
     private Transform player;
     private float detectRange;
+    private LightView lightView;
     public IdleState(EnemyStatePattern Enemy)
     {
         enemy = Enemy;
@@ -17,6 +19,8 @@ public class IdleState : IEnemyState
         timeSinceLastUpdate = enemy.TimeSinceLastUpdate;
         player = enemy.PlayerTrf;
         detectRange = enemy.DetectRange;
+        lightView = enemy.LightView;
+
     }
 
     public void Enter()
@@ -40,10 +44,14 @@ public class IdleState : IEnemyState
         }
 
         float distance = Vector3.Distance(enemy.transform.position, player.position);
-        if (distance <= detectRange)
+        if (lightView.HasTarget() || distance <= detectRange)
         {
+            if (lightView.HasTarget())
+                enemy.SetAlertTargetPos(lightView.GetFirstTarget().position);
+            
             enemy.SetState(new ChaseState(enemy));
         }
+
         //만약 비버 갈무리 이벤트 발생시?
         //enemy.SetState(new ChaseState(enemy));
     }

@@ -10,8 +10,9 @@ public class ChaseState : IEnemyState
     private float attackRange;
     private Animator animator;
     private float detectRange;
-    private float beaverSpottedTime;
-    private float beaverSpottedLastUpdate;
+    private float lostTimer;            // 못 본 시간
+    private const float LostLimit = 3f; // 3초 지나면 포기
+    private LightView lightView;
     public ChaseState(EnemyStatePattern Enemy)
     {
         enemy = Enemy;
@@ -21,19 +22,20 @@ public class ChaseState : IEnemyState
         animator = enemy.Animator;
         agent = enemy.Agent;
         detectRange = enemy.DetectRange;
-        beaverSpottedTime = enemy.BeaverSpottedTime;
-        beaverSpottedLastUpdate = enemy.BeaverSpottedLastUpdate;
+        lightView = enemy.LightView;
     }
 
     public void Enter()
     {
-        beaverSpottedLastUpdate = 0f;
+        lostTimer = 0f;
 
-        agent.SetDestination(player.position);
         agent.isStopped = false;
         agent.speed = moveSpeed;
 
         animator.SetBool("isRunning", true);
+
+        if (player != null)
+            agent.SetDestination(player.position);
     }
 
     public void Exit()
@@ -46,6 +48,7 @@ public class ChaseState : IEnemyState
     {
      
         agent.SetDestination(player.position);
+
         float distance = Vector3.Distance(enemy.transform.position, player.position);
         if (distance <= attackRange)
         {
@@ -53,17 +56,21 @@ public class ChaseState : IEnemyState
            
             enemy.SetState(new AttackState(enemy));
         }
-        if (distance > detectRange)
+        agent.isStopped = false;
+        agent.SetDestination(player.position);
+
+        if (lightView != null && lightView.HasTarget())
         {
-            beaverSpottedLastUpdate += Time.deltaTime;
+            lostTimer = 0f;
         }
         else
         {
-            beaverSpottedLastUpdate = 0f;
-        }
-        if (beaverSpottedLastUpdate >= 3)
-        {
-            enemy.SetState(new IdleState(enemy));
+            lostTimer += Time.deltaTime;
+            if (lostTimer >= LostLimit)
+            {
+                enemy.SetState(new IdleState(enemy));
+                return;
+            }
         }
     }
 }
