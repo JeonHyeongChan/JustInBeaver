@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     [Header("이동/점프 설정")]
@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     private float rollEndTime;
     private float nextRollTime;
     private Vector3 rollDir;            //구르기 방향
+
+
+
 
 
     //Animator 파라미터 해시
@@ -88,7 +91,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
     private void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
@@ -117,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
             );
         }
     }
-
 
     private void StartRoll(Vector3 desiredDir)
     {
@@ -153,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void RollUpdate()
     {
         //구르는 동안: xz는 rollDir로 고정, y는 물리 유지
@@ -176,13 +176,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void GroundCheck()
     {
         Vector3 origin = transform.position + Vector3.up * groundOffset;
         isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance);
     }
-
 
     private void UpdateAnimator()
     {
@@ -223,7 +221,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     public void OnRoll(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed)
@@ -238,5 +235,53 @@ public class PlayerMovement : MonoBehaviour
         //입력 방향으로 굴러가게(입력 없으면 forward)
         Vector3 desired = new Vector3(moveInput.x, 0f, moveInput.y);
         StartRoll(desired);
+    }
+
+    public void OnGather(InputAction.CallbackContext ctx)
+    {
+        var context = GetComponent<PlayerContext>();
+        if (context == null)
+        {
+            return;
+        } 
+            
+
+        //누르기 시작
+        if (ctx.started)
+        {
+            context.isGatherHolding = true;
+
+            var target = context.playerGatherDetector != null ? context.playerGatherDetector.currentTarget : null;
+            if (target == null) 
+            {
+                return;
+            }
+
+
+            //시간 내 재입력 + 같은 대상이면 이어서 진행
+            float startProgress = 0f;
+            bool canResume =
+                context.lastGatherTarget == target &&
+                (Time.time - context.lastGatherCancelTime) <= context.gatherResumeWindow;
+
+            if (canResume)
+            {
+                startProgress = context.lastGatherProgress;
+            }
+            else
+            {
+                startProgress = 0f;
+            }
+                
+            context.playerStateMachine.ChangeState(new PlayerGatherState(context, target, startProgress));
+            return;
+        }
+
+        //누르기 종료
+        if (ctx.canceled)
+        {
+            context.isGatherHolding = false;
+            return;
+        }
     }
 }
