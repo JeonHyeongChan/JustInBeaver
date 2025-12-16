@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
 public class UI_TitleInput : MonoBehaviour
 {
     [Header("Buttons")]
