@@ -284,4 +284,24 @@ public class PlayerController : MonoBehaviour
             return;
         }
     }
+
+    /// <summary>
+    /// 상호작용 Z키
+    /// </summary>
+    /// <param name="ctx"></param>
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+            return;
+
+        var detector = GetComponent <PlayerInteractDetector>();
+        if (detector == null)
+            return;
+
+        var target = detector.currentTarget;
+        if (target == null)
+            return;
+
+        target.Interact(this); // 즉각 실행
+    }
 }
