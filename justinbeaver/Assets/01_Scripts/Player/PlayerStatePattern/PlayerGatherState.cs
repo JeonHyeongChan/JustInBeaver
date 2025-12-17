@@ -9,6 +9,8 @@ public class PlayerGatherState : IPlayerState
     private float elapsed;   //누적 진행 시간
     private float duration;  //대상별 총 시간
 
+    private static readonly int HashIsGathering = Animator.StringToHash("IsGathering");
+
     public PlayerGatherState(PlayerContext context, CaptureObject gatherTarget, float startProgress01)
     {
         playerContext = context;
@@ -30,7 +32,9 @@ public class PlayerGatherState : IPlayerState
             playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
             return;
         }
+
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
+
         if(signal != null)
         {
             signal.RaiseGatherStart(target.transform.position);
@@ -39,6 +43,7 @@ public class PlayerGatherState : IPlayerState
         duration = Mathf.Max(0.05f, target.gatherDuration);
         elapsed *= duration;
 
+        playerContext.playerAnimator.SetBool(HashIsGathering, true);
         playerContext.gatherGauge.Show();
         playerContext.gatherGauge.SetValue(elapsed / duration);
     }
@@ -64,6 +69,7 @@ public class PlayerGatherState : IPlayerState
         {
             SaveProgressForResume();
             playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+            playerContext.playerAnimator.SetBool(HashIsGathering, false);
             return;
         }
 
@@ -84,22 +90,31 @@ public class PlayerGatherState : IPlayerState
             playerContext.lastGatherCancelTime = 0f;
 
             playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+            playerContext.playerAnimator.SetBool(HashIsGathering, false);
         }
     }
 
-    public void FixedUpdate() { }
-
+    
     public void Exit()
     {
         if (playerContext.gatherGauge != null)
+        {
             playerContext.gatherGauge.Hide();
+        }
+
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
+
         if (signal != null)
         {
             signal.RaiseGatherEnd();
         }
-        if (playerContext.playerController) playerContext.playerController.enabled = true;
+
+        if (playerContext.playerController)
+        {
+            playerContext.playerController.enabled = true;
+        }
     }
+
 
     private void SaveProgressForResume()
     {
@@ -107,6 +122,7 @@ public class PlayerGatherState : IPlayerState
         playerContext.lastGatherProgress = Mathf.Clamp01(elapsed / duration);
         playerContext.lastGatherCancelTime = Time.time;
     }
+
 
     private void CancelAndReset()
     {
@@ -117,6 +133,9 @@ public class PlayerGatherState : IPlayerState
 
         playerContext.isGatherHolding = false;
         playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+        playerContext.playerAnimator.SetBool(HashIsGathering, false);
     }
-  
+
+    public void FixedUpdate() { }
+
 }
