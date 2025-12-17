@@ -33,7 +33,7 @@ public class AlertState : IEnemyState
             enemy.SetState(new IdleState(enemy));
         }
         float distance = Vector3.Distance(enemy.transform.position, player.position);
-        if (distance <= detectRange)
+        if (distance <= detectRange || enemy.LightView.HasTarget())
         {
             enemy.SetState(new ChaseState(enemy));
         }
