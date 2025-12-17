@@ -9,7 +9,7 @@ public class PlayerContext : MonoBehaviour
     public PlayerHealth playerhealth;
     public PlayerStateMachine playerStateMachine;
     public PlayerGatherDetector playerGatherDetector;
-    public GatherGauge gatherGauge;
+    //public GatherGauge gatherGauge;
     
 
     [Header("갈무리 설정")]
@@ -22,8 +22,7 @@ public class PlayerContext : MonoBehaviour
     //진행 저장(재입력 이어서 하기용)
     [HideInInspector] public CaptureObject lastGatherTarget;
     [HideInInspector] public float lastGatherProgress;
-    [HideInInspector] public float lastGatherCancelTime;   //취소된 시각
-
+    [HideInInspector] public float lastGatherCancelTime;   //취소된 시각    
 
     private void Awake()
     {
@@ -57,9 +56,9 @@ public class PlayerContext : MonoBehaviour
             playerGatherDetector = GetComponent<PlayerGatherDetector>();
         }
 
-        if (!gatherGauge)
-        {
-            gatherGauge = GetComponent<GatherGauge>();
-        }
+        //if (!gatherGauge)
+        //{
+        //    gatherGauge = GetComponent<GatherGauge>();
+        //}
     }
 }

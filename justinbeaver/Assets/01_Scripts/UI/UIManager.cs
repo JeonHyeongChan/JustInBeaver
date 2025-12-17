@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
-    public UI_GatherGauge gatherGauge;
+    public GatherGauge gatherGauge;
 
     [Header("OutGame")]
     public GameObject shopUI;
@@ -19,11 +20,15 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
+    public GatherGauge GatherGauge => gatherGauge;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
             HideAllUI();
         }
         else
@@ -32,12 +37,52 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        BindSceneUI();
+    }
+
+    private void BindSceneUI()
+    {
+        gatherGauge = FindAnyObjectByType<GatherGauge>(
+            FindObjectsInactive.Include);
+
+        if (gatherGauge == null)
+        {
+            Debug.Log("GatherGauge Not Found in this Scene");
+            gatherGaugeUI = null;
+            return;
+        }
+
+        gatherGaugeUI = gatherGauge.gameObject;
+        gatherGaugeUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// 갈무리 UI
+    /// </summary>
+    public void ShowGatherGauge()
+    {
+        if (gatherGaugeUI)
+            gatherGaugeUI.SetActive(true);
+    }
+
+    public void HideGahterGauge()
+    {
+        if (gatherGaugeUI)
+            gatherGaugeUI.SetActive(false);
+    }
+
     public void ShowEscapeResultUI(int reward, bool success)
     {
         HideAllUI();
         escapeResultUI.SetActive(true);
     }
-
 
     public UI_HUD hud;
 

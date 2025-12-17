@@ -26,12 +26,12 @@ public class PlayerGatherState : IPlayerState
             return;
         }
 
-        if (playerContext.gatherGauge == null)
-        {
-            Debug.LogError("[PlayerContext] gatherGauge가 연결되지 않았습니다");
-            playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
-            return;
-        }
+        //if (playerContext.gatherGauge == null)
+        //{
+        //    Debug.LogError("[PlayerContext] gatherGauge가 연결되지 않았습니다");
+        //    playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+        //    return;
+        //}
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
 
@@ -44,8 +44,11 @@ public class PlayerGatherState : IPlayerState
         elapsed *= duration;
 
         playerContext.playerAnimator.SetBool(HashIsGathering, true);
-        playerContext.gatherGauge.Show();
-        playerContext.gatherGauge.SetValue(elapsed / duration);
+        //playerContext.gatherGauge.Show();
+        //playerContext.gatherGauge.SetValue(elapsed / duration);
+
+        UIManager.Instance?.ShowGatherGauge();
+        UIManager.Instance?.GatherGauge?.SetValue(elapsed / duration);
     }
 
     public void Update()
@@ -77,7 +80,8 @@ public class PlayerGatherState : IPlayerState
         elapsed += Time.deltaTime;
 
         float t = Mathf.Clamp01(elapsed / duration);
-        playerContext.gatherGauge.SetValue(t);
+        //playerContext.gatherGauge.SetValue(t);
+        UIManager.Instance?.GatherGauge?.SetValue(t);
 
         if (t >= 1f)
         {
@@ -97,10 +101,11 @@ public class PlayerGatherState : IPlayerState
     
     public void Exit()
     {
-        if (playerContext.gatherGauge != null)
-        {
-            playerContext.gatherGauge.Hide();
-        }
+        //if (playerContext.gatherGauge != null)
+        //{
+        //    playerContext.gatherGauge.Hide();
+        //}
+        UIManager.Instance?.HideGahterGauge();
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
 
