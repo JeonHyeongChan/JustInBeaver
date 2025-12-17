@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
-    public GatherGauge gatherGauge;
+    public UI_GatherGauge gatherGauge;
 
     [Header("OutGame")]
     public GameObject shopUI;
@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    public GatherGauge GatherGauge => gatherGauge;
+    public UI_GatherGauge GatherGauge => gatherGauge;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
 
     private void BindSceneUI()
     {
-        gatherGauge = FindAnyObjectByType<GatherGauge>(
+        gatherGauge = FindAnyObjectByType<UI_GatherGauge>(
             FindObjectsInactive.Include);
 
         if (gatherGauge == null)

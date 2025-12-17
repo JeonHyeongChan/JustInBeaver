@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &61314019 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6896987064991718125, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+  m_PrefabInstance: {fileID: 2902155421262802826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &93244858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1134,6 +1145,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &544744883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2061521360688327471, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+  m_PrefabInstance: {fileID: 2902155421262802826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &700610084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,6 +2423,26 @@ CapsuleCollider:
   m_Height: 1.7737476
   m_Direction: 1
   m_Center: {x: 0, y: 0.9981262, z: 0}
+--- !u!1 &1305293792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 663992650360078055, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+  m_PrefabInstance: {fileID: 2902155421262802826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1305293793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305293792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a880f8814a5fc1143997e3c097e2d6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_GatherGauge
+  slider: {fileID: 544744883}
+  TMPtext: {fileID: 61314019}
+  hideOnAwake: 1
 --- !u!1 &1338957222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,10 +2992,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 10810857342641935, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 663992650360078055, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1305293793}
   m_SourcePrefab: {fileID: 100100000, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
