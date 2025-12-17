@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyStatePattern : MonoBehaviour
 {
@@ -51,8 +52,10 @@ public class EnemyStatePattern : MonoBehaviour
     }
     private void Start()
     {
+        BindPlayer();   // 시작시 Player 바인딩
+
         SetState(new IdleState(this));
-       hitBox.SetActive(false);
+        hitBox.SetActive(false);
     }
     private void Update()
     {
@@ -65,17 +68,51 @@ public class EnemyStatePattern : MonoBehaviour
 
     private void OnEnable()
     {
-        if (player == null) return;
-        gatherSignal = player.GetComponent<PlayerGatherSignal>();
-        if (gatherSignal == null) return;
-        gatherSignal.OnGatherStart += HandleGatherStart;
-        gatherSignal.OnGatherEnd += HandleGatherEnd;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        BindPlayer();   //씬 로드 및 활성화 시 재바인딩
+
+        //if (player == null) return;
+        //gatherSignal = player.GetComponent<PlayerGatherSignal>();
+        //if (gatherSignal == null) return;
+        //gatherSignal.OnGatherStart += HandleGatherStart;
+        //gatherSignal.OnGatherEnd += HandleGatherEnd;
     }
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
         if (gatherSignal == null) return;
         gatherSignal.OnGatherStart -= HandleGatherStart;
         gatherSignal.OnGatherEnd -= HandleGatherEnd;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        BindPlayer();   // 씬 이동시 Player 재탐색
+    }
+
+    /// <summary>
+    /// Player 바인딩(Tag로)
+    /// </summary>
+    private void BindPlayer()
+    {
+        if (player != null)
+            return;
+
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject == null)
+            return;
+
+        player = playerObject.transform;
+
+        //gatherSignal 연결
+        gatherSignal = player.GetComponent<PlayerGatherSignal>();
+        if (gatherSignal != null)
+        {
+            gatherSignal.OnGatherStart += HandleGatherStart;
+            gatherSignal.OnGatherEnd += HandleGatherEnd;
+        }
+
     }
 
     private void HandleGatherStart(Vector3 anchorPos)

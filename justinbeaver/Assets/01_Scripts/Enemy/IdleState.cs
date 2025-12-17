@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class IdleState : IEnemyState
 {
@@ -17,7 +16,7 @@ public class IdleState : IEnemyState
         agent = enemy.Agent;
         updateInterval = enemy.UpdateInterval;
         timeSinceLastUpdate = enemy.TimeSinceLastUpdate;
-        player = enemy.PlayerTrf;
+        //player = enemy.PlayerTrf;
         detectRange = enemy.DetectRange;
         lightView = enemy.LightView;
 
@@ -35,6 +34,9 @@ public class IdleState : IEnemyState
 
     public void Update()
     {
+        if (enemy.PlayerTrf == null)
+            return;
+
         timeSinceLastUpdate += Time.deltaTime;
         if (timeSinceLastUpdate >= updateInterval)
         {
@@ -43,7 +45,9 @@ public class IdleState : IEnemyState
             timeSinceLastUpdate = 0f;
         }
 
-        float distance = Vector3.Distance(enemy.transform.position, player.position);
+        //float distance = Vector3.Distance(enemy.transform.position, player.position);
+        float distance = Vector3.Distance(enemy.transform.position, enemy.PlayerTrf.position);
+
         if (lightView.HasTarget() || distance <= detectRange)
         {
             if (lightView.HasTarget())
