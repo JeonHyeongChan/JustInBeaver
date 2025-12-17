@@ -625,6 +625,7 @@ GameObject:
   - component: {fileID: 303824501}
   - component: {fileID: 303824500}
   - component: {fileID: 303824502}
+  - component: {fileID: 303824503}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -684,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 303824499}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 8.6602545, z: -5.0000005}
+  m_LocalPosition: {x: 1.56622, y: 8.6602545, z: -4.9522004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -721,6 +722,18 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &303824503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303824499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6677b74bfbd1ba242a959774162d12c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollowBinder
 --- !u!4 &314443082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3946169285652520675, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
@@ -814,7 +827,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 8.6602545, z: -5.0000005}
+  m_LocalPosition: {x: 1.56622, y: 8.6602545, z: -4.9522004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
