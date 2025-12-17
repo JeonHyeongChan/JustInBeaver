@@ -1,8 +1,24 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractDetector : MonoBehaviour
 {
     public IInteractable currentTarget;
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        currentTarget = null; // 씬이 바뀔때 이전 상호작용 대상 제거 해야함
+    }
 
     private void OnTriggerEnter(Collider other)
     {
