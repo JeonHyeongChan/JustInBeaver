@@ -1088,6 +1088,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1024078898, guid: eec9152d9762751468df23d17b14bc97, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1053807162, guid: eec9152d9762751468df23d17b14bc97, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1329,10 +1333,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatePattern
   player: {fileID: 1230729152}
   detectRange: 3
-  attackRange: 1.7
+  attackRange: 1
   moveSpeed: 4
   agent: {fileID: 1296322036}
-  attackCooldown: 3
+  attackCooldown: 1
   attackDamage: 1
   updateInterval: 2
   beaverSpottedTime: 3

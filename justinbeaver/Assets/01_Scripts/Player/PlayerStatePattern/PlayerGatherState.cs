@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerGatherState : IPlayerState
 {
@@ -28,6 +29,11 @@ public class PlayerGatherState : IPlayerState
             Debug.LogError("[PlayerContext] gatherGauge가 연결되지 않았습니다");
             playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
             return;
+        }
+        var signal = playerContext.GetComponent<PlayerGatherSignal>();
+        if(signal != null)
+        {
+            signal.RaiseGatherStart(target.transform.position);
         }
 
         duration = Mathf.Max(0.05f, target.gatherDuration);
@@ -87,7 +93,11 @@ public class PlayerGatherState : IPlayerState
     {
         if (playerContext.gatherGauge != null)
             playerContext.gatherGauge.Hide();
-
+        var signal = playerContext.GetComponent<PlayerGatherSignal>();
+        if (signal != null)
+        {
+            signal.RaiseGatherEnd();
+        }
         if (playerContext.playerController) playerContext.playerController.enabled = true;
     }
 
@@ -108,4 +118,5 @@ public class PlayerGatherState : IPlayerState
         playerContext.isGatherHolding = false;
         playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
     }
+  
 }

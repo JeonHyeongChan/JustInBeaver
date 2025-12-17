@@ -25,6 +25,7 @@ public class EnemyStatePattern : MonoBehaviour
 
     Vector3 alertTargetPos;
     Vector3 lightInEnemy;
+    private PlayerGatherSignal gatherSignal;
 
     public float MoveSpeed => moveSpeed;
     public float DetectRange => detectRange;
@@ -62,6 +63,32 @@ public class EnemyStatePattern : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        if (player == null) return;
+        gatherSignal = player.GetComponent<PlayerGatherSignal>();
+        if (gatherSignal == null) return;
+        gatherSignal.OnGatherStart += HandleGatherStart;
+        gatherSignal.OnGatherEnd += HandleGatherEnd;
+    }
+    private void OnDisable()
+    {
+        if (gatherSignal == null) return;
+        gatherSignal.OnGatherStart -= HandleGatherStart;
+        gatherSignal.OnGatherEnd -= HandleGatherEnd;
+    }
+
+    private void HandleGatherStart(Vector3 anchorPos)
+    {
+        SetAlertTargetPos(anchorPos);
+        SetState(new AlertState(this));
+    }
+    private void HandleGatherEnd()
+    {
+        // 갈무리 끝났다고 즉시 돌아갈지/계속 추격
+        // 일단 여기서는 아무 것도 안 함
+        // SetState(new ChaseState(this)) 하기
+    }
     public void SetAlertTargetPos(Vector3 pos)
     {
         alertTargetPos = pos;
