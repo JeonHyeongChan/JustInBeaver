@@ -1,60 +1,90 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class UI_Inventory : MonoBehaviour
 {
-    [SerializeField] private UI_InventorySlot[] slots;
-    [SerializeField] private RectTransform highlight;
+    [Header("Grid Settings")]
+    public int columnCount = 4;
 
-    private BeaverController beaver;
+    [Header("Slot Objects")]
+    public GameObject[] slots;
+
+    int selectedIndex = -1;
 
     void OnEnable()
     {
-        beaver = FindObjectOfType<BeaverController>();
-
-        beaver.OnInventoryChanged += Refresh;
-        beaver.OnSelectedSlotChanged += UpdateHighlight;
-
-        Refresh(beaver.Inventory);
-        UpdateHighlight(beaver.SelectedSlotIndex);
-    }
-
-    void OnDisable()
-    {
-        if (!beaver) return;
-        beaver.OnInventoryChanged -= Refresh;
-        beaver.OnSelectedSlotChanged -= UpdateHighlight;
+        SelectFirstSlot();
     }
 
     void Update()
     {
-        HandleInput();
-    }
+        if (slots == null || slots.Length == 0) return;
 
-    void HandleInput()
-    {
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-            beaver.RequestMoveSlot(-1);
+            MoveLeft();
 
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-            beaver.RequestMoveSlot(+1);
+            MoveRight();
+
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+            MoveUp();
+
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+            MoveDown();
     }
 
-    void Refresh(IReadOnlyList<InventoryItem> items)
+    void SelectFirstSlot()
     {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (i < items.Count)
-                slots[i].Set(items[i]);
-            else
-                slots[i].Clear();
-        }
+        selectedIndex = 0;
+        OnSelectionChanged();
     }
 
-    void UpdateHighlight(int index)
+    // --------------------
+    // 이동 로직
+    // --------------------
+
+    void MoveLeft()
     {
-        if (index < 0 || index >= slots.Length) return;
-        highlight.position = slots[index].transform.position;
+        if (selectedIndex % columnCount == 0) return;
+        SetIndex(selectedIndex - 1);
+    }
+
+    void MoveRight()
+    {
+        if (selectedIndex % columnCount == columnCount - 1) return;
+        if (selectedIndex + 1 >= slots.Length) return;
+
+        SetIndex(selectedIndex + 1);
+    }
+
+    void MoveUp()
+    {
+        int nextIndex = selectedIndex - columnCount;
+        if (nextIndex < 0) return;
+
+        SetIndex(nextIndex);
+    }
+
+    void MoveDown()
+    {
+        int nextIndex = selectedIndex + columnCount;
+        if (nextIndex >= slots.Length) return;
+
+        SetIndex(nextIndex);
+    }
+
+    void SetIndex(int newIndex)
+    {
+        selectedIndex = newIndex;
+        OnSelectionChanged();
+    }
+
+    void OnSelectionChanged()
+    {
+        Debug.Log($"[Inventory] Selected Slot : {selectedIndex}");
+
+        // TODO:
+        // - 이전 슬롯 강조 해제
+        // - 현재 슬롯 강조
     }
 }
