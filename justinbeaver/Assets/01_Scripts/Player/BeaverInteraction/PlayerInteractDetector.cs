@@ -18,6 +18,7 @@ public class PlayerInteractDetector : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentTarget = null; // 씬이 바뀔때 이전 상호작용 대상 제거 해야함
+        UIManager.Instance?.HideInteractHint();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +26,8 @@ public class PlayerInteractDetector : MonoBehaviour
         if (other.TryGetComponent<IInteractable>(out var interactable))
         {
             currentTarget = interactable;
+
+            UIManager.Instance?.ShowInteractHint(interactable.UIAnchor, interactable.InteractText);
         }
     }
 
@@ -33,7 +36,11 @@ public class PlayerInteractDetector : MonoBehaviour
         if (other.TryGetComponent<IInteractable>(out var interactable))
         {
             if (currentTarget == interactable)
+            {
                 currentTarget = null;
+
+                UIManager.Instance?.HideInteractHint();
+            }
         }
     }
 }

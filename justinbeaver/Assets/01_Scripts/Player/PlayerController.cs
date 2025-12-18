@@ -33,7 +33,10 @@ public class PlayerController : MonoBehaviour
     private float nextRollTime;
     private Vector3 rollDir;            //구르기 방향
 
-
+    //상호작용 홀드
+    private float interactHoldTimer;
+    private bool isHoldingInteract;
+    private IInteractable holdingTarget;
 
 
 
@@ -54,6 +57,11 @@ public class PlayerController : MonoBehaviour
         {
             animator = GetComponentInChildren<Animator>();
         }
+    }
+
+    private void Update()
+    {
+        HandleInteractHold();
     }
 
     private void FixedUpdate()
@@ -291,17 +299,76 @@ public class PlayerController : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
-            return;
-
-        var detector = GetComponent <PlayerInteractDetector>();
+        var detector = GetComponent<PlayerInteractDetector>();
         if (detector == null)
             return;
 
-        var target = detector.currentTarget;
-        if (target == null)
+        //홀드 시작
+        if (ctx.started)
+        {
+            holdingTarget = detector.currentTarget;
+            if (holdingTarget == null)
+                return;
+
+            interactHoldTimer = 0f;
+            isHoldingInteract = true;
+
+            //즉시 상호작용 대상이면 바로
+            if (!holdingTarget.RequiresHold)
+            {
+                ExecuteInteract(holdingTarget);
+            }
+
+            return;
+        }
+
+        //홀드 취소
+        if (ctx.canceled)
+        {
+            CancelHold();
+        }
+    }
+
+    private void HandleInteractHold()
+    {
+        if (!isHoldingInteract || holdingTarget == null)
             return;
 
-        target.Interact(this); // 즉각 실행
+        if (!holdingTarget.RequiresHold)
+            return;
+        
+        interactHoldTimer += Time.deltaTime;
+
+        float progress = Mathf.Clamp01(interactHoldTimer / holdingTarget.HoldDuration);
+
+        holdingTarget.OnHoldUpdate(this, progress);
+
+        if (progress >= 1f)
+        {
+            ExecuteInteract(holdingTarget);
+        }
+    }
+
+    private void CancelHold()
+    {
+        if (holdingTarget != null)
+        {
+            holdingTarget.OnHoldCancel(this);
+        }
+
+        isHoldingInteract = false;
+        interactHoldTimer = 0f;
+        holdingTarget = null;
+    }
+
+    private void ExecuteInteract(IInteractable target)
+    {
+        isHoldingInteract = false;
+        interactHoldTimer = 0f;
+
+        UIManager.Instance?.HideInteractHint();
+
+        target.Interact(this);
+        holdingTarget = null;
     }
 }

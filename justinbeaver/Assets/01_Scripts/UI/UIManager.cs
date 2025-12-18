@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
+
     public UI_GatherGauge gatherGauge;
+    public UI_InteractHint interactHint;
 
     [Header("OutGame")]
     public GameObject shopUI;
@@ -47,7 +49,16 @@ public class UIManager : MonoBehaviour
         BindSceneUI();
     }
 
+    /// <summary>
+    /// 씬 전환 시 모든 씬 UI 재바인딩
+    /// </summary>
     private void BindSceneUI()
+    {
+        BindGatherGauge();
+        BindInteractHint();
+    }
+
+    private void BindGatherGauge()
     {
         gatherGauge = FindAnyObjectByType<UI_GatherGauge>(
             FindObjectsInactive.Include);
@@ -61,6 +72,20 @@ public class UIManager : MonoBehaviour
 
         gatherGaugeUI = gatherGauge.gameObject;
         gatherGaugeUI.SetActive(false);
+    }
+
+    private void BindInteractHint()
+    {
+        interactHint = FindAnyObjectByType<UI_InteractHint>(
+            FindObjectsInactive.Include);
+
+        if (interactHint == null)
+        {
+            Debug.Log("InteractHint Not Found in this Scene");
+            return;
+        }
+
+        interactHint.Hide();
     }
 
     /// <summary>
@@ -82,6 +107,21 @@ public class UIManager : MonoBehaviour
     {
         HideAllUI();
         escapeResultUI.SetActive(true);
+    }
+
+    /// <summary>
+    /// 상호작용 UI
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="text"></param>
+    public void ShowInteractHint(Transform target, string text)
+    {
+        interactHint?.Show(target, text);
+    }
+
+    public void HideInteractHint()
+    {
+        interactHint?.Hide();
     }
 
     public UI_HUD hud;
