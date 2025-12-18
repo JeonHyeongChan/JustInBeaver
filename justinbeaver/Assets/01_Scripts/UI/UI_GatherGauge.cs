@@ -22,7 +22,7 @@ public class UI_GatherGauge : MonoBehaviour
 
         if (canvasGroup == null)
         {
-            canvasGroup = GetComponentInChildren<CanvasGroup>();
+            canvasGroup = GetComponentInChildren<CanvasGroup>(true);
         }
 
         if (slider != null)

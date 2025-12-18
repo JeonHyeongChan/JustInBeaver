@@ -88,9 +88,7 @@ public class ObjectManager : MonoBehaviour
 
             for (int i = 0; i < count; i++)
             {
-                //살짝 퍼지게(겹침 방지)
-                Vector2 r = Random.insideUnitCircle * 0.3f;
-                Vector3 spawnPos = baseDropPos + new Vector3(r.x, 0f, r.y);
+                Vector3 spawnPos = baseDropPos;
 
                 ItemManager.Instance.SpawnItem(drop.dropItem, spawnPos, Quaternion.identity);
             }

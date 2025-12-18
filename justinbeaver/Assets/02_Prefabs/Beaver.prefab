@@ -330,6 +330,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2242197483488929446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3292937842383569523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9084082286203727952}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9084082286203727952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3292937842383569523}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.024, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5007452303679095742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3449583606094282690
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +965,7 @@ Transform:
   - {fileID: 5589196953552829885}
   - {fileID: 8035022597506640880}
   - {fileID: 8037972733201534307}
+  - {fileID: 9084082286203727952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &485944385309593485
@@ -1205,10 +1237,9 @@ MonoBehaviour:
   playerhealth: {fileID: 6522455464424817664}
   playerStateMachine: {fileID: 2700360685821782904}
   playerGatherDetector: {fileID: 6437610915515269419}
-  gatherGauge: {fileID: 0}
   isGatherHolding: 1
-  gatherCancelDistance: 1
-  gatherResumeWindow: 1
+  gatherCancelDistance: 5
+  gatherResumeWindow: 5
   lastGatherTarget: {fileID: 0}
   lastGatherProgress: 0
   lastGatherCancelTime: 0
@@ -1226,13 +1257,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovemant
   moveSpeed: 5
   jumpForce: 4.5
-  groundCheckDistance: 1
-  groundOffset: 0.1
+  groundCheckDistance: 10
+  groundOffset: 10
   rollSpeed: 0.05
   rollDuration: 0.01
   rollCooldown: 0.3
   rotateSpeed: 10
   animator: {fileID: 7212563134540830779}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheckPoint: {fileID: 9084082286203727952}
+  groundRadius: 0.25
 --- !u!114 &6522455464424817664
 MonoBehaviour:
   m_ObjectHideFlags: 0
