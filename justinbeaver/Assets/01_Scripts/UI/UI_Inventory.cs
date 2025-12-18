@@ -6,20 +6,20 @@ public class UI_Inventory : MonoBehaviour
     [Header("Grid Settings")]
     public int columnCount = 4;
 
-    [Header("Slot Objects")]
-    public GameObject[] slots;
+    [Header("Slots")]
+    [SerializeField] UI_InventorySlot[] slots;
 
-    int selectedIndex = -1;
+    int selectedIndex = 0;
 
     void OnEnable()
     {
-        SelectFirstSlot();
+        if (slots == null || slots.Length == 0) return;
+        SelectSlot(0);
     }
 
     void Update()
     {
-        if (slots == null || slots.Length == 0) return;
-
+        //  나중에 Player 입력으로 대체 가능
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
             MoveLeft();
 
@@ -33,12 +33,6 @@ public class UI_Inventory : MonoBehaviour
             MoveDown();
     }
 
-    void SelectFirstSlot()
-    {
-        selectedIndex = 0;
-        OnSelectionChanged();
-    }
-
     // --------------------
     // 이동 로직
     // --------------------
@@ -46,45 +40,42 @@ public class UI_Inventory : MonoBehaviour
     void MoveLeft()
     {
         if (selectedIndex % columnCount == 0) return;
-        SetIndex(selectedIndex - 1);
+        SelectSlot(selectedIndex - 1);
     }
 
     void MoveRight()
     {
         if (selectedIndex % columnCount == columnCount - 1) return;
         if (selectedIndex + 1 >= slots.Length) return;
-
-        SetIndex(selectedIndex + 1);
+        SelectSlot(selectedIndex + 1);
     }
 
     void MoveUp()
     {
-        int nextIndex = selectedIndex - columnCount;
-        if (nextIndex < 0) return;
-
-        SetIndex(nextIndex);
+        int next = selectedIndex - columnCount;
+        if (next < 0) return;
+        SelectSlot(next);
     }
 
     void MoveDown()
     {
-        int nextIndex = selectedIndex + columnCount;
-        if (nextIndex >= slots.Length) return;
-
-        SetIndex(nextIndex);
+        int next = selectedIndex + columnCount;
+        if (next >= slots.Length) return;
+        SelectSlot(next);
     }
 
-    void SetIndex(int newIndex)
-    {
-        selectedIndex = newIndex;
-        OnSelectionChanged();
-    }
+    // --------------------
+    // 선택 처리
+    // --------------------
 
-    void OnSelectionChanged()
+    void SelectSlot(int index)
     {
+        if (index < 0 || index >= slots.Length) return;
+
+        slots[selectedIndex].SetSelected(false);
+        selectedIndex = index;
+        slots[selectedIndex].SetSelected(true);
+
         Debug.Log($"[Inventory] Selected Slot : {selectedIndex}");
-
-        // TODO:
-        // - 이전 슬롯 강조 해제
-        // - 현재 슬롯 강조
     }
 }
