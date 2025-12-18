@@ -33,7 +33,7 @@ public class ChaseState : IEnemyState
         agent.speed = moveSpeed;
 
         animator.SetBool("isRunning", true);
-
+        enemy.LightViewOn();
         if (player != null)
             agent.SetDestination(player.position);
     }

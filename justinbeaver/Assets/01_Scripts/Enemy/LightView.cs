@@ -25,15 +25,24 @@ public class LightView : MonoBehaviour
     public float angle;
     public List<CastInfo> lineList;       // 표시된 선의 정보 리스트
     public Vector3 offset; //위치 보정용 벡터.
-
-    void Start()
+    private void Awake()
     {
-        targetList = new List<Transform>();
-        lineList = new List<CastInfo>();
+        targetList ??= new List<Transform>();
+        lineList ??= new List<CastInfo>();
+    }
+    private void OnEnable()
+    {
+        StopAllCoroutines();
         StartCoroutine(CheckTarget());
         StartCoroutine(DrawRayLine());
     }
-
+    
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        targetList?.Clear();
+        lineList?.Clear();
+    }
     IEnumerator CheckTarget()
     {
         WaitForSeconds wfs = new WaitForSeconds(0.1f);
@@ -48,7 +57,7 @@ public class LightView : MonoBehaviour
                 Vector3 targetPos = e.transform.position + offset;
                 Vector3 toTarget = targetPos - origin;
                 Vector3 dir = toTarget.normalized;
-                Debug.Log("target in range");
+              
                 if (Vector3.Angle(transform.forward, dir) > (viewAngle * 0.5f))
                     continue;
 
@@ -88,12 +97,21 @@ public class LightView : MonoBehaviour
                 CastInfo info = GetCastInfo(fAngle + (step * i));
                 lineList.Add(info); //리스트에 추가
 
-                //레이캐스트 정보에 따라 선 그리기
-                Debug.DrawLine(transform.position + offset, info.Point, Color.green);
             }
             yield return null;
         }
     }
+    private void OnDrawGizmosSelected()
+    {
+        if (!enabled) return;
+        if (lineList == null || lineList.Count == 0) return;
+        Gizmos.color = Color.green;
+        foreach (var info in lineList)
+        {
+            Gizmos.DrawLine(transform.position + offset, info.Point);
+        }
+    }
+
     CastInfo GetCastInfo(float Angle)
     {
         //입력받은 각도에 따라 방향 벡터 구하기

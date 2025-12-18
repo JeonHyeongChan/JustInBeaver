@@ -223,6 +223,15 @@ public class EnemyStatePattern : MonoBehaviour
         }
     }
 
+    public void LightViewOn()
+    {
+        lightView.enabled = true;
+    }
+    public void LightViewOff()
+    {
+        lightView.enabled = false;
+    }
+
     public void SetState(IEnemyState newState)
     {
         currentState?.Exit();

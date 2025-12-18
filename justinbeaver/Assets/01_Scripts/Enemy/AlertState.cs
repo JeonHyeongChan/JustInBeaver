@@ -18,7 +18,7 @@ public class AlertState : IEnemyState
     public void Enter()
     {
         agent.SetDestination(enemy.AlertTargetPos);
-        
+        enemy.LightViewOn();
     }
 
     public void Exit()
