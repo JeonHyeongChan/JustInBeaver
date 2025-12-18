@@ -3011,6 +3011,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GatherGauge
       objectReference: {fileID: 0}
+    - target: {fileID: 1996472320768660462, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996472320768660462, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3946169285652520675, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -960
@@ -3052,7 +3060,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4771707101398099545, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4771707101398099545, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338101272832521975, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338101272832521975, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7338101272832521975, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338101272832521975, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_FillMethod
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
