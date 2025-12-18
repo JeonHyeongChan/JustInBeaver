@@ -1,118 +1,89 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerGatherState : IPlayerState
 {
     private readonly PlayerContext playerContext;
     private readonly CaptureObject target;
 
-    private float elapsed;   //누적 진행 시간
-    private float duration;  //대상별 총 시간
-
     private static readonly int HashIsGathering = Animator.StringToHash("IsGathering");
 
-    public PlayerGatherState(PlayerContext context, CaptureObject gatherTarget, float startProgress01)
+    public PlayerGatherState(PlayerContext context, CaptureObject gatherTarget, float startProgress)
     {
         playerContext = context;
         target = gatherTarget;
-        elapsed = Mathf.Clamp01(startProgress01);
+
+        //이어하기 시작값 반영 (오브젝트별 진행도)
+        if (target != null)
+        {
+            target.SetProgress(startProgress);   //내부에서 Clamp01 하도록
+        }
     }
+
 
     public void Enter()
     {
-        if (target == null)
+        if (!IsTargetValid())
         {
-            playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+            GoNormalAndClearResumeIfInvalid();
             return;
         }
-
-        //if (playerContext.gatherGauge == null)
-        //{
-        //    Debug.LogError("[PlayerContext] gatherGauge가 연결되지 않았습니다");
-        //    playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
-        //    return;
-        //}
-
-        var signal = playerContext.GetComponent<PlayerGatherSignal>();
-
-        if(signal != null)
-        {
-            signal.RaiseGatherStart(target.transform.position);
-        }
-
-        duration = Mathf.Max(0.05f, target.gatherDuration);
-        elapsed *= duration;
-
         playerContext.playerAnimator.SetBool(HashIsGathering, true);
-        //playerContext.gatherGauge.Show();
-        //playerContext.gatherGauge.SetValue(elapsed / duration);
 
+        //적/시스템 알림용 시그널
+        var signal = playerContext.GetComponent<PlayerGatherSignal>();
+        signal?.RaiseGatherStart(target.transform.position);
+
+        //UI 표시
         UIManager.Instance?.ShowGatherGauge();
-        UIManager.Instance?.GatherGauge?.SetValue(elapsed / duration);
+        UIManager.Instance?.GatherGauge?.SetValue(target.progress);
     }
+
 
     public void Update()
     {
-        if (target == null)
+        if (!IsTargetValid())
         {
-            CancelAndReset();
+            ExitToNormal();
             return;
         }
 
-        //대상과 멀어지면 즉시 취소 + 초기화
+        //거리 이탈, 중단만 하고 진행도는 유지
         float dist = Vector3.Distance(playerContext.transform.position, target.transform.position);
         if (dist > playerContext.gatherCancelDistance)
         {
-            CancelAndReset();
+            PauseAndExit();
             return;
         }
 
-        //홀드가 풀렸으면 상태는 Normal로 돌아가되, 진행도는 저장(유예시간 내 재입력 시 이어하기)
+        //홀드 해제, 중단만 하고 진행도는 유지
         if (!playerContext.isGatherHolding)
         {
-            SaveProgressForResume();
-            playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
-            playerContext.playerAnimator.SetBool(HashIsGathering, false);
+            PauseAndExit();
             return;
         }
 
-        //홀드 중이면 진행
-        elapsed += Time.deltaTime;
+        //진행 누적(오브젝트가 진행도 보유)
+        target.TickGather(Time.deltaTime);
 
-        float t = Mathf.Clamp01(elapsed / duration);
-        //playerContext.gatherGauge.SetValue(t);
-        UIManager.Instance?.GatherGauge?.SetValue(t);
+        UIManager.Instance?.GatherGauge?.SetValue(target.progress);
 
-        if (t >= 1f)
+        //완료
+        if (target.progress >= 1f)
         {
-            //완료 처리
-            target.OnGatherComplete();
-
-            //저장값 초기화
-            playerContext.lastGatherTarget = null;
-            playerContext.lastGatherProgress = 0f;
-            playerContext.lastGatherCancelTime = 0f;
-
-            playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
-            playerContext.playerAnimator.SetBool(HashIsGathering, false);
+            target.OnGatherComplete();   //내부에서 드랍 + 풀 반환
+            ClearResumeCache();
+            ExitToNormal();
         }
     }
 
     
+
     public void Exit()
     {
-        //if (playerContext.gatherGauge != null)
-        //{
-        //    playerContext.gatherGauge.Hide();
-        //}
         UIManager.Instance?.HideGahterGauge();
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
-
-        if (signal != null)
-        {
-            signal.RaiseGatherEnd();
-        }
+        signal?.RaiseGatherEnd();
 
         if (playerContext.playerController)
         {
@@ -121,26 +92,56 @@ public class PlayerGatherState : IPlayerState
     }
 
 
-    private void SaveProgressForResume()
+    private bool IsTargetValid()
     {
-        playerContext.lastGatherTarget = target;
-        playerContext.lastGatherProgress = Mathf.Clamp01(elapsed / duration);
-        playerContext.lastGatherCancelTime = Time.time;
+        if (target == null)
+        {
+            return false;
+        }
+        if (!target.gameObject.activeInHierarchy)
+        {
+            return false;
+        }
+        if (target.isCompleted)
+        {
+            return false;   //완료된 대상은 다시 진행 불가
+        }
+        return true;
     }
 
 
-    private void CancelAndReset()
+    private void PauseAndExit()
     {
-        //거리 이탈 취소는 즉시 초기화
+        //이어하기 캐시 저장
+        playerContext.lastGatherTarget = target;
+        playerContext.lastGatherProgress = target.progress;
+        playerContext.lastGatherCancelTime = Time.time;
+
+        ExitToNormal();
+    }
+
+
+    private void ExitToNormal()
+    {
+        playerContext.isGatherHolding = false;
+        playerContext.playerAnimator.SetBool(HashIsGathering, false);
+        playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
+    }
+
+    private void GoNormalAndClearResumeIfInvalid()
+    {
+        if (playerContext.lastGatherTarget == target)
+            ClearResumeCache();
+
+        ExitToNormal();
+    }
+
+    private void ClearResumeCache()
+    {
         playerContext.lastGatherTarget = null;
         playerContext.lastGatherProgress = 0f;
         playerContext.lastGatherCancelTime = 0f;
-
-        playerContext.isGatherHolding = false;
-        playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
-        playerContext.playerAnimator.SetBool(HashIsGathering, false);
     }
 
     public void FixedUpdate() { }
-
 }
