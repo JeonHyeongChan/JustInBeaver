@@ -17,6 +17,8 @@ public class RuleManager : MonoBehaviour
 {
     public static RuleManager Instance;
 
+    private PlayerContext player;
+
     private GameState currentState = GameState.Playing;
 
     [Header("Rule Data")]
@@ -39,6 +41,24 @@ public class RuleManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        player = FindAnyObjectByType<PlayerContext>();
+
+        if (player != null)
+        {
+            player.OnPlayerDied += HandlePlayerDied;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (player != null)
+        {
+            player.OnPlayerDied -= HandlePlayerDied;
+        }
+    }
+
     /// <summary>
     /// 탈출 성공 처리
     /// </summary>
@@ -54,9 +74,16 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeFailed()
     {
-        escapeFailCount++;        
+        escapeFailCount++;
+
+        Debug.Log($"CurrentFaild: {escapeFailCount}");
 
         CheckTotalReset();
+    }
+
+    private void HandlePlayerDied()
+    {
+        OnEscapeFailed();
     }
 
     //==============조건 체크==============

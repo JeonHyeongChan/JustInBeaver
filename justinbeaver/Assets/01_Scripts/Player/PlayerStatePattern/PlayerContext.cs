@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerContext : MonoBehaviour
 {
@@ -22,7 +23,11 @@ public class PlayerContext : MonoBehaviour
     //진행 저장(재입력 이어서 하기용)
     [HideInInspector] public CaptureObject lastGatherTarget;
     [HideInInspector] public float lastGatherProgress;
-    [HideInInspector] public float lastGatherCancelTime;   //취소된 시각    
+    [HideInInspector] public float lastGatherCancelTime;   //취소된 시각
+
+    //이벤트
+    public event Action OnPlayerDied;
+    public event Action<int> OnHealthChange;
 
     private void Awake()
     {
@@ -60,5 +65,15 @@ public class PlayerContext : MonoBehaviour
         //{
         //    gatherGauge = GetComponent<GatherGauge>();
         //}
+    }
+
+    public void NotifyDamaged(int currentHp)
+    {
+        OnHealthChange?.Invoke(currentHp);
+    }
+    
+    public void NotifyDied()
+    {
+        OnPlayerDied?.Invoke();
     }
 }

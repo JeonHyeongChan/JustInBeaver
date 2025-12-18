@@ -21,9 +21,13 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
+        playerContext.NotifyDamaged(currentHealth); // 이벤트
+
         //HP에 따라 상태 전환
         if (currentHealth <= 0)
         {
+            playerContext.NotifyDied(); // 이벤트
+
             playerContext.playerStateMachine.ChangeState(new PlayerDieState(playerContext));
         }
         else
