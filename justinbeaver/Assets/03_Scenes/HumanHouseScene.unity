@@ -3067,6 +3067,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6896987064991718125, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896987064991718125, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7338101272832521975, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
       propertyPath: m_Type
       value: 1
