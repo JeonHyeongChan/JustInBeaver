@@ -17,7 +17,15 @@ public class CaptureObject : MonoBehaviour, IPoolable
         isCompleted = false;
     }
 
-    public void OnDespawned() { }
+    public void OnDespawned()
+    {
+        var link = GetComponent<SpawnLink>();
+
+        if (link != null && link.owner != null)
+        {
+            link.owner.OnSpawnedDespawned();
+        }
+    }
 
     public void SetProgress(float value01)
     {
