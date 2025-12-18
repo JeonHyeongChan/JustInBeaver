@@ -20,7 +20,7 @@ public class AlertState : IEnemyState
         agent.isStopped = false;
         agent.ResetPath();
         agent.SetDestination(enemy.AlertTargetPos);
-        enemy.LightViewOn();
+        enemy.LightViewOff();
     }
 
     public void Exit()
