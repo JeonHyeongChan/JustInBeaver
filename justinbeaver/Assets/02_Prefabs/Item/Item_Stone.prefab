@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6206536764917358176}
   - component: {fileID: 7232183436465865721}
   - component: {fileID: 5694017710196100974}
-  - component: {fileID: 8851570025649852514}
   m_Layer: 0
   m_Name: Item_Stone
   m_TagString: Untagged
@@ -113,24 +112,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1807203655849644511, guid: 0a2365bd8e6c2ea4997eda33d3513afd, type: 3}
---- !u!65 &8851570025649852514
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6780939623948814110}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.19878706, y: 0.11992353, z: 0.18150741}
-  m_Center: {x: -0.0027059577, y: 0.052420586, z: 0.0014559068}
