@@ -1,30 +1,43 @@
 ﻿using UnityEngine;
 
-public class CaptureObject : MonoBehaviour
+public class CaptureObject : MonoBehaviour, IPoolable
 {
+    [Header("갈무리 시간")]
     public float gatherDuration = 2f;
 
-    private DropTable dropTable;
+    //오브젝트별 진행 상태
+    public float progress { get; private set; }
+    public bool isCompleted { get; private set; }
 
-    private void Awake()
+    private void Awake() { }
+
+    public void OnSpawned()
     {
-        dropTable = GetComponent<DropTable>();
+        progress = 0f;
+        isCompleted = false;
+    }
+
+    public void OnDespawned() { }
+
+    public void SetProgress(float value01)
+    {
+        progress = Mathf.Clamp01(value01);
+    }
+
+    public void TickGather(float dt)
+    {
+        if (isCompleted) return;
+
+        float dur = Mathf.Max(0.05f, gatherDuration);
+        progress = Mathf.Clamp01(progress + dt / dur);
     }
 
     public void OnGatherComplete()
     {
-        //드랍
-        if (dropTable != null && dropTable.dropItem != null)
-        {
-            int count = Random.Range(dropTable.minCount, dropTable.maxCount + 1);
+        if (isCompleted) return;
+        isCompleted = true;
 
-            for (int i = 0; i < count; i++)
-            {
-                Vector3 p = transform.position + Vector3.up * 0.5f;
-                ItemManager.Instance.SpawnItem(dropTable.dropItem, p, Quaternion.identity);
-            }
-        }
-        //갈무리 대상 오브젝트를 풀로 반환
-        PoolManager.Instance.Despawn(gameObject);
+        //풀 반환
+        ObjectManager.Instance.DropAndDespawn(gameObject);
     }
 }
