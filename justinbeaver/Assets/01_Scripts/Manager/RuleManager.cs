@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// 게임 규칙 및 진행 상태를 판단하는 매니저
@@ -21,8 +22,10 @@ public class RuleManager : MonoBehaviour
     [Header("Rule Data")]
     private int escapeFailCount = 0;        // 침입 0 ~ 3
     private int escapeSuccessCount = 0;     // 성공
-    private int totalIntrusionCount = 0;   // 침입
 
+    //이벤트
+    public event Action OnTotalResetRequired;
+    public event Action OnEndingCondition;
 
     private void Awake()
     {
@@ -41,8 +44,7 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeSuccess()
     {
-        escapeSuccessCount++;
-        totalIntrusionCount++;
+        escapeSuccessCount++;        
 
         CheckEndingCondition();
     }
@@ -52,8 +54,7 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeFailed()
     {
-        escapeFailCount++;
-        totalIntrusionCount++;
+        escapeFailCount++;        
 
         CheckTotalReset();
     }
@@ -65,9 +66,13 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     private void CheckEndingCondition()
     {
-        //비버 집이 최고 업그레이드 상태이면
-        //현재게임진행상태 = EndingReady;
-        //OnEndingConditionMet?.Invoke(); <-요런 느낌으로
+        //집이 최고레벨인지
+        if (HomeManager.Instance != null &&
+            HomeManager.Instance.CurrentLevel >= HomeManager.MaxLevel)
+        {
+            currentState = GameState.EndingReady;
+            OnEndingCondition?.Invoke();
+        }
     }
 
     /// <summary>
@@ -80,23 +85,15 @@ public class RuleManager : MonoBehaviour
             currentState = GameState.Reseting;
             escapeFailCount = 0; // 실패 누적 초기화
 
-            //OnTotalResetRequired?.Invoke(); <- 요런 느낌
+            OnTotalResetRequired?.Invoke();
         }
     }
 
     //==============일단 읽기전용==============
-    public GameState GetGameState()
+    public GameState GetGameState() => currentState;   
+    public int GetEscapeFailCount() => escapeFailCount;
+    public void ResetFailCount()
     {
-        return currentState;
-    }
-
-    public int GetEscapeFailCount()
-    {
-        return escapeFailCount;
-    }
-
-    public int GetTotalIntrusionCount()
-    {
-        return totalIntrusionCount;
+        escapeFailCount = 0; // 홈매니저가 쓸 실패 카운터 리셋
     }
 }

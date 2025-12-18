@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 
-public class NPC : MonoBehaviour, IInteractable
+public class ShopNPC : MonoBehaviour, IInteractable
 {
-    public string InteractText => throw new System.NotImplementedException();
+    public string InteractText => "[Z] Open Shop";
+    public Transform UIAnchor => transform;
 
-    public Transform UIAnchor => throw new System.NotImplementedException();
-
-    public bool RequiresHold => throw new System.NotImplementedException();
-
-    public float HoldDuration => throw new System.NotImplementedException();
+    public bool RequiresHold => false;
+    public float HoldDuration => 0f;
 
     public void Interact(PlayerController player)
     {
