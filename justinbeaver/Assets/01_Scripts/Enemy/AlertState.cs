@@ -17,6 +17,8 @@ public class AlertState : IEnemyState
     }
     public void Enter()
     {
+        agent.isStopped = false;
+        agent.ResetPath();
         agent.SetDestination(enemy.AlertTargetPos);
         enemy.LightViewOn();
     }

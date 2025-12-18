@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -54,7 +55,7 @@ public class EnemyStatePattern : MonoBehaviour
     {
         BindPlayer();   // 시작시 Player 바인딩
 
-        SetState(new IdleState(this));
+        SetState(new SleepState(this));
         hitBox.SetActive(false);
     }
     private void Update()
@@ -96,8 +97,7 @@ public class EnemyStatePattern : MonoBehaviour
     /// </summary>
     private void BindPlayer()
     {
-        if (player != null)
-            return;
+      
 
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject == null)
@@ -117,14 +117,31 @@ public class EnemyStatePattern : MonoBehaviour
 
     private void HandleGatherStart(Vector3 anchorPos)
     {
-        SetAlertTargetPos(anchorPos);
-        SetState(new AlertState(this));
+        if (currentState is SleepState || currentState is IdleState)
+        {
+            SetAlertTargetPos(anchorPos);
+            SetState(new AlertState(this));
+        }
     }
     private void HandleGatherEnd()
     {
         // 갈무리 끝났다고 즉시 돌아갈지/계속 추격
         // 일단 여기서는 아무 것도 안 함
         // SetState(new ChaseState(this)) 하기
+    }
+    private IEnumerator WakeThenAlert()  //무한 보류 
+    {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        agent.ResetPath();
+
+        animator.SetBool("isSleeping", false);
+        animator.SetBool("isRunning", true);
+
+        animator.Update(0f);
+        yield return null;
+
+        SetState(new AlertState(this));
     }
     public void SetAlertTargetPos(Vector3 pos)
     {
@@ -204,7 +221,7 @@ public class EnemyStatePattern : MonoBehaviour
 
     public void Sleep()
     {
-        animator.SetTrigger("isSleeping");
+        animator.SetBool("isSleeping", true);
     }
  
     public Vector3 GetRandomPositionNavMesh()
@@ -230,6 +247,12 @@ public class EnemyStatePattern : MonoBehaviour
     public void LightViewOff()
     {
         lightView.enabled = false;
+    }
+
+    public void WakeUp()
+    {
+        agent.isStopped = false;
+        SetState(new AlertState(this));
     }
 
     public void SetState(IEnemyState newState)

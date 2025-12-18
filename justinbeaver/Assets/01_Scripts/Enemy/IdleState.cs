@@ -10,6 +10,7 @@ public class IdleState : IEnemyState
     private Transform player;
     private float detectRange;
     private LightView lightView;
+    private Animator animator;
     public IdleState(EnemyStatePattern Enemy)
     {
         enemy = Enemy;
@@ -19,11 +20,12 @@ public class IdleState : IEnemyState
         //player = enemy.PlayerTrf;
         detectRange = enemy.DetectRange;
         lightView = enemy.LightView;
-
+        animator = enemy.Animator;
     }
 
     public void Enter()
     {
+        animator.SetBool("isRunning", false);
         timeSinceLastUpdate = updateInterval;
         enemy.LightViewOff();
     }
