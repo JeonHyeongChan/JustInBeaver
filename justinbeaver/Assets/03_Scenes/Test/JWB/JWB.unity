@@ -652,7 +652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 1
-  dropTable: {fileID: 574519990}
 --- !u!65 &574519992
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -920,18 +919,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7351101819128119874, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
-      propertyPath: gatherGauge
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7351101819128119874, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
-      propertyPath: gatherResumeWindow
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7351101819128119874, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
-      propertyPath: gatherCancelDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_Name
       value: Beaver
@@ -991,7 +978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 1
-  dropTable: {fileID: 869916503}
 --- !u!65 &869916505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1687,6 +1673,7 @@ MonoBehaviour:
   gatherGaugeUI: {fileID: 1633689989}
   escapeResultUI: {fileID: 0}
   gatherGauge: {fileID: 1633689991}
+  interactHint: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}

@@ -265,22 +265,24 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            //이미 완료/비활성 대상이면 시작 금지
+            if (!target.gameObject.activeInHierarchy || target.isCompleted)
+            {
+                return;
+            }
 
-            //시간 내 재입력 + 같은 대상이면 이어서 진행
+
+            //시간 내 재입력 + 같은 대상이면 이어하기
             float startProgress = 0f;
             bool canResume =
                 context.lastGatherTarget == target &&
                 (Time.time - context.lastGatherCancelTime) <= context.gatherResumeWindow;
 
-            if (canResume)
-            {
-                startProgress = context.lastGatherProgress;
-            }
-            else
-            {
-                startProgress = 0f;
-            }
-                
+            startProgress = canResume ? context.lastGatherProgress : target.progress;
+
+            //타겟 진행도에 시작값 반영
+            target.SetProgress(startProgress);
+
             context.playerStateMachine.ChangeState(new PlayerGatherState(context, target, startProgress));
             return;
         }

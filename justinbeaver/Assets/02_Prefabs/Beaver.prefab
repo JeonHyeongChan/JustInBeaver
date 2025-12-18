@@ -1205,10 +1205,9 @@ MonoBehaviour:
   playerhealth: {fileID: 6522455464424817664}
   playerStateMachine: {fileID: 2700360685821782904}
   playerGatherDetector: {fileID: 6437610915515269419}
-  gatherGauge: {fileID: 0}
   isGatherHolding: 1
-  gatherCancelDistance: 1
-  gatherResumeWindow: 1
+  gatherCancelDistance: 5
+  gatherResumeWindow: 5
   lastGatherTarget: {fileID: 0}
   lastGatherProgress: 0
   lastGatherCancelTime: 0
