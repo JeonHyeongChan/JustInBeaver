@@ -8,7 +8,7 @@ public class Door : MonoBehaviour, IInteractable
 
     [Header("Escape Setting")]
     [SerializeField] private string escapeSceneName = "BeaverHouseScene";
-    [SerializeField] private float escapeHoldTime = 3f;
+    [SerializeField] private float escapeHoldTime = 2f;
 
     public bool RequiresHold => sceneName == escapeSceneName; // 씬이름 확인
     public float HoldDuration => RequiresHold ? escapeHoldTime : 0f;

@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   sceneName: 
   uiAnchor: {fileID: 2866322617202113007}
+  escapeSceneName: BeaverHouseScene
+  escapeHoldTime: 2
 --- !u!33 &8633482092242595933
 MeshFilter:
   m_ObjectHideFlags: 0
