@@ -5,14 +5,14 @@ public class UI_InventorySlot : MonoBehaviour
 {
     [SerializeField] Image background;
 
-    public void SetSelected(bool selected)
+    void Awake()
     {
         if (background == null)
-        {
-            Debug.LogError($"{name} : background Image ¿¬°á ¾ÈµÊ");
-            return;
-        }
+            background = GetComponent<Image>();
+    }
 
+    public void SetSelected(bool selected)
+    {
         background.color = selected ? Color.yellow : Color.white;
     }
 }
