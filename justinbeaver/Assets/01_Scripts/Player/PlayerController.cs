@@ -38,6 +38,13 @@ public class PlayerController : MonoBehaviour
     private bool isHoldingInteract;
     private IInteractable holdingTarget;
 
+    [Header("Ground Check")]
+    [SerializeField] private LayerMask groundMask;   // Inspector에서 Ground만 체크
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private float groundRadius = 0.25f;
+
+
+
 
 
     //Animator 파라미터 해시
@@ -61,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            Debug.Log($"Grounded={isGrounded}");
         HandleInteractHold();
     }
 
@@ -69,13 +78,16 @@ public class PlayerController : MonoBehaviour
         GroundCheck();
 
         //착지 판정
-        if (!wasGrounded && isGrounded)
+        if (isGrounded && rigid.linearVelocity.y <= 0.1f)
         {
             jumpLocked = false;
         }
         wasGrounded = isGrounded;
 
-        if (isRolling) RollUpdate();
+        if (isRolling)
+        {
+            RollUpdate();
+        }
         else Move();
 
         UpdateAnimator();
@@ -84,19 +96,18 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        animator?.SetTrigger(HashJump);
 
-        //점프 시작 애니메이션 트리거
-        if (animator != null)
-        {
-            animator.SetTrigger(HashJump);
-        }
+        Vector3 velocity = rigid.linearVelocity;
+        
+        velocity.y = 0f;
+        rigid.linearVelocity = velocity;
 
-        Vector3 vel = rigid.linearVelocity;
-        vel.y = 0f;
-        rigid.linearVelocity = vel;
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpLocked = true; //점프 소비(착지 전까지 재점프 금지)
+
+        jumpLocked = true;
     }
+
 
 
     private void Move()
@@ -184,11 +195,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
     private void GroundCheck()
     {
-        Vector3 origin = transform.position + Vector3.up * groundOffset;
-        isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance);
+        Vector3 origin = groundCheckPoint != null
+            ? groundCheckPoint.position
+            : transform.position + Vector3.up * 0.1f;
+
+        isGrounded = Physics.CheckSphere(
+            origin,
+            groundRadius,
+            groundMask,
+            QueryTriggerInteraction.Ignore
+        );
     }
+
+
+
 
     private void UpdateAnimator()
     {
@@ -222,6 +246,8 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
+        
 
         if (isGrounded && !jumpLocked)
         {
