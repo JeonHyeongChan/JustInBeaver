@@ -119,6 +119,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &25144164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2220190369237148917, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_Name
+      value: ToBeaverHouseDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610456457190814174, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425802919167225490, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
+      propertyPath: sceneName
+      value: BeaverHouseScene
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1f859657442d74479a5f5a75ae73247, type: 3}
 --- !u!114 &61314019 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6896987064991718125, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
@@ -3123,3 +3184,4 @@ SceneRoots:
   - {fileID: 464259835}
   - {fileID: 775597285}
   - {fileID: 1626979511}
+  - {fileID: 25144164}
