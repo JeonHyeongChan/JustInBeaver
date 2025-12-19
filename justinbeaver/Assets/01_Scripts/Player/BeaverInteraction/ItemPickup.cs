@@ -2,13 +2,11 @@
 
 public class ItemPickup : MonoBehaviour, IInteractable
 {
-    public string InteractText => throw new System.NotImplementedException();
+    public string InteractText => "[Z] Get Item";
+    public Transform UIAnchor => transform;
 
-    public Transform UIAnchor => throw new System.NotImplementedException();
-
-    public bool RequiresHold => throw new System.NotImplementedException();
-
-    public float HoldDuration => throw new System.NotImplementedException();
+    public bool RequiresHold => false;
+    public float HoldDuration => 0f;
 
     public void Interact(PlayerController player)
     {
