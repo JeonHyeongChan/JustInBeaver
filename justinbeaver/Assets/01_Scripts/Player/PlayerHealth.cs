@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerContext playerContext;
+    public event Action<int, int> OnHealthChanged;
 
     [Header("체력")]
     public int maxHealth = 3;
@@ -16,24 +18,18 @@ public class PlayerHealth : MonoBehaviour
         playerContext = GetComponent<PlayerContext>();
     }
 
-
     public void TakeDamage()
     {
-        currentHealth -= damage;
+        currentHealth = Mathf.Max(0, currentHealth - 1);
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        playerContext.NotifyDamaged(currentHealth); // 이벤트
-
-        //HP에 따라 상태 전환
         if (currentHealth <= 0)
         {
-            playerContext.NotifyDied(); // 이벤트
-
             playerContext.playerStateMachine.ChangeState(new PlayerDieState(playerContext));
-        }
+        }   
         else
         {
             playerContext.playerStateMachine.ChangeState(new PlayerHitState(playerContext));
         }
-
     }
 }
