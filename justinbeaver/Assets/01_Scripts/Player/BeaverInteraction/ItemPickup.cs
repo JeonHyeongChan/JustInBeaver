@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ItemPickup : MonoBehaviour, IInteractable
+public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
 {
     public string InteractText => "[Z] Get Item";
     public Transform UIAnchor => transform;
@@ -13,16 +13,33 @@ public class ItemPickup : MonoBehaviour, IInteractable
         Debug.Log("Item Get!");
         //상호작용 필요한 것들
 
-        Destroy(gameObject);
+        // TODO: 인벤토리에 아이템 추가
+
+        //풀 반환
+        Despawn();
     }
 
-    public void OnHoldCancel(PlayerController player)
+    private void Despawn()
     {
-        throw new System.NotImplementedException();
+        if (ObjectManager.Instance != null)
+        {
+            ObjectManager.Instance.DespawnObject(gameObject);
+        }
+        else if (PoolManager.Instance != null)
+        {
+            PoolManager.Instance.Despawn(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    public void OnHoldUpdate(PlayerController player, float progress01)
-    {
-        throw new System.NotImplementedException();
-    }
+    public void OnSpawned() {}
+
+    public void OnDespawned() {}
+
+    public void OnHoldCancel(PlayerController player) {}
+
+    public void OnHoldUpdate(PlayerController player, float progress01) {}
 }

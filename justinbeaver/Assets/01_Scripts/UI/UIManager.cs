@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
 
+    public UI_PlayerHearts playerHeart;
+    private PlayerHealth playerHealth;      //구독 해제용
+
     [Header("OutGame")]
     public GameObject shopUI;
     public GameObject upgradeUI;
@@ -46,6 +49,11 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (playerHealth != null && playerHeart != null)
+        {
+            playerHealth.OnHealthChanged -= playerHeart.SetHeart;
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -60,6 +68,7 @@ public class UIManager : MonoBehaviour
     {
         BindGatherGauge();
         BindInteractHint();
+        BindHearts();
     }
 
     private void BindGatherGauge()
@@ -90,6 +99,35 @@ public class UIManager : MonoBehaviour
         }
 
         interactHint.Hide();
+    }
+
+    private void BindHearts()
+    {
+        //씬에 하트 UI 찾기
+        playerHeart = FindAnyObjectByType<UI_PlayerHearts>(FindObjectsInactive.Include);
+        if(playerHeart == null)
+        {
+            return;
+        }
+
+        //씬에 PlayerHealth 찾기
+        var health = FindAnyObjectByType<PlayerHealth>(FindObjectsInactive.Exclude);
+        if(health == null)
+        {
+            return;
+        }
+
+        //이전 구독 해제
+        if (playerHealth != null)
+        {
+            playerHealth.OnHealthChanged -= playerHeart.SetHeart; 
+        }
+
+        playerHealth = health;
+        playerHealth.OnHealthChanged += playerHeart.SetHeart;
+
+        //즉시 반영
+        playerHeart.SetHeart(playerHealth.currentHealth, playerHealth.maxHealth);
     }
 
     /// <summary>
