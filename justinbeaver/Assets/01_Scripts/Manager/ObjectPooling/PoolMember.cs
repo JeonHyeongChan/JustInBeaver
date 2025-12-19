@@ -4,4 +4,7 @@
 public class PoolMember : MonoBehaviour
 {
     public int prefabId;
+
+    //중복 Release 방지용
+    [HideInInspector] public bool isInPool;
 }

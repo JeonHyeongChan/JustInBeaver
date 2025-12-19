@@ -16,6 +16,7 @@ public class PoolManager : MonoBehaviour
     }
 
     public PoolConfig[] initialPools;
+
     private readonly Dictionary<int, ObjectPool<GameObject>> pools = new();
     private readonly Dictionary<int, Transform> parents = new();
 
@@ -102,9 +103,14 @@ public class PoolManager : MonoBehaviour
             return;
         }
         var member = obj.GetComponent<PoolMember>();
-        
 
-        if (member == null || !pools.TryGetValue(member.prefabId, out var pool))
+        //이미 풀에 들어가 있으면 무시 (중복 반환 방지)
+        if (member.isInPool)
+        {
+            return;
+        }
+
+        if (!pools.TryGetValue(member.prefabId, out var pool))
         {
             obj.SetActive(false);
             return;
@@ -134,6 +140,11 @@ public class PoolManager : MonoBehaviour
 
     private static void OnGet(GameObject go)
     {
+        var member = go.GetComponent<PoolMember>();
+        if (member != null)
+        {
+            member.isInPool = false;
+        }
         go.SetActive(true);
         if (go.TryGetComponent<IPoolable>(out var pool))
         {
@@ -148,6 +159,13 @@ public class PoolManager : MonoBehaviour
         {
             pool.OnDespawned();
         }
+
+        var member = go.GetComponent<PoolMember>();
+        if (member != null)
+        {
+            member.isInPool = true;
+        }
+
         go.SetActive(false);
         go.transform.SetParent(parent, false);
     }
