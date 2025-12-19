@@ -24,12 +24,18 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
-        {
+        {            
             playerContext.playerStateMachine.ChangeState(new PlayerDieState(playerContext));
         }   
         else
         {
             playerContext.playerStateMachine.ChangeState(new PlayerHitState(playerContext));
         }
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 }

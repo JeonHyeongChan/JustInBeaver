@@ -25,9 +25,8 @@ public class PlayerDieState : IPlayerState
             playerContext.playerRigid.isKinematic = true;
         }
         playerContext.playerAnimator.SetTrigger(HashDie); //애니메이션 트리거
-    }
+    }    
 
-  
     public void Update() {}
 
     public void FixedUpdate() {}

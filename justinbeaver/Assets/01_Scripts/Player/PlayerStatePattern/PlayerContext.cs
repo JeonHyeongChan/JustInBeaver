@@ -76,4 +76,9 @@ public class PlayerContext : MonoBehaviour
     {
         OnPlayerDied?.Invoke();
     }
+
+    public void OnDieAnimationFinished()
+    {
+        NotifyDied();
+    }
 }

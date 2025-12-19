@@ -26,8 +26,9 @@ public class RuleManager : MonoBehaviour
     private int escapeSuccessCount = 0;     // 성공
 
     //이벤트
-    public event Action OnTotalResetRequired;
-    public event Action OnEndingCondition;
+    public event Action OnPlayerRespawnRequired;    // 비버 리스폰
+    public event Action OnTotalResetRequired;       // 전체 리셋
+    public event Action OnEndingCondition;          // 엔딩 조건달성
 
     private void Awake()
     {
@@ -84,6 +85,7 @@ public class RuleManager : MonoBehaviour
     private void HandlePlayerDied()
     {
         OnEscapeFailed();
+        OnPlayerRespawnRequired?.Invoke();  // 이벤트
     }
 
     //==============조건 체크==============
