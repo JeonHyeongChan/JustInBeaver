@@ -447,6 +447,7 @@ MonoBehaviour:
   escapeResultUI: {fileID: 0}
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
+  playerHeart: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
