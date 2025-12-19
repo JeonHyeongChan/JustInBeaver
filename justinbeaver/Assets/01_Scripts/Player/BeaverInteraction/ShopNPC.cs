@@ -16,11 +16,11 @@ public class ShopNPC : MonoBehaviour, IInteractable
 
     public void OnHoldCancel(PlayerController player)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnHoldUpdate(PlayerController player, float progress01)
     {
-        throw new System.NotImplementedException();
+        
     }
 }
