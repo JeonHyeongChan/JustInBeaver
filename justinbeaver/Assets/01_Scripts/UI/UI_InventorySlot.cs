@@ -3,16 +3,34 @@ using UnityEngine.UI;
 
 public class UI_InventorySlot : MonoBehaviour
 {
-    [SerializeField] Image background;
+    [Header("UI")]
+    public Image highlight; // 선택 테두리
+    public Image icon;      // 아이템 이미지
 
-    void Awake()
-    {
-        if (background == null)
-            background = GetComponent<Image>();
-    }
+    [Header("Item")]
+    [SerializeField] string itemName;
 
     public void SetSelected(bool selected)
     {
-        background.color = selected ? Color.yellow : Color.white;
+        if (highlight != null)
+            highlight.enabled = selected;
+    }
+
+    public bool HasItem()
+    {
+        return !string.IsNullOrEmpty(itemName);
+    }
+
+    public string GetItemName()
+    {
+        return itemName;
+    }
+
+    public void Clear()
+    {
+        itemName = null;
+
+        if (icon != null)
+            icon.enabled = false;
     }
 }
