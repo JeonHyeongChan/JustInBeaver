@@ -4,13 +4,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerContext playerContext;
-    public event Action<int, int> OnHealthChanged;
 
     [Header("체력")]
     public int maxHealth = 3;
 
     public int currentHealth { get; private set; }
-    private int damage = 1;
+
+    public event Action<int, int> OnHealthChanged;
 
     private void Awake()
     {

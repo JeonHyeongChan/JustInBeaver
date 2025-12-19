@@ -119,6 +119,7 @@ public class EnemyStatePattern : MonoBehaviour
     {
         if (currentState is SleepState || currentState is IdleState)
         {
+            
             SetAlertTargetPos(anchorPos);
             SetState(new AlertState(this));
         }
