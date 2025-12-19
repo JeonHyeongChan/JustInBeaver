@@ -103,9 +103,14 @@ public class PoolManager : MonoBehaviour
             return;
         }
         var member = obj.GetComponent<PoolMember>();
-        
 
-        if (member == null || !pools.TryGetValue(member.prefabId, out var pool))
+        //이미 풀에 들어가 있으면 무시 (중복 반환 방지)
+        if (member.isInPool)
+        {
+            return;
+        }
+
+        if (!pools.TryGetValue(member.prefabId, out var pool))
         {
             obj.SetActive(false);
             return;
