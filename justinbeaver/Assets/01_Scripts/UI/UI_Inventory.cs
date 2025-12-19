@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -7,17 +8,27 @@ public class UI_Inventory : MonoBehaviour
     public int columnCount = 3;
     public UI_InventorySlot[] slots;
 
+    [Header("Scroll")]
+    public ScrollRect scrollRect;
+
     int selectedIndex = 0;
 
     void OnEnable()
     {
-        if (slots == null || slots.Length == 0) return;
+        if (slots == null || slots.Length == 0)
+        {
+            Debug.LogWarning("슬롯이 비어있음");
+            return;
+        }
 
         // 전부 선택 해제
         for (int i = 0; i < slots.Length; i++)
             slots[i].SetSelected(false);
 
-        Select(0);
+        selectedIndex = 0;
+        slots[0].SetSelected(true);
+
+        ScrollToSelectedSlot();
     }
 
     void Update()
@@ -73,6 +84,8 @@ public class UI_Inventory : MonoBehaviour
 
         slots[selectedIndex].SetSelected(true);
 
+        ScrollToSelectedSlot();
+
         Debug.Log($"▶ 선택 슬롯: {selectedIndex}");
     }
 
@@ -82,13 +95,31 @@ public class UI_Inventory : MonoBehaviour
 
         if (!slot.HasItem())
         {
-            Debug.Log(" 버릴 아이템이 없음");
+            Debug.Log("버릴 아이템이 없음");
             return;
         }
 
-        Debug.Log($" 아이템 버림 : {slot.GetItemName()}");
+        Debug.Log($"아이템 버림 : {slot.GetItemName()}");
 
-        // UI 상에서 제거 (실제 드롭은 Player 쪽에서)
         slot.Clear();
+    }
+
+    void ScrollToSelectedSlot()
+    {
+        if (scrollRect == null) return;
+
+        RectTransform content = scrollRect.content;
+        RectTransform viewport = scrollRect.viewport;
+        RectTransform target = slots[selectedIndex].GetComponent<RectTransform>();
+
+        float viewportHeight = viewport.rect.height;
+        float contentHeight = content.rect.height;
+
+        float targetY = Mathf.Abs(target.localPosition.y);
+
+        float normalizedY =
+            Mathf.Clamp01(1f - (targetY / (contentHeight - viewportHeight)));
+
+        scrollRect.verticalNormalizedPosition = normalizedY;
     }
 }
