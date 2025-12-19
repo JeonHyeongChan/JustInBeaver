@@ -16,6 +16,7 @@ public class PoolManager : MonoBehaviour
     }
 
     public PoolConfig[] initialPools;
+
     private readonly Dictionary<int, ObjectPool<GameObject>> pools = new();
     private readonly Dictionary<int, Transform> parents = new();
 
@@ -134,6 +135,11 @@ public class PoolManager : MonoBehaviour
 
     private static void OnGet(GameObject go)
     {
+        var member = go.GetComponent<PoolMember>();
+        if (member != null)
+        {
+            member.isInPool = false;
+        }
         go.SetActive(true);
         if (go.TryGetComponent<IPoolable>(out var pool))
         {
@@ -148,6 +154,13 @@ public class PoolManager : MonoBehaviour
         {
             pool.OnDespawned();
         }
+
+        var member = go.GetComponent<PoolMember>();
+        if (member != null)
+        {
+            member.isInPool = true;
+        }
+
         go.SetActive(false);
         go.transform.SetParent(parent, false);
     }
