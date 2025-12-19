@@ -21,7 +21,7 @@ public class AttackState : IEnemyState
     {
         agent.isStopped = true;
         //if(만약 플레이어가 없다면 리턴)
-
+        enemy.LightViewOn();
         //플레이어 데미지 보내기 or 처리
         enemy.StartAttackCooldown();
     }
