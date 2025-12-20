@@ -143,12 +143,10 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        //Grid가 속한 "인벤토리 패널"까지만 올라가고, Canvas(root)는 잡지 않는다
         Transform taget = grid.transform;
 
         while (taget.parent != null)
         {
-            //다음 부모가 Canvas면 여기서 멈춤 (현재 t가 Canvas 바로 아래 패널)
             if (taget.parent.GetComponent<Canvas>() != null)
             {
                 break;

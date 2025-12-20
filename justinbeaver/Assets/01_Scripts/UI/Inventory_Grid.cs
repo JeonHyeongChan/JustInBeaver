@@ -116,7 +116,6 @@ public class Inventory_Grid : MonoBehaviour
             return;
         }
 
-        //int visibleRowCount = 3; // 화면에 보이는 행 (3x3)
         int totalRowCount = Mathf.CeilToInt((float)slots.Length / columnCount);
         int currentRow = selectedIndex / columnCount;
 

@@ -524,8 +524,9 @@ public class PlayerController : MonoBehaviour
             //이동 입력/상태 즉시 정리(멈춤)
             moveInput = Vector2.zero;
             if (rigid != null)
+            {
                 rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
-
+            }
             //구르기 중이면 취소
             isRolling = false;
         }
