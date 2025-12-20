@@ -136,18 +136,30 @@ public class UIManager : MonoBehaviour
 
     private void BindInventory()
     {
-        //씬에 있는 Inventory_Grid를 기준으로 루트(인벤토리 패널) 찾기
         var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
         if (grid == null)
         {
+            inventoryUI = null;
             return;
         }
 
-        inventoryUI = grid.transform.root.gameObject;
-        inventoryUI.SetActive(false); //시작 시 OFF
+        //Grid가 속한 "인벤토리 패널"까지만 올라가고, Canvas(root)는 잡지 않는다
+        Transform taget = grid.transform;
+
+        while (taget.parent != null)
+        {
+            //다음 부모가 Canvas면 여기서 멈춤 (현재 t가 Canvas 바로 아래 패널)
+            if (taget.parent.GetComponent<Canvas>() != null)
+            {
+                break;
+            }
+            taget = taget.parent;
+        }
+        inventoryUI = taget.gameObject;
+
+        //시작 시 강제 OFF
+        inventoryUI.SetActive(false);
     }
-
-
 
     public void ToggleInventory()
     {
@@ -165,15 +177,14 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
-        
+
         if (inventoryUI.activeSelf == open)
         {
             return;
         }
-            
         inventoryUI.SetActive(open);
 
-        // 플레이어 입력 잠금/해제
+        //플레이어 잠금/해제
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         if (player != null)
         {
