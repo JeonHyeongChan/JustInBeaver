@@ -36,13 +36,11 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-
             DontDestroyOnLoad(gameObject);
-
             SceneManager.sceneLoaded += OnSceneLoaded;
-            HideAllUI();
-
+            
             BindSceneUI();
+            HideAllUI();
         }
         else
         {
@@ -63,6 +61,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BindSceneUI();
+        HideAllUI();
     }
 
     /// <summary>
