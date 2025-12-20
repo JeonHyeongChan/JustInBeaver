@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 
 public class UI_InventorySlot : MonoBehaviour
@@ -6,7 +6,7 @@ public class UI_InventorySlot : MonoBehaviour
     Image bgImage;
 
     Color normalColor = Color.white;
-    Color selectedColor = Color.yellow;
+    Color selectedColor = Color.cyan;
 
     [Header("Item")]
     [SerializeField] string itemName;
@@ -14,20 +14,28 @@ public class UI_InventorySlot : MonoBehaviour
     [Header("UI")]
     public Image icon;
 
+
+
     void Awake()
     {
         bgImage = GetComponent<Image>();
-
-        if (bgImage == null)
-            Debug.LogError($"{name} : Image ƒƒ∆˜≥Õ∆Æ∞° æ¯¿Ω!");
+    
+        //if (bgImage == null)
+        //{
+        //    Debug.LogError($"{name} : Image Ïª¥Ìè¨ÎÑåÌä∏Í∞Ä ÏóÜÏùå!");
+        //}
     }
+
 
     public void SetSelected(bool selected)
     {
-        if (bgImage == null) return;
-
+        if (bgImage == null)
+        {
+            return;
+        }
         bgImage.color = selected ? selectedColor : normalColor;
     }
+
 
     public bool HasItem()
     {
@@ -39,11 +47,14 @@ public class UI_InventorySlot : MonoBehaviour
         return itemName;
     }
 
+
     public void Clear()
     {
         itemName = null;
 
         if (icon != null)
+        {
             icon.enabled = false;
+        }
     }
 }

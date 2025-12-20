@@ -25,7 +25,11 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
+
     public UI_GatherGauge GatherGauge => gatherGauge;
+    public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
+
+
 
     private void Awake()
     {
@@ -130,7 +134,64 @@ public class UIManager : MonoBehaviour
         playerHeart.SetHeart(playerHealth.currentHealth, playerHealth.maxHealth);
     }
 
-    /// <summary>
+
+    public void ToggleInventory()
+    {
+        if (inventoryUI == null)
+        {
+            return;
+        }
+        SetInventoryOpen(!inventoryUI.activeSelf);
+    }
+
+
+    public void SetInventoryOpen(bool open)
+    {
+        if (inventoryUI == null)
+        {
+            return;
+        }
+        
+        if (inventoryUI.activeSelf == open)
+        {
+            return;
+        }
+            
+        inventoryUI.SetActive(open);
+
+        // 플레이어 입력 잠금/해제
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        if (player != null)
+        {
+            player.SetInputLocked(open);
+            player.SetInventoryOpen(open);
+        }
+    }
+
+
+
+    public void MoveInventoryCursor(Vector2 dir)
+    {
+        var grid = inventoryUI.GetComponentInChildren<Inventory_Grid>(true);
+        if (grid == null)
+        {
+            return;
+        }
+
+        int x = Mathf.RoundToInt(dir.x);
+        int y = Mathf.RoundToInt(dir.y);
+        grid.Move(x, -y); //UI 좌표 보정
+    }
+
+    public void DropSelectedItem()
+    {
+        var grid = inventoryUI.GetComponentInChildren<Inventory_Grid>(true);
+        grid?.DropSelectedItem();
+    }
+
+
+
+    /// <summary>s
     /// 갈무리 UI
     /// </summary>
     public void ShowGatherGauge()
@@ -172,15 +233,6 @@ public class UIManager : MonoBehaviour
     {
         HideAllUI();
         hudUI.SetActive(true);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            Time.timeScale = inventoryUI.activeSelf ? 0f : 1f;
-        }
     }
 
     public void HideAllUI()

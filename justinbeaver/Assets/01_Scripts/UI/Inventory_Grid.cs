@@ -1,5 +1,4 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory_Grid : MonoBehaviour
@@ -13,102 +12,107 @@ public class Inventory_Grid : MonoBehaviour
 
     int selectedIndex = 0;
 
+
+
     void OnEnable()
     {
-        if (slots == null || slots.Length == 0) return;
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
 
         for (int i = 0; i < slots.Length; i++)
+        {
             slots[i].SetSelected(false);
+        }
 
         Select(0);
     }
 
-    void Update()
-    {
-        if (Keyboard.current == null) return;
-    
-      // ÀÌµ¿
-      if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-          Move(-1, 0);
-      if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-          Move(1, 0);
-      if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-          Move(0, -1);
-      if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-          Move(0, 1);
-    
-      // C : ¾ÆÀÌÅÛ ¹ö¸®±â
-      if (Keyboard.current.cKey.wasPressedThisFrame)
-      {
-          DropSelectedItem();
-      }
-    
-    }
-    void Move(int x, int y)
+
+
+    //ì´ë™
+    public void Move(int x, int y)
     {
         int row = selectedIndex / columnCount;
         int col = selectedIndex % columnCount;
 
         int nextRow = row + y;
         int nextCol = col + x;
-
         if (nextCol < 0 || nextCol >= columnCount)
+        {
             return;
+        }
 
         int nextIndex = nextRow * columnCount + nextCol;
-
         if (nextIndex < 0 || nextIndex >= slots.Length)
+        {
             return;
+        }
 
         Select(nextIndex);
     }
 
+
+
+    //ì„ íƒ
     void Select(int index)
     {
         if (index < 0 || index >= slots.Length)
+        {
             return;
-
+        }
+            
         slots[selectedIndex].SetSelected(false);
         selectedIndex = index;
         slots[selectedIndex].SetSelected(true);
 
         ScrollToSelectedSlot();
-
-        Debug.Log($" ¼±ÅÃ ½½·Ô: {selectedIndex}");
     }
 
-    void DropSelectedItem()
+
+
+
+    //ë²„ë¦´ ì•„ì´í…œ ì„ íƒ
+    public void DropSelectedItem()
     {
         UI_InventorySlot slot = slots[selectedIndex];
 
         if (!slot.HasItem())
         {
-            Debug.Log(" ¹ö¸± ¾ÆÀÌÅÛ ¾øÀ½");
+            Debug.Log(" ë²„ë¦´ ì•„ì´í…œ ì—†ìŒ");
             return;
         }
-
-        Debug.Log($" ¾ÆÀÌÅÛ ¹ö¸² : {slot.GetItemName()}");
+        Debug.Log($" ì•„ì´í…œ ë²„ë¦¼ : {slot.GetItemName()}");
         slot.Clear();
     }
 
+
+
+
+    //ìŠ¬ë¡¯ ì„ íƒ ìŠ¤í¬ë¡¤
     void ScrollToSelectedSlot()
     {
-        if (scrollRect == null) return;
+        if (scrollRect == null)
+        {
+            return;
+        }
 
-        int visibleRowCount = 3; // È­¸é¿¡ º¸ÀÌ´Â Çà (3x3)
+        int visibleRowCount = 3; // í™”ë©´ì— ë³´ì´ëŠ” í–‰ (3x3)
         int totalRowCount = Mathf.CeilToInt((float)slots.Length / columnCount);
 
+        //ìŠ¤í¬ë¡¤ í•„ìš” ì—†ìŒ
         if (totalRowCount <= visibleRowCount)
-            return; // ½ºÅ©·Ñ ÇÊ¿ä ¾øÀ½
+        {
+            return;
+        }
 
         int currentRow = selectedIndex / columnCount;
 
-        // È­¸é »ó´Ü ±âÁØ ½ÃÀÛ row °è»ê
+        //í™”ë©´ ìƒë‹¨ ê¸°ì¤€ ì‹œì‘ row ê³„ì‚°
         int maxStartRow = totalRowCount - visibleRowCount;
         int startRow = Mathf.Clamp(currentRow, 0, maxStartRow);
-
-        float normalizedY =
-            1f - (float)startRow / maxStartRow;
+        float normalizedY = 1f - (float)startRow / maxStartRow;
 
         scrollRect.verticalNormalizedPosition = normalizedY;
     }
