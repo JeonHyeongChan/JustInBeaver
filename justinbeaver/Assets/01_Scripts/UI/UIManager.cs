@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
         BindGatherGauge();
         BindInteractHint();
         BindHearts();
+        BindInventory();
     }
 
     private void BindGatherGauge()
@@ -133,6 +134,20 @@ public class UIManager : MonoBehaviour
         //즉시 반영
         playerHeart.SetHeart(playerHealth.currentHealth, playerHealth.maxHealth);
     }
+
+    private void BindInventory()
+    {
+        //씬에 있는 Inventory_Grid를 기준으로 루트(인벤토리 패널) 찾기
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null)
+        {
+            return;
+        }
+
+        inventoryUI = grid.transform.root.gameObject;
+        inventoryUI.SetActive(false); //시작 시 OFF
+    }
+
 
 
     public void ToggleInventory()
