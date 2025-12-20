@@ -425,7 +425,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+            
+        if (!ctx.started)
+        {
+            return;
+        }
+            
         Vector2 dir = ctx.ReadValue<Vector2>();
         if (dir == Vector2.zero)
         {
@@ -433,6 +438,7 @@ public class PlayerController : MonoBehaviour
         }
         UIManager.Instance?.MoveInventoryCursor(dir);
     }
+
 
 
     //인벤토리 키 닫기 (X키)
