@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22567a8506beb4a46bcad032d49ab02c, type: 3}
   m_Name: Item_Metal
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  icon: {fileID: 21300000, guid: 9127b6299e597b94395598dab43881dc, type: 3}
   itemPrefab: {fileID: 1135580564505572289, guid: b588b80d82ab3cb4e859386044f1e771, type: 3}
   itemId: 3
   itemName: Metal

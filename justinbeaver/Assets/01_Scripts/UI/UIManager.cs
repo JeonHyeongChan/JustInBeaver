@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BindSceneUI();
+        SetInventoryOpen(false);
         HideAllUI();
     }
 
@@ -136,28 +138,18 @@ public class UIManager : MonoBehaviour
 
     private void BindInventory()
     {
-        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
-        if (grid == null)
+        var root = FindAnyObjectByType<InventoryRootMarker>(FindObjectsInactive.Include);
+        if (root == null)
         {
             inventoryUI = null;
             return;
         }
 
-        Transform taget = grid.transform;
-
-        while (taget.parent != null)
-        {
-            if (taget.parent.GetComponent<Canvas>() != null)
-            {
-                break;
-            }
-            taget = taget.parent;
-        }
-        inventoryUI = taget.gameObject;
-
-        //시작 시 강제 OFF
-        inventoryUI.SetActive(false);
+        inventoryUI = root.gameObject;
+        inventoryUI.SetActive(false); //시작 시 무조건 OFF
     }
+
+
 
     public void ToggleInventory()
     {
@@ -175,14 +167,16 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
-
+            
+        // 이미 원하는 상태면 아무것도 안 함
         if (inventoryUI.activeSelf == open)
         {
             return;
         }
+
         inventoryUI.SetActive(open);
 
-        //플레이어 잠금/해제
+        // 플레이어 잠금/해제
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         if (player != null)
         {
@@ -190,8 +184,6 @@ public class UIManager : MonoBehaviour
             player.SetInventoryOpen(open);
         }
     }
-
-
 
     public void MoveInventoryCursor(Vector2 dir)
     {
@@ -206,11 +198,33 @@ public class UIManager : MonoBehaviour
         grid.Move(x, -y); //UI 좌표 보정
     }
 
+
     public void DropSelectedItem()
     {
         var grid = inventoryUI.GetComponentInChildren<Inventory_Grid>(true);
         grid?.DropSelectedItem();
     }
+
+
+    public bool TryAddItemToInventory(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return false;
+        }
+            
+
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null)
+        {
+            return false;
+        }
+
+        grid.RebindSlots();
+        bool ok = grid.TryAddItem(itemId);
+        return ok;
+    }
+
 
 
 

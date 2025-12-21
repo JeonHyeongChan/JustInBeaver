@@ -5,6 +5,8 @@ public class Inventory_Grid : MonoBehaviour
 {
     [Header("Grid")]
     public int columnCount = 3;
+
+    [Header("Slots")]
     public UI_InventorySlot[] slots;
 
     [Header("Scroll")]
@@ -15,48 +17,67 @@ public class Inventory_Grid : MonoBehaviour
 
     int selectedIndex = 0;
 
+    [Header("Options")]
+    [SerializeField] private bool autoBindSlotsOnEnable = true;
+    [SerializeField] private bool includeInactiveSlots = true;
 
-    void Awake()
+
+    private void Awake()
     {
-        if (scrollRect != null)
+        BindScrollRefs();
+        
+        if (slots == null || slots.Length == 0)
         {
-            if (scrollRect == null)
-            {
-                scrollRect = GetComponentInParent<ScrollRect>(true);
-            }
-            contentRT = scrollRect.content;
-            viewportRT = scrollRect.viewport;
-
-            
+            RebindSlots();
         }
     }
 
 
-    void OnEnable()
+    private void OnEnable()
+    {
+        if (autoBindSlotsOnEnable)
+        {
+            BindScrollRefs();
+            RebindSlots();
+        }
+
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
+        //선택 초기화
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] != null)
+            {
+                slots[i].SetSelected(false);
+            }
+        }
+
+        selectedIndex = Mathf.Clamp(selectedIndex, 0, slots.Length - 1);
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(true);
+        }
+        ScrollToSelectedSlot();
+    }
+
+
+    //이동
+    public void Move(int x, int y)
     {
         if (slots == null || slots.Length == 0)
         {
             return;
         }
 
-        for (int i = 0; i < slots.Length; i++)
-        {
-            slots[i].SetSelected(false);
-        }
-
-        Select(0);
-    }
-
-
-
-    //이동
-    public void Move(int x, int y)
-    {
         int row = selectedIndex / columnCount;
         int col = selectedIndex % columnCount;
 
         int nextRow = row + y;
         int nextCol = col + x;
+
         if (nextCol < 0 || nextCol >= columnCount)
         {
             return;
@@ -67,58 +88,109 @@ public class Inventory_Grid : MonoBehaviour
         {
             return;
         }
-
         Select(nextIndex);
     }
-
 
 
     //선택
     void Select(int index)
     {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }    
+            
         if (index < 0 || index >= slots.Length)
         {
             return;
         }
-            
-        slots[selectedIndex].SetSelected(false);
-        selectedIndex = index;
-        slots[selectedIndex].SetSelected(true);
 
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(false);
+        }
+
+        selectedIndex = index;
+
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(true);
+        }
         ScrollToSelectedSlot();
     }
-
-
 
 
     //버릴 아이템 선택
     public void DropSelectedItem()
     {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
         UI_InventorySlot slot = slots[selectedIndex];
+        
+        if (slot == null)
+        {
+            return;
+        }
 
         if (!slot.HasItem())
         {
-            Debug.Log(" 버릴 아이템 없음");
+            Debug.Log("버릴 아이템 없음");
             return;
         }
-        Debug.Log($" 아이템 버림 : {slot.GetItemName()}");
+
+        string id = slot.GetItemId();
+        var data = ItemManager.Instance != null ? ItemManager.Instance.GetItem(id) : null;
+
+        Debug.Log($"아이템 버림 : {(data != null ? data.itemName : id)}");
         slot.Clear();
     }
 
 
+    //빈 슬롯에 아이템 추가
+    public bool TryAddItem(string itemId)
+    {
+        if (slots == null || slots.Length == 0)
+        {
+            return false;
+        }    
+            
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return false;
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] != null && !slots[i].HasItem())
+            {
+                slots[i].SetItemId(itemId);
+                return true;
+            }
+        }
+
+        Debug.Log("인벤토리 가득 참");
+        return false;
+    }
 
 
     //슬롯 선택 스크롤
     void ScrollToSelectedSlot()
     {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }    
+            
         if (scrollRect == null || contentRT == null || viewportRT == null)
         {
             return;
         }
 
-        int totalRowCount = Mathf.CeilToInt((float)slots.Length / columnCount);
-        int currentRow = selectedIndex / columnCount;
-
+        //레이아웃 갱신
+        Canvas.ForceUpdateCanvases();
 
         //슬롯 RectTransform 높이 사용
         var slotRT = slots[selectedIndex].GetComponent<RectTransform>();
@@ -132,22 +204,20 @@ public class Inventory_Grid : MonoBehaviour
         var grid = contentRT.GetComponent<GridLayoutGroup>();
         float spacingY = grid != null ? grid.spacing.y : 0f;
 
-
         float rowHeight = cellHeight + spacingY;
-
+        
         float contentHeight = contentRT.rect.height;
         float viewportHeight = viewportRT.rect.height;
-
 
         //스크롤 필요 없음
         if (contentHeight <= viewportHeight + 0.01f)
         {
             return;
         }
-        float targetCenterY = currentRow * rowHeight + rowHeight * 0.5f;
-
 
         //뷰포트 중앙 위치
+        int currentRow = selectedIndex / columnCount;
+        float targetCenterY = currentRow * rowHeight + rowHeight * 0.5f;
         float viewportCenterY = viewportHeight * 0.5f;
 
         //목표값
@@ -161,5 +231,35 @@ public class Inventory_Grid : MonoBehaviour
         Vector2 pos = contentRT.anchoredPosition;
         pos.y = desiredContentY;
         contentRT.anchoredPosition = pos;
+    }
+
+    private void BindScrollRefs()
+    {
+        if (scrollRect == null)
+        {
+            scrollRect = GetComponentInParent<ScrollRect>(true);
+        }
+
+        if (scrollRect == null)
+        {
+            contentRT = null;
+            viewportRT = null;
+            return;
+        }
+
+        contentRT = scrollRect.content;
+        viewportRT = scrollRect.viewport != null
+            ? scrollRect.viewport
+            : scrollRect.GetComponent<RectTransform>(); //예외 방지
+    }
+
+
+    public void RebindSlots()
+    {
+        slots = GetComponentsInChildren<UI_InventorySlot>(includeInactiveSlots);
+        if ((slots == null || slots.Length == 0) && contentRT != null)
+        {
+            slots = contentRT.GetComponentsInChildren<UI_InventorySlot>(includeInactiveSlots);
+        }
     }
 }
