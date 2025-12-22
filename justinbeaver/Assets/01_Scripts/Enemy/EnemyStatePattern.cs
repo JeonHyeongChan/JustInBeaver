@@ -97,18 +97,19 @@ public class EnemyStatePattern : MonoBehaviour
     /// </summary>
     private void BindPlayer()
     {
-      
-
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject == null)
+        {
             return;
-
+        }
+             
         player = playerObject.transform;
 
         //gatherSignal 연결
         gatherSignal = player.GetComponent<PlayerGatherSignal>();
         if (gatherSignal != null)
         {
+            Debug.Log("연결 완료");
             gatherSignal.OnGatherStart += HandleGatherStart;
             gatherSignal.OnGatherEnd += HandleGatherEnd;
         }
@@ -117,9 +118,10 @@ public class EnemyStatePattern : MonoBehaviour
 
     private void HandleGatherStart(Vector3 anchorPos)
     {
+        Debug.Log("핸들개터스타트");
         if (currentState is SleepState || currentState is IdleState)
         {
-            
+            Debug.Log("갈무리 if");
             SetAlertTargetPos(anchorPos);
             SetState(new AlertState(this));
         }

@@ -33,19 +33,22 @@ public class PlayerController : MonoBehaviour
     private float nextRollTime;
     private Vector3 rollDir;            //구르기 방향
 
+
     //상호작용 홀드
     private float interactHoldTimer;
     private bool isHoldingInteract;
     private IInteractable holdingTarget;
 
+
+    //인벤토리 관련
+    private bool inputLocked; // 인벤토리 활성화 시 입력 잠금
+    private bool isInventoryOpen;
+
+
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundMask;   // Inspector에서 Ground만 체크
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundRadius = 0.25f;
-
-
-
-
 
     //Animator 파라미터 해시
     private static readonly int HashSpeed = Animator.StringToHash("Speed");
@@ -66,12 +69,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            Debug.Log($"Grounded={isGrounded}");
         HandleInteractHold();
     }
+
 
     private void FixedUpdate()
     {
@@ -212,8 +215,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
-
     private void UpdateAnimator()
     {
         if (animator == null)
@@ -231,12 +232,22 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (inputLocked)
+        {
+            moveInput = Vector2.zero; return;
+        }
+
         moveInput = ctx.ReadValue<Vector2>();
     }
 
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (inputLocked)
+        {
+            return;
+        }    
+
         if (!ctx.performed)
         {
             return;
@@ -247,8 +258,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        
-
         if (isGrounded && !jumpLocked)
         {
             Jump();
@@ -257,10 +266,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext ctx)
     {
+
+        if (inputLocked)
+        {
+            return;
+        }
+
         if (!ctx.performed)
         {
             return;
         }
+
         if (!isGrounded)
         {
             return;
@@ -273,6 +289,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnGather(InputAction.CallbackContext ctx)
     {
+        if (inputLocked)
+        {
+            return;
+        }
+
         var context = GetComponent<PlayerContext>();
         if (context == null)
         {
@@ -327,6 +348,11 @@ public class PlayerController : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnInteract(InputAction.CallbackContext ctx)
     {
+        if (inputLocked)
+        {
+            return;
+        }
+
         var detector = GetComponent<PlayerInteractDetector>();
         if (detector == null)
             return;
@@ -357,6 +383,86 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    //인벤토리 열기 (Tab키)
+    public void OnToggleInventory(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+        bool nextOpen = !(UIManager.Instance != null && UIManager.Instance.IsInventoryOpen);
+        UIManager.Instance?.SetInventoryOpen(nextOpen);
+    }
+
+
+
+    //아이템 버리기 (C키)
+    public void OnDropItem(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }    
+            
+        if (!isInventoryOpen)
+        {
+            return;
+        }
+        UIManager.Instance?.DropSelectedItem();
+    }
+
+
+    //인벤토리 이동 입력 (화살표키)
+    public void OnMoveUI(InputAction.CallbackContext ctx)
+    {
+        if (!isInventoryOpen)
+        {
+            return;
+        }
+
+        if (!ctx.performed)
+        {
+            return;
+        }
+        
+        Vector2 v = ctx.ReadValue<Vector2>();
+        int x = v.x > 0.5f ? 1 : (v.x < -0.5f ? -1 : 0);
+        int y = v.y > 0.5f ? 1 : (v.y < -0.5f ? -1 : 0);
+        
+        if (x == 0 && y == 0)
+        {
+            return;
+        }
+
+        UIManager.Instance?.MoveInventoryCursor(new Vector2(x, y));
+    }
+
+
+    //인벤토리 키 닫기 (X키)
+    public void OnCloseUI(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }    
+            
+        if (!isInventoryOpen)
+        {
+            return;
+        }
+        isInventoryOpen = false;
+        UIManager.Instance?.SetInventoryOpen(false);
+        SetInputLocked(false);
+    }
+
+
+    public void SetInventoryOpen(bool open)
+    {
+        isInventoryOpen = open;
+    }
+
+
     private void HandleInteractHold()
     {
         if (!isHoldingInteract || holdingTarget == null)
@@ -377,6 +483,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
     private void CancelHold()
     {
         if (holdingTarget != null)
@@ -389,6 +497,8 @@ public class PlayerController : MonoBehaviour
         holdingTarget = null;
     }
 
+
+
     private void ExecuteInteract(IInteractable target)
     {
         isHoldingInteract = false;
@@ -398,5 +508,24 @@ public class PlayerController : MonoBehaviour
 
         target.Interact(this);
         holdingTarget = null;
+    }
+
+
+    //입력 잠금 시 이동,점프,구르기 막기
+    public void SetInputLocked(bool locked)
+    {
+        inputLocked = locked;
+
+        if (locked)
+        {
+            //이동 입력/상태 즉시 정리(멈춤)
+            moveInput = Vector2.zero;
+            if (rigid != null)
+            {
+                rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
+            }
+            //구르기 중이면 취소
+            isRolling = false;
+        }
     }
 }

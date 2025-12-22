@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &560485584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+  m_PrefabInstance: {fileID: 823731187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &768534455
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +174,7 @@ MonoBehaviour:
   escapeResultUI: {fileID: 0}
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
+  playerHeart: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
@@ -229,13 +235,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 823731189}
   m_SourcePrefab: {fileID: 100100000, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
 --- !u!4 &823731188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
   m_PrefabInstance: {fileID: 823731187}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &823731189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560485584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01c3f11e654f06479d5ccd0cb759531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGatherSignal
 --- !u!1 &955234486
 GameObject:
   m_ObjectHideFlags: 0

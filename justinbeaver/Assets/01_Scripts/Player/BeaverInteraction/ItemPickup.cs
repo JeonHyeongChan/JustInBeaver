@@ -8,12 +8,25 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
     public bool RequiresHold => false;
     public float HoldDuration => 0f;
 
+    [Header("Item")]
+    [SerializeField] private ItemData itemData;
+
+    private string ItemId => itemData != null ? itemData.itemId : null;
+
+
     public void Interact(PlayerController player)
     {
         Debug.Log("Item Get!");
-        //상호작용 필요한 것들
+        
+        if (itemData == null || string.IsNullOrEmpty(itemData.itemId))
+        {
+            return;
+        }
 
-        // TODO: 인벤토리에 아이템 추가
+        if (!UIManager.Instance.TryAddItemToInventory(itemData.itemId))
+        {
+            return;
+        }
 
         //풀 반환
         Despawn();
@@ -25,10 +38,12 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
         {
             ObjectManager.Instance.DespawnObject(gameObject);
         }
+
         else if (PoolManager.Instance != null)
         {
             PoolManager.Instance.Despawn(gameObject);
-        }
+        }    
+            
         else
         {
             gameObject.SetActive(false);
@@ -36,10 +51,7 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
     }
 
     public void OnSpawned() {}
-
     public void OnDespawned() {}
-
     public void OnHoldCancel(PlayerController player) {}
-
     public void OnHoldUpdate(PlayerController player, float progress01) {}
 }

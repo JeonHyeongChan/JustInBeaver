@@ -1,51 +1,77 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory_Grid : MonoBehaviour
 {
     [Header("Grid")]
     public int columnCount = 3;
+
+    [Header("Slots")]
     public UI_InventorySlot[] slots;
 
     [Header("Scroll")]
     public ScrollRect scrollRect;
 
+    private RectTransform contentRT;
+    private RectTransform viewportRT;
+
     int selectedIndex = 0;
 
-    void OnEnable()
-    {
-        if (slots == null || slots.Length == 0) return;
+    [Header("Options")]
+    [SerializeField] private bool autoBindSlotsOnEnable = true;
+    [SerializeField] private bool includeInactiveSlots = true;
 
+
+    private void Awake()
+    {
+        BindScrollRefs();
+        
+        if (slots == null || slots.Length == 0)
+        {
+            RebindSlots();
+        }
+    }
+
+
+    private void OnEnable()
+    {
+        if (autoBindSlotsOnEnable)
+        {
+            BindScrollRefs();
+            RebindSlots();
+        }
+
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
+        //ÏÑ†ÌÉù Ï¥àÍ∏∞Ìôî
         for (int i = 0; i < slots.Length; i++)
-            slots[i].SetSelected(false);
+        {
+            if (slots[i] != null)
+            {
+                slots[i].SetSelected(false);
+            }
+        }
 
-        Select(0);
+        selectedIndex = Mathf.Clamp(selectedIndex, 0, slots.Length - 1);
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(true);
+        }
+        ScrollToSelectedSlot();
     }
 
-    void Update()
+
+    //Ïù¥Îèô
+    public void Move(int x, int y)
     {
-        if (Keyboard.current == null) return;
-    
-      // ¿Ãµø
-      if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-          Move(-1, 0);
-      if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-          Move(1, 0);
-      if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-          Move(0, -1);
-      if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-          Move(0, 1);
-    
-      // C : æ∆¿Ã≈€ πˆ∏Æ±‚
-      if (Keyboard.current.cKey.wasPressedThisFrame)
-      {
-          DropSelectedItem();
-      }
-    
-    }
-    void Move(int x, int y)
-    {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
         int row = selectedIndex / columnCount;
         int col = selectedIndex % columnCount;
 
@@ -53,63 +79,187 @@ public class Inventory_Grid : MonoBehaviour
         int nextCol = col + x;
 
         if (nextCol < 0 || nextCol >= columnCount)
-            return;
-
-        int nextIndex = nextRow * columnCount + nextCol;
-
-        if (nextIndex < 0 || nextIndex >= slots.Length)
-            return;
-
-        Select(nextIndex);
-    }
-
-    void Select(int index)
-    {
-        if (index < 0 || index >= slots.Length)
-            return;
-
-        slots[selectedIndex].SetSelected(false);
-        selectedIndex = index;
-        slots[selectedIndex].SetSelected(true);
-
-        ScrollToSelectedSlot();
-
-        Debug.Log($" º±≈√ ΩΩ∑‘: {selectedIndex}");
-    }
-
-    void DropSelectedItem()
-    {
-        UI_InventorySlot slot = slots[selectedIndex];
-
-        if (!slot.HasItem())
         {
-            Debug.Log(" πˆ∏± æ∆¿Ã≈€ æ¯¿Ω");
             return;
         }
 
-        Debug.Log($" æ∆¿Ã≈€ πˆ∏≤ : {slot.GetItemName()}");
+        int nextIndex = nextRow * columnCount + nextCol;
+        if (nextIndex < 0 || nextIndex >= slots.Length)
+        {
+            return;
+        }
+        Select(nextIndex);
+    }
+
+
+    //ÏÑ†ÌÉù
+    void Select(int index)
+    {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }    
+            
+        if (index < 0 || index >= slots.Length)
+        {
+            return;
+        }
+
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(false);
+        }
+
+        selectedIndex = index;
+
+        if (slots[selectedIndex] != null)
+        {
+            slots[selectedIndex].SetSelected(true);
+        }
+        ScrollToSelectedSlot();
+    }
+
+
+    //Î≤ÑÎ¶¥ ÏïÑÏù¥ÌÖú ÏÑ†ÌÉù
+    public void DropSelectedItem()
+    {
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
+        UI_InventorySlot slot = slots[selectedIndex];
+        
+        if (slot == null)
+        {
+            return;
+        }
+
+        if (!slot.HasItem())
+        {
+            Debug.Log("Î≤ÑÎ¶¥ ÏïÑÏù¥ÌÖú ÏóÜÏùå");
+            return;
+        }
+
+        string id = slot.GetItemId();
+        var data = ItemManager.Instance != null ? ItemManager.Instance.GetItem(id) : null;
+
+        Debug.Log($"ÏïÑÏù¥ÌÖú Î≤ÑÎ¶º : {(data != null ? data.itemName : id)}");
         slot.Clear();
     }
 
+
+    //Îπà Ïä¨Î°ØÏóê ÏïÑÏù¥ÌÖú Ï∂îÍ∞Ä
+    public bool TryAddItem(string itemId)
+    {
+        if (slots == null || slots.Length == 0)
+        {
+            return false;
+        }    
+            
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return false;
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] != null && !slots[i].HasItem())
+            {
+                slots[i].SetItemId(itemId);
+                return true;
+            }
+        }
+
+        Debug.Log("Ïù∏Î≤§ÌÜ†Î¶¨ Í∞ÄÎìù Ï∞∏");
+        return false;
+    }
+
+
+    //Ïä¨Î°Ø ÏÑ†ÌÉù Ïä§ÌÅ¨Î°§
     void ScrollToSelectedSlot()
     {
-        if (scrollRect == null) return;
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }    
+            
+        if (scrollRect == null || contentRT == null || viewportRT == null)
+        {
+            return;
+        }
 
-        int visibleRowCount = 3; // »≠∏Èø° ∫∏¿Ã¥¬ «‡ (3x3)
-        int totalRowCount = Mathf.CeilToInt((float)slots.Length / columnCount);
+        //Î†àÏù¥ÏïÑÏõÉ Í∞±Ïã†
+        Canvas.ForceUpdateCanvases();
 
-        if (totalRowCount <= visibleRowCount)
-            return; // Ω∫≈©∑— « ø‰ æ¯¿Ω
+        //Ïä¨Î°Ø RectTransform ÎÜíÏù¥ ÏÇ¨Ïö©
+        var slotRT = slots[selectedIndex].GetComponent<RectTransform>();
+        if (slotRT == null)
+        {
+            return;
+        }
 
+        //GridLayoutGroup yÍ∞í Î∞òÏòÅ
+        float cellHeight = slotRT.rect.height;
+        var grid = contentRT.GetComponent<GridLayoutGroup>();
+        float spacingY = grid != null ? grid.spacing.y : 0f;
+
+        float rowHeight = cellHeight + spacingY;
+        
+        float contentHeight = contentRT.rect.height;
+        float viewportHeight = viewportRT.rect.height;
+
+        //Ïä§ÌÅ¨Î°§ ÌïÑÏöî ÏóÜÏùå
+        if (contentHeight <= viewportHeight + 0.01f)
+        {
+            return;
+        }
+
+        //Î∑∞Ìè¨Ìä∏ Ï§ëÏïô ÏúÑÏπò
         int currentRow = selectedIndex / columnCount;
+        float targetCenterY = currentRow * rowHeight + rowHeight * 0.5f;
+        float viewportCenterY = viewportHeight * 0.5f;
 
-        // »≠∏È ªÛ¥‹ ±‚¡ÿ Ω√¿€ row ∞ËªÍ
-        int maxStartRow = totalRowCount - visibleRowCount;
-        int startRow = Mathf.Clamp(currentRow, 0, maxStartRow);
+        //Î™©ÌëúÍ∞í
+        float desiredContentY = targetCenterY - viewportCenterY;
 
-        float normalizedY =
-            1f - (float)startRow / maxStartRow;
+        //Í∞ÄÎä•Ìïú Î≤îÏúÑÎ°ú clamp
+        float maxContentY = Mathf.Max(0f, contentHeight - viewportHeight);
+        desiredContentY = Mathf.Clamp(desiredContentY, 0f, maxContentY);
 
-        scrollRect.verticalNormalizedPosition = normalizedY;
+        //Ï†ÅÏö©
+        Vector2 pos = contentRT.anchoredPosition;
+        pos.y = desiredContentY;
+        contentRT.anchoredPosition = pos;
+    }
+
+    private void BindScrollRefs()
+    {
+        if (scrollRect == null)
+        {
+            scrollRect = GetComponentInParent<ScrollRect>(true);
+        }
+
+        if (scrollRect == null)
+        {
+            contentRT = null;
+            viewportRT = null;
+            return;
+        }
+
+        contentRT = scrollRect.content;
+        viewportRT = scrollRect.viewport != null
+            ? scrollRect.viewport
+            : scrollRect.GetComponent<RectTransform>(); //ÏòàÏô∏ Î∞©ÏßÄ
+    }
+
+
+    public void RebindSlots()
+    {
+        slots = GetComponentsInChildren<UI_InventorySlot>(includeInactiveSlots);
+        if ((slots == null || slots.Length == 0) && contentRT != null)
+        {
+            slots = contentRT.GetComponentsInChildren<UI_InventorySlot>(includeInactiveSlots);
+        }
     }
 }
