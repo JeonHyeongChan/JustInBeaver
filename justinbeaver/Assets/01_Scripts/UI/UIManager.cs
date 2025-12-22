@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     private PlayerHealth playerHealth;      //구독 해제용
 
     public GameObject gameFailUI;
+    public GameObject gameSuccessUI;
 
     [Header("OutGame")]
     public GameObject shopUI;
@@ -43,7 +44,7 @@ public class UIManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
-            
+
             BindSceneUI();
             HideAllUI();
         }
@@ -80,6 +81,7 @@ public class UIManager : MonoBehaviour
         BindHearts();
         BindInventory();
         BindGameFailUI();
+        BindGameSuccessUI();
     }
 
     private void BindGatherGauge()
@@ -116,14 +118,14 @@ public class UIManager : MonoBehaviour
     {
         //씬에 하트 UI 찾기
         playerHeart = FindAnyObjectByType<UI_PlayerHearts>(FindObjectsInactive.Include);
-        if(playerHeart == null)
+        if (playerHeart == null)
         {
             return;
         }
 
         //씬에 PlayerHealth 찾기
         var health = FindAnyObjectByType<PlayerHealth>(FindObjectsInactive.Exclude);
-        if(health == null)
+        if (health == null)
         {
             return;
         }
@@ -131,7 +133,7 @@ public class UIManager : MonoBehaviour
         //이전 구독 해제
         if (playerHealth != null)
         {
-            playerHealth.OnHealthChanged -= playerHeart.SetHeart; 
+            playerHealth.OnHealthChanged -= playerHeart.SetHeart;
         }
 
         playerHealth = health;
@@ -167,6 +169,19 @@ public class UIManager : MonoBehaviour
         gameFailUI.SetActive(false);
     }
 
+    private void BindGameSuccessUI()
+    {
+        var marker = FindAnyObjectByType<GameSuccessUIMarker>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            gameSuccessUI = null;
+            return;
+        }
+
+        gameSuccessUI = marker.gameObject;
+        gameSuccessUI.SetActive(false);
+    }
+
 
 
     public void ToggleInventory()
@@ -185,7 +200,7 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
-            
+
         // 이미 원하는 상태면 아무것도 안 함
         if (inventoryUI.activeSelf == open)
         {
@@ -230,7 +245,7 @@ public class UIManager : MonoBehaviour
         {
             return false;
         }
-            
+
 
         var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
         if (grid == null)
@@ -258,12 +273,6 @@ public class UIManager : MonoBehaviour
     {
         if (gatherGaugeUI)
             gatherGaugeUI.SetActive(false);
-    }
-
-    public void ShowEscapeResultUI(int reward, bool success)
-    {
-        HideAllUI();
-        escapeResultUI.SetActive(true);
     }
 
     /// <summary>
@@ -308,9 +317,43 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.HandlePlayerRespawn();
     }
 
+    /// <summary>
+    /// 비버 탈출시 성공UI
+    /// </summary>
+    public void ShowEscapeSuccessUI()
+    {
+        if (gameSuccessUI != null)
+            gameSuccessUI.SetActive(true);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        var button = gameSuccessUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+
+    public void ConfirmEscapeSuccess()
+    {
+        if (gameSuccessUI != null)
+            gameSuccessUI.SetActive(false);
+
+        GameManager.Instance.HandlePlayerRespawn();
+    }
+
+
+
 
 
     public UI_HUD hud;
+    public void ShowEscapeResultUI(int reward, bool success)
+    {
+        HideAllUI();
+        escapeResultUI.SetActive(true);
+    }
 
     public void ShowGameUI()
     {

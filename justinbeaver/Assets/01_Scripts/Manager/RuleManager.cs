@@ -65,7 +65,9 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeSuccess()
     {
-        escapeSuccessCount++;        
+        escapeSuccessCount++;
+
+        UIManager.Instance?.ShowEscapeSuccessUI();
 
         CheckEndingCondition();
     }

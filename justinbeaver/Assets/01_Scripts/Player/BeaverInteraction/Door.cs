@@ -14,11 +14,19 @@ public class Door : MonoBehaviour, IInteractable
     public float HoldDuration => RequiresHold ? escapeHoldTime : 0f;
 
     public string InteractText => RequiresHold
-        ? $"[Z] Hold to Go {sceneName}": $"[Z] GO {sceneName}";
-    public Transform UIAnchor => uiAnchor ? uiAnchor : transform;    
+        ? $"[Z] Hold to Go {sceneName}" : $"[Z] GO {sceneName}";
+    public Transform UIAnchor => uiAnchor ? uiAnchor : transform;
 
     public void Interact(PlayerController player)
     {
+        //탈출구
+        if (sceneName == escapeSceneName)
+        {
+            RuleManager.Instance?.OnEscapeSuccess();
+            return;
+        }
+
+        //일반문
         SceneManager.LoadScene(sceneName);
     }
 
