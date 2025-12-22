@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8884026457219471206}
   - component: {fileID: 5555223849187212348}
   - component: {fileID: -6219412124378482747}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 16_PC_Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

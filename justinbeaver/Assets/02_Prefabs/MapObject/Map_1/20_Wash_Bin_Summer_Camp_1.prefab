@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8906745556747067695}
   - component: {fileID: 6872414522611390250}
   - component: {fileID: 7109924716744534143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 20_Wash_Bin_Summer_Camp_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

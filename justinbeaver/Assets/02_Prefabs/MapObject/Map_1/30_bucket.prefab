@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4962709741389078560}
   - component: {fileID: 3402429737235697551}
   - component: {fileID: 682886551097783388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bucket-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 6009766996192355375}
   - component: {fileID: 8921517074854992994}
   - component: {fileID: 904077035824359652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bucket-handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 930796549607971472}
   - component: {fileID: 6906367314979081827}
   - component: {fileID: 1969931418182061456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 30_bucket
   m_TagString: Untagged
   m_Icon: {fileID: 0}

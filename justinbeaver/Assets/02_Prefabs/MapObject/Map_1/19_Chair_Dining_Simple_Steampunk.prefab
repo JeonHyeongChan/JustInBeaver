@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8595679685047613178}
   - component: {fileID: 511411154884628877}
   - component: {fileID: 7280719688062570374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 19_Chair_Dining_Simple_Steampunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}

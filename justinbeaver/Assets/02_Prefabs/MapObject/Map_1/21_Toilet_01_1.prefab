@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6011443202782837050}
   - component: {fileID: 5246501939222664043}
   - component: {fileID: 4928859743258486029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 21_Toilet_01_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

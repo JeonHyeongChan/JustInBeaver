@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7177224337154381135}
   - component: {fileID: 3618019746599425779}
   - component: {fileID: 7906549305952046630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 06_Refrigerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 6376764211124631380}
   - component: {fileID: 8922967896222574054}
   - component: {fileID: 4239447445640438180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
