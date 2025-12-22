@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MapController : MonoBehaviour
+public class MapSpawner : MonoBehaviour
 {
     public MapSet mapSet;
     public Transform spawnPoint;
@@ -19,8 +19,12 @@ public class MapController : MonoBehaviour
         index = Mathf.Clamp(index, 0, mapSet.mapPrefabs.Count - 1);
         var prefab = mapSet.mapPrefabs[index];
 
-        PoolManager.Instance.Register(prefab, preloadCount: 0, maxSize: 1);
-        currentMap = PoolManager.Instance.Spawn(prefab, spawnPoint.position, spawnPoint.rotation);
+        PoolManager.Instance.Register(prefab, preloadCount: 0, maxSize: 4);
+
+        Vector3 pos = spawnPoint != null ? spawnPoint.position : Vector3.zero;
+        Quaternion rot = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
+
+        currentMap = PoolManager.Instance.Spawn(prefab, pos, rot);        
     }
 
     public void DespawnCurrent()

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드
         }
         else
@@ -58,14 +58,23 @@ public class GameManager : MonoBehaviour
         {
             Beaver.Instance.transform.position = BeaverSpawnPoint.Current.position;
         }
-        
+
         //인간 집 랜덤 선택
         if (scene.name == "HumanHouseScene")
         {
-            var controller = FindAnyObjectByType<MapController>();
-            if (controller != null)
+            var spawner = FindAnyObjectByType<MapSpawner>();
+            if (spawner != null && spawner.mapSet != null)
             {
-                controller.SpawnSelectedMap(SelectedMapIndex);
+                int count = spawner.mapSet.mapPrefabs.Count;
+                if (count <= 0)
+                {
+                    return;
+                }
+                    
+                //매번 랜덤 재선택
+                SelectedMapIndex = Random.Range(0, count);
+
+                spawner.SpawnSelectedMap(SelectedMapIndex);
             }
         }
 
@@ -147,7 +156,11 @@ public class GameManager : MonoBehaviour
 
     public void GoToField(MapSet set)
     {
-        SelectRandomMap(set.mapPrefabs.Count);
+        if (set == null || set.mapPrefabs.Count == 0)
+        {
+            return;
+        }
+        SelectRandomMap(set.mapPrefabs.Count);        
         SceneController.Instance.LoadScene(SceneType.HumanHouse);
     }
 }

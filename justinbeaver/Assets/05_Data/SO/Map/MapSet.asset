@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b1882fb72ef9a4e9fa5f7481944798, type: 3}
   m_Name: MapSet
   m_EditorClassIdentifier: Assembly-CSharp::MapSet
-  mapPrefabs: []
+  mapPrefabs:
+  - {fileID: 389734660655369321, guid: 041d7f3656e7c5d4d99ac94e9defbcbc, type: 3}
+  - {fileID: 5227572298788707677, guid: 16306ed06197cef49a0a5b517683141f, type: 3}

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2875251457603844511}
   - component: {fileID: 7442166080368050970}
   - component: {fileID: 4266517284524153445}
+  - component: {fileID: -8265357301465445685}
   m_Layer: 8
   m_Name: 04_KitchenTable_01
   m_TagString: Untagged
@@ -177,3 +178,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 8
+--- !u!208 &-8265357301465445685
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317876817981448464}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.78200006, y: 0.43600002, z: 0.52500004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.43400002, z: 0}
+  m_TimeToStationary: 0.5

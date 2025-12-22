@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 661263142722854038}
   - component: {fileID: 8127004169483804560}
   - component: {fileID: 2434071742111878808}
+  - component: {fileID: -6127469253014422925}
   m_Layer: 8
   m_Name: 07_Sofa_07_2
   m_TagString: Untagged
@@ -178,3 +179,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
+--- !u!208 &-6127469253014422925
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017328494742825589}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.9850001, y: 0.541, z: 0.522}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.541, z: 0.42400002}
+  m_TimeToStationary: 0.5
