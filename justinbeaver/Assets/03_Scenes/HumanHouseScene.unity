@@ -740,8 +740,8 @@ Transform:
   m_Children:
   - {fileID: 397905607}
   - {fileID: 1174513669}
-  - {fileID: 1179692803}
   - {fileID: 1144160875}
+  - {fileID: 1179692803}
   - {fileID: 2105975361}
   - {fileID: 49476240}
   - {fileID: 557093552}
@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 303824501}
   - component: {fileID: 303824500}
   - component: {fileID: 303824502}
+  - component: {fileID: 303824504}
   - component: {fileID: 303824503}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -1152,8 +1153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 10
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -1240,6 +1241,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6677b74bfbd1ba242a959774162d12c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollowBinder
+--- !u!114 &303824504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303824499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe43d662878a7c43bcd44d43c9e2094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDeoccluder
+  CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 128
+  IgnoreTag: doorcell
+  TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  MinimumDistanceFromTarget: 0.3
+  AvoidObstacles:
+    Enabled: 1
+    DistanceLimit: 0
+    MinimumOcclusionTime: 0
+    CameraRadius: 0.1
+    UseFollowTarget:
+      Enabled: 1
+      YOffset: 0
+    Strategy: 0
+    MaximumEffort: 4
+    SmoothingTime: 0
+    Damping: 0.4
+    DampingWhenOccluded: 0.2
+  ShotQualityEvaluation:
+    Enabled: 0
+    OptimalDistance: 10
+    NearLimit: 5
+    FarLimit: 30
+    MaxQualityBoost: 0.2
 --- !u!4 &314443082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3946169285652520675, guid: 0eec2cc6a2685354eab4e814d1dbdcc1, type: 3}
