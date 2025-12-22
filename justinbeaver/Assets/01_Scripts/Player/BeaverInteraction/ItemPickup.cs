@@ -10,6 +10,8 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
 
     [Header("Item")]
     [SerializeField] private ItemData itemData;
+    public string itemId;
+
 
     private string ItemId => itemData != null ? itemData.itemId : null;
 

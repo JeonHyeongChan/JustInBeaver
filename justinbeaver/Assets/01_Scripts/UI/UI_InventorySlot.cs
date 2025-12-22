@@ -89,4 +89,20 @@ public class UI_InventorySlot : MonoBehaviour
         icon.enabled = true;
         icon.color = Color.white;
     }
+
+
+    //아이템 빼기
+    public string PopItemId()
+    {
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return null;
+        }
+        
+        string id = itemId;
+        itemId = null;
+        
+        RefreshUI();
+        return id;
+    }
 }
