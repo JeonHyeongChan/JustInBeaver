@@ -334,6 +334,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        //누르기 종료
         if (ctx.canceled)
         {
             context.isGatherHolding = false;

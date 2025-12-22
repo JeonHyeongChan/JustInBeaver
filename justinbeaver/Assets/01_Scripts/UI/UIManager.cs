@@ -180,7 +180,7 @@ public class UIManager : MonoBehaviour
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         if (player != null)
         {
-            player.SetInventoryLocked(open);
+            player.SetInputLocked(open);
             player.SetInventoryOpen(open);
         }
     }
