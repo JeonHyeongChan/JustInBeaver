@@ -366,6 +366,11 @@ public class PlayerController : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnInteract(InputAction.CallbackContext ctx)
     {
+        if (isInventoryOpen) //인벤토리 열려있으면 Z 상호작용 금지
+        {
+            return;
+        }    
+            
         if (inputLocked)
         {
             return;

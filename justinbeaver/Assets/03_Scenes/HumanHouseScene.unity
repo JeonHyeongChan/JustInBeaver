@@ -3310,10 +3310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ef81be3b1db441bb4be1b1a6bb64d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
-  initialPools:
-  - prefab: {fileID: 8608635952163956967, guid: cdaf83b2fc05f7440bade930a31aa049, type: 3}
-    preloadCount: 1
-    maxSize: 1
+  initialPools: []
 --- !u!4 &775597285
 Transform:
   m_ObjectHideFlags: 0
@@ -7707,6 +7704,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemManager
   database: {fileID: 11400000, guid: c7bc0584ee5d7974ba5783830bcb7daf, type: 2}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundRayHeight: 2
+  groundRayDistance: 10
+  groundOffsetY: 0.02
+  groundProbeRadius: 0.25
 --- !u!4 &1626979511
 Transform:
   m_ObjectHideFlags: 0
