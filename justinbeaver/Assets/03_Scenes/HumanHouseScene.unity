@@ -4136,6 +4136,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1527468353255806966, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
+      propertyPath: m_TagString
+      value: doorcell
+      objectReference: {fileID: 0}
     - target: {fileID: 1554239858063083093, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
       propertyPath: m_Layer
       value: 7
