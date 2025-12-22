@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4889215012621590852}
   - component: {fileID: 2840566177506344915}
   - component: {fileID: 9173263266238312442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 22_Bath
   m_TagString: Untagged
   m_Icon: {fileID: 0}

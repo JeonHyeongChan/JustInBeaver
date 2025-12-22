@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1979585601376459573}
   - component: {fileID: 6172107413815878443}
   - component: {fileID: 44114852763981100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 18_Table_Fancy_Round_B_Fantasy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

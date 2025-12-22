@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 780196979665790307}
   - component: {fileID: 3243702193714422553}
   - component: {fileID: 130423365141222139}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: locker-metal-big-door-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5077617153194682116}
   - component: {fileID: 6207277803344307700}
   - component: {fileID: 3928745413975098800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: locker-metal-big-door-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4474119295085331848}
   - component: {fileID: 6300997980128767472}
   - component: {fileID: 7208700736520986156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: locker-metal-big-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 1363008882216281480}
   - component: {fileID: 1095116938995675303}
   - component: {fileID: 718588360278121628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 29_Locker_Metal_Big_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

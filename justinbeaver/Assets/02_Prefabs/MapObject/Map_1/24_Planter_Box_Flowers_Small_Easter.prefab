@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1725735823000532793}
   - component: {fileID: 7433285994846550232}
   - component: {fileID: 3104942098246694663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 24_Planter_Box_Flowers_Small_Easter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

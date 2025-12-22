@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2907594684751944927}
   - component: {fileID: 5834599496600981813}
   - component: {fileID: 2838392030525033556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 23_Bookcase_Modular_Cabinet_Filled_1m_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6563872602198604339}
   - component: {fileID: 6959236243197534741}
   - component: {fileID: 3484109263458256944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: library-modular-cabinet-filled-1m-a-door-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 4245306620324960491}
   - component: {fileID: 244199283831894609}
   - component: {fileID: 533976775248233226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: library-modular-cabinet-filled-1m-a-door-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 3803452523987296477}
   - component: {fileID: 8614128331204815491}
   - component: {fileID: 3436507383142692322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: library-modular-cabinet-filled-1m-a-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
