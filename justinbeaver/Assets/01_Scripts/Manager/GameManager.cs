@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int SelectedMapIndex { get; private set; } = -1;
+
     private void Awake()
     {
         if (Instance == null)
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     //씬 로드 완료시 게임 필수요소 생성
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -55,13 +58,24 @@ public class GameManager : MonoBehaviour
         {
             Beaver.Instance.transform.position = BeaverSpawnPoint.Current.position;
         }
+        
+        //인간 집 랜덤 선택
+        if (scene.name == "HumanHouseScene")
+        {
+            var controller = FindAnyObjectByType<MapController>();
+            if (controller != null)
+            {
+                controller.SpawnSelectedMap(SelectedMapIndex);
+            }
+        }
 
         //게임 초기화
         if (scene.name == "BeaverHouseScene")
         {
             InitializeGame();
-        }        
+        }
     }
+
 
     private void InitializeGame()
     {
@@ -122,5 +136,18 @@ public class GameManager : MonoBehaviour
         //RuleManager 리셋
         //플레이어 상태 저장
         //등등
+    }
+
+
+    public void SelectRandomMap(int mapCount)
+    {
+        SelectedMapIndex = Random.Range(0, mapCount);
+    }
+
+
+    public void GoToField(MapSet set)
+    {
+        SelectRandomMap(set.mapPrefabs.Count);
+        SceneController.Instance.LoadScene(SceneType.HumanHouse);
     }
 }
