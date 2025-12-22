@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class UIManager : MonoBehaviour
@@ -17,6 +19,8 @@ public class UIManager : MonoBehaviour
 
     public UI_PlayerHearts playerHeart;
     private PlayerHealth playerHealth;      //구독 해제용
+
+    public GameObject gameFailUI;
 
     [Header("OutGame")]
     public GameObject shopUI;
@@ -75,6 +79,7 @@ public class UIManager : MonoBehaviour
         BindInteractHint();
         BindHearts();
         BindInventory();
+        BindGameFailUI();
     }
 
     private void BindGatherGauge()
@@ -147,6 +152,19 @@ public class UIManager : MonoBehaviour
 
         inventoryUI = root.gameObject;
         inventoryUI.SetActive(false); //시작 시 무조건 OFF
+    }
+
+    private void BindGameFailUI()
+    {
+        var marker = FindAnyObjectByType<GameFailUIMarker>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            gameFailUI = null;
+            return;
+        }
+
+        gameFailUI = marker.gameObject;
+        gameFailUI.SetActive(false);
     }
 
 
@@ -227,7 +245,6 @@ public class UIManager : MonoBehaviour
 
 
 
-
     /// <summary>s
     /// 갈무리 UI
     /// </summary>
@@ -263,6 +280,35 @@ public class UIManager : MonoBehaviour
     {
         interactHint?.Hide();
     }
+
+    /// <summary>
+    /// 비버 사망시 실패UI
+    /// </summary>
+    public void ShowGameFailUI()
+    {
+        if (gameFailUI != null)
+            gameFailUI.SetActive(true);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);   // 플레이어 입력 잠그기
+
+        var button = gameFailUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+
+    public void ConfirmGameFail()
+    {
+        if (gameFailUI != null)
+            gameFailUI.SetActive(false);
+
+        GameManager.Instance.HandlePlayerRespawn();
+    }
+
+
 
     public UI_HUD hud;
 
