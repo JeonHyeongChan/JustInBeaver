@@ -6,10 +6,9 @@ public class ObjectManager : MonoBehaviour
     public static ObjectManager Instance { get; private set; }
     private readonly HashSet<GameObject> active = new();
 
-    [Header("Drop Grounding")]
-    [SerializeField] private float dropRayStartHeight = 2f;   //레이 시작 높이
-    [SerializeField] private float dropRayDistance = 10f;     //레이 길이
-    [SerializeField] private float dropGroundOffset = 0.05f;  //바닥에 박힘 방지 오프셋
+    [HideInInspector] private float dropRayStartHeight = 0f;   //레이 시작 높이
+    [HideInInspector] private float dropRayDistance = 0.1f;     //레이 길이
+    [HideInInspector] private float dropGroundOffset = 0f;  //바닥에 박힘 방지 오프셋
     [SerializeField] private LayerMask groundMask;
 
 

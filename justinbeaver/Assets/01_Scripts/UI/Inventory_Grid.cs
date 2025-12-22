@@ -129,11 +129,11 @@ public class Inventory_Grid : MonoBehaviour
         }
 
         UI_InventorySlot slot = slots[selectedIndex];
-        
         if (slot == null)
         {
             return;
         }
+            
 
         if (!slot.HasItem())
         {
@@ -141,12 +141,27 @@ public class Inventory_Grid : MonoBehaviour
             return;
         }
 
-        string id = slot.GetItemId();
-        var data = ItemManager.Instance != null ? ItemManager.Instance.GetItem(id) : null;
 
-        Debug.Log($"아이템 버림 : {(data != null ? data.itemName : id)}");
-        slot.Clear();
+        //슬롯에서 아이템 제거
+        string itemId = slot.PopItemId();
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return;
+        }
+
+
+        //드랍 위치
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        Vector3 dropPos = player != null ? player.transform.position : Vector3.zero;
+
+        if (player != null)
+        {
+            dropPos += player.transform.forward * 1.0f + Vector3.up * 0.2f;
+        }
+        ItemManager.Instance.SpawnPickupByItemId(itemId, dropPos, Quaternion.identity);
     }
+
+
 
 
     //빈 슬롯에 아이템 추가
