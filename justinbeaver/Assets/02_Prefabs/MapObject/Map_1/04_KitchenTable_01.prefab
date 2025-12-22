@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2875251457603844511}
   - component: {fileID: 7442166080368050970}
   - component: {fileID: 4266517284524153445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 04_KitchenTable_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

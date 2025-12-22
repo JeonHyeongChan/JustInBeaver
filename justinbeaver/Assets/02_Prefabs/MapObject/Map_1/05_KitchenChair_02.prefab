@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8697116482374803225}
   - component: {fileID: 1996385073648820813}
   - component: {fileID: 5154389682477006884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 05_KitchenChair_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

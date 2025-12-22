@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5474918085135800117}
   - component: {fileID: 2349979482632624599}
   - component: {fileID: 2172507891167406244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 09_RoomFurniture_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

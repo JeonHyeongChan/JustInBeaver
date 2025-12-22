@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8255525438115330127}
   - component: {fileID: 6766472841253334708}
   - component: {fileID: 2013577538866228203}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 26_Can_Watering_Metal_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2005624024016896219}
   - component: {fileID: 846665901533359910}
   - component: {fileID: 6985763931975478549}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 13_Bookcase_Modular_Filled_2m_B_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -84,11 +84,6 @@ public class PlayerGatherState : IPlayerState
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
         signal?.RaiseGatherEnd();
-
-        if (playerContext.playerController)
-        {
-            playerContext.playerController.enabled = true;
-        }
     }
 
 

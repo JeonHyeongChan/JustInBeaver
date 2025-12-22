@@ -33,20 +33,21 @@ public class PlayerController : MonoBehaviour
     private float nextRollTime;
     private Vector3 rollDir;            //구르기 방향
 
-
     //상호작용 홀드
     private float interactHoldTimer;
     private bool isHoldingInteract;
     private IInteractable holdingTarget;
 
-
-    //인벤토리 관련
-    private bool inputLocked; // 인벤토리 활성화 시 입력 잠금
     private bool isInventoryOpen;
 
+    private bool inventoryLocked;
+    private bool gatherLocked;
+    private bool inputLocked; //입력 잠금
+
+    private bool IsLocked => inventoryLocked || gatherLocked;
 
     [Header("Ground Check")]
-    [SerializeField] private LayerMask groundMask;   // Inspector에서 Ground만 체크
+    [SerializeField] private LayerMask groundMask;   //Inspector에서 Ground만 체크
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundRadius = 0.25f;
 
@@ -232,9 +233,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (inputLocked)
+        if (IsLocked)
         {
-            moveInput = Vector2.zero; return;
+            moveInput = Vector2.zero;
+            return;
         }
 
         moveInput = ctx.ReadValue<Vector2>();
@@ -243,10 +245,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (inputLocked)
+        if (IsLocked)
         {
+            moveInput = Vector2.zero;
             return;
-        }    
+        }
 
         if (!ctx.performed)
         {
@@ -266,9 +269,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext ctx)
     {
-
-        if (inputLocked)
+        if (IsLocked)
         {
+            moveInput = Vector2.zero;
             return;
         }
 
@@ -289,25 +292,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnGather(InputAction.CallbackContext ctx)
     {
-        if (inputLocked)
-        {
-            return;
-        }
-
         var context = GetComponent<PlayerContext>();
         if (context == null)
         {
             return;
-        } 
-            
+        }
 
         //누르기 시작
         if (ctx.started)
         {
-            context.isGatherHolding = true;
-
             var target = context.playerGatherDetector != null ? context.playerGatherDetector.currentTarget : null;
-            if (target == null) 
+            if (target == null)
             {
                 return;
             }
@@ -318,17 +313,22 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            context.isGatherHolding = true;
+
 
             //시간 내 재입력 + 같은 대상이면 이어하기
-            float startProgress = 0f;
             bool canResume =
                 context.lastGatherTarget == target &&
                 (Time.time - context.lastGatherCancelTime) <= context.gatherResumeWindow;
 
-            startProgress = canResume ? context.lastGatherProgress : target.progress;
+            float startProgress = canResume ? context.lastGatherProgress : target.progress;
 
             //타겟 진행도에 시작값 반영
             target.SetProgress(startProgress);
+
+
+            //갈무리 동안 이동 잠금
+            SetGatherLocked(true);
 
             context.playerStateMachine.ChangeState(new PlayerGatherState(context, target, startProgress));
             return;
@@ -338,9 +338,27 @@ public class PlayerController : MonoBehaviour
         if (ctx.canceled)
         {
             context.isGatherHolding = false;
+
+            //손 뗐을 때 즉시 해제
+            SetGatherLocked(false);
             return;
         }
     }
+
+    private void SetGatherLocked(bool locked)
+    {
+        gatherLocked = locked;
+
+        if (locked)
+        {
+            moveInput = Vector2.zero;
+            if (rigid != null)
+                rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
+
+            isRolling = false;
+        }
+    }
+
 
     /// <summary>
     /// 상호작용 Z키
@@ -525,6 +543,20 @@ public class PlayerController : MonoBehaviour
                 rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
             }
             //구르기 중이면 취소
+            isRolling = false;
+        }
+    }
+
+    public void SetInventoryLocked(bool locked)
+    {
+        inventoryLocked = locked;
+
+        if (locked)
+        {
+            moveInput = Vector2.zero;
+            if (rigid != null)
+                rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
+
             isRolling = false;
         }
     }

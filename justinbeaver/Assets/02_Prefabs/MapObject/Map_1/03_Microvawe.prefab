@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8862525040500826513}
   - component: {fileID: 2929634722985783538}
   - component: {fileID: 3737951195646014413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 03_Microvawe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
