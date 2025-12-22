@@ -19,17 +19,21 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
     public void Interact(PlayerController player)
     {
         Debug.Log("Item Get!");
-        
-        if (itemData == null || string.IsNullOrEmpty(itemData.itemId))
+
+        string id = (itemData != null && !string.IsNullOrEmpty(itemData.itemId))
+            ? itemData.itemId
+            : itemId;
+
+        if (string.IsNullOrEmpty(id))
         {
             return;
         }
 
-        if (!UIManager.Instance.TryAddItemToInventory(itemData.itemId))
+        if (!UIManager.Instance.TryAddItemToInventory(id))
         {
             return;
         }
-
+            
         //풀 반환
         Despawn();
     }

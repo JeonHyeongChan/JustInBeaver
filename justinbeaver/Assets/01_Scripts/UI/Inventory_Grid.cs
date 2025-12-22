@@ -123,19 +123,17 @@ public class Inventory_Grid : MonoBehaviour
     //버릴 아이템 선택
     public void DropSelectedItem()
     {
-
         if (slots == null || slots.Length == 0)
         {
             return;
         }
-
 
         UI_InventorySlot slot = slots[selectedIndex];
         if (slot == null)
         {
             return;
         }
-
+            
 
         if (!slot.HasItem())
         {
@@ -144,26 +142,25 @@ public class Inventory_Grid : MonoBehaviour
         }
 
 
-        //슬롯에서 아이템 제거(아이디 확보)
+        //슬롯에서 아이템 제거
         string itemId = slot.PopItemId();
         if (string.IsNullOrEmpty(itemId))
         {
             return;
         }
 
-        //필드에 드랍
+
+        //드랍 위치
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         Vector3 dropPos = player != null ? player.transform.position : Vector3.zero;
-        string id = slot.GetItemId();
 
-        
-        //플레이어 앞쪽 + 약간 위에서 떨구기
         if (player != null)
         {
             dropPos += player.transform.forward * 1.0f + Vector3.up * 0.2f;
         }
-        ItemManager.Instance.SpawnPickupByItemId(id, dropPos);
+        ItemManager.Instance.SpawnPickupByItemId(itemId, dropPos, Quaternion.identity);
     }
+
 
 
 

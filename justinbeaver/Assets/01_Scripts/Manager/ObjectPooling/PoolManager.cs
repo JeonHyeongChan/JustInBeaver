@@ -98,18 +98,21 @@ public class PoolManager : MonoBehaviour
 
     public void Despawn(GameObject obj)
     {
-        if (obj == null)
-        {
-            return;
-        }
+        if (obj == null) return;
+
         var member = obj.GetComponent<PoolMember>();
 
-        //이미 풀에 들어가 있으면 무시 (중복 반환 방지)
-        if (member.isInPool)
+        //PoolMember가 없으면 풀 오브젝트가 아니므로 그냥 비활성(또는 Destroy)
+        if (member == null)
         {
+            obj.SetActive(false);
             return;
         }
 
+        //이미 풀에 들어가 있으면 무시
+        if (member.isInPool) return;
+
+        //prefabId가 등록된 풀에 없으면 그냥 비활성
         if (!pools.TryGetValue(member.prefabId, out var pool))
         {
             obj.SetActive(false);
@@ -117,6 +120,7 @@ public class PoolManager : MonoBehaviour
         }
         pool.Release(obj);
     }
+
 
 
     private static GameObject CreateNew(GameObject prefab, int prefabId, Transform parent)
