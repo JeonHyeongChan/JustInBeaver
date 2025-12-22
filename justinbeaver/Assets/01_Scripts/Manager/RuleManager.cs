@@ -85,7 +85,8 @@ public class RuleManager : MonoBehaviour
     private void HandlePlayerDied()
     {
         OnEscapeFailed();
-        OnPlayerRespawnRequired?.Invoke();  // 이벤트
+        //OnPlayerRespawnRequired?.Invoke();  // 이벤트
+        UIManager.Instance?.ShowGameFailUI();
     }
 
     //==============조건 체크==============

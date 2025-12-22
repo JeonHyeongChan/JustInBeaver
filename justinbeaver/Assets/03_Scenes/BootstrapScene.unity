@@ -175,6 +175,7 @@ MonoBehaviour:
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
   playerHeart: {fileID: 0}
+  gameFailUI: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
@@ -188,6 +189,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1027783499}
     m_Modifications:
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823731190}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSubmit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIInputController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673229912768098829, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -237,6 +266,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 823731190}
+    - targetCorrespondingSourceObject: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 823731189}
   m_SourcePrefab: {fileID: 100100000, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
@@ -257,6 +289,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c3f11e654f06479d5ccd0cb759531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGatherSignal
+--- !u!114 &823731190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560485584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1520f971de4d5974baaff713bb4aab46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIInputController
 --- !u!1 &955234486
 GameObject:
   m_ObjectHideFlags: 0

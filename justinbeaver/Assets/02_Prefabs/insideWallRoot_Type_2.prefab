@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6364026154345852745}
   m_Layer: 0
   m_Name: insideWallRoot_Type_2
-  m_TagString: Untagged
+  m_TagString: doorcell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1653910757673250133}
   m_Layer: 0
   m_Name: insideWallRoot_Type_2
-  m_TagString: Untagged
+  m_TagString: doorcell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

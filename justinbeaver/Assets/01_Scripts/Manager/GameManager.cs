@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         var health = Beaver.Instance.GetComponent<PlayerHealth>();
         var rigid = Beaver.Instance.GetComponent<Rigidbody>();
         var animator = context.playerAnimator;
+        var controller = context.playerController;
 
         health.ResetHealth();                                                   // 체력 초기화
 
@@ -91,6 +92,8 @@ public class GameManager : MonoBehaviour
 
         context.playerController.enabled = true;                                // 컨트롤러 활성화
         context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
+
+        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제
 
         //맵 초기화 (인간포함)
         //spawner.InitializeSpawner();
