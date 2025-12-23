@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -455,6 +456,36 @@ public class UIManager : MonoBehaviour
         foreach (var slot in grid.slots)
         {
             if (slot != null && slot.HasItem())
+            {
+                slot.Clear();
+            }
+        }
+    }
+
+    public void RemoveItemsFromInventoryByFilter(Func<string, bool> filter)
+    {
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null)
+        {
+            return;
+        }
+
+        grid.RebindSlots();
+
+        foreach (var slot in grid.slots)
+        {
+            if (slot == null || !slot.HasItem())
+            {
+                continue;
+            }
+
+            string id = slot.GetItemId();
+            if (string.IsNullOrEmpty(id))
+            {
+                continue;
+            }    
+                
+            if (filter != null && filter(id))
             {
                 slot.Clear();
             }

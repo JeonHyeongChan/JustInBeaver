@@ -46,6 +46,11 @@ public class UI_InventorySlot : MonoBehaviour
         if (selected)
         {
             UIManager.Instance?.ShowItemTooltip(this);
+        }    
+            
+        else
+        {
+            UIManager.Instance?.HideItemTooltip();
         }
     }
 

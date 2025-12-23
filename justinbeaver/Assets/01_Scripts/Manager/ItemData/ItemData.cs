@@ -11,7 +11,8 @@ public class ItemData : ScriptableObject
 
     public string displayName;
     [TextArea] public string description;
-    
+
+    public ItemType type = ItemType.ingredient;
     public bool stackable = true;
     public int maxStack = 99;
 }

@@ -5,6 +5,8 @@ public class UI_StorageBar : MonoBehaviour
 {
     public string[] itemIds;
     public TextMeshProUGUI[] amountTexts;
+
+
     private void OnEnable()
     {
         if (StorageManager.Instance != null)
