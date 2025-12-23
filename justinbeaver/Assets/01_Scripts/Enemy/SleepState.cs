@@ -14,7 +14,7 @@ public class SleepState : IEnemyState
     }
     public void Enter()
     {
-        agent.isStopped = true;
+        agent.enabled = false;
         enemy.LightViewOff();
         enemy.Sleep();
     }
