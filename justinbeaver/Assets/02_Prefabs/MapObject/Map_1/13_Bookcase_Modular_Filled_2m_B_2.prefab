@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7561596171471581033}
   - component: {fileID: 9064641338043375925}
   - component: {fileID: 5981128615578500839}
+  - component: {fileID: -8597298938321071133}
   m_Layer: 8
   m_Name: 13_Bookcase_Modular_Filled_2m_B_2
   m_TagString: Untagged
@@ -178,3 +179,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
+--- !u!208 &-8597298938321071133
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933333290903298218}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.5000001, z: 0.23900001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1, y: 1.4900001, z: 0.23900001}
+  m_TimeToStationary: 0.5

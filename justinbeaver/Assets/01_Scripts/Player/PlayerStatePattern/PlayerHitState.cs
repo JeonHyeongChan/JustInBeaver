@@ -24,7 +24,11 @@ public class PlayerHitState : IPlayerState
             playerContext.playerRigid.linearVelocity = Vector3.zero;
         }
 
-        playerContext.playerAnimator?.SetTrigger(HashHit);
+        var anim = playerContext.GetAnimatorSafe();
+        if (anim != null)
+        {
+            anim.SetBool(HashHit, true);
+        }
         endTime = Time.time + hitDuration;
     }
 

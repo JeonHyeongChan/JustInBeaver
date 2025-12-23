@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4889215012621590852}
   - component: {fileID: 2840566177506344915}
   - component: {fileID: 9173263266238312442}
+  - component: {fileID: 3095023186451484733}
   m_Layer: 8
   m_Name: 22_Bath
   m_TagString: Untagged
@@ -178,3 +179,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: f6fee1e6abdd3ec43b066ada30d3785e, type: 2}
   minCount: 1
   maxCount: 1
+--- !u!208 &3095023186451484733
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865447324302610673}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.85700005, y: 0.287, z: 0.38200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.001, y: 0.287, z: 0}
+  m_TimeToStationary: 0.5
