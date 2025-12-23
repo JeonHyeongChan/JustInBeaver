@@ -29,6 +29,8 @@ public class RuleManager : MonoBehaviour
     public event Action OnPlayerRespawnRequired;    // 비버 리스폰
     public event Action OnTotalResetRequired;       // 전체 리셋
     public event Action OnEndingCondition;          // 엔딩 조건달성
+    public event Action OnEscapeSucceeded;          // 탈출 성공 시
+
 
     private void Awake()
     {
@@ -65,8 +67,9 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeSuccess()
     {
-        escapeSuccessCount++;
 
+        escapeSuccessCount++;
+        OnEscapeSucceeded?.Invoke();
         UIManager.Instance?.ShowEscapeSuccessUI();
 
         CheckEndingCondition();

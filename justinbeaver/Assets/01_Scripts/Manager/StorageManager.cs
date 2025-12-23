@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StorageManager : MonoBehaviour
 {
     public static StorageManager Instance;
     private Dictionary<string, int> storageItems = new Dictionary<string, int>();
-
+    public event Action OnStorageChanged;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class StorageManager : MonoBehaviour
     {
         //전체 초기화: 창고에 저장된 모든 재료를 0으로 만듬
         storageItems.Clear();
+        OnStorageChanged?.Invoke();
         Debug.Log("[StorageManager] Total Reset => storageItems cleared");
     }
 
@@ -54,6 +56,7 @@ public class StorageManager : MonoBehaviour
             storageItems[itemid] = 0;
         }
         storageItems[itemid] += amount;
+        OnStorageChanged?.Invoke();
         Debug.Log($"[StorageManager] Add {itemid} x{amount} (총량: {storageItems[itemid]})");
     }
     public int GetItemAmount(string itemid)  //아이템 개수 조회
@@ -89,6 +92,7 @@ public class StorageManager : MonoBehaviour
             {
                 storageItems.Remove(cost.itemId);
             }
+            OnStorageChanged?.Invoke();
             Debug.Log($"[StorageManager] Consume {cost.itemId} x{cost.amount}");
         }
     }

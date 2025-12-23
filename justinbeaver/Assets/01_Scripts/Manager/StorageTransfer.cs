@@ -17,4 +17,21 @@ public class StorageTransfer : MonoBehaviour
 
         UIManager.Instance.ClearInventoryAll();
     }
+
+    private void OnEnable()
+    {
+        if (RuleManager.Instance != null)
+        {
+            RuleManager.Instance.OnEscapeSucceeded += TransferInventoryStorage;
+        }
+            
+    }
+
+    private void OnDisable()
+    {
+        if (RuleManager.Instance != null)
+        {
+            RuleManager.Instance.OnEscapeSucceeded -= TransferInventoryStorage;
+        }
+    }
 }

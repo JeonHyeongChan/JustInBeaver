@@ -7,14 +7,21 @@ public class UI_StorageBar : MonoBehaviour
     public TextMeshProUGUI[] amountTexts;
     private void OnEnable()
     {
+        if (StorageManager.Instance != null)
+        {
+            StorageManager.Instance.OnStorageChanged += Refresh;
+        }
         Refresh();
-   
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        Refresh();
+        if (StorageManager.Instance != null)
+        {
+            StorageManager.Instance.OnStorageChanged -= Refresh;
+        }
     }
+
 
     public void Refresh()
     {
