@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapSet
   mapPrefabs:
   - {fileID: 4175109520670445715, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
+  - {fileID: 4500551181199601167, guid: 2951e3520e8615e44b7d310c8835f821, type: 3}

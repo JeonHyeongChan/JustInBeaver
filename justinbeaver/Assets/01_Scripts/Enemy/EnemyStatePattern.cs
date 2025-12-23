@@ -51,10 +51,16 @@ public class EnemyStatePattern : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         lightView = GetComponent<LightView>();
     }
+
+    private void OnDestroy()
+    {
+        currentState = null;
+    }
+
     private void Start()
     {
         BindPlayer();   // 시작시 Player 바인딩
-
+        
         SetState(new SleepState(this));
         hitBox.SetActive(false);
     }
