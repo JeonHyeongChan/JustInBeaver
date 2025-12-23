@@ -14,9 +14,14 @@ public class StorageManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        Debug.Log($"[StorageManager] Awake {GetInstanceID()}");
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        AddItems("Wood", 5);  //테스트
     }
 
     private void OnEnable()

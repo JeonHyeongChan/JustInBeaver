@@ -66,12 +66,12 @@ public class HomeManager : MonoBehaviour
         
         if (data == null)
             return false;
-        if (StorageManager.Instance == null)
+        if (StorageManager.Instance == null)  //창고 매니저 연동구간 
             return false;
         if (!StorageManager.Instance.CheckSufficientItems(data.requiredMaterials))
             return false;
 
-        StorageManager.Instance.ConsumeItems(data.requiredMaterials);
+        StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
 
         currentLevel++;
         ApplyHouseLevel(currentLevel);

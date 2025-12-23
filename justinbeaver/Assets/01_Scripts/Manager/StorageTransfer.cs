@@ -13,6 +13,7 @@ public class StorageTransfer : MonoBehaviour
         {
             StorageManager.Instance.AddItems(item.Key, item.Value);
         }
+        Debug.Log("[StorageTransfer]");
 
         UIManager.Instance.ClearInventoryAll();
     }
