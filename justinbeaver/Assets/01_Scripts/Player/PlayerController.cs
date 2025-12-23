@@ -255,7 +255,6 @@ public class PlayerController : MonoBehaviour
             moveInput = Vector2.zero;
             return;
         }
-
         moveInput = ctx.ReadValue<Vector2>();
     }
 
