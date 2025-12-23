@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8884026457219471206}
   - component: {fileID: 5555223849187212348}
   - component: {fileID: -6219412124378482747}
+  - component: {fileID: 3302522152520030244}
   m_Layer: 8
   m_Name: 16_PC_Screen
   m_TagString: Untagged
@@ -205,3 +206,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.68428135, y: 0.47987604, z: 0.15160424}
   m_Center: {x: 0, y: 0.23974344, z: -0.008132447}
+--- !u!208 &3302522152520030244
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569287509730315166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.342, y: 0.24000001, z: 0.076000005}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.24000001, z: -0.008}
+  m_TimeToStationary: 0.5

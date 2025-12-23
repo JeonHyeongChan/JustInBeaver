@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3974002274191999824}
   - component: {fileID: 2556348156925621970}
   - component: {fileID: 4869550423261331694}
+  - component: {fileID: -8683353200284893365}
   m_Layer: 8
   m_Name: 20_Wash_Bin_Summer_Camp_2
   m_TagString: Untagged
@@ -177,3 +178,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+--- !u!208 &-8683353200284893365
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213089694373795664}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.296, z: 0.26900002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.20700002}
+  m_TimeToStationary: 0.5

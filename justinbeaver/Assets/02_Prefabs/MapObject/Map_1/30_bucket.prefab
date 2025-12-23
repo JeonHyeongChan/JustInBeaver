@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 930796549607971472}
   - component: {fileID: 6906367314979081827}
   - component: {fileID: 1969931418182061456}
+  - component: {fileID: 3877831648517259303}
   m_Layer: 8
   m_Name: 30_bucket
   m_TagString: Untagged
@@ -373,3 +374,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &3877831648517259303
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763703274168841515}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

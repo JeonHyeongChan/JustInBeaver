@@ -10,8 +10,6 @@ public class PlayerContext : MonoBehaviour
     public PlayerHealth playerhealth;
     public PlayerStateMachine playerStateMachine;
     public PlayerGatherDetector playerGatherDetector;
-    //public GatherGauge gatherGauge;
-    
 
     [Header("갈무리 설정")]
     [HideInInspector] public bool isGatherHolding;
@@ -19,7 +17,6 @@ public class PlayerContext : MonoBehaviour
     public float gatherResumeWindow = 1.0f;     //이 시간 안에 재입력하면 이어서 진행
 
 
-   
     //진행 저장(재입력 이어서 하기용)
     [HideInInspector] public CaptureObject lastGatherTarget;
     [HideInInspector] public float lastGatherProgress;
@@ -60,11 +57,6 @@ public class PlayerContext : MonoBehaviour
         {
             playerGatherDetector = GetComponent<PlayerGatherDetector>();
         }
-
-        //if (!gatherGauge)
-        //{
-        //    gatherGauge = GetComponent<GatherGauge>();
-        //}
     }
 
     public void NotifyDamaged(int currentHp)
@@ -80,5 +72,14 @@ public class PlayerContext : MonoBehaviour
     public void OnDieAnimationFinished()
     {
         NotifyDied();
+    }
+
+    public Animator GetAnimatorSafe()
+    {
+        if (playerAnimator == null)
+        {
+            playerAnimator = GetComponentInChildren<Animator>(true);
+        }
+        return playerAnimator;
     }
 }
