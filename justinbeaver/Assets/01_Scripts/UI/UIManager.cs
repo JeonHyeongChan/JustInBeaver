@@ -159,6 +159,9 @@ public class UIManager : MonoBehaviour
 
     private void BindGameFailUI()
     {
+        Debug.Log("BindGameFailUI");
+        gameFailUI = null;
+
         var marker = FindAnyObjectByType<GameFailUIMarker>(FindObjectsInactive.Include);
         if (marker == null)
         {
@@ -172,6 +175,9 @@ public class UIManager : MonoBehaviour
 
     private void BindGameSuccessUI()
     {
+        Debug.Log("BindGameSuccessUI");
+        gameSuccessUI = null;
+
         var marker = FindAnyObjectByType<GameSuccessUIMarker>(FindObjectsInactive.Include);
         if (marker == null)
         {
@@ -341,6 +347,8 @@ public class UIManager : MonoBehaviour
 
     public void ConfirmEscapeSuccess()
     {
+        Debug.Log("ConfirmEscapeSuccess CLICKED");
+
         if (gameSuccessUI != null)
             gameSuccessUI.SetActive(false);
 
