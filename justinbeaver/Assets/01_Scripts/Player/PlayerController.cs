@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput playerInput;
-
+   
     [Header("이동/점프 설정")]
     public float moveSpeed = 6f;
     public float jumpForce = 5f;
@@ -65,7 +64,6 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.freezeRotation = true;
 
-        playerInput = GetComponent<PlayerInput>();
 
         if (animator == null)
         {
