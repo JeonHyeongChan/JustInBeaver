@@ -17,3 +17,7 @@ MonoBehaviour:
   itemId: 3
   itemName: Metal
   itemWeight: 1
+  displayName: Metal
+  description: Home Level 3
+  stackable: 1
+  maxStack: 99

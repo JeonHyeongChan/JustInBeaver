@@ -123,32 +123,21 @@ public class Inventory_Grid : MonoBehaviour
     //버릴 아이템 선택
     public void DropSelectedItem()
     {
-        if (slots == null || slots.Length == 0)
-        {
-            return;
-        }
-
-        UI_InventorySlot slot = slots[selectedIndex];
-        if (slot == null)
-        {
-            return;
-        }
-            
-
-        if (!slot.HasItem())
+        var slot = slots[selectedIndex];
+        if (slot == null || !slot.HasItem())
         {
             Debug.Log("버릴 아이템 없음");
             return;
-        }
+        }    
+        string itemId = slot.GetItemId();
 
+        // 1개만 차감
+        slot.TryConsume(1);
 
-        //슬롯에서 아이템 제거
-        string itemId = slot.PopItemId();
         if (string.IsNullOrEmpty(itemId))
         {
             return;
         }
-
 
         //드랍 위치
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
@@ -158,31 +147,75 @@ public class Inventory_Grid : MonoBehaviour
         {
             dropPos += player.transform.forward * 1.0f + Vector3.up * 0.2f;
         }
+
         ItemManager.Instance.SpawnPickupByItemId(itemId, dropPos, Quaternion.identity);
+        UIManager.Instance?.ShowItemTooltip(slot);
     }
 
 
-
-
     //빈 슬롯에 아이템 추가
-    public bool TryAddItem(string itemId)
+    public bool TryAddItem(string itemId, int addCount = 1)
     {
         if (slots == null || slots.Length == 0)
         {
             return false;
-        }    
-            
-        if (string.IsNullOrEmpty(itemId))
+        }
+
+        if (string.IsNullOrEmpty(itemId) || addCount <= 0)
         {
             return false;
         }
 
+        var data = ItemManager.Instance != null ? ItemManager.Instance.GetItem(itemId) : null;
+        bool stackable = data != null && data.stackable;
+        int maxStack = data != null ? Mathf.Max(1, data.maxStack) : 1;
+
+        //스택
+        if (stackable)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                var slot = slots[i];
+                if (slot == null)
+                {
+                    continue;
+                }    
+                    
+                if (slot.HasItem() && slot.GetItemId() == itemId && slot.GetCount() < maxStack)
+                {
+                    int before = slot.GetCount();
+                    slot.TryAddToStack(itemId, addCount, maxStack);
+                    
+                    int used = slot.GetCount() - before;
+                    addCount -= used;
+                    
+                    if (addCount <= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        //남은 수량을 빈 슬롯에 분배
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i] != null && !slots[i].HasItem())
+            var s = slots[i];
+            if (s == null)
             {
-                slots[i].SetItemId(itemId);
-                return true;
+                continue;
+            }    
+                
+            if (!s.HasItem())
+            {
+                int put = stackable ? Mathf.Min(maxStack, addCount) : 1;
+                s.SetItem(itemId, put);
+                addCount -= put;
+                
+                if (addCount <= 0)
+                {
+                    return true;
+                }
             }
         }
 
