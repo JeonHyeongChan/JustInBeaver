@@ -39,17 +39,13 @@ public class UI_InventorySlot : MonoBehaviour
         if (bgImage == null)
         {
             return;
-        }
+        }    
+            
         bgImage.color = selected ? selectedColor : normalColor;
 
-        //툴팁 표시
         if (selected)
         {
             UIManager.Instance?.ShowItemTooltip(this);
-        }
-        else
-        {
-            UIManager.Instance.HideItemTooltip();
         }
     }
 

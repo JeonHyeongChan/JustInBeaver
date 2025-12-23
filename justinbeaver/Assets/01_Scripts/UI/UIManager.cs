@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
         BindInteractHint();
         BindHearts();
         BindInventory();
+        BindItemTooltip();
         BindGameFailUI();
         BindGameSuccessUI();
     }
@@ -183,6 +184,17 @@ public class UIManager : MonoBehaviour
 
         gameSuccessUI = marker.gameObject;
         gameSuccessUI.SetActive(false);
+    }
+
+
+    private void BindItemTooltip()
+    {
+        itemTooltip = FindAnyObjectByType<UI_ItemTooltip>(FindObjectsInactive.Include);
+        if (itemTooltip == null)
+        {
+            return;
+        }
+        itemTooltip.Hide();
     }
 
 
