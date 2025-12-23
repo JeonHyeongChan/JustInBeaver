@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5813456679299309365}
   - component: {fileID: 8952314115828719128}
   - component: {fileID: 8889726391085889316}
+  - component: {fileID: 2339344494583912117}
   m_Layer: 8
   m_Name: 17_Display_Table
   m_TagString: Untagged
@@ -177,3 +178,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+--- !u!208 &2339344494583912117
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879514979080482095}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.818, y: 0.43100002, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.43100002, z: 0}
+  m_TimeToStationary: 0.5
