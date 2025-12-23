@@ -17,11 +17,13 @@ public class SleepState : IEnemyState
         agent.enabled = false;
         enemy.LightViewOff();
         enemy.Sleep();
+        enemy.flashLight.SetActive(false);
     }
 
     public void Exit()
     {
         animator.SetBool("isSleeping", false);
+        enemy.flashLight.SetActive(true);
     }
 
     public void Update()
