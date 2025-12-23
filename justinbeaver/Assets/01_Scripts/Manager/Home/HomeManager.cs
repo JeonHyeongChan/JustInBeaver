@@ -66,11 +66,12 @@ public class HomeManager : MonoBehaviour
         
         if (data == null)
             return false;
+        if (StorageManager.Instance == null)
+            return false;
+        if (!StorageManager.Instance.CheckSufficientItems(data.requiredMaterials))
+            return false;
 
-        //if (!HasEnoughMaterials(data))
-        //    return false;
-
-        //ConsumeMaterials(data);
+        StorageManager.Instance.ConsumeItems(data.requiredMaterials);
 
         currentLevel++;
         ApplyHouseLevel(currentLevel);

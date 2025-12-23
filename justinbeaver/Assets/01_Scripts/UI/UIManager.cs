@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -371,5 +372,44 @@ public class UIManager : MonoBehaviour
         if (upgradeUI) upgradeUI.SetActive(false);
         if (gameOverUI) gameOverUI.SetActive(false);
         if (victoryUI) victoryUI.SetActive(false);
+    }
+
+    public Dictionary<string, int> CollectInventoryItems()  //(스테이지 매니저 연동) 인벤 아이템id들을 반환 id => 갸ㅐ수
+    {
+        var result = new Dictionary<string, int>();
+
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);  //꺼져 있어도 반드시 잡아와라
+        if (grid == null) return result;
+        grid.RebindSlots();  //씬 전환해도 끊김 없게 
+
+        foreach (var slot in grid.slots)
+        {
+            if (slot == null || !slot.HasItem()) continue;
+
+            string id = slot.GetItemId();
+            if (string.IsNullOrEmpty(id)) continue;
+
+            if (!result.ContainsKey(id))
+            {
+                result[id] = 0;
+            }
+            result[id]++;
+        }
+        return result;
+    }
+
+    public void ClearInventoryAll()  //(스테이지 매니저 연동) 인벤 슬롯 전체 비우기
+    {
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null) return;
+        grid.RebindSlots();
+
+        foreach (var slot in grid.slots)
+        {
+            if (slot != null && slot.HasItem())
+            {
+                slot.Clear();
+            }
+        }
     }
 }
