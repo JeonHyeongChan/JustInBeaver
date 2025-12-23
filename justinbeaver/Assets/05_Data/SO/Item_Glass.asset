@@ -17,3 +17,7 @@ MonoBehaviour:
   itemId: 4
   itemName: Glass
   itemWeight: 1
+  displayName: Glass
+  description: Home Level 4
+  stackable: 1
+  maxStack: 99

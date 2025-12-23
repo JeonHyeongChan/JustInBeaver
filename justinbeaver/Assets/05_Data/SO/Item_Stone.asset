@@ -17,3 +17,7 @@ MonoBehaviour:
   itemId: 2
   itemName: Stone
   itemWeight: 1
+  displayName: Stone
+  description: Home Level 2
+  stackable: 1
+  maxStack: 99
