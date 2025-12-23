@@ -22,6 +22,9 @@ public class Door : MonoBehaviour, IInteractable
         //탈출구
         if (sceneName == escapeSceneName)
         {
+            FindAnyObjectByType<StorageTransfer>(FindObjectsInactive.Include)   //인벤토리속 내용물 창고로 옮ㅂ기ㅣ
+          ?.TransferInventoryStorage();
+     
             RuleManager.Instance?.OnEscapeSuccess();
             return;
         }

@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &96055429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96055430}
+  - component: {fileID: 96055431}
+  m_Layer: 0
+  m_Name: StorageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &96055430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96055429}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 680.7851, y: 790.50824, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1027783499}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &96055431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96055429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51e03dfdcc2e7e46a96c125a7ae70f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StorageManager
 --- !u!1 &560485584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8852819285662168690, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
@@ -176,6 +220,7 @@ MonoBehaviour:
   interactHint: {fileID: 0}
   playerHeart: {fileID: 0}
   gameFailUI: {fileID: 0}
+  gameSuccessUI: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
@@ -381,6 +426,7 @@ Transform:
   - {fileID: 1089060545}
   - {fileID: 768534456}
   - {fileID: 2111436106}
+  - {fileID: 96055430}
   - {fileID: 823731188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,6 +586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899243177}
   - component: {fileID: 1899243178}
+  - component: {fileID: 1899243179}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -574,6 +621,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542231770892f5545b7fc0adb5bb1558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!114 &1899243179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899243176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a4e9e998fea284399c2260a8fd2924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StorageTransfer
 --- !u!1 &2111436105
 GameObject:
   m_ObjectHideFlags: 0
