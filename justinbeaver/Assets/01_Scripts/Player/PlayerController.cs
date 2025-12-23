@@ -103,10 +103,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        //씬 전환/비활성 중 입력 콜백 방지
-        if (playerInput != null)
-            playerInput.enabled = false;
-
         //홀드 상태 정리
         isHoldingInteract = false;
         holdingTarget = null;
@@ -116,13 +112,6 @@ public class PlayerController : MonoBehaviour
         gatherLocked = false;
         isRolling = false;
         moveInput = Vector2.zero;
-    }
-
-
-    private void OnEnable()
-    {
-        if (playerInput != null)
-            playerInput.enabled = true;
     }
 
 
@@ -267,7 +256,6 @@ public class PlayerController : MonoBehaviour
             moveInput = Vector2.zero;
             return;
         }
-
         moveInput = ctx.ReadValue<Vector2>();
     }
 

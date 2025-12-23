@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
+    public UI_ItemTooltip itemTooltip;
 
     public UI_PlayerHearts playerHeart;
     private PlayerHealth playerHealth;      //구독 해제용
@@ -32,7 +33,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-
+    
     public UI_GatherGauge GatherGauge => gatherGauge;
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
 
@@ -69,6 +70,7 @@ public class UIManager : MonoBehaviour
     {
         BindSceneUI();
         SetInventoryOpen(false);
+        HideItemTooltip();
         HideAllUI();
     }
 
@@ -210,6 +212,11 @@ public class UIManager : MonoBehaviour
 
         inventoryUI.SetActive(open);
 
+        if (!open)
+        {
+            HideItemTooltip();
+        }
+
         // 플레이어 잠금/해제
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         if (player != null)
@@ -346,6 +353,25 @@ public class UIManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 툴팁 UI
+    /// </summary>
+    public void ShowItemTooltip(UI_InventorySlot slot)
+    {
+        if (itemTooltip == null || slot == null || !slot.HasItem())
+        {
+            itemTooltip?.Hide();
+            return;
+        }
+
+        var data = ItemManager.Instance != null ? ItemManager.Instance.GetItem(slot.GetItemId()) : null;
+        itemTooltip.Show(data, slot.GetCount());
+    }
+
+    public void HideItemTooltip()
+    {
+        itemTooltip?.Hide();
+    }
 
 
 
@@ -374,7 +400,7 @@ public class UIManager : MonoBehaviour
         if (victoryUI) victoryUI.SetActive(false);
     }
 
-    public Dictionary<string, int> CollectInventoryItems()  //(스테이지 매니저 연동) 인벤 아이템id들을 반환 id => 갸ㅐ수
+    public Dictionary<string, int> CollectInventoryItems()  //(스토리지 매니저 연동) 인벤 아이템id들을 반환 id => 개수
     {
         var result = new Dictionary<string, int>();
 
@@ -393,7 +419,7 @@ public class UIManager : MonoBehaviour
             {
                 result[id] = 0;
             }
-            result[id]++;
+            result[id] += slot.GetCount();
         }
         return result;
     }
