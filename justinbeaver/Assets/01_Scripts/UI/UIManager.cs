@@ -312,6 +312,8 @@ public class UIManager : MonoBehaviour
 
     public void ConfirmGameFail()
     {
+        Debug.Log("ConfirmGameFail CLICKED");
+
         if (gameFailUI != null)
             gameFailUI.SetActive(false);
 
