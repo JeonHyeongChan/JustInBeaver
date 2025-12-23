@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
 
     private void OnDisable()
-    {
+    {      
         //홀드 상태 정리
         isHoldingInteract = false;
         holdingTarget = null;
@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
         isRolling = false;
         moveInput = Vector2.zero;
     }
-
 
 
     private void Jump()
