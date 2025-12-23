@@ -1358,7 +1358,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheckPoint: {fileID: 9084082286203727952}
-  groundRadius: 0.25
+  groundRadius: 1
 --- !u!114 &6522455464424817664
 MonoBehaviour:
   m_ObjectHideFlags: 0
