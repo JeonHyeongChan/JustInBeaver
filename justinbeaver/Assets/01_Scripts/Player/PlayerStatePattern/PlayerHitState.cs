@@ -17,11 +17,15 @@ public class PlayerHitState : IPlayerState
         if (playerContext.playerController)
         {
             playerContext.playerController.enabled = false;
-        }    
-            
+        }
+
         if (playerContext.playerRigid)
         {
+            //기존 속도 제거
             playerContext.playerRigid.linearVelocity = Vector3.zero;
+
+            //위로 튀는 속도 제한
+            ClampVerticalVelocity(playerContext.playerRigid, 2.5f);
         }
 
         var anim = playerContext.GetAnimatorSafe();
@@ -29,8 +33,10 @@ public class PlayerHitState : IPlayerState
         {
             anim.SetBool(HashHit, true);
         }
+
         endTime = Time.time + hitDuration;
     }
+
 
     public void Update()
     {
@@ -48,6 +54,16 @@ public class PlayerHitState : IPlayerState
         {
             playerContext.playerStateMachine.ChangeState(new PlayerNormalState(playerContext));
         }
+    }
+
+    public void ClampVerticalVelocity(Rigidbody rigid, float maxUpSpeed = 2.5f)
+    {
+        var vel = rigid.linearVelocity;
+        if (vel.y > maxUpSpeed)
+        {
+            vel.y = maxUpSpeed;
+        }
+        rigid.linearVelocity = vel;
     }
 
     public void FixedUpdate() { }

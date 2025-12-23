@@ -192,12 +192,12 @@ public class EnemyStatePattern : MonoBehaviour
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
         float animLength = state.length;
         // 킥이 실제로 맞는 프레임까지 약간 대기
-        yield return new WaitForSeconds(animLength);
+        yield return new WaitForSeconds(0.1f);
 
         hitBox.SetActive(true);
 
         // 판정 유지 시간
-        yield return new WaitForSeconds(animLength);
+        yield return new WaitForSeconds(0.15f);
 
         hitBox.SetActive(false);
     }
