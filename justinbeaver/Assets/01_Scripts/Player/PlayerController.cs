@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerInput playerInput;
 
     [Header("이동/점프 설정")]
     public float moveSpeed = 6f;
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.freezeRotation = true;
 
+        playerInput = GetComponent<PlayerInput>();
+
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
@@ -96,6 +99,32 @@ public class PlayerController : MonoBehaviour
 
         UpdateAnimator();
     }
+
+
+    private void OnDisable()
+    {
+        //씬 전환/비활성 중 입력 콜백 방지
+        if (playerInput != null)
+            playerInput.enabled = false;
+
+        //홀드 상태 정리
+        isHoldingInteract = false;
+        holdingTarget = null;
+        interactHoldTimer = 0f;
+
+        //갈무리 상태도 정리
+        gatherLocked = false;
+        isRolling = false;
+        moveInput = Vector2.zero;
+    }
+
+
+    private void OnEnable()
+    {
+        if (playerInput != null)
+            playerInput.enabled = true;
+    }
+
 
 
     private void Jump()
@@ -292,6 +321,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnGather(InputAction.CallbackContext ctx)
     {
+        if (!this || !isActiveAndEnabled)
+        {
+            return;
+        }
+
         var context = GetComponent<PlayerContext>();
         if (context == null)
         {
@@ -479,7 +513,6 @@ public class PlayerController : MonoBehaviour
         SetInputLocked(false);
     }
 
-
     public void SetInventoryOpen(bool open)
     {
         isInventoryOpen = open;
@@ -507,7 +540,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     private void CancelHold()
     {
         if (holdingTarget != null)
@@ -519,7 +551,6 @@ public class PlayerController : MonoBehaviour
         interactHoldTimer = 0f;
         holdingTarget = null;
     }
-
 
 
     private void ExecuteInteract(IInteractable target)

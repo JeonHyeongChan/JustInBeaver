@@ -22,12 +22,24 @@ public class PlayerGatherState : IPlayerState
 
     public void Enter()
     {
+
         if (!IsTargetValid())
         {
             GoNormalAndClearResumeIfInvalid();
             return;
         }
-        playerContext.playerAnimator.SetBool(HashIsGathering, true);
+
+        var anim = playerContext.GetAnimatorSafe();
+        if (anim != null)
+        {
+            anim.SetBool(HashIsGathering, true);
+        }
+
+        if (!IsTargetValid())
+        {
+            GoNormalAndClearResumeIfInvalid();
+            return;
+        }
 
         //적/시스템 알림용 시그널
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
@@ -76,11 +88,17 @@ public class PlayerGatherState : IPlayerState
         }
     }
 
-    
+
 
     public void Exit()
     {
         UIManager.Instance?.HideGahterGauge();
+
+        var anim = playerContext.GetAnimatorSafe();
+        if (anim != null)
+        {
+            anim.SetBool(HashIsGathering, false);
+        }
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
         signal?.RaiseGatherEnd();

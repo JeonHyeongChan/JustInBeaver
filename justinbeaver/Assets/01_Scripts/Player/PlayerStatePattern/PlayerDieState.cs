@@ -24,7 +24,12 @@ public class PlayerDieState : IPlayerState
             playerContext.playerRigid.linearVelocity = Vector3.zero;
             playerContext.playerRigid.isKinematic = true;
         }
-        playerContext.playerAnimator.SetTrigger(HashDie); //애니메이션 트리거
+
+        var anim = playerContext.GetAnimatorSafe();
+        if (anim != null)
+        {
+            anim.SetTrigger(HashDie);
+        }
     }    
 
     public void Update() {}
