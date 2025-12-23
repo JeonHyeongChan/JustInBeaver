@@ -14,14 +14,16 @@ public class SleepState : IEnemyState
     }
     public void Enter()
     {
-        agent.isStopped = true;
+        agent.enabled = false;
         enemy.LightViewOff();
         enemy.Sleep();
+        enemy.flashLight.SetActive(false);
     }
 
     public void Exit()
     {
         animator.SetBool("isSleeping", false);
+        enemy.flashLight.SetActive(true);
     }
 
     public void Update()

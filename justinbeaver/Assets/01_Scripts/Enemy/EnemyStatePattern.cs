@@ -24,6 +24,7 @@ public class EnemyStatePattern : MonoBehaviour
     public GameObject hitBox;
     public LightView lightView;
     public float movementRange;
+    public GameObject flashLight;
 
     Vector3 alertTargetPos;
     Vector3 lightInEnemy;

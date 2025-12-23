@@ -20,6 +20,7 @@ public class AlertState : IEnemyState
     }
     public void Enter()
     {
+        agent.enabled = true;
         agent.isStopped = true;
         agent.ResetPath();
         animator.SetBool("isSleeping", false);
