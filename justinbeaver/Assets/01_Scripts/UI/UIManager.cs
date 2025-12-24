@@ -19,8 +19,8 @@ public class UIManager : MonoBehaviour
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
     public UI_ItemTooltip itemTooltip;
-
     public UI_PlayerHearts playerHeart;
+
     private PlayerHealth playerHealth;      //구독 해제용
 
     public GameObject gameFailUI;
@@ -34,7 +34,9 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    
+    public UI_WeightGauge weightGauge;
+
+
     public UI_GatherGauge GatherGauge => gatherGauge;
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
 

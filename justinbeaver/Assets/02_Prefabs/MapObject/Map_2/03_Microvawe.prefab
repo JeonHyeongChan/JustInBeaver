@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5719410357008110262}
   - component: {fileID: 1918638478155793226}
   - component: {fileID: 8817858707432456985}
+  - component: {fileID: 6694035371938466828}
   m_Layer: 8
   m_Name: 03_Microvawe
   m_TagString: Untagged
@@ -205,3 +206,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 13
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &6694035371938466828
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5030473951779056631}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.26500002, y: 0.15, z: 0.155}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.15, z: 0.0050000004}
+  m_TimeToStationary: 0.5

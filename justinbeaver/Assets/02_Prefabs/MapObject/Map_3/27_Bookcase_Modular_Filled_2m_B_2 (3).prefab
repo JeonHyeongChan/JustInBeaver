@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7563602853474146769}
   - component: {fileID: 3035303122021902935}
   - component: {fileID: 5160873147913414779}
+  - component: {fileID: 319944723516828321}
   m_Layer: 8
   m_Name: 27_Bookcase_Modular_Filled_2m_B_2 (3)
   m_TagString: Untagged
@@ -178,3 +179,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &319944723516828321
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464841230125414912}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.5000001, z: 0.23900001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1, y: 1.4900001, z: 0.23900001}
+  m_TimeToStationary: 0.5

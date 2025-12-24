@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 943519503369185152}
   - component: {fileID: 8026852952645981918}
   - component: {fileID: 3997168549732827094}
+  - component: {fileID: -8030893127781360414}
   m_Layer: 8
   m_Name: 02_KitchenTabletop1_03
   m_TagString: Untagged
@@ -177,3 +178,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &-8030893127781360414
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437838713753519390}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.55600005, y: 0.44200003, z: 0.31300002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.441, z: 0.035}
+  m_TimeToStationary: 0.5

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5018123404993983972}
   - component: {fileID: 9205515292345695186}
   - component: {fileID: 8389129025951655258}
+  - component: {fileID: 5356903431847670214}
   m_Layer: 8
   m_Name: 21_Toilet_01_1
   m_TagString: Untagged
@@ -178,3 +179,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &5356903431847670214
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571398382420432380}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.268, y: 0.54700005, z: 0.351}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.007, y: 0.54200006, z: -0.082}
+  m_TimeToStationary: 0.5

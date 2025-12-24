@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5107663843337674769}
   - component: {fileID: 7418441914978968449}
   - component: {fileID: 3390478392388838650}
+  - component: {fileID: 6462522247386609790}
   m_Layer: 0
   m_Name: 38_Trophy_Hippopotamus
   m_TagString: Untagged
@@ -143,6 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &5107663843337674769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +203,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5415435, y: 1.9831164, z: 1.5070753}
   m_Center: {x: 0.000002115965, y: -0.12396923, z: 0.75353765}
+--- !u!208 &6462522247386609790
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560927779767165225}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.771, y: 0.99200004, z: 0.754}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.124000005, z: 0.754}
+  m_TimeToStationary: 0.5

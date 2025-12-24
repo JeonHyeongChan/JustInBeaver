@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2761946712140322652}
   - component: {fileID: 8034858541661098724}
   - component: {fileID: 7590592674605714899}
+  - component: {fileID: 8716127648195353770}
   m_Layer: 0
   m_Name: 30_Bar_02
   m_TagString: Untagged
@@ -142,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &8034858541661098724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.97, y: 1.24, z: 2.31}
   m_Center: {x: 0.00000013411045, y: 0.566792, z: 0.21034724}
+--- !u!208 &8716127648195353770
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873372793073484244}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.35000002, y: 0.568, z: 1.107}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.56700003, z: 0.21000001}
+  m_TimeToStationary: 0.5

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7627837655160381266}
   - component: {fileID: 5348902349828728633}
   - component: {fileID: 5046908296994798471}
+  - component: {fileID: -142497009236586268}
   m_Layer: 8
   m_Name: 04_Refrigerator
   m_TagString: Untagged
@@ -120,6 +121,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 19
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &-142497009236586268
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492686253808153807}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5945776300090962828
 GameObject:
   m_ObjectHideFlags: 0

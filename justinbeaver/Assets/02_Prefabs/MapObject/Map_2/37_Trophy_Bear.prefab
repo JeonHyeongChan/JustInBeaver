@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -2662764595330095760}
   - component: {fileID: -729737956930709396}
   - component: {fileID: -8976818707815746445}
+  - component: {fileID: 7148213601378907429}
   m_Layer: 0
   m_Name: 37_Trophy_Bear
   m_TagString: Untagged
@@ -185,6 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &-8976818707815746445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +203,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
+--- !u!208 &7148213601378907429
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750971908086724076}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.43, y: 0.51100004, z: 0.33}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.044000003, z: 0.33}
+  m_TimeToStationary: 0.5

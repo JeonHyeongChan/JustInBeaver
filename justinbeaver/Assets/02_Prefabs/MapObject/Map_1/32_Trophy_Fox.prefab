@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5347633137856193233}
   - component: {fileID: -3521306040247114449}
   - component: {fileID: -2136984129312791685}
+  - component: {fileID: 6649829705341249339}
   m_Layer: 0
   m_Name: 32_Trophy_Fox
   m_TagString: Untagged
@@ -158,6 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!65 &-3521306040247114449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -200,3 +203,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3840003, y: 0.45591313, z: 0.3342119}
   m_Center: {x: -0.0000012591481, y: -0.019711673, z: 0.16710594}
+--- !u!208 &6649829705341249339
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908350083912656577}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.192, y: 0.22800002, z: 0.16700001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.020000001, z: 0.16700001}
+  m_TimeToStationary: 0.5
