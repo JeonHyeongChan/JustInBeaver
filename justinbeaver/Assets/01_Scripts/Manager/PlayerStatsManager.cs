@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 
 public class PlayerStatsManager : MonoBehaviour
@@ -13,7 +13,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float MaxWeight => maxWeight;
     public float CurrentWeight { get; private set; }
 
-    // ¹«°Ô º¯°æ ÀÌº¥Æ®
+    // ë¬´ê²Œ ë³€ê²½ ì´ë²¤íŠ¸
     public event Action<float> OnWeightChanged;
 
     private void Awake()
@@ -28,11 +28,12 @@ public class PlayerStatsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÎº¥Åä¸®¿¡¼­ ÃÑ ¹«°Ô °è»ê ÈÄ È£Ãâ
+    /// ì¸ë²¤í† ë¦¬ì—ì„œ ì´ ë¬´ê²Œ ê³„ì‚° í›„ í˜¸ì¶œ
     /// </summary>
     public void SetCurrentWeight(float weight)
     {
         CurrentWeight = Mathf.Max(0, weight);
+        Debug.Log($"[Weight] SetCurrentWeight = {CurrentWeight}");
         OnWeightChanged?.Invoke(CurrentWeight);
     }
 

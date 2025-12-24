@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 5
-  requiredHomeLevel: 1
+  gatherDuration: 9
+  requiredHomeLevel: 2
   lockedMessage: The house level is low.
 --- !u!208 &5356903431847670214
 NavMeshObstacle:
