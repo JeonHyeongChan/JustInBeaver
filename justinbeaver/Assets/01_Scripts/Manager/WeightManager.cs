@@ -1,40 +1,45 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class WeightManager : MonoBehaviour
 {
     public static WeightManager Instance;
 
-    [SerializeField]
-    private List<ItemWeightPair> itemWeights;
+    [Header("Penalty")]
+    [SerializeField] private float overWeight = 0.05f;          // 초과 무게 1당 속도 감소량
+    [SerializeField] private float maxPenalty = 4f;             // 최대 감소량
 
-    Dictionary<string, float> weightMap;
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
-        weightMap = new Dictionary<string, float>();
-
-        foreach (var pair in itemWeights)
-            weightMap[pair.itemId] = pair.weight;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public float GetItemWeight(ItemData item)
+
+    //ItemData에서 무게를 바로 읽음
+    public float GetItemWeight(ItemData data)
     {
-        if (item == null) return 0;
-        return weightMap.TryGetValue(item.itemId, out float w) ? w : 1f;
+        if (data == null)
+        {
+            return 0f;
+        }
+        return Mathf.Max(0f, data.weight);
     }
 
-    public float CalculateSpeedPenalty(float totalWeight, float strength)
+
+    //CurrentWeight / Strength 기반 패널티
+    public float CalculateSpeedPenalty(float currentWeight, float strength)
     {
-        float excess = Mathf.Max(0, totalWeight - strength);
-        return excess * 0.05f; // ��� �̵�����
-    }
-}
+        float limit = Mathf.Max(0f, strength);
+        float over = Mathf.Max(0f, currentWeight - limit);
 
-[System.Serializable]
-public class ItemWeightPair
-{
-    public string itemId;
-    public float weight;
+        float penalty = over * overWeight;
+        return Mathf.Clamp(penalty, 0f, maxPenalty);
+    }
 }
