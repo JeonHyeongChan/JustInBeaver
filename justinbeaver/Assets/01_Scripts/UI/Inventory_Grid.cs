@@ -216,6 +216,7 @@ public class Inventory_Grid : MonoBehaviour
                 
                 if (addCount <= 0)
                 {
+                    UpdatePlayerWeight();
                     return true;
                 }
             }
@@ -313,6 +314,7 @@ public class Inventory_Grid : MonoBehaviour
         }
     }
 
+
     void UpdatePlayerWeight()
     {
         float totalWeight = 0f;
@@ -320,16 +322,19 @@ public class Inventory_Grid : MonoBehaviour
         foreach (var slot in slots)
         {
             if (slot == null || !slot.HasItem())
+            {
                 continue;
+            }
 
             var itemData = ItemManager.Instance.GetItem(slot.GetItemId());
             if (itemData == null)
+            {
                 continue;
+            }
 
             float itemWeight = WeightManager.Instance.GetItemWeight(itemData);
             totalWeight += itemWeight * slot.GetCount();
         }
-
         PlayerStatsManager.Instance.SetCurrentWeight(totalWeight);
     }
 }
