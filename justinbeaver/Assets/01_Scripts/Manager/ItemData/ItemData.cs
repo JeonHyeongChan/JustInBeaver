@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+public enum ItemType
+{
+    None,
+    Resource,
+    ingredient
+}
+
+
 [CreateAssetMenu(menuName = "Game/Items/ItemData", fileName = "Item_")]
 public class ItemData : ScriptableObject
 {
@@ -11,7 +19,8 @@ public class ItemData : ScriptableObject
 
     public string displayName;
     [TextArea] public string description;
-    
+
+    public ItemType type = ItemType.ingredient;
     public bool stackable = true;
     public int maxStack = 99;
 }

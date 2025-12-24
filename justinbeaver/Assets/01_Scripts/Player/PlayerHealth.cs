@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = Mathf.Max(0, currentHealth - 1);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        
 
         if (currentHealth <= 0)
         {            
@@ -38,4 +39,5 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
+
 }
