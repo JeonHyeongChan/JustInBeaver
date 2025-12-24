@@ -46,6 +46,28 @@ public class HouseSpawner : MonoBehaviour
         currentHouse = Instantiate(housePrefabs[index], 
             spawnPoint.position, spawnPoint.rotation, transform);
 
-        Debug.Log($"Spawned House {level}");       
-    }   
+        Debug.Log($"Spawned House {level}");
+
+        MoveBeaverToHouseSpawn(currentHouse);
+    }
+
+    private void MoveBeaverToHouseSpawn(GameObject house)
+    {
+        if (Beaver.Instance == null)
+            return;
+
+        //새 하우스 프리펩 안에서 SpawnPoint 검색
+        var spawn = house.GetComponentInChildren<BeaverSpawnPoint>();
+
+        if (spawn == null)
+        {
+            Debug.LogWarning("BeaverSpawnPoint not found in house prefab");
+            return;
+        }
+
+        Beaver.Instance.transform.position = spawn.transform.position;
+        Beaver.Instance.transform.rotation = spawn.transform.rotation;
+
+        Debug.Log("Beaver moved to new house spawn point");
+    }
 }
