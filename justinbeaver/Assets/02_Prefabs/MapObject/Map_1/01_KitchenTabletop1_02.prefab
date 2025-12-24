@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 8
+  requiredHomeLevel: 1
+  unlockData: {fileID: 0}
 --- !u!208 &5323396291197723474
 NavMeshObstacle:
   m_ObjectHideFlags: 0
