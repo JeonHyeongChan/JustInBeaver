@@ -337,12 +337,11 @@ public class PlayerController : MonoBehaviour
             //거점 레벨 체크
             if (!target.IsUnlocked())
             {
-                UIManager.Instance?.ShowInteractHint(
-                    target.transform,
-                    target.GetLockedMessage()
-                );
+                UIManager.Instance?.ShowInteractHint(target.transform, target.GetLockedMessage());
                 return;
             }
+
+            context.isGatherHolding = true;
 
             //시간 내 재입력 + 같은 대상이면 이어하기
             bool canResume =
