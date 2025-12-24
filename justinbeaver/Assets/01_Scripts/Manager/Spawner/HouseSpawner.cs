@@ -46,6 +46,6 @@ public class HouseSpawner : MonoBehaviour
         currentHouse = Instantiate(housePrefabs[index], 
             spawnPoint.position, spawnPoint.rotation, transform);
 
-        Debug.Log($"Spawned House {level}");
-    }
+        Debug.Log($"Spawned House {level}");       
+    }   
 }
