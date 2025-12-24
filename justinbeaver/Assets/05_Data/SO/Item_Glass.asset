@@ -16,8 +16,9 @@ MonoBehaviour:
   itemPrefab: {fileID: 2126354863793704868, guid: 0424504be54729e4daab2be033461d16, type: 3}
   itemId: 4
   itemName: Glass
-  itemWeight: 1
   displayName: Glass
   description: Home Level 4
+  type: 2
   stackable: 1
   maxStack: 99
+  weight: 2

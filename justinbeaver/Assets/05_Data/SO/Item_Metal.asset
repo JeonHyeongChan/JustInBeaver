@@ -16,8 +16,9 @@ MonoBehaviour:
   itemPrefab: {fileID: 8551633419422577694, guid: b588b80d82ab3cb4e859386044f1e771, type: 3}
   itemId: 3
   itemName: Metal
-  itemWeight: 1
   displayName: Metal
   description: Home Level 3
+  type: 2
   stackable: 1
   maxStack: 99
+  weight: 4

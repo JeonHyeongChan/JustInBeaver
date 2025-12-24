@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3397376447705995338}
   - component: {fileID: 9212252565976037032}
   - component: {fileID: 8085172594173166311}
-  - component: {fileID: -161800645472904927}
   m_Layer: 8
   m_Name: 13_Bookcase_Modular_Filled_2m_B_4
   m_TagString: Untagged
@@ -151,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &9212252565976037032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,20 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 7
---- !u!208 &-161800645472904927
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817106403119487819}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1, y: 1.5000001, z: 0.23900001}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -1, y: 1.4900001, z: 0.23900001}
-  m_TimeToStationary: 0.5
+  gatherDuration: 10

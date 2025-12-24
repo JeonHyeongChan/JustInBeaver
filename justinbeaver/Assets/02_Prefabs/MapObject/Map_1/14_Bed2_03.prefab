@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5374219176674949928}
   - component: {fileID: 7720897330794968475}
   - component: {fileID: 9206098791302136568}
-  - component: {fileID: -3918942589050348246}
   m_Layer: 8
   m_Name: 14_Bed2_03
   m_TagString: Untagged
@@ -156,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!65 &9206098791302136568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,19 +178,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.43, y: 0.9, z: 2.99}
   m_Center: {x: 0.00006404519, y: 0.39080134, z: 0.25987172}
---- !u!208 &-3918942589050348246
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7908368958030668723}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.578, y: 0.39100003, z: 1.212}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.39100003, z: 0.26000002}
-  m_TimeToStationary: 0.5

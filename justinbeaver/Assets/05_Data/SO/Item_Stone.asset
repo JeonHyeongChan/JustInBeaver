@@ -16,8 +16,9 @@ MonoBehaviour:
   itemPrefab: {fileID: 7435605209473519019, guid: 5974c500bfce66b4ca7e6068466b5010, type: 3}
   itemId: 2
   itemName: Stone
-  itemWeight: 1
   displayName: Stone
   description: Home Level 2
+  type: 2
   stackable: 1
   maxStack: 99
+  weight: 3

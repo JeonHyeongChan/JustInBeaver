@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 8862525040500826513}
   - component: {fileID: 2929634722985783538}
   - component: {fileID: 3737951195646014413}
-  - component: {fileID: 6829373564735113537}
   m_Layer: 8
   m_Name: 03_Microvawe
   m_TagString: Untagged
@@ -191,8 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!114 &3737951195646014413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,22 +204,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 6
-  requiredHomeLevel: 3
-  lockedMessage: House Lv 3
---- !u!208 &6829373564735113537
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2558358763290988712}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.26500002, y: 0.15, z: 0.155}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.15, z: 0.0050000004}
-  m_TimeToStationary: 0.5
+  gatherDuration: 13

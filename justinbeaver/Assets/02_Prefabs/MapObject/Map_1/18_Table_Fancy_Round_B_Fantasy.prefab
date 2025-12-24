@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1979585601376459573}
   - component: {fileID: 6172107413815878443}
   - component: {fileID: 44114852763981100}
-  - component: {fileID: 3873119503542816503}
   m_Layer: 8
   m_Name: 18_Table_Fancy_Round_B_Fantasy
   m_TagString: Untagged
@@ -163,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 3
+  gatherDuration: 4
 --- !u!114 &44114852763981100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,19 +178,3 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
---- !u!208 &3873119503542816503
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107847412990544627}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.75200003, y: 0.4, z: 0.744}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.013, y: 0.397, z: 0.010000001}
-  m_TimeToStationary: 0.5

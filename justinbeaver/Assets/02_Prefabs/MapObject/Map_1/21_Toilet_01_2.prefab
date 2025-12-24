@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 9075089293108234963}
   - component: {fileID: 7566929277743569080}
   - component: {fileID: 5539667431932194096}
-  - component: {fileID: 4143490841918438128}
   m_Layer: 8
   m_Name: 21_Toilet_01_2
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0253, y: 2.0253, z: 2.0253}
+  m_LocalScale: {x: 1.8, y: 1.5, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -178,22 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 9
-  requiredHomeLevel: 2
-  lockedMessage: House Lv 2
---- !u!208 &4143490841918438128
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344481206632525437}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.268, y: 0.54700005, z: 0.351}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.007, y: 0.54200006, z: -0.082}
-  m_TimeToStationary: 0.5
+  gatherDuration: 5

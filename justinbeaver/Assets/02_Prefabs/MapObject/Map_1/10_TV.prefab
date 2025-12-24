@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 7792069978610357649}
   - component: {fileID: 6811266170829728797}
   - component: {fileID: 6763059195983905398}
-  - component: {fileID: 2227552077589862817}
   m_Layer: 8
   m_Name: 10_TV
   m_TagString: Untagged
@@ -205,22 +204,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 4
-  requiredHomeLevel: 4
-  lockedMessage: House Lv 4
---- !u!208 &2227552077589862817
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798159476707525836}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.698, y: 0.49, z: 0.091000006}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.48900002, z: -0.017}
-  m_TimeToStationary: 0.5
+  gatherDuration: 5

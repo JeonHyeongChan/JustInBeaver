@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7177224337154381135}
   - component: {fileID: 3618019746599425779}
   - component: {fileID: 7906549305952046630}
-  - component: {fileID: -7305197208088508200}
   m_Layer: 8
   m_Name: 06_Refrigerator
   m_TagString: Untagged
@@ -106,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &7906549305952046630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,25 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 17
-  requiredHomeLevel: 3
-  lockedMessage: House Lv 3
---- !u!208 &-7305197208088508200
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3103075043150367017}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  gatherDuration: 19
 --- !u!1 &6955233452333657812
 GameObject:
   m_ObjectHideFlags: 0

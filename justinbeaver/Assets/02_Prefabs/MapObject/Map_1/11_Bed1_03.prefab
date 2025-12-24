@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8637741421755499706}
   - component: {fileID: 108078848698647502}
   - component: {fileID: 7230878647894649396}
-  - component: {fileID: 6181108162784964647}
   m_Layer: 8
   m_Name: 11_Bed1_03
   m_TagString: Untagged
@@ -164,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &7230878647894649396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,20 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 5
---- !u!208 &6181108162784964647
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4805108169099570240}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.92, y: 0.39100003, z: 1.212}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.39100003, z: -0.043}
-  m_TimeToStationary: 0.5
+  gatherDuration: 10

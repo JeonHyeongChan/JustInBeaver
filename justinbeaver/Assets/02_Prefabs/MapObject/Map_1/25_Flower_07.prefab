@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 321753911423127914}
   - component: {fileID: 6227354506563072097}
   - component: {fileID: 4188001381633208249}
-  - component: {fileID: -2999463537417238289}
   m_Layer: 8
   m_Name: 25_Flower_07
   m_TagString: Untagged
@@ -150,9 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 4
-  requiredHomeLevel: 4
-  lockedMessage: House Lv 4
+  gatherDuration: 5
 --- !u!114 &6227354506563072097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,21 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 1
-  maxCount: 1
---- !u!208 &-2999463537417238289
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490709552451277742}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.293, y: 0.372, z: 0.275}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.023000002, y: 0.372, z: 0.044000003}
-  m_TimeToStationary: 0.5
+  minCount: 2
+  maxCount: 12

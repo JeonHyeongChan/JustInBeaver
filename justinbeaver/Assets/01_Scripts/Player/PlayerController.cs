@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
 {
    
     [Header("이동/점프 설정")]
+    
+
     public float moveSpeed = 6f;
     public float jumpForce = 5f;
     public float groundCheckDistance = 1.0f;
@@ -53,8 +55,9 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Move Speed Modifiers")]
-    [SerializeField] private float minMoveSpeed = 1f; //최저 속도 보장
-    private PlayerSpeedBuff speedBuff;                //버프 배율
+    private float baseMoveSpeed = 6f;
+    private float minMoveSpeed = 1f;                //최저 속도 보장
+    private PlayerSpeedBuff speedBuff;              //버프 배율
 
 
     //Animator 파라미터 해시
@@ -146,8 +149,16 @@ public class PlayerController : MonoBehaviour
             move.Normalize();
         }
 
-        //속도 처리
-        float finalSpeed = GetFinalMoveSpeed();
+        //무게 패널티
+        float penalty = (PlayerStatsManager.Instance != null)
+            ? PlayerStatsManager.Instance.GetSpeedPenalty()
+            : 0f;
+        float speedAfterWeight = Mathf.Max(1f, baseMoveSpeed - penalty);
+
+        //피격 시 속도 버프
+        float mul = (speedBuff != null) ? speedBuff.currentMulitiplier : 1f;
+
+        float finalSpeed = speedAfterWeight * mul;
 
         //이동
         Vector3 currentVel = rigid.linearVelocity;
@@ -598,22 +609,5 @@ public class PlayerController : MonoBehaviour
 
             isRolling = false;
         }
-    }
-
-
-    //속도 처리
-    private float GetFinalMoveSpeed()
-    {
-        float penalty = (PlayerStatsManager.Instance != null)
-            ? PlayerStatsManager.Instance.GetSpeedPenalty()
-            : 0f;
-
-        float speedAfterWeight = Mathf.Max(minMoveSpeed, moveSpeed - penalty);
-
-        float buffMultiplier = (speedBuff != null)
-            ? speedBuff.currentMulitiplier
-            : 1f;
-
-        return speedAfterWeight * buffMultiplier;
     }
 }
