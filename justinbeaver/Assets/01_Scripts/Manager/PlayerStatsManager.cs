@@ -1,23 +1,49 @@
 using UnityEngine;
+using System;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    [Header("Base Stats")]
-    public float baseSpeed = 5f;
-    public float strength = 10f;
+    public static PlayerStatsManager Instance { get; private set; }
 
-    float currentSpeed;
+    [Header("Stats")]
+    [SerializeField] private float strength = 50f;
+    [SerializeField] private float maxWeight = 100f;
 
-    public void UpdateSpeed(float totalWeight)
+    public float Strength => strength;
+    public float MaxWeight => maxWeight;
+    public float CurrentWeight { get; private set; }
+
+    // 무게 변경 이벤트
+    public event Action<float> OnWeightChanged;
+
+    private void Awake()
     {
-        float penaltyRate = Mathf.Clamp01((totalWeight / strength) * 0.05f);
-        currentSpeed = baseSpeed * (1f - penaltyRate);
-
-        Debug.Log($"속도 적용: {currentSpeed}");
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public float GetSpeed()
+    /// <summary>
+    /// 인벤토리에서 총 무게 계산 후 호출
+    /// </summary>
+    public void SetCurrentWeight(float weight)
     {
-        return currentSpeed;
+        CurrentWeight = Mathf.Max(0, weight);
+        OnWeightChanged?.Invoke(CurrentWeight);
+    }
+
+    public float GetSpeedPenalty()
+    {
+        if (WeightManager.Instance == null)
+            return 0f;
+
+        return WeightManager.Instance.CalculateSpeedPenalty(
+            CurrentWeight,
+            Strength
+        );
     }
 }

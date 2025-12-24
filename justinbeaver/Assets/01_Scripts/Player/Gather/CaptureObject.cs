@@ -5,8 +5,11 @@ public class CaptureObject : MonoBehaviour, IPoolable
     [Header("갈무리 시간")]
     public float gatherDuration = 2f;
 
-    [Header("갈무리 해금 조건 (SO)")]
-    public GatherUnlockData unlockData;
+    [Header("해금 조건(거점 레벨)")]
+    [Range(1, 5)] public int requiredHomeLevel = 1;
+
+    [TextArea]
+    public string lockedMessage = "The house level is low.";
 
 
     //오브젝트별 진행 상태
@@ -34,33 +37,21 @@ public class CaptureObject : MonoBehaviour, IPoolable
 
     public bool IsUnlocked()
     {
-        // SO 없으면 기본 허용
-        if (unlockData == null)
+        if (HomeManager.Instance == null)
         {
             return true;
         }
-            
-        if (HomeManager.Instance == null)
-        {
-            return false;
-        }
-        return HomeManager.Instance.CurrentLevel >= unlockData.requiredHomeLevel;
+        return HomeManager.Instance.CurrentLevel >= requiredHomeLevel;
     }
 
 
     public string GetLockedMessage()
     {
-        if (unlockData == null)
+        if (!string.IsNullOrEmpty(lockedMessage))
         {
-            return string.Empty;
+            return lockedMessage;
         }
-            
-
-        if (!string.IsNullOrEmpty(unlockData.lockedMessage))
-        {
-            return unlockData.lockedMessage;
-        }
-        return $"House level {unlockData.requiredHomeLevel} need more";
+        return $"House level {requiredHomeLevel} need more";
     }
 
 

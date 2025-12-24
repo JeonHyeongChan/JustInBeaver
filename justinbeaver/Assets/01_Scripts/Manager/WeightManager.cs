@@ -5,36 +5,36 @@ public class WeightManager : MonoBehaviour
 {
     public static WeightManager Instance;
 
-    [System.Serializable]
-    public class WeightEntry
-    {
-        public string itemId;
-        public float weight;
-    }
+    [SerializeField]
+    private List<ItemWeightPair> itemWeights;
 
-    [Header("Item Weight Table")]
-    public List<WeightEntry> weightTable = new();
-
-    Dictionary<string, float> weightDict = new();
+    Dictionary<string, float> weightMap;
 
     void Awake()
     {
         Instance = this;
+        weightMap = new Dictionary<string, float>();
 
-        foreach (var entry in weightTable)
-        {
-            if (!string.IsNullOrEmpty(entry.itemId))
-                weightDict[entry.itemId] = entry.weight;
-        }
+        foreach (var pair in itemWeights)
+            weightMap[pair.itemId] = pair.weight;
     }
 
-    public float GetWeight(ItemData item)
+    public float GetItemWeight(ItemData item)
     {
-        if (item == null) return 0f;
-
-        if (weightDict.TryGetValue(item.itemId, out float w))
-            return w;
-
-        return 0f; // 등록 안 된 아이템은 무게 0
+        if (item == null) return 0;
+        return weightMap.TryGetValue(item.itemId, out float w) ? w : 1f;
     }
+
+    public float CalculateSpeedPenalty(float totalWeight, float strength)
+    {
+        float excess = Mathf.Max(0, totalWeight - strength);
+        return excess * 0.05f; // 비버 이동공식
+    }
+}
+
+[System.Serializable]
+public class ItemWeightPair
+{
+    public string itemId;
+    public float weight;
 }
