@@ -4,7 +4,7 @@ using Unity.Cinemachine; // [중요] 3.x 버전 네임스페이스
 public class CameraFocusTrigger : MonoBehaviour
 {
     [Header("Cinemachine 3.x Components")]
-    public CinemachineCamera focusCam;       // 변경됨: VirtualCamera -> CinemachineCamera
+    public CinemachineCamera focusCam;      
     public CinemachineTargetGroup targetGroup;
 
     [Header("Settings")]
@@ -16,10 +16,11 @@ public class CameraFocusTrigger : MonoBehaviour
 
     private void Awake()
     {
+       GameObject FocusCamera = GameObject.Find("FocusCam");
         // focusCam 자동 연결
         if (focusCam == null)
         {
-            focusCam = FindAnyObjectByType<CinemachineCamera>();
+            focusCam = FocusCamera.GetComponent<CinemachineCamera>();
             if (focusCam == null)
                 Debug.LogError("[CameraFocusTrigger] CinemachineCamera not found");
         }

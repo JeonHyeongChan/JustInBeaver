@@ -298,6 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 6
+  requiredHomeLevel: 3
+  lockedMessage: House Lv 3
 --- !u!114 &8934215925595121946
 MonoBehaviour:
   m_ObjectHideFlags: 0

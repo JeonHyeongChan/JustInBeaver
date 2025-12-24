@@ -133,6 +133,7 @@ public class Inventory_Grid : MonoBehaviour
 
         // 1개만 차감
         slot.TryConsume(1);
+        UpdatePlayerWeight();
 
         if (string.IsNullOrEmpty(itemId))
         {
@@ -191,6 +192,7 @@ public class Inventory_Grid : MonoBehaviour
                     
                     if (addCount <= 0)
                     {
+                        UpdatePlayerWeight();
                         return true;
                     }
                 }
@@ -214,6 +216,7 @@ public class Inventory_Grid : MonoBehaviour
                 
                 if (addCount <= 0)
                 {
+                    UpdatePlayerWeight();
                     return true;
                 }
             }
@@ -309,5 +312,29 @@ public class Inventory_Grid : MonoBehaviour
         {
             slots = contentRT.GetComponentsInChildren<UI_InventorySlot>(includeInactiveSlots);
         }
+    }
+
+
+    void UpdatePlayerWeight()
+    {
+        float totalWeight = 0f;
+
+        foreach (var slot in slots)
+        {
+            if (slot == null || !slot.HasItem())
+            {
+                continue;
+            }
+
+            var itemData = ItemManager.Instance.GetItem(slot.GetItemId());
+            if (itemData == null)
+            {
+                continue;
+            }
+
+            float itemWeight = WeightManager.Instance.GetItemWeight(itemData);
+            totalWeight += itemWeight * slot.GetCount();
+        }
+        PlayerStatsManager.Instance.SetCurrentWeight(totalWeight);
     }
 }

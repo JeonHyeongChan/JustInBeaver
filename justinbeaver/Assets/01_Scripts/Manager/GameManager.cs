@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -51,13 +52,7 @@ public class GameManager : MonoBehaviour
         if (Beaver.Instance != null)
         {
             Beaver.Instance.gameObject.SetActive(!isTitle); // TitleScene에서는 비활성화
-        }
-
-        //비버 Spawn 처리
-        if (!isTitle && BeaverSpawnPoint.Current != null && Beaver.Instance != null)
-        {
-            Beaver.Instance.transform.position = BeaverSpawnPoint.Current.position;
-        }
+        }        
 
         //인간 집 랜덤 선택
         if (scene.name == "HumanHouseScene")
@@ -83,8 +78,10 @@ public class GameManager : MonoBehaviour
         {
             InitializeGame();
         }
-    }
 
+        //스폰 위치로 비버 이동
+        StartCoroutine(MoveBeaverReady());
+    }
 
     private void InitializeGame()
     {
@@ -116,17 +113,17 @@ public class GameManager : MonoBehaviour
         context.playerController.enabled = true;                                // 컨트롤러 활성화
         context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
 
-        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제
-
-        //맵 초기화 (인간포함)
-        //spawner.InitializeSpawner();
+        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제        
     }
 
+    /// <summary>
+    /// 비버 리스폰
+    /// </summary>
     public void HandlePlayerRespawn()
     {
         Debug.Log("Beaver Respanwn");
 
-        SceneController.Instance.LoadScene(SceneType.BeaverHouse);  // 비버집으로
+        SceneController.Instance.LoadScene(SceneType.BeaverHouse);  
     }
 
     public void EndingAfterReturnToTitle()
@@ -138,7 +135,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.HideAllUI();
 
         SceneController.Instance.LoadScene(SceneType.Title);
-    }
+    }    
 
     private void CleanGameState()
     {
@@ -162,5 +159,29 @@ public class GameManager : MonoBehaviour
         }
         SelectRandomMap(set.mapPrefabs.Count);        
         SceneController.Instance.LoadScene(SceneType.HumanHouse);
+    }
+
+    /// <summary>
+    /// 비버 스폰위치로 지연이동
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator MoveBeaverReady()
+    {
+        yield return null;
+
+        var spawnPoint = BeaverSpawnPoint.GetForCurrentScene();
+
+        if (spawnPoint == null)
+        {            
+            yield break;
+        }
+
+        if (Beaver.Instance == null)
+            yield break;
+
+        Beaver.Instance.transform.position = spawnPoint.transform.position;
+        Beaver.Instance.transform.rotation = spawnPoint.transform.rotation;
+
+        Debug.Log($"{spawnPoint.gameObject.scene.name}");
     }
 }

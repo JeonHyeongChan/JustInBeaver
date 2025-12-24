@@ -51,6 +51,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundRadius = 0.25f;
 
+
+    [Header("Move Speed Modifiers")]
+    [SerializeField] private float minMoveSpeed = 1f; //최저 속도 보장
+    private PlayerSpeedBuff speedBuff;                //버프 배율
+
+
     //Animator 파라미터 해시
     private static readonly int HashSpeed = Animator.StringToHash("Speed");
     private static readonly int HashIsGrounded = Animator.StringToHash("IsGrounded");
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.freezeRotation = true;
 
+        speedBuff = GetComponent<PlayerSpeedBuff>();
 
         if (animator == null)
         {
@@ -138,13 +145,15 @@ public class PlayerController : MonoBehaviour
         {
             move.Normalize();
         }
-            
+
+        //속도 처리
+        float finalSpeed = GetFinalMoveSpeed();
+
         //이동
         Vector3 currentVel = rigid.linearVelocity;
         Vector3 targetVel = move * moveSpeed;
 
         rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
-
 
         //회전(입력이 있을 때만)
         if (move.sqrMagnitude > 0.001f)
@@ -306,6 +315,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnGather(InputAction.CallbackContext ctx)
     {
+  
+
         if (!this || !isActiveAndEnabled)
         {
             return;
@@ -332,8 +343,14 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            context.isGatherHolding = true;
+            //거점 레벨 체크
+            if (!target.IsUnlocked())
+            {
+                UIManager.Instance?.ShowInteractHint(target.transform, target.GetLockedMessage());
+                return;
+            }
 
+            context.isGatherHolding = true;
 
             //시간 내 재입력 + 같은 대상이면 이어하기
             bool canResume =
@@ -372,8 +389,9 @@ public class PlayerController : MonoBehaviour
         {
             moveInput = Vector2.zero;
             if (rigid != null)
+            {
                 rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
-
+            }
             isRolling = false;
         }
     }
@@ -580,5 +598,22 @@ public class PlayerController : MonoBehaviour
 
             isRolling = false;
         }
+    }
+
+
+    //속도 처리
+    private float GetFinalMoveSpeed()
+    {
+        float penalty = (PlayerStatsManager.Instance != null)
+            ? PlayerStatsManager.Instance.GetSpeedPenalty()
+            : 0f;
+
+        float speedAfterWeight = Mathf.Max(minMoveSpeed, moveSpeed - penalty);
+
+        float buffMultiplier = (speedBuff != null)
+            ? speedBuff.currentMulitiplier
+            : 1f;
+
+        return speedAfterWeight * buffMultiplier;
     }
 }

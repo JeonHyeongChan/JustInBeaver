@@ -1,40 +1,45 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 public class WeightManager : MonoBehaviour
 {
     public static WeightManager Instance;
 
-    [System.Serializable]
-    public class WeightEntry
-    {
-        public string itemId;
-        public float weight;
-    }
+    [Header("Penalty")]
+    [SerializeField] private float overWeight = 0.05f;          // ì´ˆê³¼ ë¬´ê²Œ 1ë‹¹ ì†ë„ ê°ì†ŒëŸ‰
+    [SerializeField] private float maxPenalty = 4f;             // ìµœëŒ€ ê°ì†ŒëŸ‰
 
-    [Header("Item Weight Table")]
-    public List<WeightEntry> weightTable = new();
-
-    Dictionary<string, float> weightDict = new();
 
     void Awake()
     {
-        Instance = this;
-
-        foreach (var entry in weightTable)
+        if (Instance != null && Instance != this)
         {
-            if (!string.IsNullOrEmpty(entry.itemId))
-                weightDict[entry.itemId] = entry.weight;
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public float GetWeight(ItemData item)
+
+    //ItemDataì—ì„œ ë¬´ê²Œë¥¼ ë°”ë¡œ ì½ìŒ
+    public float GetItemWeight(ItemData data)
     {
-        if (item == null) return 0f;
+        if (data == null)
+        {
+            return 0f;
+        }
+        return Mathf.Max(0f, data.weight);
+    }
 
-        if (weightDict.TryGetValue(item.itemId, out float w))
-            return w;
 
-        return 0f; // µî·Ï ¾È µÈ ¾ÆÀÌÅÛÀº ¹«°Ô 0
+    //CurrentWeight / Strength ê¸°ë°˜ íŒ¨ë„í‹°
+    public float CalculateSpeedPenalty(float currentWeight, float strength)
+    {
+        float limit = Mathf.Max(0f, strength);
+        float over = Mathf.Max(0f, currentWeight - limit);
+
+        float penalty = over * overWeight;
+        return Mathf.Clamp(penalty, 0f, maxPenalty);
     }
 }
