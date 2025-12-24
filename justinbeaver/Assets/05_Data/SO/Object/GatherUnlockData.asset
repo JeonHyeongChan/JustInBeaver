@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 033d98791b3ab9a43981ceba3c24cdf6, type: 3}
   m_Name: GatherUnlockData
   m_EditorClassIdentifier: Assembly-CSharp::GatherUnlockData
-  requiredHomeLevel: 1
+  requiredHomeLevel: 2
   lockedMessage: The House level is insufficient.
