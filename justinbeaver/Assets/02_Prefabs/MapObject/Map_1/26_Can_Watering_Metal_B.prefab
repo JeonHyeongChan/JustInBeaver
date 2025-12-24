@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8255525438115330127}
   - component: {fileID: 6766472841253334708}
   - component: {fileID: 2013577538866228203}
+  - component: {fileID: 4808664105900084577}
   m_Layer: 8
   m_Name: 26_Can_Watering_Metal_B
   m_TagString: Untagged
@@ -150,6 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &6766472841253334708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
   minCount: 1
   maxCount: 1
+--- !u!208 &4808664105900084577
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5068506901353783608}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.142, y: 0.25, z: 0.35900003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.246, z: 0.102000006}
+  m_TimeToStationary: 0.5

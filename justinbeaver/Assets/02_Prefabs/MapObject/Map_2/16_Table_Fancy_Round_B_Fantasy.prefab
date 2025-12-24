@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1338338779007979664}
   - component: {fileID: 4254931866334464974}
   - component: {fileID: 2535238270131867427}
+  - component: {fileID: -2556761754430478209}
   m_Layer: 8
   m_Name: 16_Table_Fancy_Round_B_Fantasy
   m_TagString: Untagged
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &2535238270131867427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
+--- !u!208 &-2556761754430478209
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962699534614687147}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.75200003, y: 0.4, z: 0.744}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.013, y: 0.397, z: 0.010000001}
+  m_TimeToStationary: 0.5

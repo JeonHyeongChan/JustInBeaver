@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1725735823000532793}
   - component: {fileID: 7433285994846550232}
   - component: {fileID: 3104942098246694663}
+  - component: {fileID: 2974492909632492499}
   m_Layer: 8
   m_Name: 24_Planter_Box_Flowers_Small_Easter
   m_TagString: Untagged
@@ -178,3 +179,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 2
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &2974492909632492499
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909017044681619685}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.56, y: 0.596, z: 0.23500001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.5, y: 0.596, z: 0.17500001}
+  m_TimeToStationary: 0.5

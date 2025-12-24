@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6367760687878289714}
   - component: {fileID: 98141152318183764}
   - component: {fileID: 509253084285002754}
+  - component: {fileID: 1621580450933184721}
   m_Layer: 8
   m_Name: 24_Flower_07 1
   m_TagString: Untagged
@@ -150,6 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 9
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &98141152318183764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
   minCount: 2
   maxCount: 2
+--- !u!208 &1621580450933184721
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206981573650936445}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.293, y: 0.372, z: 0.275}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.023000002, y: 0.372, z: 0.044000003}
+  m_TimeToStationary: 0.5

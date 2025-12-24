@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6026219866701587415}
   - component: {fileID: -2180808474585302539}
   - component: {fileID: 7534423403123203352}
+  - component: {fileID: 4316255211387965925}
   m_Layer: 0
   m_Name: 33_RoomFurniture_08
   m_TagString: Untagged
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &7534423403123203352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 3
   maxCount: 3
+--- !u!208 &4316255211387965925
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871503709203554826}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.61200005, y: 1.005, z: 0.263}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.005, z: 0.025}
+  m_TimeToStationary: 0.5

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6673326225605826727}
   - component: {fileID: 7263798833859059584}
   - component: {fileID: 7162311584621479195}
+  - component: {fileID: 504780062299076981}
   m_Layer: 8
   m_Name: 29_Boxgimic
   m_TagString: Untagged
@@ -142,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &6673326225605826727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,3 +208,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.24015659, y: 0.21372595, z: 0.19069633}
   m_Center: {x: 0, y: 0.10686298, z: 0}
+--- !u!208 &504780062299076981
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820666686932259278}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.120000005, y: 0.10700001, z: 0.095000006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.10700001, z: 0}
+  m_TimeToStationary: 0.5
