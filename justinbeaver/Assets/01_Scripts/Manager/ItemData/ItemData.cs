@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+public enum ItemType
+{
+    None,
+    Resource,
+    ingredient
+}
+
+
 [CreateAssetMenu(menuName = "Game/Items/ItemData", fileName = "Item_")]
 public class ItemData : ScriptableObject
 {
