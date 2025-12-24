@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 17
+  requiredHomeLevel: 3
+  lockedMessage: House Lv 3
 --- !u!208 &-7305197208088508200
 NavMeshObstacle:
   m_ObjectHideFlags: 0
