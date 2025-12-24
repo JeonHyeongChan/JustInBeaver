@@ -15,4 +15,4 @@ MonoBehaviour:
   mapPrefabs:
   - {fileID: 8133276178268865365, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
   - {fileID: 5509051318155679265, guid: b081b316b5aa9084c9b1029b9336ba36, type: 3}
-  - {fileID: 8009917620598750184, guid: a01974f8ed8ff614ca2b7ce5b80c15af, type: 3}
+  - {fileID: 5393969924080921587, guid: a01974f8ed8ff614ca2b7ce5b80c15af, type: 3}

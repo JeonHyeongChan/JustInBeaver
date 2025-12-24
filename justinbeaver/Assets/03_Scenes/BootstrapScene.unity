@@ -213,6 +213,7 @@ MonoBehaviour:
   escapeResultUI: {fileID: 0}
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
+  itemTooltip: {fileID: 0}
   playerHeart: {fileID: 0}
   gameFailUI: {fileID: 0}
   gameSuccessUI: {fileID: 0}

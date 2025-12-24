@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8833452617267200416}
   - component: {fileID: 130305790553331275}
   - component: {fileID: 6417834770308205051}
-  - component: {fileID: 1865846928517342556}
   - component: {fileID: 2868037773318598088}
   - component: {fileID: 3920609319512882149}
   - component: {fileID: 3256070404534663752}
-  - component: {fileID: -2888415046486826488}
-  - component: {fileID: -4984842343278582778}
+  - component: {fileID: 991381458196274860}
+  - component: {fileID: 2568843125020105547}
+  - component: {fileID: 6212623567028641222}
   m_Layer: 0
   m_Name: 07_Kettle
   m_TagString: Untagged
@@ -95,28 +95,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1865846928517342556
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857240930540547115}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 82587edb567f9de4b956d19bd6121eac, type: 3}
 --- !u!114 &2868037773318598088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +138,7 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
   minCount: 1
   maxCount: 1
---- !u!54 &-2888415046486826488
+--- !u!54 &991381458196274860
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +165,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-4984842343278582778
+--- !u!65 &2568843125020105547
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857240930540547115}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.36161113, y: 0.3295075, z: 0.25803673}
+  m_Center: {x: -0.009323575, y: 0.16475375, z: 0.000000007450581}
+--- !u!65 &6212623567028641222
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,5 +205,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.46, y: 0.39, z: 0.35}
+  m_Size: {x: 0.55, y: 0.48, z: 0.44}
   m_Center: {x: -0.009323575, y: 0.16475375, z: 0.000000007450581}
