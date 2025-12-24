@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1682985568240857961}
   - component: {fileID: 7937654308041381539}
   - component: {fileID: 7665488032919355230}
+  - component: {fileID: -8965774082147015881}
   m_Layer: 8
   m_Name: 19_Wash_Bin_Summer_Camp_1
   m_TagString: Untagged
@@ -177,3 +178,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &-8965774082147015881
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525821498944444558}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.296, z: 0.26900002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.20700002}
+  m_TimeToStationary: 0.5

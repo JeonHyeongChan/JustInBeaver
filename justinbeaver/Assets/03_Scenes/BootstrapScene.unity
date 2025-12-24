@@ -221,6 +221,7 @@ MonoBehaviour:
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   victoryUI: {fileID: 0}
+  weightGauge: {fileID: 0}
   hud: {fileID: 0}
 --- !u!1001 &823731187
 PrefabInstance:

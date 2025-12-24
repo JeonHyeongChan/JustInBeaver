@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6188804943184813606}
   - component: {fileID: 1472348850793254968}
   - component: {fileID: 5888587993497949419}
+  - component: {fileID: -3331302010934168011}
   m_Layer: 8
   m_Name: 05_Sofa_07_1
   m_TagString: Untagged
@@ -178,3 +179,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &-3331302010934168011
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406810800453372391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.9850001, y: 0.541, z: 0.522}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.541, z: 0.42400002}
+  m_TimeToStationary: 0.5

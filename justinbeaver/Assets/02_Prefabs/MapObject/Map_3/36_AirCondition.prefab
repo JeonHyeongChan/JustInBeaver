@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3219511698064306393}
   - component: {fileID: -5012458991930737499}
   - component: {fileID: 5002424193957241360}
+  - component: {fileID: 5180065792658977198}
   m_Layer: 0
   m_Name: 36_AirCondition
   m_TagString: Untagged
@@ -178,3 +179,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 13
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &5180065792658977198
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480417088907700199}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.55600005, y: 0.11400001, z: 0.125}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.004}
+  m_TimeToStationary: 0.5

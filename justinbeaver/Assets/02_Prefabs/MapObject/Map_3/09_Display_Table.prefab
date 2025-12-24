@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7217834114233086223}
   - component: {fileID: 3946566824803247565}
   - component: {fileID: 4110612788486835690}
+  - component: {fileID: -5384734203276583226}
   m_Layer: 8
   m_Name: 09_Display_Table
   m_TagString: Untagged
@@ -177,3 +178,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &-5384734203276583226
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099069815369405045}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.818, y: 0.43100002, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.43100002, z: 0}
+  m_TimeToStationary: 0.5

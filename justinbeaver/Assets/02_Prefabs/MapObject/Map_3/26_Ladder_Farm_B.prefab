@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4000690023854157127}
   - component: {fileID: 1678049716520764520}
   - component: {fileID: 667068047764770336}
+  - component: {fileID: 4313173220638939187}
   m_Layer: 8
   m_Name: 26_Ladder_Farm_B
   m_TagString: Untagged
@@ -206,3 +207,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!208 &4313173220638939187
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206874446210684829}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 1.5000001, z: 0.045}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.030000001, y: 1.5000001, z: 0.011000001}
+  m_TimeToStationary: 0.5

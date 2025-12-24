@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6837416326110884442}
   - component: {fileID: 3837408941227455886}
   - component: {fileID: 8385027954173292499}
+  - component: {fileID: -6875913024389633270}
   m_Layer: 0
   m_Name: 28_Desk_Kneehole
   m_TagString: Untagged
@@ -109,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &8385027954173292499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +127,22 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 2
   maxCount: 2
+--- !u!208 &-6875913024389633270
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151876150986281389}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1463628027170983001
 GameObject:
   m_ObjectHideFlags: 0

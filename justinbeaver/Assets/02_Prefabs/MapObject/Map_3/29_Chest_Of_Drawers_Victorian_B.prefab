@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: -2820682940295926662}
   - component: {fileID: 1040505229858597487}
   - component: {fileID: 5780255145831416031}
+  - component: {fileID: 7038651975798570444}
   m_Layer: 0
   m_Name: 29_Chest_Of_Drawers_Victorian_B
   m_TagString: Untagged
@@ -627,6 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &-2820682940295926662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,3 +688,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.23, y: 1.2, z: 0.78}
   m_Center: {x: 0, y: 0.59, z: 0}
+--- !u!208 &7038651975798570444
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526805414997919943}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

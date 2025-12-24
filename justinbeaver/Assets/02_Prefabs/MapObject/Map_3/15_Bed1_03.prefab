@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3535984528206896488}
   - component: {fileID: -3638846102248876436}
   - component: {fileID: -6108825618563302508}
+  - component: {fileID: 7207082600564766347}
   m_Layer: 0
   m_Name: 15_Bed1_03
   m_TagString: Untagged
@@ -158,6 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!65 &-3638846102248876436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -200,3 +203,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.99, y: 1.46, z: 2.63}
   m_Center: {x: 0.0000002682209, y: 0.3908013, z: -0.042966187}
+--- !u!208 &7207082600564766347
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505456234858585734}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.92, y: 0.39100003, z: 1.212}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.39100003, z: -0.043}
+  m_TimeToStationary: 0.5

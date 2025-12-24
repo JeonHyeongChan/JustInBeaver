@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3785048874218178132}
   - component: {fileID: 4928824387424650568}
   - component: {fileID: -8658073285262793132}
+  - component: {fileID: 8738789778796969294}
   m_Layer: 0
   m_Name: 30_Chair_Office
   m_TagString: Untagged
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 2
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
 --- !u!114 &-8658073285262793132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,19 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
+--- !u!208 &8738789778796969294
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045504306269690599}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.314, y: 0.45600003, z: 0.314}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.001, y: 0.453, z: -0.001}
+  m_TimeToStationary: 0.5
