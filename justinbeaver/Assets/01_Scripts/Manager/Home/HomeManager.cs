@@ -54,17 +54,15 @@ public class HomeManager : MonoBehaviour
 
     public HouseUpgradeData GetNextUpgradeData()
     {
-        if (!CanUpgrade())
-            return null;
+        int nextLevel = currentLevel + 1;
 
-        int index = currentLevel;
-
-        if (upgradeData == null || index < 0 || index >= upgradeData.Length)
+        foreach (var data in upgradeData)
         {
-            return null;
+            if (data != null && data.targetLevel == nextLevel)
+                return data;
         }
 
-        return upgradeData[index];
+        return null;
     }
 
     public bool TryUpgradeHome()
@@ -82,8 +80,8 @@ public class HomeManager : MonoBehaviour
             return false;
         
         StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
-
-        currentLevel++;
+        
+        currentLevel = data.targetLevel;
         ApplyHouseLevel(currentLevel);
 
         return true;

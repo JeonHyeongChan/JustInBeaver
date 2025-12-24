@@ -5,7 +5,10 @@ using UnityEngine;
 public class StorageManager : MonoBehaviour
 {
     public static StorageManager Instance;
-    private Dictionary<string, int> storageItems = new Dictionary<string, int>();
+
+    [SerializeField] private ItemDatabase itemDatabase; // id -> itemData
+
+    private Dictionary<ItemData, int> storageItems = new Dictionary<ItemData, int>();
     public event Action OnStorageChanged;
 
     private void Awake()
@@ -19,11 +22,7 @@ public class StorageManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-    private void Start()
-    {
-        AddItems("Wood", 5);  //테스트
-    }
+    }    
 
     private void OnEnable()
     {
@@ -38,44 +37,87 @@ public class StorageManager : MonoBehaviour
         {
             RuleManager.Instance.OnTotalResetRequired -= OnTotalReset;
         }
-    }
+    }   
+
     private void OnTotalReset()
     {
         //전체 초기화: 창고에 저장된 모든 재료를 0으로 만듬
         storageItems.Clear();
         OnStorageChanged?.Invoke();
-        Debug.Log("[StorageManager] Total Reset => storageItems cleared");
     }
 
-    public void AddItems(string itemid, int amount)  //아이템 추가
+    /// <summary>
+    /// string -> itemData로 변환
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <returns></returns>
+    private ItemData Resolve(string itemId)
     {
-        if (string.IsNullOrEmpty(itemid) || amount <= 0)
-            return;
-        if (!storageItems.ContainsKey(itemid))
+        if (string.IsNullOrEmpty(itemId))
+            return null;
+
+        //ItemManager 우선
+        if (ItemManager.Instance != null)
         {
-            storageItems[itemid] = 0;
+            var data = ItemManager.Instance.GetItem(itemId);
+            if (data != null) return data;
         }
-        storageItems[itemid] += amount;
-        OnStorageChanged?.Invoke();
-        Debug.Log($"[StorageManager] Add {itemid} x{amount} (총량: {storageItems[itemid]})");
+
+        //ItemDatabase
+        if (itemDatabase != null)
+        {
+            var data = itemDatabase.Find(itemId);
+            if (data != null) return data;
+        }
+        
+        return null;
     }
-    public int GetItemAmount(string itemid)  //아이템 개수 조회
+
+    public void AddItems(ItemData item, int amount)  //아이템 추가
     {
-        if (storageItems.TryGetValue(itemid, out int amount))
-        {
-            return amount;
-        }
-        return 0;
+        if (item == null || amount <= 0) return;
+
+        if (!storageItems.ContainsKey(item))
+            storageItems[item] = 0;
+
+        storageItems[item] += amount;
+        OnStorageChanged?.Invoke();
+
+        Debug.Log($"[StorageManager] Add {item.itemId} x{amount} (총량: {storageItems[item]})");
+    }
+
+    public void AddItems(string itemId, int amount)
+    {
+        var item = Resolve(itemId);
+        if (item == null)               
+            return;
+
+        AddItems(item, amount);
+    }
+
+    public int GetItemAmount(ItemData item)  //아이템 개수 조회
+    {
+        if (item == null)
+            return 0;
+
+        return storageItems.TryGetValue(item, out int amount) ? amount : 0;
+    }
+
+    public int GetItemAmount(string itemId)
+    {
+        var item = Resolve(itemId);
+        return GetItemAmount(item);
     }
 
     public bool CheckSufficientItems(MaterialCost[] costs)  //업그레이드 재료 충분한지 체크
     {
         foreach (var cost in costs)
         {
-            if (GetItemAmount(cost.itemId) < cost.amount)
-            {
+            if (cost.item == null)
                 return false;
-            }
+
+            if (GetItemAmount(cost.item) < cost.amount)
+                return false;
         }
         return true;
     }
@@ -83,19 +125,18 @@ public class StorageManager : MonoBehaviour
     {
         foreach (var cost in costs)
         {
-            if (!storageItems.ContainsKey(cost.itemId))
+            if (cost.item == null)
                 continue;
 
-            storageItems[cost.itemId] -= cost.amount;
+            if (!storageItems.ContainsKey(cost.item))
+                continue;
 
-            if (storageItems[cost.itemId] <= 0)
-            {
-                storageItems.Remove(cost.itemId);
-            }
-            OnStorageChanged?.Invoke();
-            Debug.Log($"[StorageManager] Consume {cost.itemId} x{cost.amount}");
+            storageItems[cost.item] -= cost.amount;
+
+            if (storageItems[cost.item] <= 0)
+                storageItems.Remove(cost.item);
         }
+
+        OnStorageChanged?.Invoke();
     }
-
-
 }

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51e03dfdcc2e7e46a96c125a7ae70f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StorageManager
+  itemDatabase: {fileID: 0}
 --- !u!1 &768534455
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +431,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
   currentLevel: 1
-  upgradeData: []
+  upgradeData:
+  - {fileID: 11400000, guid: 7bc482cc3bb347a49969a96c1005e6ad, type: 2}
+  - {fileID: 11400000, guid: 6382c688321e1484db2d7da5ed1b8ccb, type: 2}
+  - {fileID: 11400000, guid: 9ddd91b0775771c4580f749815b2fb48, type: 2}
+  - {fileID: 11400000, guid: 80930500e9c3151468c536808a2b7c3e, type: 2}
 --- !u!1 &1243213955
 GameObject:
   m_ObjectHideFlags: 0
