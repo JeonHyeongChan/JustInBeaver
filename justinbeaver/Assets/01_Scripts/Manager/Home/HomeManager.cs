@@ -14,6 +14,9 @@ public class HomeManager : MonoBehaviour
     [Header("Upgrade Data")]
     [SerializeField] private HouseUpgradeData[] upgradeData;
 
+    //이벤트
+    public event Action<int> OnHouseLevelChanged;
+
     private void Awake()
     {
         if (Instance == null)
@@ -54,7 +57,14 @@ public class HomeManager : MonoBehaviour
         if (!CanUpgrade())
             return null;
 
-        return upgradeData[currentLevel];
+        int index = currentLevel;
+
+        if (upgradeData == null || index < 0 || index >= upgradeData.Length)
+        {
+            return null;
+        }
+
+        return upgradeData[index];
     }
 
     public bool TryUpgradeHome()
@@ -82,13 +92,12 @@ public class HomeManager : MonoBehaviour
     private void ApplyHouseLevel(int level)
     {
         Debug.Log($"House Upgrade -> {level}");
-
-        //외형 변경
-
-        //파밍 확장
+        
         ApplyFarmingItems(level);
 
         RuleManager.Instance?.ResetFailCount();
+
+        OnHouseLevelChanged?.Invoke(level); // 이벤트
 
         //엔딩 NPC 활성화 체크                
     }

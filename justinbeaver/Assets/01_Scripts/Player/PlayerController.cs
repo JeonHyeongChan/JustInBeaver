@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput playerInput;
-
+   
     [Header("이동/점프 설정")]
     public float moveSpeed = 6f;
     public float jumpForce = 5f;
@@ -65,7 +64,6 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.freezeRotation = true;
 
-        playerInput = GetComponent<PlayerInput>();
 
         if (animator == null)
         {
@@ -308,6 +306,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnGather(InputAction.CallbackContext ctx)
     {
+  
+
         if (!this || !isActiveAndEnabled)
         {
             return;
@@ -334,8 +334,15 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            context.isGatherHolding = true;
-
+            //거점 레벨 체크
+            if (!target.IsUnlocked())
+            {
+                UIManager.Instance?.ShowInteractHint(
+                    target.transform,
+                    target.GetLockedMessage()
+                );
+                return;
+            }
 
             //시간 내 재입력 + 같은 대상이면 이어하기
             bool canResume =
@@ -374,8 +381,9 @@ public class PlayerController : MonoBehaviour
         {
             moveInput = Vector2.zero;
             if (rigid != null)
+            {
                 rigid.linearVelocity = new Vector3(0f, rigid.linearVelocity.y, 0f);
-
+            }
             isRolling = false;
         }
     }

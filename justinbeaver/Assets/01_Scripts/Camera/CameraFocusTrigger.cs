@@ -1,57 +1,80 @@
-using UnityEngine;
-using Unity.Cinemachine; // [Áß¿ä] 3.x ¹öÀü ³×ÀÓ½ºÆäÀÌ½º
+ï»¿using UnityEngine;
+using Unity.Cinemachine; // [ì¤‘ìš”] 3.x ë²„ì „ ë„¤ì„ìŠ¤í˜ì´ìŠ¤
 
 public class CameraFocusTrigger : MonoBehaviour
 {
     [Header("Cinemachine 3.x Components")]
-    public CinemachineCamera focusCam;       // º¯°æµÊ: VirtualCamera -> CinemachineCamera
+    public CinemachineCamera focusCam;       // ë³€ê²½ë¨: VirtualCamera -> CinemachineCamera
     public CinemachineTargetGroup targetGroup;
 
     [Header("Settings")]
-    public Transform interactionTarget;      // NPC ¶Ç´Â »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®
-    public int highPriority = 20;            // È°¼ºÈ­ ½Ã ¿ì¼±¼øÀ§
-    public int lowPriority = 0;              // ºñÈ°¼ºÈ­ ½Ã ¿ì¼±¼øÀ§
+    public Transform interactionTarget;      // NPC ë˜ëŠ” ìƒí˜¸ì‘ìš© ì˜¤ë¸Œì íŠ¸
+    public int highPriority = 20;            // í™œì„±í™” ì‹œ ìš°ì„ ìˆœìœ„
+    public int lowPriority = 0;              // ë¹„í™œì„±í™” ì‹œ ìš°ì„ ìˆœìœ„
 
     private Transform playerTransform;
 
+    private void Awake()
+    {
+        // focusCam ìë™ ì—°ê²°
+        if (focusCam == null)
+        {
+            focusCam = FindAnyObjectByType<CinemachineCamera>();
+            if (focusCam == null)
+                Debug.LogError("[CameraFocusTrigger] CinemachineCamera not found");
+        }
+
+        // targetGroup ìë™ ì—°ê²°
+        if (targetGroup == null)
+        {
+            targetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
+            if (targetGroup == null)
+                Debug.LogError("[CameraFocusTrigger] CinemachineTargetGroup not found");
+        }
+
+        // interactionTarget ê¸°ë³¸ê°’
+        if (interactionTarget == null)
+            interactionTarget = transform;
+    }
+
     private void Start()
     {
-        // 1. "Player" ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ® Ã£±â
+        // 1. "Player" íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
 
-            // 2. Å¸°Ù ±×·ìÀÇ 0¹ø ÀÎµ¦½º¿¡ ÇÃ·¹ÀÌ¾î ÇÒ´ç
-            // 3.x API¿¡¼­´Â Targets ¸®½ºÆ®¸¦ Á÷Á¢ ¼öÁ¤
+            // 2. íƒ€ê²Ÿ ê·¸ë£¹ì˜ 0ë²ˆ ì¸ë±ìŠ¤ì— í”Œë ˆì´ì–´ í• ë‹¹
+            // 3.x APIì—ì„œëŠ” Targets ë¦¬ìŠ¤íŠ¸ë¥¼ ì§ì ‘ ìˆ˜ì •
             var targets = targetGroup.Targets;
 
             if (targets != null && targets.Count > 0)
             {
-                targets[0].Object = playerTransform; // 0¹ø ÀÚ¸®¿¡ ÇÃ·¹ÀÌ¾î ²È±â
+                targets[0].Object = playerTransform; // 0ë²ˆ ìë¦¬ì— í”Œë ˆì´ì–´ ê½‚ê¸°
                 targets[0].Weight = 1f;
                 targets[0].Radius = 2f;
             }
             else
             {
-                // ¸¸¾à ¸®½ºÆ®°¡ ºñ¾îÀÖ´Ù¸é »õ·Î Ãß°¡ (AddMember »ç¿ë)
+                // ë§Œì•½ ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆë‹¤ë©´ ìƒˆë¡œ ì¶”ê°€ (AddMember ì‚¬ìš©)
                 targetGroup.AddMember(playerTransform, 1f, 2f);
             }
 
-            // º¯°æµÈ ¸®½ºÆ®¸¦ ´Ù½Ã Àû¿ë (Áß¿ä)
+            // ë³€ê²½ëœ ë¦¬ìŠ¤íŠ¸ë¥¼ ë‹¤ì‹œ ì ìš© (ì¤‘ìš”)
             targetGroup.Targets = targets;
         }
         else
         {
-            Debug.LogWarning("Player ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogWarning("Player íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
 
-        // »óÈ£ÀÛ¿ë ´ë»óÀÌ ºñ¾îÀÖÀ¸¸é ÀÌ ½ºÅ©¸³Æ®°¡ ´Ş¸° ¿ÀºêÁ§Æ®·Î ¼³Á¤
+        // ìƒí˜¸ì‘ìš© ëŒ€ìƒì´ ë¹„ì–´ìˆìœ¼ë©´ ì´ ìŠ¤í¬ë¦½íŠ¸ê°€ ë‹¬ë¦° ì˜¤ë¸Œì íŠ¸ë¡œ ì„¤ì •
         if (interactionTarget == null)
             interactionTarget = transform;
 
-        // ½ÃÀÛ ½Ã Ä«¸Ş¶ó ¿ì¼±¼øÀ§ ÃÊ±âÈ­
+        // ì‹œì‘ ì‹œ ì¹´ë©”ë¼ ìš°ì„ ìˆœìœ„ ì´ˆê¸°í™”
         if (focusCam != null) focusCam.Priority = lowPriority;
     }
 
@@ -59,10 +82,10 @@ public class CameraFocusTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // »óÈ£ÀÛ¿ë ´ë»ó(NPC)À» Å¸°Ù ±×·ì¿¡ Ãß°¡
+            // ìƒí˜¸ì‘ìš© ëŒ€ìƒ(NPC)ì„ íƒ€ê²Ÿ ê·¸ë£¹ì— ì¶”ê°€
             AddTargetToGroup(interactionTarget, 1f, 2f);
 
-            // Ä«¸Ş¶ó ¿ì¼±¼øÀ§ ³ô¿©¼­ ÀüÈ¯
+            // ì¹´ë©”ë¼ ìš°ì„ ìˆœìœ„ ë†’ì—¬ì„œ ì „í™˜
             focusCam.Priority = highPriority;
         }
     }
@@ -71,18 +94,18 @@ public class CameraFocusTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Ä«¸Ş¶ó ¿ì¼±¼øÀ§ ¿ø»óº¹±¸
+            // ì¹´ë©”ë¼ ìš°ì„ ìˆœìœ„ ì›ìƒë³µêµ¬
             focusCam.Priority = lowPriority;
 
-            // »óÈ£ÀÛ¿ë ´ë»ó Á¦°Å
+            // ìƒí˜¸ì‘ìš© ëŒ€ìƒ ì œê±°
             RemoveTargetFromGroup(interactionTarget);
         }
     }
 
-    // ÇïÆÛ ÇÔ¼ö: Å¸°Ù ±×·ì Ãß°¡
+    // í—¬í¼ í•¨ìˆ˜: íƒ€ê²Ÿ ê·¸ë£¹ ì¶”ê°€
     void AddTargetToGroup(Transform t, float weight, float radius)
     {
-        // ÀÌ¹Ì ±×·ì¿¡ ÀÖ´ÂÁö È®ÀÎ
+        // ì´ë¯¸ ê·¸ë£¹ì— ìˆëŠ”ì§€ í™•ì¸
         foreach (var item in targetGroup.Targets)
         {
             if (item.Object == t) return;
@@ -90,7 +113,7 @@ public class CameraFocusTrigger : MonoBehaviour
         targetGroup.AddMember(t, weight, radius);
     }
 
-    // ÇïÆÛ ÇÔ¼ö: Å¸°Ù ±×·ì Á¦°Å
+    // í—¬í¼ í•¨ìˆ˜: íƒ€ê²Ÿ ê·¸ë£¹ ì œê±°
     void RemoveTargetFromGroup(Transform t)
     {
         targetGroup.RemoveMember(t);

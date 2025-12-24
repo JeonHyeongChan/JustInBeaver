@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  unlockData: {fileID: 11400000, guid: 0be871d8327daf9439d34d3e8dab5448, type: 2}
 --- !u!208 &2227552077589862817
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class UI_InventorySlot : MonoBehaviour
 
     [Header("Count UI")]
     public TMP_Text countText;
-    
+
     private bool hideCountWhenOne = true;
     private bool hideIconWhenEmpty = true;
 
@@ -39,13 +39,18 @@ public class UI_InventorySlot : MonoBehaviour
         if (bgImage == null)
         {
             return;
-        }    
-            
+        }
+
         bgImage.color = selected ? selectedColor : normalColor;
 
         if (selected)
         {
             UIManager.Instance?.ShowItemTooltip(this);
+        }    
+            
+        else
+        {
+            UIManager.Instance?.HideItemTooltip();
         }
     }
 
@@ -65,8 +70,8 @@ public class UI_InventorySlot : MonoBehaviour
     public int GetCount()
     {
         return count;
-    }    
-        
+    }
+
 
     //슬롯에 아이템 저장(아이템 데이터는 DB에서 가져옴)
     public void SetItem(string newItemId, int newCount)
@@ -104,12 +109,12 @@ public class UI_InventorySlot : MonoBehaviour
         if (itemId != addItemId)
         {
             return false;
-        }    
-            
+        }
+
         int before = count;
         count = Mathf.Min(maxStack, count + addCount);
         bool changed = count != before;
-        
+
         if (changed)
         {
             RefreshUI();
