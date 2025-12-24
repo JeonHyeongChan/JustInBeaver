@@ -432,8 +432,12 @@ public class PlayerController : MonoBehaviour
         if (ctx.started)
         {
             holdingTarget = detector.currentTarget;
-            if (holdingTarget == null)
+
+            if (holdingTarget == null || (holdingTarget is MonoBehaviour mb && mb == null))
+            {
+                holdingTarget = null;
                 return;
+            }            
 
             interactHoldTimer = 0f;
             isHoldingInteract = true;
@@ -573,6 +577,19 @@ public class PlayerController : MonoBehaviour
         interactHoldTimer = 0f;
 
         UIManager.Instance?.HideInteractHint();
+
+        //파괴된 오브젝트 안되게
+        if (target == null)
+        {
+            holdingTarget = null;
+            return;
+        }
+
+        if (target is MonoBehaviour mb && mb == null)
+        {
+            holdingTarget = null;
+            return;
+        }
 
         target.Interact(this);
         holdingTarget = null;
