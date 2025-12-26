@@ -29,6 +29,8 @@ public class PlayerGatherState : IPlayerState
             return;
         }
 
+        SoundManager.Instance?.PlayLoopSFX(SFXType.GatheringLoop); // 사운드
+
         var anim = playerContext.GetAnimatorSafe();
         if (anim != null)
         {
@@ -102,6 +104,8 @@ public class PlayerGatherState : IPlayerState
 
         var signal = playerContext.GetComponent<PlayerGatherSignal>();
         signal?.RaiseGatherEnd();
+
+        SoundManager.Instance?.StopLoopSFX(SFXType.GatheringLoop); // 사운드
     }
 
 

@@ -23,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - 1);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverHit);
+
         var buff = GetComponent<PlayerSpeedBuff>();
         buff?.ApplyHitSpeedBoot();
         Debug.Log("플레이어 이속 증가");
