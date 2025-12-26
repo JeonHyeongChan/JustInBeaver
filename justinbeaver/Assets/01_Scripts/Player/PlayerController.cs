@@ -5,8 +5,6 @@ public class PlayerController : MonoBehaviour
 {
    
     [Header("이동/점프 설정")]
-    
-
     public float moveSpeed = 6f;
     public float jumpForce = 5f;
     public float groundCheckDistance = 1.0f;
@@ -55,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Move Speed Modifiers")]
-    private float baseMoveSpeed = 6f;
     private PlayerSpeedBuff speedBuff;              //버프 배율
 
 
@@ -141,31 +138,34 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        //정규화
-        if (move.sqrMagnitude > 1f)
-        {
-            move.Normalize();
-        }
+        if (move.sqrMagnitude > 1f) move.Normalize();
 
         //무게 패널티
         float penalty = (PlayerStatsManager.Instance != null)
             ? PlayerStatsManager.Instance.GetSpeedPenalty()
             : 0f;
-        float speedAfterWeight = Mathf.Max(1f, baseMoveSpeed - penalty);
 
-        //피격 시 속도 버프
+        //baseMoveSpeed 기준으로 패널티 적용
+        float speedAfterWeight = Mathf.Max(1f, moveSpeed - penalty);
+
+
+        //피격 버프 배율
         float mul = (speedBuff != null) ? speedBuff.currentMulitiplier : 1f;
 
         float finalSpeed = speedAfterWeight * mul;
+        
 
-        //이동
+        //이동에 finalSpeed 반영
         Vector3 currentVel = rigid.linearVelocity;
-        Vector3 targetVel = move * moveSpeed;
+        Vector3 targetVel = move * finalSpeed;
 
         rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
+        Debug.Log($"[Move] mul={mul}, finalSpeed={finalSpeed}");
 
-        //회전(입력이 있을 때만)
+        var stats = PlayerStatsManager.Instance;
+        Debug.Log($"w={stats?.CurrentWeight}, maxW={stats?.MaxWeight}, penalty={penalty}, finalSpeed={finalSpeed}");
+
+        //회전
         if (move.sqrMagnitude > 0.001f)
         {
             Quaternion targetRot = Quaternion.LookRotation(move);

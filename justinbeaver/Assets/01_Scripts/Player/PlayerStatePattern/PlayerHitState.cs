@@ -28,6 +28,13 @@ public class PlayerHitState : IPlayerState
             ClampVerticalVelocity(playerContext.playerRigid, 0f);
         }
 
+        // 피격 시 3초 이동속도 버프
+        var buff = playerContext.GetComponent<PlayerSpeedBuff>();
+        if (buff != null)
+        {
+            buff.ApplyHitSpeedBoot();
+        }
+
         var anim = playerContext.GetAnimatorSafe();
         if (anim != null)
         {

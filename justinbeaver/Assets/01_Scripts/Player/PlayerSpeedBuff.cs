@@ -12,19 +12,24 @@ public class PlayerSpeedBuff : MonoBehaviour
 
     public void ApplyHitSpeedBoot()
     {
+        Debug.Log("[SpeedBuff] ApplyHitSpeedBoot");
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
         }
         coroutine = StartCoroutine(CoBoost());
-        Debug.Log("이속 증가");
+        
     }
 
     private IEnumerator CoBoost()
     {
         multitiplier = hitSpeedMulitiplier;
+        Debug.Log($"[SpeedBuff] BOOST ON");
+
         yield return new WaitForSeconds(hitSpeedDuration);
+
         multitiplier = 1f;
+        Debug.Log("[SpeedBuff] BOOST OFF");
         coroutine = null;
     }
 }
