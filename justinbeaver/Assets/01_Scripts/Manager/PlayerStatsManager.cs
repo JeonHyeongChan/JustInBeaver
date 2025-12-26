@@ -127,4 +127,11 @@ public class PlayerStatsManager : MonoBehaviour
         OnStatsChanged?.Invoke();
         OnWeightChanged?.Invoke(CurrentWeight);
     }
+
+
+    public void ResetWeightToZero()
+    {
+        SetCurrentWeight(0f);
+    }
+
 }
