@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4680717518429956361}
   - component: {fileID: 4627359364097725390}
   - component: {fileID: 4682936961410327597}
-  - component: {fileID: -3200840684054778774}
+  - component: {fileID: 7645306756553919212}
   m_Layer: 8
   m_Name: 12_Bed_Table_01_3
   m_TagString: Untagged
@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
 --- !u!114 &4627359364097725390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnLink
   owner: {fileID: 0}
---- !u!208 &-3200840684054778774
+--- !u!208 &7645306756553919212
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

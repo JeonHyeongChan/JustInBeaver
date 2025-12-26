@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1725735823000532793}
   - component: {fileID: 7433285994846550232}
   - component: {fileID: 3104942098246694663}
-  - component: {fileID: 1812337783326429278}
+  - component: {fileID: 2974492909632492499}
   m_Layer: 8
   m_Name: 24_Planter_Box_Flowers_Small_Easter
   m_TagString: Untagged
@@ -179,7 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
---- !u!208 &1812337783326429278
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
+--- !u!208 &2974492909632492499
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5594438150072610149}
   - component: {fileID: 7590343995008700797}
   - component: {fileID: -1620949590331049223}
-  - component: {fileID: -3162813238282833776}
+  - component: {fileID: -1657758232985502991}
   m_Layer: 8
   m_Name: 28_Box
   m_TagString: Untagged
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
 --- !u!114 &5594438150072610149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +208,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.24015659, y: 0.21372595, z: 0.19069633}
   m_Center: {x: 0, y: 0.10686298, z: 0}
---- !u!208 &-3162813238282833776
+--- !u!208 &-1657758232985502991
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

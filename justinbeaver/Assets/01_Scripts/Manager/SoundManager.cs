@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,35 +13,41 @@ public class SoundManager : MonoBehaviour
     [Range(0f, 1f)] public float bgmVolume = 0.6f;
     [Range(0f, 1f)] public float sfxVolume = 0.8f;
 
-    //public AudioClip beaverHitSFX; <- 비버맞는효과음
+    [Header("Scene BGM Setting")]
+    public SceneBGM[] sceneBGMs;
+
+    private Dictionary<SceneType, AudioClip> bgmMap;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-
-            //이벤트들 여기다
-            //비버맞은거감지 += PlayBeaverHit;
-
             bgmSource.loop = true;
+
+            bgmSource.volume = bgmVolume;
+            sfxSource.volume = sfxVolume;
+
+            BuildBGMMap();
         }
         else
         {
             Destroy(gameObject);
             return;
         }
-    }
+    }   
 
-    private void Start()
+    private void BuildBGMMap()
     {
-        bgmSource.volume = bgmVolume;
-        sfxSource.volume = sfxVolume;
-    }
+        bgmMap = new Dictionary<SceneType, AudioClip>();
 
-    private void OnDestroy()
-    {
-        //비버맞은거감지 -= PlayBeaverHit;
+        foreach (var bgm in sceneBGMs)
+        {
+            if (!bgmMap.ContainsKey(bgm.sceneType))
+            {
+                bgmMap.Add(bgm.sceneType, bgm.clip);
+            }
+        }
     }
 
     /// <summary>
@@ -54,9 +60,23 @@ public class SoundManager : MonoBehaviour
         if (clip == null)
             return;
 
+        if (bgmSource.isPlaying && bgmSource.clip == clip) // 중복방지
+            return;
+
         bgmSource.clip = clip;
         bgmSource.loop = loop;
         bgmSource.Play();
+    }
+
+    public void PlaySceneBGM(SceneType sceneType)
+    {
+        if (bgmMap == null)
+            return;
+
+        if (!bgmMap.TryGetValue(sceneType, out AudioClip clip))
+            return;
+
+        PlayBGM(clip);
     }
 
     /// <summary>

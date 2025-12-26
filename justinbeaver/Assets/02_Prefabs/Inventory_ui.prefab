@@ -119,6 +119,8 @@ MonoBehaviour:
   - {fileID: 7227449106749182337}
   - {fileID: 1747015908497665723}
   scrollRect: {fileID: 5027116674438602020}
+  autoBindSlotsOnEnable: 1
+  includeInactiveSlots: 1
 --- !u!1 &2959597607435916759
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,8 +333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4945e1ba7d9fee42b7929a2aa0d2bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_InventorySlot
-  itemName: 
+  itemId: 
+  count: 0
   icon: {fileID: 0}
+  countText: {fileID: 0}
 --- !u!114 &2060126741075782839
 MonoBehaviour:
   m_ObjectHideFlags: 0

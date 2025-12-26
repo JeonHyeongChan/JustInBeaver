@@ -53,8 +53,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Move Speed Modifiers")]
-    [SerializeField] private float minMoveSpeed = 1f; //최저 속도 보장
-    private PlayerSpeedBuff speedBuff;                //버프 배율
+    private PlayerSpeedBuff speedBuff;              //버프 배율
 
 
     //Animator 파라미터 해시
@@ -139,23 +138,34 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
+        if (move.sqrMagnitude > 1f) move.Normalize();
 
-        //정규화
-        if (move.sqrMagnitude > 1f)
-        {
-            move.Normalize();
-        }
+        //무게 패널티
+        float penalty = (PlayerStatsManager.Instance != null)
+            ? PlayerStatsManager.Instance.GetSpeedPenalty()
+            : 0f;
 
-        //속도 처리
-        float finalSpeed = GetFinalMoveSpeed();
+        //baseMoveSpeed 기준으로 패널티 적용
+        float speedAfterWeight = Mathf.Max(1f, moveSpeed - penalty);
 
-        //이동
+
+        //피격 버프 배율
+        float mul = (speedBuff != null) ? speedBuff.currentMulitiplier : 1f;
+
+        float finalSpeed = speedAfterWeight * mul;
+        
+
+        //이동에 finalSpeed 반영
         Vector3 currentVel = rigid.linearVelocity;
-        Vector3 targetVel = move * moveSpeed;
+        Vector3 targetVel = move * finalSpeed;
 
         rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
+        Debug.Log($"[Move] mul={mul}, finalSpeed={finalSpeed}");
 
-        //회전(입력이 있을 때만)
+        var stats = PlayerStatsManager.Instance;
+        Debug.Log($"w={stats?.CurrentWeight}, maxW={stats?.MaxWeight}, penalty={penalty}, finalSpeed={finalSpeed}");
+
+        //회전
         if (move.sqrMagnitude > 0.001f)
         {
             Quaternion targetRot = Quaternion.LookRotation(move);
@@ -421,8 +431,12 @@ public class PlayerController : MonoBehaviour
         if (ctx.started)
         {
             holdingTarget = detector.currentTarget;
-            if (holdingTarget == null)
+
+            if (holdingTarget == null || (holdingTarget is MonoBehaviour mb && mb == null))
+            {
+                holdingTarget = null;
                 return;
+            }            
 
             interactHoldTimer = 0f;
             isHoldingInteract = true;
@@ -563,6 +577,19 @@ public class PlayerController : MonoBehaviour
 
         UIManager.Instance?.HideInteractHint();
 
+        //파괴된 오브젝트 안되게
+        if (target == null)
+        {
+            holdingTarget = null;
+            return;
+        }
+
+        if (target is MonoBehaviour mb && mb == null)
+        {
+            holdingTarget = null;
+            return;
+        }
+
         target.Interact(this);
         holdingTarget = null;
     }
@@ -598,22 +625,5 @@ public class PlayerController : MonoBehaviour
 
             isRolling = false;
         }
-    }
-
-
-    //속도 처리
-    private float GetFinalMoveSpeed()
-    {
-        float penalty = (PlayerStatsManager.Instance != null)
-            ? PlayerStatsManager.Instance.GetSpeedPenalty()
-            : 0f;
-
-        float speedAfterWeight = Mathf.Max(minMoveSpeed, moveSpeed - penalty);
-
-        float buffMultiplier = (speedBuff != null)
-            ? speedBuff.currentMulitiplier
-            : 1f;
-
-        return speedAfterWeight * buffMultiplier;
     }
 }

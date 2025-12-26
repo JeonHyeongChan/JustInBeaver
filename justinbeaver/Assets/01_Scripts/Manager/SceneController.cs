@@ -23,6 +23,14 @@ public class SceneController : MonoBehaviour
             { SceneType.HumanHouse, "HumanHouseScene" }
         };
 
+    private static readonly Dictionary<string, SceneType> ReverseSceneMap =
+        new Dictionary<string, SceneType>
+        {
+            { "TitleScene", SceneType.Title },
+            { "BeaverHouseScene", SceneType.BeaverHouse },
+            { "HumanHouseScene", SceneType.HumanHouse }
+        };
+
     private void Awake()
     {
         if (Instance == null)
@@ -60,5 +68,13 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    public static SceneType GetSceneType(string sceneName)
+    {
+        if (ReverseSceneMap.TryGetValue(sceneName, out SceneType type))
+            return type;
+
+        return SceneType.Title;
     }
 }

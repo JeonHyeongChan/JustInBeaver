@@ -16,7 +16,7 @@ public class SleepState : IEnemyState
     {
         agent.enabled = false;
         enemy.LightViewOff();
-        enemy.Sleep();
+        enemy.StartCoroutine(enemy.SleepWait());
         enemy.flashLight.SetActive(false);
     }
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3974002274191999824}
   - component: {fileID: 2556348156925621970}
   - component: {fileID: 4869550423261331694}
-  - component: {fileID: -8683353200284893365}
+  - component: {fileID: 7776563829277130547}
   m_Layer: 8
   m_Name: 20_Wash_Bin_Summer_Camp_2
   m_TagString: Untagged
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 2
-  lockedMessage: House Lv 2
---- !u!208 &-8683353200284893365
+  lockedMessage: house level 2
+--- !u!208 &7776563829277130547
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

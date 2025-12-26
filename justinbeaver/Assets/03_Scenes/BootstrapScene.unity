@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51e03dfdcc2e7e46a96c125a7ae70f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StorageManager
+  itemDatabase: {fileID: 0}
 --- !u!1 &768534455
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +214,7 @@ MonoBehaviour:
   escapeResultUI: {fileID: 0}
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
+  itemTooltip: {fileID: 0}
   playerHeart: {fileID: 0}
   gameFailUI: {fileID: 0}
   gameSuccessUI: {fileID: 0}
@@ -220,6 +222,7 @@ MonoBehaviour:
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   victoryUI: {fileID: 0}
+  weightGauge: {fileID: 0}
   hud: {fileID: 0}
 --- !u!1001 &823731187
 PrefabInstance:
@@ -428,7 +431,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
   currentLevel: 1
-  upgradeData: []
+  upgradeData:
+  - {fileID: 11400000, guid: 7bc482cc3bb347a49969a96c1005e6ad, type: 2}
+  - {fileID: 11400000, guid: 6382c688321e1484db2d7da5ed1b8ccb, type: 2}
+  - {fileID: 11400000, guid: 9ddd91b0775771c4580f749815b2fb48, type: 2}
+  - {fileID: 11400000, guid: 80930500e9c3151468c536808a2b7c3e, type: 2}
 --- !u!1 &1243213955
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +631,13 @@ MonoBehaviour:
   sfxSource: {fileID: 2111436108}
   bgmVolume: 0.6
   sfxVolume: 0.8
+  sceneBGMs:
+  - sceneType: 0
+    clip: {fileID: 8300000, guid: 4128a4baaa47f8249b149187f12ffcc5, type: 3}
+  - sceneType: 1
+    clip: {fileID: 8300000, guid: c3e8f2182f23169459cbdbaa837c1e50, type: 3}
+  - sceneType: 2
+    clip: {fileID: 8300000, guid: 9e816bebbe6d8ef4b8269b367aa4fdc0, type: 3}
 --- !u!82 &2111436108
 AudioSource:
   m_ObjectHideFlags: 0
@@ -733,7 +747,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

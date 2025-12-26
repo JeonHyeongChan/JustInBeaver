@@ -6,8 +6,8 @@ public class WeightManager : MonoBehaviour
     public static WeightManager Instance;
 
     [Header("Penalty")]
-    [SerializeField] private float overWeight = 0.05f;          // 초과 무게 1당 속도 감소량
-    [SerializeField] private float maxPenalty = 4f;             // 최대 감소량
+    [SerializeField] private float overWeight = 0.05f;          //초과 무게 1당 속도 감소량
+    [SerializeField] private float maxPenaltyAtFull = 3f;       //가득 찼을 때 최대 감소량(이동속도에서 빼는 값)
 
 
     void Awake()
@@ -29,17 +29,19 @@ public class WeightManager : MonoBehaviour
         {
             return 0f;
         }
-        return Mathf.Max(0f, data.weight);
+        return Mathf.Max(0f, data.itemWeight);
     }
 
 
-    //CurrentWeight / Strength 기반 패널티
-    public float CalculateSpeedPenalty(float currentWeight, float strength)
+    //currentWeight / maxWeight 기반 패널티
+    public float CalculateSpeedPenalty(float currentWeight, float maxWeight)
     {
-        float limit = Mathf.Max(0f, strength);
-        float over = Mathf.Max(0f, currentWeight - limit);
+        float max = Mathf.Max(1f, maxWeight);
+        float ratio = Mathf.Clamp01(currentWeight / max);
 
-        float penalty = over * overWeight;
-        return Mathf.Clamp(penalty, 0f, maxPenalty);
+        //0%면 0, 100%면 maxPenaltyAtFull
+        float penalty = ratio * maxPenaltyAtFull;
+
+        return Mathf.Clamp(penalty, 0f, maxPenaltyAtFull);
     }
 }

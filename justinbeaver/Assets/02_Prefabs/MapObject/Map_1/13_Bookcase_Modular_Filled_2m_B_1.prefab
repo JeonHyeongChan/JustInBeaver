@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3975203428366028310}
   - component: {fileID: 3746245570133065100}
   - component: {fileID: 31853674362587161}
-  - component: {fileID: -1518623730167232210}
+  - component: {fileID: 560734436523637116}
   m_Layer: 8
   m_Name: 13_Bookcase_Modular_Filled_2m_B_1
   m_TagString: Untagged
@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &3746245570133065100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 7
---- !u!208 &-1518623730167232210
+  gatherDuration: 10
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
+--- !u!208 &560734436523637116
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

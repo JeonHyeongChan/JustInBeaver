@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 6697424332875588718}
   - component: {fileID: 9001956378290500127}
   - component: {fileID: 9155956615735430544}
-  - component: {fileID: -1976906210069462027}
+  - component: {fileID: -4264906185085918722}
   m_Layer: 8
   m_Name: 29_Locker_Metal_Big_2
   m_TagString: Untagged
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &9155956615735430544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,10 +234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 15
+  gatherDuration: 13
   requiredHomeLevel: 3
-  lockedMessage: House Lv 3
---- !u!208 &-1976906210069462027
+  lockedMessage: house level 3
+--- !u!208 &-4264906185085918722
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8255525438115330127}
   - component: {fileID: 6766472841253334708}
   - component: {fileID: 2013577538866228203}
-  - component: {fileID: 6246847290266156462}
+  - component: {fileID: 4808664105900084577}
   m_Layer: 8
   m_Name: 26_Can_Watering_Metal_B
   m_TagString: Untagged
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 6
+  gatherDuration: 5
   requiredHomeLevel: 3
-  lockedMessage: House Lv 3
+  lockedMessage: house level 3
 --- !u!114 &6766472841253334708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
   minCount: 1
   maxCount: 1
---- !u!208 &6246847290266156462
+--- !u!208 &4808664105900084577
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

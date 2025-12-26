@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 930796549607971472}
   - component: {fileID: 6906367314979081827}
   - component: {fileID: 1969931418182061456}
-  - component: {fileID: 3877831648517259303}
+  - component: {fileID: -7075534588189007069}
   m_Layer: 8
   m_Name: 30_bucket
   m_TagString: Untagged
@@ -297,9 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 6
+  gatherDuration: 5
   requiredHomeLevel: 3
-  lockedMessage: House Lv 3
+  lockedMessage: house level 3
 --- !u!114 &8934215925595121946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!208 &3877831648517259303
+--- !u!208 &-7075534588189007069
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

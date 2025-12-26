@@ -22,7 +22,10 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = Mathf.Max(0, currentHealth - 1);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
-        
+
+        var buff = GetComponent<PlayerSpeedBuff>();
+        buff?.ApplyHitSpeedBoot();
+        Debug.Log("플레이어 이속 증가");
 
         if (currentHealth <= 0)
         {            
@@ -31,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             playerContext.playerStateMachine.ChangeState(new PlayerHitState(playerContext));
-        }
+        }  
     }
 
     public void ResetHealth()

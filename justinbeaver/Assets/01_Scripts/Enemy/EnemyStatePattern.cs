@@ -271,5 +271,9 @@ public class EnemyStatePattern : MonoBehaviour
         currentState = newState;
         currentState.Enter();
     }
-
+    public IEnumerator SleepWait()
+    {
+        yield return new WaitForSeconds(0.3f);
+        animator.SetBool("isSleeping", true);
+    }
 }
