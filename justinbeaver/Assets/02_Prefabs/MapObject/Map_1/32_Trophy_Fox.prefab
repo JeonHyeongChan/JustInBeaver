@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -3521306040247114449}
   - component: {fileID: -2136984129312791685}
   - component: {fileID: 6649829705341249339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 32_Trophy_Fox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4928824387424650568}
   - component: {fileID: -8658073285262793132}
   - component: {fileID: 8738789778796969294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 30_Chair_Office
   m_TagString: Untagged
   m_Icon: {fileID: 0}

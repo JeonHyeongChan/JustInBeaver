@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 25375229855790754}
   - component: {fileID: 567692394073069700}
   - component: {fileID: 6040691956721526122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chest-of-drawers-victorian-b-drawer-b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 3616594372867158517}
   - component: {fileID: 7606477519766720913}
   - component: {fileID: 7673166938412398542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chest-of-drawers-victorian-b-drawer-d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 8769508947904711568}
   - component: {fileID: 8538995728314636484}
   - component: {fileID: 8213645830364879417}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chest-of-drawers-victorian-b-drawer-a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 3999366371354832830}
   - component: {fileID: 5041984143788887275}
   - component: {fileID: 5645188952145885594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chest-of-drawers-victorian-b-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 541958857595766733}
   - component: {fileID: 2975649267480025277}
   - component: {fileID: 1189085839238281143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chest-of-drawers-victorian-b-drawer-c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 1040505229858597487}
   - component: {fileID: 5780255145831416031}
   - component: {fileID: 7038651975798570444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 29_Chest_Of_Drawers_Victorian_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

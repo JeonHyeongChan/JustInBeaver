@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3821073725608237041}
   - component: {fileID: 3996449753644333183}
   - component: {fileID: -2294106853037605496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 17_Snow_Globe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

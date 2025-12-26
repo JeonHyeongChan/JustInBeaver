@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5012458991930737499}
   - component: {fileID: 5002424193957241360}
   - component: {fileID: 5180065792658977198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 36_AirCondition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

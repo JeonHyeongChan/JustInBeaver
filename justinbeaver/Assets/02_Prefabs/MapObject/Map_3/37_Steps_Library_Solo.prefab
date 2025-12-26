@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7601645042352955625}
   - component: {fileID: 3449700723372281139}
   - component: {fileID: 5922473628650789330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 37_Steps_Library_Solo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
