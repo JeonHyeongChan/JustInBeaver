@@ -6,15 +6,23 @@ public class PlayerStatsManager : MonoBehaviour
     public static PlayerStatsManager Instance { get; private set; }
 
     [Header("Stats")]
-    [SerializeField] private float strength = 50f;
-    [SerializeField] private float maxWeight = 100f;
+    [SerializeField] private float strength = 5f;
+
+    [Header("Weight")]
+    [SerializeField] private float baseMaxWeight = 5f;        //기본 최대무게
+    [SerializeField] private float maxWeightPerStrength = 0.5f;   //Strength 1당 최대무게 증가량
+    private float maxWeightBonus = 0f;                          //업그레이드/버프 보너스
 
     public float Strength => strength;
-    public float MaxWeight => maxWeight;
     public float CurrentWeight { get; private set; }
 
     // 무게 변경 이벤트
     public event Action<float> OnWeightChanged;
+    public event Action OnStatsChanged;        //스탯 UI용
+
+    // 현재 최대 무게(Strength + 업그레이드 반영)
+    public float MaxWeight => baseMaxWeight + (strength * maxWeightPerStrength) + maxWeightBonus;
+
 
     private void Awake()
     {
@@ -35,26 +43,41 @@ public class PlayerStatsManager : MonoBehaviour
         CurrentWeight = Mathf.Max(0, weight);
         Debug.Log($"[Weight] SetCurrentWeight = {CurrentWeight}");
         OnWeightChanged?.Invoke(CurrentWeight);
+        OnStatsChanged?.Invoke();
     }
+
 
     public float GetSpeedPenalty()
     {
         if (WeightManager.Instance == null)
+        {
             return 0f;
+        }
 
-        return WeightManager.Instance.CalculateSpeedPenalty(
+        return WeightManager.Instance.CalculateSpeedPenalty
+        (
             CurrentWeight,
-            Strength
+            MaxWeight
         );
     }
 
-    public void UpgradeStrength(float amount)
+
+    public void AddStrength(float amount)
     {
+        if (amount <= 0f)
+        {
+            return;
+        }
         strength += amount;
+        OnStatsChanged?.Invoke();
+        OnWeightChanged?.Invoke(CurrentWeight);
     }
+
 
     public void UpgradeMaxWeight(float amount)
     {
-        maxWeight += amount;
+        maxWeightBonus += amount;
+        OnStatsChanged?.Invoke();
+        OnWeightChanged?.Invoke(CurrentWeight);
     }
 }
