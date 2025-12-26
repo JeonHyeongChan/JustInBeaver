@@ -124,6 +124,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverJump);
+
         animator?.SetTrigger(HashJump);
 
         Vector3 velocity = rigid.linearVelocity;
