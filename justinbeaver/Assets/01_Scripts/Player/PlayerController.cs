@@ -189,8 +189,9 @@ public class PlayerController : MonoBehaviour
         if (isRolling)
         {
             return;
-        }    
+        }
 
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverRoll);
 
         //방향이 없다면 현재 바라보는 방향으로 구르기
         if (desiredDir.sqrMagnitude < 0.001f)
