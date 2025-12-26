@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드
         }
         else
@@ -46,6 +46,12 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene Loaded: {scene.name}");
+
+        if (SoundManager.Instance != null) // BGM
+        {
+            SceneType type = SceneController.GetSceneType(scene.name);
+            SoundManager.Instance.PlaySceneBGM(type);
+        }
 
         bool isTitle = scene.name == "TitleScene";
 

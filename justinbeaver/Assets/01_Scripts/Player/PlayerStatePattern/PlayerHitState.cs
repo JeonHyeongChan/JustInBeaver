@@ -25,7 +25,14 @@ public class PlayerHitState : IPlayerState
             playerContext.playerRigid.linearVelocity = Vector3.zero;
 
             //위로 튀는 속도 제한
-            ClampVerticalVelocity(playerContext.playerRigid, 0.5f);
+            ClampVerticalVelocity(playerContext.playerRigid, 0f);
+        }
+
+        // 피격 시 3초 이동속도 버프
+        var buff = playerContext.GetComponent<PlayerSpeedBuff>();
+        if (buff != null)
+        {
+            buff.ApplyHitSpeedBoot();
         }
 
         var anim = playerContext.GetAnimatorSafe();
@@ -56,7 +63,7 @@ public class PlayerHitState : IPlayerState
         }
     }
 
-    public void ClampVerticalVelocity(Rigidbody rigid, float maxUpSpeed = 2.5f)
+    public void ClampVerticalVelocity(Rigidbody rigid, float maxUpSpeed = 0f)
     {
         var vel = rigid.linearVelocity;
         if (vel.y > maxUpSpeed)

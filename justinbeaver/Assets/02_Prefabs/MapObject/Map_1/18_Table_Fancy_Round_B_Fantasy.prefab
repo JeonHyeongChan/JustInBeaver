@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1979585601376459573}
   - component: {fileID: 6172107413815878443}
   - component: {fileID: 44114852763981100}
-  - component: {fileID: 3873119503542816503}
+  - component: {fileID: -8983202759834294634}
   m_Layer: 8
   m_Name: 18_Table_Fancy_Round_B_Fantasy
   m_TagString: Untagged
@@ -163,7 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 3
+  gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
 --- !u!114 &44114852763981100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +181,7 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
---- !u!208 &3873119503542816503
+--- !u!208 &-8983202759834294634
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

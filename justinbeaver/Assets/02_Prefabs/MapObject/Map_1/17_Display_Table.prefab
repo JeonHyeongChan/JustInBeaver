@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5813456679299309365}
   - component: {fileID: 8952314115828719128}
   - component: {fileID: 8889726391085889316}
-  - component: {fileID: 2339344494583912117}
+  - component: {fileID: 3794911024058886739}
   m_Layer: 8
   m_Name: 17_Display_Table
   m_TagString: Untagged
@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!114 &8952314115828719128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,8 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 5
---- !u!208 &2339344494583912117
+  gatherDuration: 7
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
+--- !u!208 &3794911024058886739
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

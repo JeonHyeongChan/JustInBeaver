@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a8627cfb227a8448f16e585257bf1e, type: 3}
+  m_Name: Lv3_HouseUpgradeData
+  m_EditorClassIdentifier: Assembly-CSharp::HouseUpgradeData
+  targetLevel: 3
+  requiredMaterials:
+  - item: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: f6fee1e6abdd3ec43b066ada30d3785e, type: 2}
+    amount: 0
+  - item: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
+    amount: 0
+  - item: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
+    amount: 0

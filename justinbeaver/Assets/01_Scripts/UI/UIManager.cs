@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 
@@ -19,9 +20,10 @@ public class UIManager : MonoBehaviour
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
     public UI_ItemTooltip itemTooltip;
-
     public UI_PlayerHearts playerHeart;
+
     private PlayerHealth playerHealth;      //구독 해제용
+    private PlayerStatsManager boundStats;
 
     public GameObject gameFailUI;
     public GameObject gameSuccessUI;
@@ -34,7 +36,9 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    
+    public UI_WeightGauge weightGauge;
+
+
     public UI_GatherGauge GatherGauge => gatherGauge;
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
 
@@ -49,6 +53,7 @@ public class UIManager : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
 
             BindSceneUI();
+            BindWeightEvents();
             HideAllUI();
         }
         else
@@ -56,6 +61,23 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);    // 싱글톤으로 수정
         }
     }
+
+    private void OnEnable()
+    {
+        if (PlayerStatsManager.Instance != null)
+        {
+            PlayerStatsManager.Instance.OnWeightChanged += HandleWeightChanged;
+        }   
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerStatsManager.Instance != null)
+        {
+            PlayerStatsManager.Instance.OnWeightChanged -= HandleWeightChanged;
+        }
+    }
+
 
     private void OnDestroy()
     {
@@ -70,6 +92,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BindSceneUI();
+        BindWeightEvents();
         SetInventoryOpen(false);
         HideItemTooltip();
         HideAllUI();
@@ -85,8 +108,12 @@ public class UIManager : MonoBehaviour
         BindHearts();
         BindInventory();
         BindItemTooltip();
+        BindWeightGauge();
+        BindWeightEvents();
         BindGameFailUI();
         BindGameSuccessUI();
+        BindShopUI();
+        BindUpgradeUI();
     }
 
     private void BindGatherGauge()
@@ -205,6 +232,41 @@ public class UIManager : MonoBehaviour
     }
 
 
+    private void BindWeightGauge()
+    {
+        weightGauge = FindAnyObjectByType<UI_WeightGauge>(FindObjectsInactive.Include);
+        if (weightGauge == null)
+        {
+            return;
+        }
+        RefreshWeightGauge(); // 씬 로드 직후 한번 반영
+    }
+
+    private void BindShopUI()
+    {
+        shopUI = null;
+        var marker = FindAnyObjectByType<UI_Shop>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            shopUI = null;
+            return;
+        }
+        shopUI = marker.gameObject;
+        shopUI.SetActive(false);
+    }
+
+    private void BindUpgradeUI()
+    {
+        upgradeUI = null;
+        var maker = FindAnyObjectByType<UI_Upgrade>(FindObjectsInactive.Include);
+        if (maker == null)
+        {
+            upgradeUI = null;
+            return;
+        }
+        upgradeUI = maker.gameObject;
+        upgradeUI.SetActive(false);
+    }
 
     public void ToggleInventory()
     {
@@ -365,6 +427,63 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowShopUI()
+    {
+        if (shopUI != null )
+        {
+            shopUI.SetActive(true);
+        }
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        var button = shopUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+
+    public void ShowUpgradeUI()
+    {
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(true);
+        }
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        var button = upgradeUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+    public void HideShopUI()
+    {
+        if (shopUI != null)
+            shopUI.SetActive(false);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
+    public void HideUpgradeUI()
+    {
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(false);
+        }
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
     public void ConfirmEscapeSuccess()
     {
         Debug.Log("ConfirmEscapeSuccess CLICKED");
@@ -409,6 +528,7 @@ public class UIManager : MonoBehaviour
     {
         HideAllUI();
         hudUI.SetActive(true);
+        RefreshWeightGauge();
     }
 
     public void HideAllUI()
@@ -447,10 +567,16 @@ public class UIManager : MonoBehaviour
         return result;
     }
 
+
     public void ClearInventoryAll()  //(스테이지 매니저 연동) 인벤 슬롯 전체 비우기
     {
         var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
-        if (grid == null) return;
+        
+        if (grid == null)
+        {
+            return;
+        }
+
         grid.RebindSlots();
 
         foreach (var slot in grid.slots)
@@ -461,6 +587,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
 
     public void RemoveItemsFromInventoryByFilter(Func<string, bool> filter)
     {
@@ -490,5 +617,55 @@ public class UIManager : MonoBehaviour
                 slot.Clear();
             }
         }
+    }
+
+
+    private void HandleWeightChanged(float weight)
+    {
+        RefreshWeightGauge();
+    }
+
+
+    public void RefreshWeightGauge()
+    {
+        if (weightGauge == null)
+        {
+            return;
+        }
+        
+        var stats = PlayerStatsManager.Instance;
+        
+        if (stats == null)
+        {
+            return;
+        }
+        weightGauge.Refresh(stats.CurrentWeight, stats.MaxWeight);
+    }
+
+
+    private void BindWeightEvents()
+    {
+        var stats = PlayerStatsManager.Instance;
+
+        //이미 올바른 대상에 바인딩 되어있으면 끝
+        if (boundStats == stats)
+        {
+            return;
+        }
+
+        //이전 대상 구독 해제
+        if (boundStats != null)
+        {
+            boundStats.OnWeightChanged -= HandleWeightChanged;
+        }
+        boundStats = stats;
+
+        //새 대상 구독
+        if (boundStats != null)
+        {
+            boundStats.OnWeightChanged += HandleWeightChanged;
+        }
+        //즉시 1회 반영
+        RefreshWeightGauge();
     }
 }

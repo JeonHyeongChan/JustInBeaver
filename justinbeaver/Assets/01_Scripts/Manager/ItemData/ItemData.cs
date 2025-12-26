@@ -25,5 +25,5 @@ public class ItemData : ScriptableObject
     public int maxStack = 99;
 
     [Header("Weight")]
-    [Range(1, 5)] public float weight = 1f;
+    [Range(1, 5)] public float itemWeight = 1f;
 }

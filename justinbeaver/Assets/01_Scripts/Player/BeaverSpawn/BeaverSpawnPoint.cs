@@ -11,9 +11,7 @@ public class BeaverSpawnPoint : MonoBehaviour
     {
         string sceneName = gameObject.scene.name;
 
-        SpawnPoints[sceneName] = this;
-
-        Debug.Log($"BeaverSpawnPoint for scene: {sceneName}");
+        SpawnPoints[sceneName] = this;       
     }
 
     private void OnDisable()

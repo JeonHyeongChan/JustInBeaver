@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5945291548028768434}
   - component: {fileID: 4570319093990017763}
   - component: {fileID: 464075302060477691}
-  - component: {fileID: 5323396291197723474}
+  - component: {fileID: -5055008093605076244}
   m_Layer: 8
   m_Name: 01_KitchenTabletop1_02
   m_TagString: Untagged
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 3
+  maxCount: 3
 --- !u!114 &464075302060477691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,10 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 8
+  gatherDuration: 10
   requiredHomeLevel: 3
-  lockedMessage: House Lv 3
---- !u!208 &5323396291197723474
+  lockedMessage: house level 3
+--- !u!208 &-5055008093605076244
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6011443202782837050}
   - component: {fileID: 5246501939222664043}
   - component: {fileID: 4928859743258486029}
-  - component: {fileID: -8828804742164289974}
+  - component: {fileID: 4122272053561345594}
   m_Layer: 8
   m_Name: 21_Toilet_01_1
   m_TagString: Untagged
@@ -33,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 8593173710603853214}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.074}
-  m_LocalScale: {x: 2.3006222, y: 2.043, z: 2.2838697}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.8, y: 1.5, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 9
   requiredHomeLevel: 2
-  lockedMessage: House Lv 2
---- !u!208 &-8828804742164289974
+  lockedMessage: The house level is low.
+--- !u!208 &4122272053561345594
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

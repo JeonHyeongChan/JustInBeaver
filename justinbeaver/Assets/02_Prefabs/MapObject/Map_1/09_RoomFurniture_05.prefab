@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5474918085135800117}
   - component: {fileID: 2349979482632624599}
   - component: {fileID: 2172507891167406244}
-  - component: {fileID: -4117021963429856794}
+  - component: {fileID: 2989458832460857024}
   m_Layer: 8
   m_Name: 09_RoomFurniture_05
   m_TagString: Untagged
@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!114 &2172507891167406244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 6
---- !u!208 &-4117021963429856794
+  gatherDuration: 7
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
+--- !u!208 &2989458832460857024
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

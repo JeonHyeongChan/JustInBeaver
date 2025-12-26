@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc80653d7225b444a8d6528710b672a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeightManager
-  itemWeights: []
+  overWeight: 0.05
+  maxPenalty: 4
 --- !u!4 &396864722
 Transform:
   m_ObjectHideFlags: 0
@@ -624,7 +625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc80653d7225b444a8d6528710b672a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeightManager
-  itemWeights: []
+  overWeight: 0.05
+  maxPenalty: 4
 --- !u!1 &1463723428
 GameObject:
   m_ObjectHideFlags: 0

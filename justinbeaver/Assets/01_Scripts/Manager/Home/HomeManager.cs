@@ -54,36 +54,34 @@ public class HomeManager : MonoBehaviour
 
     public HouseUpgradeData GetNextUpgradeData()
     {
-        if (!CanUpgrade())
-            return null;
+        int nextLevel = currentLevel + 1;
 
-        int index = currentLevel;
-
-        if (upgradeData == null || index < 0 || index >= upgradeData.Length)
+        foreach (var data in upgradeData)
         {
-            return null;
+            if (data != null && data.targetLevel == nextLevel)
+                return data;
         }
 
-        return upgradeData[index];
+        return null;
     }
 
     public bool TryUpgradeHome()
     {
-        //if (!CanUpgrade())
-        //    return false;
-        //
-        //HouseUpgradeData data = GetNextUpgradeData();
-        //
-        //if (data == null)
-        //    return false;
-        //if (StorageManager.Instance == null)  //창고 매니저 연동구간 
-        //    return false;
-        //if (!StorageManager.Instance.CheckSufficientItems(data.requiredMaterials))
-        //    return false;
-        //
-        //StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
-
-        currentLevel++;
+        if (!CanUpgrade())
+            return false;
+        
+        HouseUpgradeData data = GetNextUpgradeData();
+        
+        if (data == null)
+            return false;
+        if (StorageManager.Instance == null)  //창고 매니저 연동구간 
+            return false;
+        if (!StorageManager.Instance.CheckSufficientItems(data.requiredMaterials))
+            return false;
+        
+        StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
+        
+        currentLevel = data.targetLevel;
         ApplyHouseLevel(currentLevel);
 
         return true;

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5374219176674949928}
   - component: {fileID: 7720897330794968475}
   - component: {fileID: 9206098791302136568}
-  - component: {fileID: -3918942589050348246}
+  - component: {fileID: -3072169662741812761}
   m_Layer: 8
   m_Name: 14_Bed2_03
   m_TagString: Untagged
@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
+  requiredHomeLevel: 1
+  lockedMessage: house level 1
 --- !u!114 &5374219176674949928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,8 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!65 &9206098791302136568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,7 +181,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.43, y: 0.9, z: 2.99}
   m_Center: {x: 0.00006404519, y: 0.39080134, z: 0.25987172}
---- !u!208 &-3918942589050348246
+--- !u!208 &-3072169662741812761
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

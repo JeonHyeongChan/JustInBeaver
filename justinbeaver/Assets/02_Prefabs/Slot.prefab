@@ -89,4 +89,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_InventorySlot
   itemId: 
+  count: 0
   icon: {fileID: 0}
+  countText: {fileID: 0}

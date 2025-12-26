@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6763474378547044779}
   - component: {fileID: 8117930973673726621}
   - component: {fileID: 293500678532140447}
-  - component: {fileID: 262363293024535404}
+  - component: {fileID: -2157566752808489020}
   m_Layer: 8
   m_Name: 15_OfficeChair_01
   m_TagString: Untagged
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
-  maxCount: 1
+  minCount: 2
+  maxCount: 2
 --- !u!114 &293500678532140447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,10 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 6
+  gatherDuration: 11
   requiredHomeLevel: 3
-  lockedMessage: House Lv 3
---- !u!208 &262363293024535404
+  lockedMessage: house level 3
+--- !u!208 &-2157566752808489020
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
