@@ -11,11 +11,16 @@ public class CaptureObject : MonoBehaviour, IPoolable
     [TextArea]
     public string lockedMessage = "The house level is low.";
 
+    private DropTable dropTable;
 
     //오브젝트별 진행 상태
     public float progress { get; private set; }
     public bool isCompleted { get; private set; }
 
+    private void Awake()
+    {
+        dropTable = GetComponent<DropTable>(); // 드랍아이템 참조
+    }
 
     public void OnSpawned()
     {
@@ -77,8 +82,17 @@ public class CaptureObject : MonoBehaviour, IPoolable
         if (isCompleted)
         {
             return;
-        }
+        }        
+
         isCompleted = true;
+
+        if (dropTable == null)
+        {
+            Debug.LogError($"[GatherComplete] DropTable missing on {name}");
+            return;
+        }
+
+        dropTable.Drop(transform.position);
 
         //풀 반환
         ObjectManager.Instance.DropAndDespawn(gameObject);

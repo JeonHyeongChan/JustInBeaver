@@ -161,11 +161,9 @@ public class PlayerController : MonoBehaviour
         Vector3 currentVel = rigid.linearVelocity;
         Vector3 targetVel = move * finalSpeed;
 
-        rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
-        Debug.Log($"[Move] mul={mul}, finalSpeed={finalSpeed}");
+        rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);        
 
-        var stats = PlayerStatsManager.Instance;
-        Debug.Log($"w={stats?.CurrentWeight}, maxW={stats?.MaxWeight}, penalty={penalty}, finalSpeed={finalSpeed}");
+        var stats = PlayerStatsManager.Instance;       
 
         //회전
         if (move.sqrMagnitude > 0.001f)

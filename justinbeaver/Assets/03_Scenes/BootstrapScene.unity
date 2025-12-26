@@ -641,14 +641,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9e816bebbe6d8ef4b8269b367aa4fdc0, type: 3}
   chaseBGM: {fileID: 8300000, guid: ed5b08f4fc266dc41b897299cab954ef, type: 3}
   sfxDatas:
-  - type: 2
-    clip: {fileID: 8300000, guid: 5235a58433f624981ac8b307bfe14d20, type: 3}
-  - type: 0
-    clip: {fileID: 8300000, guid: 66272cd30edb2ee4c991a9d4d3c6e8a9, type: 3}
-  - type: 1
-    clip: {fileID: 8300000, guid: 9414b8eb06ea94b249708bc621e9638d, type: 3}
   - type: 3
+    clip: {fileID: 8300000, guid: 5235a58433f624981ac8b307bfe14d20, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 66272cd30edb2ee4c991a9d4d3c6e8a9, type: 3}
+  - type: 2
+    clip: {fileID: 8300000, guid: 9414b8eb06ea94b249708bc621e9638d, type: 3}
+  - type: 4
     clip: {fileID: 8300000, guid: ee15e3d5f721f79489ad906e56607b59, type: 3}
+  - type: 5
+    clip: {fileID: 8300000, guid: f4549f9e1af94487a972eb0c0e2b1728, type: 3}
+  - type: 6
+    clip: {fileID: 8300000, guid: d0947e9629513754c9c8f5143d51e348, type: 3}
+  - type: 7
+    clip: {fileID: 8300000, guid: 2bb763732c062aa42a7c6646ad4ff017, type: 3}
+  - type: 8
+    clip: {fileID: 8300000, guid: 4785abc5534f0324f9552e2ad07ba543, type: 3}
   loopSFXSource: {fileID: 2111436110}
 --- !u!82 &2111436108
 AudioSource:

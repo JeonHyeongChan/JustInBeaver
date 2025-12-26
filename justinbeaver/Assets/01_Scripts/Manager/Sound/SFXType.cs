@@ -1,14 +1,21 @@
 ﻿public enum SFXType
 {
+    None = 0,
+
     //비버
     BeaverHit,
     BeaverRoll,
     BeaverJump,   
     //BeaverMove,
 
-    //갈무리 완료시
+    //갈무리
     GatheringLoop,
-    GatherComplete,
+    
+    //드랍
+    DropWood,
+    DropStone,
+    DropGlass,
+    DropMetal,
 
     //버튼
     ButtonConfirm,
