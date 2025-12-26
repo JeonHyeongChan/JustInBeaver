@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 
@@ -111,6 +112,8 @@ public class UIManager : MonoBehaviour
         BindWeightEvents();
         BindGameFailUI();
         BindGameSuccessUI();
+        BindShopUI();
+        BindUpgradeUI();
     }
 
     private void BindGatherGauge()
@@ -239,7 +242,31 @@ public class UIManager : MonoBehaviour
         RefreshWeightGauge(); // 씬 로드 직후 한번 반영
     }
 
+    private void BindShopUI()
+    {
+        shopUI = null;
+        var marker = FindAnyObjectByType<UI_Shop>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            shopUI = null;
+            return;
+        }
+        shopUI = marker.gameObject;
+        shopUI.SetActive(false);
+    }
 
+    private void BindUpgradeUI()
+    {
+        upgradeUI = null;
+        var maker = FindAnyObjectByType<UI_Upgrade>(FindObjectsInactive.Include);
+        if (maker == null)
+        {
+            upgradeUI = null;
+            return;
+        }
+        upgradeUI = maker.gameObject;
+        upgradeUI.SetActive(false);
+    }
 
     public void ToggleInventory()
     {
@@ -400,6 +427,63 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowShopUI()
+    {
+        if (shopUI != null )
+        {
+            shopUI.SetActive(true);
+        }
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        var button = shopUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+
+    public void ShowUpgradeUI()
+    {
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(true);
+        }
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        var button = upgradeUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+    public void HideShopUI()
+    {
+        if (shopUI != null)
+            shopUI.SetActive(false);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
+    public void HideUpgradeUI()
+    {
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(false);
+        }
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
     public void ConfirmEscapeSuccess()
     {
         Debug.Log("ConfirmEscapeSuccess CLICKED");
