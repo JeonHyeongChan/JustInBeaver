@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1044887605123028340}
   - component: {fileID: 6909480077515003308}
   - component: {fileID: 5555673426725577193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 2489783513214431251}
   - component: {fileID: 606754122510194268}
   - component: {fileID: 3141846534740966414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-reload-a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 3683248886603365483}
   - component: {fileID: 8129110331734910008}
   - component: {fileID: 70957870958725214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-reload-b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 8459516687151018592}
   - component: {fileID: 311685086799881713}
   - component: {fileID: 2643620129707361092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-reload-c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 8330535207190018430}
   - component: {fileID: -2457508058640516423}
   - component: {fileID: -8471208065858353759}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 36_Winchester_1897
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 1822414709499340113}
   - component: {fileID: 3561590156426268401}
   - component: {fileID: 4680116816118428944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 4643854076116481550}
   - component: {fileID: 6920735228247943180}
   - component: {fileID: 1307494737808945029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: winchester-1897-reload-d
   m_TagString: Untagged
   m_Icon: {fileID: 0}

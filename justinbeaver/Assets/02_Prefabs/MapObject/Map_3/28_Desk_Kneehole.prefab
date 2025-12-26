@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3837408941227455886}
   - component: {fileID: 8385027954173292499}
   - component: {fileID: -6875913024389633270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 28_Desk_Kneehole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 3602452233385610906}
   - component: {fileID: 4071405848392757497}
   - component: {fileID: 216283036609977698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: desk-kneehole-drawer-b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 3391359924056820321}
   - component: {fileID: 4387462179014990032}
   - component: {fileID: 1018653586899622829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: desk-kneehole-drawer-large
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 895790697796177053}
   - component: {fileID: 7128407549584545932}
   - component: {fileID: 55682373350588211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: desk-kneehole-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 1289856324993935527}
   - component: {fileID: 6299977713884257220}
   - component: {fileID: 206425788485224197}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: desk-kneehole-drawer-a
   m_TagString: Untagged
   m_Icon: {fileID: 0}

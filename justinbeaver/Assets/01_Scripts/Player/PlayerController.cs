@@ -627,4 +627,32 @@ public class PlayerController : MonoBehaviour
             isRolling = false;
         }
     }
+
+    public void ForceDrop(float downVelocity = -15f, bool zeroUpVelocityFirst = true)
+    {
+        if (rigid == null)
+        {
+            return;
+        }
+
+        if (isGrounded)
+        {
+            return;
+        }
+
+        var vel = rigid.linearVelocity;
+
+        //위로 튀는 중이면 y 속도 제거
+        if (zeroUpVelocityFirst && vel.y > 0f)
+        {
+            vel.y = 0f;
+        }
+
+        //아래로 강제 낙하
+        vel.y = Mathf.Min(vel.y, downVelocity);
+        rigid.linearVelocity = vel;
+
+        jumpLocked = true;
+        isRolling = false;
+    }
 }

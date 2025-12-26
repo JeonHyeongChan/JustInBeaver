@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4965204643756238364}
   - component: {fileID: -422290389917672066}
   - component: {fileID: 2431739719670452456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 31_Bottle_Ink_Closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

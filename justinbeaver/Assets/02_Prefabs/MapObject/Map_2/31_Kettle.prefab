@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -690772490301720198}
   - component: {fileID: -1403400923853960577}
   - component: {fileID: -4594599130800292151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 31_Kettle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

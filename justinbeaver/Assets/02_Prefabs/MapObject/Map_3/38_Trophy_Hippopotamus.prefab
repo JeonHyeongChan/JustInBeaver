@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7418441914978968449}
   - component: {fileID: 3390478392388838650}
   - component: {fileID: 6462522247386609790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 38_Trophy_Hippopotamus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
