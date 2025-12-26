@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
     private bool gatherLocked;
     private bool inputLocked; //입력 잠금
 
-    private bool IsLocked => inventoryLocked || gatherLocked;
+    private bool IsLocked => inventoryLocked || gatherLocked || inputLocked;
+
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundMask;   //Inspector에서 Ground만 체크
