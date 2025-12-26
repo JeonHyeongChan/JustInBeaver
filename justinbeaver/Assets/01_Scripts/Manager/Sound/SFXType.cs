@@ -3,12 +3,12 @@
     //비버
     BeaverHit,
     BeaverRoll,
-    BeaverJump,
-    BeaverGather,
+    BeaverJump,   
     //BeaverMove,
 
     //갈무리 완료시
-    //4종류
+    GatheringLoop,
+    GatherComplete,
 
     //버튼
     ButtonConfirm,
