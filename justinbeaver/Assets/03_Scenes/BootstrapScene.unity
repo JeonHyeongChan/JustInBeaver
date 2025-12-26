@@ -638,6 +638,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c3e8f2182f23169459cbdbaa837c1e50, type: 3}
   - sceneType: 2
     clip: {fileID: 8300000, guid: 9e816bebbe6d8ef4b8269b367aa4fdc0, type: 3}
+  sfxDatas: []
 --- !u!82 &2111436108
 AudioSource:
   m_ObjectHideFlags: 0

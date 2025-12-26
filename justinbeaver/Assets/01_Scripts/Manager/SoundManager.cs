@@ -16,7 +16,11 @@ public class SoundManager : MonoBehaviour
     [Header("Scene BGM Setting")]
     public SceneBGM[] sceneBGMs;
 
+    [Header("SFX Setting")]
+    public SFXData[] sfxDatas;
+
     private Dictionary<SceneType, AudioClip> bgmMap;
+    private Dictionary<SFXType, AudioClip> sfxMap;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class SoundManager : MonoBehaviour
             sfxSource.volume = sfxVolume;
 
             BuildBGMMap();
+            BuildSFXMap();
         }
         else
         {
@@ -46,6 +51,19 @@ public class SoundManager : MonoBehaviour
             if (!bgmMap.ContainsKey(bgm.sceneType))
             {
                 bgmMap.Add(bgm.sceneType, bgm.clip);
+            }
+        }
+    }
+
+    private void BuildSFXMap()
+    {
+        sfxMap = new Dictionary<SFXType, AudioClip>();
+
+        foreach (var sfx in sfxDatas)
+        {
+            if (!sfxMap.ContainsKey(sfx.type))
+            {
+                sfxMap.Add(sfx.type, sfx.clip);
             }
         }
     }
@@ -83,17 +101,11 @@ public class SoundManager : MonoBehaviour
     /// 효과음
     /// </summary>
     /// <param name="clip"></param>
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(SFXType type)
     {
-        if (clip == null)
-            return;
-
-        sfxSource.PlayOneShot(clip, sfxVolume);
-    }
-
-    //private void PlayBeaverHit()    //비버맞는소리
-    //{
-    //    if (beaverHitSFX != null)
-    //        PlaySFX(beaverHitSFX);
-    //}
+        if (sfxMap.TryGetValue(type, out var clip))
+        {
+            sfxSource.PlayOneShot(clip, sfxVolume);
+        }
+    }    
 }
