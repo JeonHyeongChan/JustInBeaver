@@ -24,7 +24,7 @@ public class UI_Shop : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
-        UIManager.Instance.HideShopUI();
+       
         UIManager.Instance.ShowUpgradeUI();
     }
     public void OnClickExitButton()

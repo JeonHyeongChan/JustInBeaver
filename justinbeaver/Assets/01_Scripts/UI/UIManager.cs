@@ -446,8 +446,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowUpgradeUI()
     {
+      
         if (upgradeUI != null)
         {
+            HideShopUI();
             upgradeUI.SetActive(true);
         }
 
