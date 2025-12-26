@@ -61,11 +61,11 @@ public class UI_TitleInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Enter나 Space 버튼 확인처리
+    /// 버튼 확인처리
     /// </summary>
     private void HandleSubmit()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             if (currentIndex == 0)
                 OnNewGame();
