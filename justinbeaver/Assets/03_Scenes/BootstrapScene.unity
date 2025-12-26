@@ -170,7 +170,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1027783499}
     m_Modifications:
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -355,6 +355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1462108707}
   - {fileID: 1530893528}
   - {fileID: 1899243177}
   - {fileID: 955234487}
@@ -470,6 +471,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec4154ee0a9a1a4598fc18a6b2a1ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BootstrapLoader
+--- !u!4 &1462108707 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
+  m_PrefabInstance: {fileID: 289092326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1530893527
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,4 +951,3 @@ SceneRoots:
   m_Roots:
   - {fileID: 1027783499}
   - {fileID: 1243213956}
-  - {fileID: 289092326}
