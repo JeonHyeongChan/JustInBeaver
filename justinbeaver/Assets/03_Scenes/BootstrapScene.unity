@@ -631,6 +631,13 @@ MonoBehaviour:
   sfxSource: {fileID: 2111436108}
   bgmVolume: 0.6
   sfxVolume: 0.8
+  sceneBGMs:
+  - sceneType: 0
+    clip: {fileID: 8300000, guid: 4128a4baaa47f8249b149187f12ffcc5, type: 3}
+  - sceneType: 1
+    clip: {fileID: 8300000, guid: c3e8f2182f23169459cbdbaa837c1e50, type: 3}
+  - sceneType: 2
+    clip: {fileID: 8300000, guid: 9e816bebbe6d8ef4b8269b367aa4fdc0, type: 3}
 --- !u!82 &2111436108
 AudioSource:
   m_ObjectHideFlags: 0
@@ -740,7 +747,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
