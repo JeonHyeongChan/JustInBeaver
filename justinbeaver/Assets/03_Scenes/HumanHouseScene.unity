@@ -10824,9 +10824,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759a2156337a1c54fa2a01c1f1395c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsManager
+  strengthLevel: 1
   strength: 5
   baseMaxWeight: 5
   maxWeightPerStrength: 1
+  upgradeData:
+  - {fileID: 11400000, guid: 8a43333b733209d47abcc0650a7f5e9a, type: 2}
+  - {fileID: 11400000, guid: 94d4fce29ee5f404ab2efd56bd6f26a9, type: 2}
 --- !u!4 &1782731133
 Transform:
   m_ObjectHideFlags: 0
