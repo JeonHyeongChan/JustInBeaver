@@ -10,7 +10,9 @@ public class ChaseState : IEnemyState
     private float attackRange;
     private Animator animator;
     private float detectRange;
-
+    private float lostTimer;            // 못 본 시간
+    private const float LostLimit = 3f; // 3초 지나면 포기
+    private LightView lightView;
     public ChaseState(EnemyStatePattern Enemy)
     {
         enemy = Enemy;
@@ -20,15 +22,20 @@ public class ChaseState : IEnemyState
         animator = enemy.Animator;
         agent = enemy.Agent;
         detectRange = enemy.DetectRange;
+        lightView = enemy.LightView;
     }
 
     public void Enter()
     {
-        agent.SetDestination(player.position);
+        lostTimer = 0f;
+
         agent.isStopped = false;
         agent.speed = moveSpeed;
 
         animator.SetBool("isRunning", true);
+        enemy.LightViewOn();
+        if (player != null)
+            agent.SetDestination(player.position);
     }
 
     public void Exit()
@@ -39,7 +46,9 @@ public class ChaseState : IEnemyState
 
     public void Update()
     {
+     
         agent.SetDestination(player.position);
+
         float distance = Vector3.Distance(enemy.transform.position, player.position);
         if (distance <= attackRange)
         {
@@ -47,9 +56,21 @@ public class ChaseState : IEnemyState
            
             enemy.SetState(new AttackState(enemy));
         }
-        if (distance > detectRange)
+        agent.isStopped = false;
+        agent.SetDestination(player.position);
+
+        if (lightView != null && lightView.HasTarget())
         {
-            //enemy.SetState(new IdleState(enemy));
+            lostTimer = 0f;
+        }
+        else
+        {
+            lostTimer += Time.deltaTime;
+            if (lostTimer >= LostLimit)
+            {
+                enemy.SetState(new IdleState(enemy));
+                return;
+            }
         }
     }
 }

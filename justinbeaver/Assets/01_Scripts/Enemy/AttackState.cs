@@ -21,22 +21,22 @@ public class AttackState : IEnemyState
     {
         agent.isStopped = true;
         //if(만약 플레이어가 없다면 리턴)
-
+        enemy.LightViewOn();
         //플레이어 데미지 보내기 or 처리
         enemy.StartAttackCooldown();
     }
 
     public void Exit()
     {
-       
+        enemy.hitBox.SetActive(false);
         enemy.StopAttackCooldown();
     }
 
     public void Update()
     {
-
+        if (enemy.IsAttackAnimPlaying) return;
         float distance = Vector3.Distance(enemy.transform.position, player.position);
-        if (distance >= attackRange)
+        if (distance > attackRange)
         {
             enemy.SetState(new ChaseState(enemy));
         }
