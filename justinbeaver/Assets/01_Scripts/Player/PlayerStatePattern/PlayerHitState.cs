@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public class PlayerHitState : IPlayerState
+
+public class PlayerHitState : MonoBehaviour, IPlayerState
 {
     private PlayerContext playerContext;
     private float hitDuration = 0.4f;
     private float endTime;
+    private const float MaxUpSpeedDuringHit = 0f;
+
     private static readonly int HashHit = Animator.StringToHash("Hit");
 
     public PlayerHitState(PlayerContext context)
@@ -23,9 +26,7 @@ public class PlayerHitState : IPlayerState
         {
             //기존 속도 제거
             playerContext.playerRigid.linearVelocity = Vector3.zero;
-
-            //위로 튀는 속도 제한
-            ClampVerticalVelocity(playerContext.playerRigid, 0f);
+            playerContext.playerRigid.angularVelocity = Vector3.zero;
         }
 
         // 피격 시 3초 이동속도 버프
@@ -42,6 +43,24 @@ public class PlayerHitState : IPlayerState
         }
 
         endTime = Time.time + hitDuration;
+    }
+
+    public void FixedUpdate()
+    {
+        var rigid = playerContext.playerRigid;
+
+        if (rigid == null)
+        {
+            return;
+        }
+
+        var vel = rigid.linearVelocity;
+        if (vel.y > MaxUpSpeedDuringHit)
+        {
+            vel.y = MaxUpSpeedDuringHit;
+            rigid.linearVelocity = vel;
+        }
+        Debug.Log($"[HIT FixedUpdate] t={Time.time:F3} vel={playerContext.playerRigid.linearVelocity}");
     }
 
 
@@ -63,16 +82,6 @@ public class PlayerHitState : IPlayerState
         }
     }
 
-    public void ClampVerticalVelocity(Rigidbody rigid, float maxUpSpeed = 0f)
-    {
-        var vel = rigid.linearVelocity;
-        if (vel.y > maxUpSpeed)
-        {
-            vel.y = maxUpSpeed;
-        }
-        rigid.linearVelocity = vel;
-    }
-
-    public void FixedUpdate() { }
+    
     public void Exit() { }
 }
