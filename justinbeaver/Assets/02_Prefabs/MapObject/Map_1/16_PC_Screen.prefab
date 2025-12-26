@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 4
+  gatherDuration: 5
 --- !u!54 &5555223849187212348
 Rigidbody:
   m_ObjectHideFlags: 0
