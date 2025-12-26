@@ -2,9 +2,10 @@
 
 public class UI_Shop : MonoBehaviour
 {
-    
+
     void Start()
     {
+  
         
     }
 

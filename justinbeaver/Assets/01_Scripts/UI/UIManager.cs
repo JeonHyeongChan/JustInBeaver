@@ -451,6 +451,7 @@ public class UIManager : MonoBehaviour
         {
             HideShopUI();
             upgradeUI.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(upgradeUI);
         }
 
         var player = FindAnyObjectByType<PlayerController>();
