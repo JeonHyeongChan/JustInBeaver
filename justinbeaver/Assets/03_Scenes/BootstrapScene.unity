@@ -234,7 +234,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2026462963143823724, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: groundRadius
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
       propertyPath: m_LocalPosition.x
