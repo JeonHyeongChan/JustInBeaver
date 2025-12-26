@@ -1258,6 +1258,7 @@ GameObject:
   - component: {fileID: 303824504}
   - component: {fileID: 303824503}
   - component: {fileID: 303824505}
+  - component: {fileID: 303824506}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -1397,8 +1398,8 @@ MonoBehaviour:
     Strategy: 0
     MaximumEffort: 4
     SmoothingTime: 0
-    Damping: 1
-    DampingWhenOccluded: 1
+    Damping: 1.5
+    DampingWhenOccluded: 1.5
   ShotQualityEvaluation:
     Enabled: 0
     OptimalDistance: 10
@@ -1418,6 +1419,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinemachineLockRotation
   m_FixedRotation: {x: 60, y: 0, z: 0}
+--- !u!114 &303824506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303824499}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDecollider
+  CameraRadius: 0.3
+  Decollision:
+    Enabled: 0
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Damping: 0.5
+    SmoothingTime: 0
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    MaximumRaycast: 10
+    Damping: 0.5
 --- !u!1 &310754804
 GameObject:
   m_ObjectHideFlags: 0
@@ -6117,7 +6148,7 @@ Transform:
   m_GameObject: {fileID: 942004051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.89, z: 0}
+  m_LocalPosition: {x: 0, y: 5.54, z: 0}
   m_LocalScale: {x: 9.1446, y: 1, z: 7.113}
   m_ConstrainProportionsScale: 0
   m_Children: []
