@@ -10,11 +10,17 @@ public class SoundManager : MonoBehaviour
     public AudioSource sfxSource;
 
     [Header("Volume Setting")]
-    [Range(0f, 1f)] public float bgmVolume = 0.6f;
-    [Range(0f, 1f)] public float sfxVolume = 0.8f;
+    [Range(0f, 1f)] public float bgmVolume;
+    [Range(0f, 1f)] public float sfxVolume;
 
     [Header("Scene BGM Setting")]
     public SceneBGM[] sceneBGMs;
+
+    private AudioClip currentSceneBGM;
+    private AudioClip overrideBGM;
+
+    [Header("State BGM")]
+    public AudioClip chaseBGM;
 
     [Header("SFX Setting")]
     public SFXData[] sfxDatas;
@@ -94,6 +100,34 @@ public class SoundManager : MonoBehaviour
         if (!bgmMap.TryGetValue(sceneType, out AudioClip clip))
             return;
 
+        currentSceneBGM = clip;
+
+        if (overrideBGM != null)
+            return;
+
+        PlayBGM(clip);
+    }
+    
+    public void StopOverrideBGM()
+    {
+        if (overrideBGM == null)
+            return;
+
+        overrideBGM = null;
+
+        if (currentSceneBGM != null)
+            PlayBGM(currentSceneBGM);
+    }
+
+    public void PlayOverrideBGM(AudioClip clip)
+    {
+        if (clip == null)
+            return;
+        
+        if (overrideBGM == clip && bgmSource.isPlaying)
+            return;
+
+        overrideBGM = clip;
         PlayBGM(clip);
     }
 

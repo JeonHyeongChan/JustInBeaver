@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        SoundManager.Instance?.PlaySFX(SFXType.BeaverJump);
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverJump); // 사운드
 
         animator?.SetTrigger(HashJump);
 

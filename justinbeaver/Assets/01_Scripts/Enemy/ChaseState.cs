@@ -29,6 +29,8 @@ public class ChaseState : IEnemyState
     {
         lostTimer = 0f;
 
+        SoundManager.Instance?.PlayOverrideBGM(SoundManager.Instance.chaseBGM); // 사운드
+
         agent.isStopped = false;
         agent.speed = moveSpeed;
 
@@ -42,6 +44,8 @@ public class ChaseState : IEnemyState
     {
         animator.SetBool("isRunning", false);
         agent.isStopped = false;
+
+        SoundManager.Instance?.StopOverrideBGM(); // 사운드
     }
 
     public void Update()

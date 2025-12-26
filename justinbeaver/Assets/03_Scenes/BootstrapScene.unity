@@ -629,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   bgmSource: {fileID: 2111436109}
   sfxSource: {fileID: 2111436108}
-  bgmVolume: 0.6
+  bgmVolume: 0.2
   sfxVolume: 0.8
   sceneBGMs:
   - sceneType: 0
@@ -638,6 +638,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c3e8f2182f23169459cbdbaa837c1e50, type: 3}
   - sceneType: 2
     clip: {fileID: 8300000, guid: 9e816bebbe6d8ef4b8269b367aa4fdc0, type: 3}
+  chaseBGM: {fileID: 8300000, guid: ed5b08f4fc266dc41b897299cab954ef, type: 3}
   sfxDatas:
   - type: 2
     clip: {fileID: 8300000, guid: 5235a58433f624981ac8b307bfe14d20, type: 3}
