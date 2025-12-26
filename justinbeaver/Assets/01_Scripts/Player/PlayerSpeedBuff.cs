@@ -17,6 +17,7 @@ public class PlayerSpeedBuff : MonoBehaviour
             StopCoroutine(coroutine);
         }
         coroutine = StartCoroutine(CoBoost());
+        Debug.Log("이속 증가");
     }
 
     private IEnumerator CoBoost()

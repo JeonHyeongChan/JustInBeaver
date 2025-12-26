@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
-  requiredHomeLevel: 1
-  lockedMessage: The house level is low.
+  requiredHomeLevel: 4
+  lockedMessage: house level 4
 --- !u!114 &-2466998720386649052
 MonoBehaviour:
   m_ObjectHideFlags: 0

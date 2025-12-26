@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Move Speed Modifiers")]
     private float baseMoveSpeed = 6f;
-    private float minMoveSpeed = 1f;                //최저 속도 보장
     private PlayerSpeedBuff speedBuff;              //버프 배율
 
 
