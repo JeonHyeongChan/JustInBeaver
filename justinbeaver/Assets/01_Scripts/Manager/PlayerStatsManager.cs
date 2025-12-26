@@ -47,4 +47,14 @@ public class PlayerStatsManager : MonoBehaviour
             Strength
         );
     }
+
+    public void UpgradeStrength(float amount)
+    {
+        strength += amount;
+    }
+
+    public void UpgradeMaxWeight(float amount)
+    {
+        maxWeight += amount;
+    }
 }
