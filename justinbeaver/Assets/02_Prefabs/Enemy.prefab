@@ -1780,6 +1780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4499049038390974141}
+  - component: {fileID: 3719802593079590772}
   - component: {fileID: 2063843997260085189}
   - component: {fileID: 614590007956682568}
   - component: {fileID: 2243673811868471567}
@@ -1812,6 +1813,20 @@ Transform:
   - {fileID: 3560016257459243712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3719802593079590772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5527065647411632598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63117850038eef64ca3e6070241ca1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanFootstepRadio
+  triggerDistance: 20
+  footstepSFX: 14
 --- !u!95 &2063843997260085189
 Animator:
   serializedVersion: 7

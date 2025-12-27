@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -28,8 +29,8 @@ public class SoundManager : MonoBehaviour
     [Header("Gathering SFX")]
     public AudioSource loopSFXSource;
 
-    [Header("Loop SFX")]
-    
+    [Header("Human Footstep SFX")]
+    public AudioSource humanFootstepSource;
 
     private Dictionary<SceneType, AudioClip> bgmMap;
     private Dictionary<SFXType, AudioClip> sfxMap;
@@ -52,7 +53,22 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }   
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {        
+        StopHumanFootstep(null); // 탈출할때 적 가까이 있었을때 발소리 재생 버그 방지
+    }
 
     private void BuildBGMMap()
     {
@@ -182,5 +198,35 @@ public class SoundManager : MonoBehaviour
 
         int index = Random.Range(0, types.Length);
         PlaySFX(types[index]);
+    }
+
+    /// <summary>
+    /// 인간 발소리
+    /// </summary>
+    /// <param name="type"></param>
+    public void PlayHumanFootstep(Transform human, SFXType type)
+    {
+        if (humanFootstepSource == null)
+            return;
+
+        if (!sfxMap.TryGetValue(type, out var clip))
+            return;
+
+        if (humanFootstepSource.isPlaying && humanFootstepSource.clip == clip)
+            return;
+
+        humanFootstepSource.clip = clip;
+        humanFootstepSource.volume = sfxVolume;
+        humanFootstepSource.loop = true;
+        humanFootstepSource.Play();
+    }
+
+    public void StopHumanFootstep(Transform human)
+    {
+        if (humanFootstepSource == null)
+            return;
+
+        if (humanFootstepSource.isPlaying)
+            humanFootstepSource.Stop();
     }
 }

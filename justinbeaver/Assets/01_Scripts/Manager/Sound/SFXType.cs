@@ -28,7 +28,7 @@
 
     //인간
     HumanChase, // 완료
-    HumanWalk,    
+    HumanWalk, // 완료
     HumanTargetFound, // 완료
     HumanAttackUgh, // 완료
     HumanAttackYah, // 완료
