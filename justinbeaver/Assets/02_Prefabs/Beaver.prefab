@@ -938,10 +938,10 @@ GameObject:
   - component: {fileID: 6522455464424817664}
   - component: {fileID: 2700360685821782904}
   - component: {fileID: 6437610915515269419}
-  - component: {fileID: 6039700855833780170}
   - component: {fileID: 2373389651120172279}
   - component: {fileID: 4359417911467395434}
   - component: {fileID: 8476783324362432602}
+  - component: {fileID: -3660146103931347697}
   m_Layer: 0
   m_Name: Beaver
   m_TagString: Player
@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerContext
   playerController: {fileID: 2026462963143823724}
   playerAnimator: {fileID: 7212563134540830779}
-  playerRigid: {fileID: 6039700855833780170}
+  playerRigid: {fileID: 0}
   playerhealth: {fileID: 6522455464424817664}
   playerStateMachine: {fileID: 2700360685821782904}
   playerGatherDetector: {fileID: 6437610915515269419}
@@ -1348,8 +1348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovemant
   moveSpeed: 5
   jumpForce: 4.5
-  groundCheckDistance: 10
-  groundOffset: 10
+  groundCheckDistance: 0.01
+  groundOffset: 0.01
   rollSpeed: 0.05
   rollDuration: 0.01
   rollCooldown: 0.3
@@ -1359,7 +1359,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheckPoint: {fileID: 9084082286203727952}
-  groundRadius: 1
+  groundRadius: 0.1
 --- !u!114 &6522455464424817664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,33 +1397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec8ec38291ebe746b70cbe34e71d5d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGatherDetector
---- !u!54 &6039700855833780170
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8852819285662168690}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 64
-  m_CollisionDetection: 1
 --- !u!136 &2373389651120172279
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1431,7 +1404,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8852819285662168690}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20fab3894d4ea494dbe30767a10c7f42, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1443,7 +1416,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.32
+  m_Radius: 0.25
   m_Height: 1.03
   m_Direction: 2
   m_Center: {x: 0, y: 0.27, z: 0}
@@ -1473,6 +1446,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpeedBuff
   hitSpeedMulitiplier: 1.5
   hitSpeedDuration: 3
+--- !u!54 &-3660146103931347697
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 64
+  m_CollisionDetection: 0
 --- !u!1 &8943125863728703080
 GameObject:
   m_ObjectHideFlags: 0

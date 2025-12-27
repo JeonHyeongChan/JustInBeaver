@@ -1,14 +1,21 @@
 ﻿public enum SFXType
 {
+    None = 0,
+
     //비버
-    BeaverHit,
-    BeaverRoll,
-    BeaverJump,
-    BeaverGather,
+    BeaverHit, // 완료
+    BeaverRoll, // 완료
+    BeaverJump, // 완료
     //BeaverMove,
 
-    //갈무리 완료시
-    //4종류
+    //갈무리
+    GatheringLoop, // 완료
+
+    //드랍
+    DropWood, // 완료
+    DropStone, // 완료
+    DropGlass, // 완료
+    DropMetal, // 완료
 
     //버튼
     ButtonConfirm,
@@ -20,7 +27,7 @@
     SeaOtterVoice,
 
     //인간
-    HumanChase, //배경음 음소거 필요
+    HumanChase, // 완료
     HumanWalk,
     HumanAttack,
     HumanTargetFound,

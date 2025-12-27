@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
 
     public UI_WeightGauge weightGauge;
 
+    private const string homeScene = "BeaverHouseScene";
 
     public UI_GatherGauge GatherGauge => gatherGauge;
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
@@ -96,6 +97,15 @@ public class UIManager : MonoBehaviour
         SetInventoryOpen(false);
         HideItemTooltip();
         HideAllUI();
+
+        //거점 씬 들어오면 무게 초기화
+        if (scene.name == homeScene)
+        {
+            //무게 0으로 초기화
+            PlayerStatsManager.Instance?.ResetWeightToZero();
+            RefreshWeightGauge();
+        }
+
     }
 
     /// <summary>

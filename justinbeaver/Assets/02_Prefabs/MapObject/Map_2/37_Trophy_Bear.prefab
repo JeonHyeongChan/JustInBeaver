@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -729737956930709396}
   - component: {fileID: -8976818707815746445}
   - component: {fileID: 7148213601378907429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 37_Trophy_Bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}

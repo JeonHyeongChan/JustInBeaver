@@ -25,6 +25,12 @@ public class SoundManager : MonoBehaviour
     [Header("SFX Setting")]
     public SFXData[] sfxDatas;
 
+    [Header("Gathering SFX")]
+    public AudioSource loopSFXSource;
+
+    [Header("Loop SFX")]
+    
+
     private Dictionary<SceneType, AudioClip> bgmMap;
     private Dictionary<SFXType, AudioClip> sfxMap;
 
@@ -141,5 +147,31 @@ public class SoundManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(clip, sfxVolume);
         }
-    }    
+    }
+
+    public void PlayLoopSFX(SFXType type)
+    {
+        if (!sfxMap.TryGetValue(type, out var clip))
+            return;
+
+        if (loopSFXSource.isPlaying && loopSFXSource.clip == clip)
+            return;
+
+        loopSFXSource.clip = clip;
+        loopSFXSource.volume = sfxVolume;
+        loopSFXSource.loop = true;
+        loopSFXSource.Play();
+    }
+
+    public void StopLoopSFX(SFXType type)
+    {
+        if (!loopSFXSource.isPlaying)
+            return;
+
+        if (sfxMap.TryGetValue(type, out var clip) && loopSFXSource.clip != clip)
+            return;
+
+        loopSFXSource.Stop();
+        loopSFXSource.clip = null;
+    }
 }
