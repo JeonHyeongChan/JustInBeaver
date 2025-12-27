@@ -28,9 +28,11 @@
 
     //인간
     HumanChase, // 완료
-    HumanWalk,
-    HumanAttack,
-    HumanTargetFound,
+    HumanWalk,    
+    HumanTargetFound, // 완료
+    HumanAttackUgh,
+    HumanAttackYah,
+    HumanAttackYiya,
 
     //아이템
     ItemCollect,

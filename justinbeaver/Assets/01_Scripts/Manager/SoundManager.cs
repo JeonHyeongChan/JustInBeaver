@@ -174,4 +174,13 @@ public class SoundManager : MonoBehaviour
         loopSFXSource.Stop();
         loopSFXSource.clip = null;
     }
+
+    public void PlayRandomSFX(params SFXType[] types)
+    {
+        if (types == null || types.Length == 0)
+            return;
+
+        int index = Random.Range(0, types.Length);
+        PlaySFX(types[index]);
+    }
 }
