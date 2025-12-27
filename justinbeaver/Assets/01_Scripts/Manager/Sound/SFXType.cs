@@ -35,8 +35,8 @@
     HumanAttackYiya, // 완료
 
     //아이템
-    ItemCollect,
-    ItemTrash,
+    ItemCollect, // 완료
+    ItemTrash, // 완료
 
     //업그레이드
     HouseUpgrade,
