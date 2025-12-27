@@ -15,12 +15,18 @@ public class PlayerController : MonoBehaviour
     public float rollDuration = 0.35f;   //구르기 지속 시간
     public float rollCooldown = 0.6f;    //구르기 쿨타임
 
+
+    [Header("구르기 무적")]
+    [SerializeField] private bool enableRollInvincible = true;
+
+
     [Header("회전 설정")]
     public float rotateSpeed = 10f;
 
     [Header("애니메이터")]
     public Animator animator;
 
+    private PlayerHealth playerHealth;
     private Rigidbody rigid;
     private Vector2 moveInput;
     private bool isGrounded;
@@ -116,6 +122,12 @@ public class PlayerController : MonoBehaviour
         gatherLocked = false;
         isRolling = false;
         moveInput = Vector2.zero;
+
+        //구르기 무적 정리
+        if (playerHealth != null)
+        {
+            playerHealth.SetRollInvincible(false);
+        }
     }
 
 
@@ -205,7 +217,14 @@ public class PlayerController : MonoBehaviour
         nextRollTime = Time.time + rollCooldown;
 
 
-        //롤 애니메이션 트리거
+        //구르기 무적 ON
+        if (enableRollInvincible && playerHealth != null)
+        {
+            playerHealth.SetRollInvincible(true);
+        }
+
+
+        //구르기 애니메이션 트리거
         if (animator != null)
         {
             animator.SetTrigger(HashRoll);
@@ -231,6 +250,12 @@ public class PlayerController : MonoBehaviour
         if (Time.time >= rollEndTime)
         {
             isRolling = false;
+
+            //구르기 무적 OFF
+            if (enableRollInvincible && playerHealth != null)
+            {
+                playerHealth.SetRollInvincible(false);
+            }
         }
     }
 

@@ -14,8 +14,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float invincibleDuration = 3.0f;
     private float invincibleEndTime = -1f;
     public bool IsInvincible => Time.time < invincibleEndTime;
-    
-    
+
+
+    private bool rollInvincible = false; //구르기 무적 판정용
+
+
     public event Action<int, int> OnHealthChanged;
 
 
@@ -63,10 +66,19 @@ public class PlayerHealth : MonoBehaviour
         }  
     }
 
+
     public void ResetHealth()
     {
         currentHealth = maxHealth;
         invincibleEndTime = -1f;
+        rollInvincible = false;
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+
+    //구르기 무적 on/off
+    public void SetRollInvincible(bool on)
+    {
+        rollInvincible = on;
     }
 }
