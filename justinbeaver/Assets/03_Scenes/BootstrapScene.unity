@@ -659,8 +659,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e32363191cdf54a40a17829dac8b0d20, type: 3}
   - type: 17
     clip: {fileID: 8300000, guid: 435db40c270f94646a62b20622f7b5ce, type: 3}
-  - type: 16
-    clip: {fileID: 8300000, guid: fc64ece2e619ae14ab2b1f0619903777, type: 3}
+  - type: 18
+    clip: {fileID: 8300000, guid: a38e007fb425c8046ab848e778ad9887, type: 3}
+  - type: 19
+    clip: {fileID: 8300000, guid: cb20ae1d22a7e4cf58a126036aa6eeb7, type: 3}
+  - type: 20
+    clip: {fileID: 8300000, guid: 5f1da2aaa97c6c741b5d3bb801c8f9dc, type: 3}
   loopSFXSource: {fileID: 2111436110}
 --- !u!82 &2111436108
 AudioSource:

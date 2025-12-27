@@ -51,6 +51,8 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
             return;
         }
 
+        SoundManager.Instance?.PlaySFX(SFXType.ItemCollect); // 사운드
+
         //풀 반환
         Despawn();
     }
