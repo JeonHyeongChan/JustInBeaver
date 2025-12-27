@@ -30,9 +30,9 @@
     HumanChase, // 완료
     HumanWalk,    
     HumanTargetFound, // 완료
-    HumanAttackUgh,
-    HumanAttackYah,
-    HumanAttackYiya,
+    HumanAttackUgh, // 완료
+    HumanAttackYah, // 완료
+    HumanAttackYiya, // 완료
 
     //아이템
     ItemCollect,
