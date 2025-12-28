@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 7824968713263207526}
   - component: {fileID: 8228920270776616677}
   - component: {fileID: 7647047331337700937}
-  - component: {fileID: 5897373908021594979}
   - component: {fileID: 5434545158149012717}
   - component: {fileID: 5729673740108245672}
   - component: {fileID: 5107663843337674769}
-  - component: {fileID: 7418441914978968449}
   - component: {fileID: 3390478392388838650}
   - component: {fileID: 6462522247386609790}
+  - component: {fileID: 177778588007344861}
+  - component: {fileID: 8632248649761162208}
+  - component: {fileID: -430568355442884786}
+  - component: {fileID: -5788821529991624327}
   m_Layer: 8
   m_Name: 38_Trophy_Hippopotamus
   m_TagString: Untagged
@@ -96,28 +98,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5897373908021594979
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3560927779767165225}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 146218559060412351, guid: c4ead358424930246a76076be585360e, type: 3}
 --- !u!114 &5434545158149012717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,27 +141,6 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 1
   maxCount: 1
---- !u!65 &7418441914978968449
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3560927779767165225}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.81, y: 1.9831164, z: 1.78}
-  m_Center: {x: 0.000002115965, y: -0.12396923, z: 0.75353765}
 --- !u!65 &3390478392388838650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -219,3 +178,80 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -0.124000005, z: 0.754}
   m_TimeToStationary: 0.5
+--- !u!114 &177778588007344861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560927779767165225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63702ebb2ef0e0743b20b0db7adb28fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupportPhysicsEnabler
+  supportMask:
+    serializedVersion: 2
+    m_Bits: 128
+  unsupportedTimeToEnable: 0.2
+  wallCheckDistance: 0.3
+  sideCheckDistance: 0
+  checkRadius: 0.5
+--- !u!54 &8632248649761162208
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560927779767165225}
+  serializedVersion: 5
+  m_Mass: 30
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!45 &-430568355442884786
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560927779767165225}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
+--- !u!64 &-5788821529991624327
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560927779767165225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 146218559060412351, guid: c4ead358424930246a76076be585360e, type: 3}

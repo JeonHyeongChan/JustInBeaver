@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 6886131528572125620}
   - component: {fileID: 6910216496949837346}
   - component: {fileID: 1860061300330468362}
-  - component: {fileID: -6996326777060738726}
   - component: {fileID: -8775939492334574008}
   - component: {fileID: 2547094001305178491}
   - component: {fileID: 5439943862252395397}
   - component: {fileID: 2668858417766779794}
+  - component: {fileID: 5413061120014121207}
+  - component: {fileID: 6225312399415530675}
   m_Layer: 0
   m_Name: 39_Road_Flare_3Stage
   m_TagString: Untagged
@@ -117,27 +118,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2530351460319517288, guid: 7f8bbc60a29cdb64dbb0904cc77e72b7, type: 3}
---- !u!65 &-6996326777060738726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677062313052679358}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.042676006, y: 0.2671529, z: 0.036958516}
-  m_Center: {x: 0.000000011175871, y: 0.030000526, z: -0.000000028871}
 --- !u!65 &-8775939492334574008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -201,3 +181,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
+  requiredHomeLevel: 1
+  lockedMessage: The house level is low.
+--- !u!114 &5413061120014121207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677062313052679358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63702ebb2ef0e0743b20b0db7adb28fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupportPhysicsEnabler
+  supportMask:
+    serializedVersion: 2
+    m_Bits: 128
+  unsupportedTimeToEnable: 0.2
+  wallCheckDistance: 0.03
+  sideCheckDistance: 0
+  checkRadius: 0.135
+--- !u!54 &6225312399415530675
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677062313052679358}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

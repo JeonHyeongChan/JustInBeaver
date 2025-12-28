@@ -135,6 +135,8 @@ public class Inventory_Grid : MonoBehaviour
         slot.TryConsume(1);
         UpdatePlayerWeight();
 
+        SoundManager.Instance?.PlaySFX(SFXType.ItemTrash); // 사운드
+
         if (string.IsNullOrEmpty(itemId))
         {
             return;
