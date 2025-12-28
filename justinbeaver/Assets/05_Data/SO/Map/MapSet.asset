@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MapSet
   m_EditorClassIdentifier: Assembly-CSharp::MapSet
   mapPrefabs:
-  - {fileID: 1667596850639028401, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
-  - {fileID: 3332836065339064735, guid: b081b316b5aa9084c9b1029b9336ba36, type: 3}
-  - {fileID: 936682777113103606, guid: a01974f8ed8ff614ca2b7ce5b80c15af, type: 3}
+  - {fileID: 4240219129585312377, guid: cb2010506a4e8894b972fc8ccec99372, type: 3}
+  - {fileID: 9024206384922421449, guid: b081b316b5aa9084c9b1029b9336ba36, type: 3}
+  - {fileID: 8089714206575845457, guid: a01974f8ed8ff614ca2b7ce5b80c15af, type: 3}
