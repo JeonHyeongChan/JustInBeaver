@@ -213,6 +213,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectSpawner_3
       objectReference: {fileID: 0}
+    - target: {fileID: 7986569817881511031, guid: fc75cb2cb70bc1848a1ecc881d08cce1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.634
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986569817881511031, guid: fc75cb2cb70bc1848a1ecc881d08cce1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986569817881511031, guid: fc75cb2cb70bc1848a1ecc881d08cce1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.554
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

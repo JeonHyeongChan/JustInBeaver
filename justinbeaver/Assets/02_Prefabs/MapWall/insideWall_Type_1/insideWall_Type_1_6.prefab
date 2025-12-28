@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250c209afd3ff64eae2bb727808dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
-  gatherDuration: 2
+  gatherDuration: 15
   requiredHomeLevel: 1
   lockedMessage: The house level is low.
 --- !u!114 &1026345889392217606
@@ -193,6 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e50030b9a734e04090dc943277ad090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
-  dropItem: {fileID: 0}
-  minCount: 1
-  maxCount: 1
+  dropItem: {fileID: 11400000, guid: f6fee1e6abdd3ec43b066ada30d3785e, type: 2}
+  minCount: 3
+  maxCount: 3
