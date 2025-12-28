@@ -20,6 +20,6 @@ MonoBehaviour:
   description: Home Level 4
   type: 2
   stackable: 1
-  maxStack: 99
+  maxStack: 1
   itemWeight: 1
   spawnSFX: 7

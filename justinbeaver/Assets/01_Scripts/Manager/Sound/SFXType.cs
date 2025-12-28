@@ -28,13 +28,15 @@
 
     //인간
     HumanChase, // 완료
-    HumanWalk,
-    HumanAttack,
-    HumanTargetFound,
+    HumanWalk, // 완료
+    HumanTargetFound, // 완료
+    HumanAttackUgh, // 완료
+    HumanAttackYah, // 완료
+    HumanAttackYiya, // 완료
 
     //아이템
-    ItemCollect,
-    ItemTrash,
+    ItemCollect, // 완료
+    ItemTrash, // 완료
 
     //업그레이드
     HouseUpgrade,

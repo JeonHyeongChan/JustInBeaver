@@ -276,4 +276,10 @@ public class EnemyStatePattern : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         animator.SetBool("isSleeping", true);
     }
+
+    //발소리
+    public bool IsInChaseOrAlert()
+    {
+        return currentState is IdleState || currentState is AlertState;
+    }
 }
