@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 2719394187529248975}
   - component: {fileID: 8408863397976758664}
   - component: {fileID: -5347633137856193233}
-  - component: {fileID: -3521306040247114449}
   - component: {fileID: -2136984129312791685}
   - component: {fileID: 6649829705341249339}
   - component: {fileID: 7394587416468931289}
   - component: {fileID: 4643764101177651549}
+  - component: {fileID: -3381325875206425557}
   m_Layer: 8
   m_Name: 32_Trophy_Fox
   m_TagString: Untagged
@@ -140,27 +140,6 @@ MonoBehaviour:
   gatherDuration: 4
   requiredHomeLevel: 1
   lockedMessage: The house level is low.
---- !u!65 &-3521306040247114449
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2908350083912656577}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.47, y: 0.45591313, z: 0.48}
-  m_Center: {x: -0.0000012591481, y: -0.019711673, z: 0.16710594}
 --- !u!65 &-2136984129312791685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,3 +223,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &-3381325875206425557
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908350083912656577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -857943151657375486, guid: 7780b19123787594cb2f830beac5296a, type: 3}

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5012458991930737499}
   - component: {fileID: 5002424193957241360}
   - component: {fileID: 5180065792658977198}
+  - component: {fileID: 761111394564646745}
   m_Layer: 8
   m_Name: 36_AirCondition
   m_TagString: Untagged
@@ -114,7 +115,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9784f0995ad584b45ae01701c3876039, type: 3}
 --- !u!65 &-2343454541948635613
@@ -197,3 +198,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.004}
   m_TimeToStationary: 0.5
+--- !u!114 &761111394564646745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480417088907700199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63702ebb2ef0e0743b20b0db7adb28fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupportPhysicsEnabler
+  supportMask:
+    serializedVersion: 2
+    m_Bits: 128
+  unsupportedTimeToEnable: 0.2
+  wallCheckDistance: 0.03
+  sideCheckDistance: 0.03
+  checkRadius: 0.135
