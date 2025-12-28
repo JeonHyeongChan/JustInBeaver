@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 5888806187813447208}
   - component: {fileID: 4893517623359243147}
   - component: {fileID: 7070743516725487310}
-  - component: {fileID: 1554835410508371699}
   - component: {fileID: 2719394187529248975}
   - component: {fileID: 8408863397976758664}
   - component: {fileID: -5347633137856193233}
-  - component: {fileID: -3521306040247114449}
   - component: {fileID: -2136984129312791685}
   - component: {fileID: 6649829705341249339}
+  - component: {fileID: 7394587416468931289}
+  - component: {fileID: 4643764101177651549}
+  - component: {fileID: -3381325875206425557}
   m_Layer: 8
   m_Name: 32_Trophy_Fox
   m_TagString: Untagged
@@ -96,28 +97,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1554835410508371699
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2908350083912656577}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -857943151657375486, guid: 7780b19123787594cb2f830beac5296a, type: 3}
 --- !u!114 &2719394187529248975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,27 +140,6 @@ MonoBehaviour:
   gatherDuration: 4
   requiredHomeLevel: 1
   lockedMessage: The house level is low.
---- !u!65 &-3521306040247114449
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2908350083912656577}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.47, y: 0.45591313, z: 0.48}
-  m_Center: {x: -0.0000012591481, y: -0.019711673, z: 0.16710594}
 --- !u!65 &-2136984129312791685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -219,3 +177,71 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -0.020000001, z: 0.16700001}
   m_TimeToStationary: 0.5
+--- !u!114 &7394587416468931289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908350083912656577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63702ebb2ef0e0743b20b0db7adb28fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupportPhysicsEnabler
+  supportMask:
+    serializedVersion: 2
+    m_Bits: 128
+  unsupportedTimeToEnable: 0.2
+  wallCheckDistance: 0.03
+  sideCheckDistance: 0
+  checkRadius: 0.135
+--- !u!54 &4643764101177651549
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908350083912656577}
+  serializedVersion: 5
+  m_Mass: 15
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &-3381325875206425557
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908350083912656577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -857943151657375486, guid: 7780b19123787594cb2f830beac5296a, type: 3}
