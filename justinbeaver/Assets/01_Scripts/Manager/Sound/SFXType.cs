@@ -43,7 +43,7 @@
     StatUpgrade, // 완료
     
     //리셋
-    Reset
+    Reset // 완료
 
     //알림음 (튜토용)
     //내용
