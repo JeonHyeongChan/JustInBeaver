@@ -994,6 +994,7 @@ GameObject:
   - component: {fileID: 6437610915515269419}
   - component: {fileID: 4359417911467395434}
   - component: {fileID: 8476783324362432602}
+  - component: {fileID: 1898579881381135930}
   - component: {fileID: -3660146103931347697}
   - component: {fileID: 7089783657379442201}
   m_Layer: 0
@@ -1542,6 +1543,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpeedBuff
   hitSpeedMulitiplier: 1.5
   hitSpeedDuration: 3
+--- !u!114 &1898579881381135930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c418338298e5f94aaf21fa133d9d667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitBlinker
+  blinkInterval: 0.08
+  lowAlpha: 0.25
+  normalAlpha: 1
+  includeInactive: 1
 --- !u!54 &-3660146103931347697
 Rigidbody:
   m_ObjectHideFlags: 0

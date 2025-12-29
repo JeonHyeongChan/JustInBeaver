@@ -29,6 +29,13 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
             playerContext.playerRigid.angularVelocity = Vector3.zero;
         }
 
+        //피격 점멸 시작
+        var blinker = playerContext.GetComponent<HitBlinker>();
+        if (blinker != null)
+        {
+            blinker.StartBlink(hitDuration);
+        }
+
         // 피격 시 3초 이동속도 버프
         var buff = playerContext.GetComponent<PlayerSpeedBuff>();
         if (buff != null)
@@ -60,7 +67,6 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
             vel.y = MaxUpSpeedDuringHit;
             rigid.linearVelocity = vel;
         }
-        Debug.Log($"[HIT FixedUpdate] t={Time.time:F3} vel={playerContext.playerRigid.linearVelocity}");
     }
 
 
@@ -83,5 +89,13 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
     }
 
     
-    public void Exit() { }
+    public void Exit()
+    {
+        //피격 점멸 종료   
+        var blinker = playerContext.GetComponent<HitBlinker>();
+        if (blinker != null)
+        {
+            blinker.StopBlink();
+        }
+    }
 }
