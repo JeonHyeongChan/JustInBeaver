@@ -139,4 +139,39 @@ public class StorageManager : MonoBehaviour
 
         OnStorageChanged?.Invoke();
     }
+
+    public List<StoredItem> ExportSaveData()
+    {
+        var list = new List<StoredItem>();
+
+        foreach (var temp in storageItems)
+        {
+            list.Add(new StoredItem
+            {
+                itemId = temp.Key.itemId,
+                count = temp.Value
+            });
+        }
+
+        return list;
+    }
+
+    public void ImportSaveData(List<StoredItem> items)
+    {
+        storageItems.Clear();
+
+        if (items == null)
+            return;
+
+        foreach (var item in items)
+        {
+            var data = Resolve(item.itemId);
+            if (data == null)
+                continue;
+
+            storageItems[data] = item.count;
+        }
+
+        OnStorageChanged?.Invoke();
+    }
 }

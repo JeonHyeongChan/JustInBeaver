@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool IsContinue { get; private set; }
+
     public int SelectedMapIndex { get; private set; } = -1;
 
     private void Awake()
@@ -82,7 +84,15 @@ public class GameManager : MonoBehaviour
         //게임 초기화
         if (scene.name == "BeaverHouseScene")
         {
-            InitializeGame();
+            if (IsContinue)
+            {
+                StartCoroutine(ApplyContinueDataWhenReady()); // 세이브체크
+                IsContinue = false;
+            }
+            else
+            {
+                InitializeGame(); // 새게임 및 리스폰
+            }
         }
 
         //스폰 위치로 비버 이동
@@ -192,5 +202,39 @@ public class GameManager : MonoBehaviour
         Beaver.Instance.transform.rotation = spawnPoint.transform.rotation;
 
         Debug.Log($"{spawnPoint.gameObject.scene.name}");
+    }
+
+    /// <summary>
+    /// 이어하기 적용
+    /// </summary>
+    private IEnumerator ApplyContinueDataWhenReady()
+    {
+        if (!SaveManager.HasSave())
+            yield break;
+
+        while (ItemManager.Instance == null || StorageManager.Instance == null)
+            yield return null;
+
+        var data = SaveManager.Load();
+        if (data == null)
+            yield break;
+
+        Debug.Log("[Continue] Apply Save Data (Delayed)");
+
+        HomeManager.Instance.SetLevel(data.houseLevel);
+        RuleManager.Instance.SetFailCount(data.failCountAtcurrentLevel);
+        StorageManager.Instance.ImportSaveData(data.storedItems);
+
+        yield return null; // UI 바인딩 프레임 보장
+
+        //InitializeGame();
+
+        //var bar = FindAnyObjectByType<UI_StorageBar>(FindObjectsInactive.Include);
+        //bar?.Refresh(); // UI 강제보정
+    }
+
+    public void SetContinue()
+    {
+        IsContinue = true;
     }
 }

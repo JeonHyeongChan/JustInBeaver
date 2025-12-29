@@ -131,4 +131,9 @@ public class RuleManager : MonoBehaviour
     {
         escapeFailCount = 0; // 홈매니저가 쓸 실패 카운터 리셋
     }
+
+    public void SetFailCount(int count)
+    {
+        escapeFailCount = Mathf.Max(0, count);
+    }
 }

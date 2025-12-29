@@ -124,7 +124,13 @@ public class HomeManager : MonoBehaviour
     private void ApplyFarmingItems(int level)
     {
         //ObjectManager
-    }    
+    }
+
+    public void SetLevel(int level)
+    {
+        currentLevel = Mathf.Clamp(level, 1, MaxLevel);
+        ApplyHouseLevel(currentLevel);
+    }
 
     private void CheckEndingNPC(int level)
     {

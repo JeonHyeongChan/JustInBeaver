@@ -1278,6 +1278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_TitleInput
   newGameButton: {fileID: 593046803}
+  continueButton: {fileID: 162814229}
   exitGameButton: {fileID: 927185020}
 --- !u!1 &1731575007
 GameObject:
