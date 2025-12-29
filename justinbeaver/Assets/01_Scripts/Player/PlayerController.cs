@@ -449,6 +449,7 @@ public class PlayerController : MonoBehaviour
             
         if (inputLocked)
         {
+            Debug.LogWarning("들어오면 안됨");
             return;
         }
 

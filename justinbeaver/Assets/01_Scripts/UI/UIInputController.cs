@@ -18,12 +18,6 @@ public class UIInputController : MonoBehaviour
             return;
         }
 
-        if (seletedObject.name == null)
-        {
-            seletedObject.GetComponent<Button>().onClick.Invoke();
-            Debug.Log("창 닫기");
-        }
-
         //실패 UI
         if (UIManager.Instance != null &&
             UIManager.Instance.gameFailUI != null &&
@@ -58,6 +52,7 @@ public class UIInputController : MonoBehaviour
         if (button != null && button.interactable)
         {
             button.onClick.Invoke();
+            selected = null;
         }
 
         // if (!IsAnyUIOpen())

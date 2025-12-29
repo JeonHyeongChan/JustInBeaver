@@ -474,12 +474,11 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        var button = upgradeUI.GetComponentInChildren<Button>();
+        var button = shopUI.GetComponentInChildren<Button>();
         if (button != null)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(button.gameObject);
-            Debug.Log($"{button.gameObject.name}");
         }
     }
 
@@ -513,6 +512,7 @@ public class UIManager : MonoBehaviour
             shopUI.SetActive(false);
 
         var player = FindAnyObjectByType<PlayerController>();
+        Debug.LogWarning(player == null);
         player?.SetInputLocked(false);
 
         if (EventSystem.current != null)
