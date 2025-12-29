@@ -338,6 +338,11 @@ public class UIManager : MonoBehaviour
 
     public void MoveInventoryCursor(Vector2 dir)
     {
+        if (inventoryUI == null || !inventoryUI.activeSelf)
+        {
+            return;
+        }
+            
         var grid = inventoryUI.GetComponentInChildren<Inventory_Grid>(true);
         if (grid == null)
         {

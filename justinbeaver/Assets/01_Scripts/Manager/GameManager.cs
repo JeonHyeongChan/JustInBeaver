@@ -117,9 +117,12 @@ public class GameManager : MonoBehaviour
         animator.ResetTrigger("Die");
 
         context.playerController.enabled = true;                                // 컨트롤러 활성화
-        context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
 
-        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제        
+        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제
+        controller.SetInventoryLocked(false);                                   // 인벤토리 잠금 해제
+        controller.SetInventoryOpen(false);                                     // 인벤토리 오픈 해제
+
+        context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
     }
 
     /// <summary>
