@@ -252,6 +252,7 @@ public class UIManager : MonoBehaviour
         RefreshWeightGauge(); // 씬 로드 직후 한번 반영
     }
 
+
     private void BindShopUI()
     {
         shopUI = null;
@@ -264,6 +265,7 @@ public class UIManager : MonoBehaviour
         shopUI = marker.gameObject;
         shopUI.SetActive(false);
     }
+
 
     private void BindUpgradeUI()
     {

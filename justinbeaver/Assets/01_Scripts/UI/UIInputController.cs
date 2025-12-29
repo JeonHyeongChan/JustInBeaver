@@ -144,7 +144,4 @@ public class UIInputController : MonoBehaviour
             return;
         }
     }
-
-
-
 }
