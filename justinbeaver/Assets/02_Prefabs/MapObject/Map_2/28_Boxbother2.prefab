@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8609152963761139487}
   - component: {fileID: 3048365984958015847}
   - component: {fileID: 7446157091654830222}
+  - component: {fileID: 2349265792370115823}
   - component: {fileID: 6498747406131810405}
   - component: {fileID: -373854681480097211}
   m_Layer: 8
@@ -159,6 +160,33 @@ MonoBehaviour:
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 0
   maxCount: 1
+--- !u!54 &2349265792370115823
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471535666458787515}
+  serializedVersion: 5
+  m_Mass: 9
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!65 &6498747406131810405
 BoxCollider:
   m_ObjectHideFlags: 0

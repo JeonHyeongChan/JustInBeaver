@@ -5,32 +5,25 @@ using UnityEngine.UI;
 
 public class UIInputController : MonoBehaviour
 {
-    [Header("Submit Debounce")]
-    [SerializeField] private float submitCooldown = 0.2f;
-    private float nextSubmitTime;
 
     GameObject seletedObject;
-
-    [Header("Navigate")]
-    [SerializeField] private float axisThreshold = 0.5f;
-    [SerializeField] private float repeatDelay = 0.18f;
-    private float nextRepeatTime;
 
     public void OnSubmit(InputAction.CallbackContext ctx)
     {
         seletedObject = EventSystem.current.currentSelectedGameObject;
        
+
         if (!ctx.performed)
         {
             return;
         }
 
-        //같은 입력 연타/홀드로 인한 2번 클릭 방지
-        if (Time.unscaledTime < nextSubmitTime)
+        if (seletedObject.name == null)
         {
-            return;
-        }    
-            
+            seletedObject.GetComponent<Button>().onClick.Invoke();
+            Debug.Log("창 닫기");
+        }
+
         //실패 UI
         if (UIManager.Instance != null &&
             UIManager.Instance.gameFailUI != null &&
@@ -65,7 +58,6 @@ public class UIInputController : MonoBehaviour
         if (button != null && button.interactable)
         {
             button.onClick.Invoke();
-            return;
         }
 
         // if (!IsAnyUIOpen())
@@ -129,84 +121,27 @@ public class UIInputController : MonoBehaviour
     //}
 
 
-    public void OnBack(InputAction.CallbackContext ctx)
+    public void OnPause(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed)
         {
             return;
-        }    
-            
-        //C키, 뒤로가기
+        }
+        UIManager.Instance?.TogglePauseUI();
+    }
+
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+
         if (UIManager.Instance != null && UIManager.Instance.IsPauseOpen)
         {
             UIManager.Instance.HandlePauseBack();
             return;
-        }
-    }
-
-
-    public void OnNavigate(InputAction.CallbackContext ctx)
-    {
-        if (!(ctx.started || ctx.performed))
-        {
-            return;
-        }    
-            
-        if (Time.unscaledTime < nextRepeatTime)
-        {
-            return;
-        }    
-            
-        if (UIManager.Instance == null)
-        {
-            return;
-        }    
-            
-        //도움말 패널이 열려있을 때만 페이지 이동
-        var help = UIManager.Instance.GetHelpPanel();
-        if (help == null || !help.gameObject.activeInHierarchy)
-        {
-            return;
-        }    
-            
-        Vector2 v = ctx.ReadValue<Vector2>();
-
-        //좌, 우만
-        if (v.x > axisThreshold)
-        {
-            help.Next();
-            nextRepeatTime = Time.unscaledTime + repeatDelay;
-        }
-        else if (v.x < -axisThreshold)
-        {
-            help.Prev();
-            nextRepeatTime = Time.unscaledTime + repeatDelay;
-        }
-    }
-
-    public void OnHelpPrev(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed)
-        {
-            return;
-        }
-        var help = UIManager.Instance?.GetHelpPanel();
-        if (help != null && help.gameObject.activeInHierarchy)
-        {
-            help.Prev();
-        }
-    }
-
-    public void OnHelpNext(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed)
-        {
-            return;
-        }
-        var help = UIManager.Instance?.GetHelpPanel();
-        if (help != null && help.gameObject.activeInHierarchy)
-        {
-            help.Next();
         }
     }
 }
