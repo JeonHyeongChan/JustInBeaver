@@ -1038,7 +1038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f70efb23173d8b4dbbe7651c94d570f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeaverFootstep
-  stepInterval: 0.2
+  minInterval: 0.15
+  maxInterval: 0.6
+  maxSpeedRef: 6
 --- !u!114 &6191272327527689645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,6 +1053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1520f971de4d5974baaff713bb4aab46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIInputController
+  submitCooldown: 0.2
+  axisThreshold: 0.5
+  repeatDelay: 0.18
 --- !u!114 &485944385309593485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,8 +1408,8 @@ MonoBehaviour:
     m_ActionName: 'UI/Back[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5328848833533839312, guid: 57888d1aa92f82746954c93775089fb4, type: 3}
-        m_TargetAssemblyTypeName: UIInputController, Assembly-CSharp
+      - m_Target: {fileID: 2026462963143823724}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnPause
         m_Mode: 0
         m_Arguments:

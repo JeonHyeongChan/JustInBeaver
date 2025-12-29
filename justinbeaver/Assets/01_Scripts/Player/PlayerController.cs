@@ -559,6 +559,14 @@ public class PlayerController : MonoBehaviour
         SetInputLocked(false);
     }
 
+    //일시정지 키
+    public void OnPause(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        UIManager.Instance?.TogglePauseUI();
+    }
+
+
     public void SetInventoryOpen(bool open)
     {
         isInventoryOpen = open;
