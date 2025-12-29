@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3096542031405039239}
-  - component: {fileID: 4489606186545656137}
+  - component: {fileID: 3030376550739762347}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: foot
@@ -134,8 +134,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5007452303679095742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4489606186545656137
-BoxCollider:
+--- !u!135 &3030376550739762347
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -153,7 +153,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &665754975284950898
 GameObject:
@@ -1038,7 +1038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f70efb23173d8b4dbbe7651c94d570f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeaverFootstep
-  stepInterval: 0.2
+  minInterval: 0.15
+  maxInterval: 0.6
+  maxSpeedRef: 6
 --- !u!114 &6191272327527689645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,7 +1461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovemant
   moveSpeed: 5
-  jumpForce: 5
+  jumpForce: 4.5
   groundCheckDistance: 0.01
   groundOffset: 0.01
   rollSpeed: 0.05
@@ -1583,8 +1585,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.38, z: 1.03}
-  m_Center: {x: 0, y: 0.44, z: 0}
+  m_Size: {x: 0.5, y: 0.38, z: 1.15}
+  m_Center: {x: 0, y: 0.47, z: 0.01}
 --- !u!1 &8943125863728703080
 GameObject:
   m_ObjectHideFlags: 0
