@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 768534456}
   - component: {fileID: 768534457}
+  - component: {fileID: 768534458}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -222,14 +223,28 @@ MonoBehaviour:
   interactHint: {fileID: 0}
   itemTooltip: {fileID: 0}
   playerHeart: {fileID: 0}
+  weightGauge: {fileID: 0}
+  helpPanel: {fileID: 0}
   gameFailUI: {fileID: 0}
   gameSuccessUI: {fileID: 0}
   shopUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   victoryUI: {fileID: 0}
-  weightGauge: {fileID: 0}
   hud: {fileID: 0}
+--- !u!114 &768534458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768534455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a3699c03314674aaff304b2f274540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseInput
+  pauseAction: {fileID: 5392408960784523579, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &955234486
 GameObject:
   m_ObjectHideFlags: 0
