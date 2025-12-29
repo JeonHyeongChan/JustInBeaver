@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,14 +16,11 @@ public class UIManager : MonoBehaviour
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
     public GameObject pauseUI;
-    
 
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
     public UI_ItemTooltip itemTooltip;
     public UI_PlayerHearts playerHeart;
-    public UI_WeightGauge weightGauge;
-    public UI_HelpPanel helpPanel;
 
     private PlayerHealth playerHealth;      //구독 해제용
     private PlayerStatsManager boundStats;
@@ -41,16 +36,14 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    
+    public UI_WeightGauge weightGauge;
+
     private const string homeScene = "BeaverHouseScene";
 
     public UI_GatherGauge GatherGauge => gatherGauge;
-
-    public UI_HelpPanel GetHelpPanel() => helpPanel;
-
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
     public bool IsPauseOpen => pauseUI != null && pauseUI.activeSelf;
-    
+
 
     private void Awake()
     {
@@ -104,10 +97,11 @@ public class UIManager : MonoBehaviour
         SetInventoryOpen(false);
         HideItemTooltip();
         HideAllUI();
-        ForceCloseUIState();
 
+        //거점 씬 들어오면 무게 초기화
         if (scene.name == homeScene)
         {
+            //무게 0으로 초기화
             PlayerStatsManager.Instance?.ResetWeightToZero();
             RefreshWeightGauge();
         }
@@ -130,7 +124,6 @@ public class UIManager : MonoBehaviour
         BindShopUI();
         BindUpgradeUI();
         BindPauseUI();
-        BindHelpUI();
     }
 
     private void BindGatherGauge()
@@ -303,15 +296,6 @@ public class UIManager : MonoBehaviour
     }
 
 
-    private void BindHelpUI()
-    {
-        helpPanel = FindAnyObjectByType<UI_HelpPanel>(FindObjectsInactive.Include);
-        if (helpPanel != null)
-        {
-            helpPanel.gameObject.SetActive(false);
-        }
-    }
-
 
     public void ToggleInventory()
     {
@@ -482,18 +466,27 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ShowShopUI()
     {
-        if (shopUI == null)
+        if(shopUI == null)
         {
             return;
-        }            
+        }
         shopUI.SetActive(true);
-
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
-        FocusFirstSelectable(shopUI);
-    }
+        if (EventSystem.current == null)
+        {
+            return;
+        }
 
+        var button = upgradeUI.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+            Debug.Log($"{button.gameObject.name}");
+        }
+    }
 
     /// <summary>
     /// 스텟 업그레이드 UI
@@ -579,37 +572,37 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ShowPauseUI()
     {
-        if (pauseUI == null) return;
-
+        if (pauseUI == null)
+        {
+            return;
+        }    
         pauseUI.SetActive(true);
-        StopPlayerMotion();
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
         Time.timeScale = 0f;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        FocusFirstSelectable(pauseUI);
     }
-
 
 
     public void HidePauseUI()
     {
-        if (pauseUI == null) return;
-
+        if (pauseUI == null)
+        {
+            return;
+        }
         pauseUI.SetActive(false);
-        Time.timeScale = 1f;
 
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(false);
 
         if (EventSystem.current != null)
+        {
             EventSystem.current.SetSelectedGameObject(null);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        }
+        Time.timeScale = 1f;
     }
-    
+
 
     public void TogglePauseUI()
     {
@@ -651,7 +644,6 @@ public class UIManager : MonoBehaviour
         if (upgradeUI) upgradeUI.SetActive(false);
         if (gameOverUI) gameOverUI.SetActive(false);
         if (victoryUI) victoryUI.SetActive(false);
-        if (pauseUI) pauseUI.SetActive(false);
     }
 
     public Dictionary<string, int> CollectInventoryItems()  //(스토리지 매니저 연동) 인벤 아이템id들을 반환 id => 개수
@@ -802,74 +794,5 @@ public class UIManager : MonoBehaviour
         {
             HidePauseUI();
         }
-    }
-
-    private void StopPlayerMotion()
-    {
-        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
-        if (player == null)
-        {
-            return;
-        }
-        player.SetInputLocked(true);
-        var rb = player.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-    }
-
-
-    //첫번째 버튼 찾기
-    private void FocusFirstSelectable(GameObject root)
-    {
-        if (root == null || EventSystem.current == null)
-        {
-            return;
-        }
-
-        var buttons = root.GetComponentsInChildren<Button>(true);
-        Button targetBtn = null;
-        foreach (var button in buttons)
-        {
-            if (button != null && button.gameObject.activeInHierarchy && button.interactable)
-            {
-                targetBtn = button;
-                break;
-            }
-        }
-
-        Selectable target = targetBtn != null
-            ? targetBtn
-            : root.GetComponentInChildren<Selectable>(true);
-
-        if (target == null)
-        {
-            return;
-        }
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(target.gameObject);
-    }
-
-
-    private void ForceCloseUIState()
-    {
-        // 시간 정상화 (Pause가 켜져있던 상태를 강제로 해제)
-        Time.timeScale = 1f;
-
-        // Pause 패널 강제 OFF
-        if (pauseUI != null) pauseUI.SetActive(false);
-
-        if (shopUI != null) shopUI.SetActive(false);
-        if (upgradeUI != null) upgradeUI.SetActive(false);
-
-        // 플레이어 입력 잠금 해제 + 입력맵 Player로 복귀(네가 맵 스위칭 쓰는 경우)
-        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
-        player?.SetInputLocked(false);
-
-        // UI 선택 초기화
-        if (EventSystem.current != null)
-            EventSystem.current.SetSelectedGameObject(null);
     }
 }
