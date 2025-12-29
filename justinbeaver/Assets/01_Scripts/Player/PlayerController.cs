@@ -522,22 +522,22 @@ public class PlayerController : MonoBehaviour
         if (!isInventoryOpen)
         {
             return;
-        }
-
-        if (!ctx.performed)
+        }    
+           
+        if (!ctx.started)
         {
             return;
-        }
-        
+        }    
+           
         Vector2 v = ctx.ReadValue<Vector2>();
         int x = v.x > 0.5f ? 1 : (v.x < -0.5f ? -1 : 0);
         int y = v.y > 0.5f ? 1 : (v.y < -0.5f ? -1 : 0);
-        
+
         if (x == 0 && y == 0)
         {
             return;
-        }
-
+        }    
+            
         UIManager.Instance?.MoveInventoryCursor(new Vector2(x, y));
     }
 
