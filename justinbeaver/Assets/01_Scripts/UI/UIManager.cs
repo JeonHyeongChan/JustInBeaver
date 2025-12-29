@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 
@@ -16,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
+    public GameObject pauseUI;
 
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     public UI_GatherGauge GatherGauge => gatherGauge;
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
-
+    public bool IsPauseOpen => pauseUI != null && pauseUI.activeSelf;
 
 
     private void Awake()
@@ -105,7 +105,6 @@ public class UIManager : MonoBehaviour
             PlayerStatsManager.Instance?.ResetWeightToZero();
             RefreshWeightGauge();
         }
-
     }
 
     /// <summary>
@@ -124,6 +123,7 @@ public class UIManager : MonoBehaviour
         BindGameSuccessUI();
         BindShopUI();
         BindUpgradeUI();
+        BindPauseUI();
     }
 
     private void BindGatherGauge()
@@ -252,6 +252,7 @@ public class UIManager : MonoBehaviour
         RefreshWeightGauge(); // 씬 로드 직후 한번 반영
     }
 
+
     private void BindShopUI()
     {
         shopUI = null;
@@ -265,6 +266,7 @@ public class UIManager : MonoBehaviour
         shopUI.SetActive(false);
     }
 
+
     private void BindUpgradeUI()
     {
         upgradeUI = null;
@@ -277,6 +279,23 @@ public class UIManager : MonoBehaviour
         upgradeUI = maker.gameObject;
         upgradeUI.SetActive(false);
     }
+
+
+    private void BindPauseUI()
+    {
+        pauseUI = null;
+        var marker = FindAnyObjectByType<PauseUIMarker>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            pauseUI = null;
+            return;
+        }
+
+        pauseUI = marker.gameObject;
+        pauseUI.SetActive(false);
+    }
+
+
 
     public void ToggleInventory()
     {
@@ -437,23 +456,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 상점UI
+    /// </summary>
     public void ShowShopUI()
     {
-        if (shopUI != null )
+        if(shopUI == null)
         {
-            shopUI.SetActive(true);
+            return;
         }
+        shopUI.SetActive(true);
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
-        var button = shopUI.GetComponentInChildren<Button>();
+        if (EventSystem.current == null)
+        {
+            return;
+        }
+
+        var button = upgradeUI.GetComponentInChildren<Button>();
         if (button != null)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(button.gameObject);
+            Debug.Log($"{button.gameObject.name}");
         }
     }
 
+    /// <summary>
+    /// 스텟 업그레이드 UI
+    /// </summary>
     public void ShowUpgradeUI()
     {
       
@@ -474,6 +506,7 @@ public class UIManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
     }
+
     public void HideShopUI()
     {
         if (shopUI != null)
@@ -529,6 +562,59 @@ public class UIManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 일시정지 UI
+    /// </summary>
+    public void ShowPauseUI()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }    
+        pauseUI.SetActive(true);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
+
+        Time.timeScale = 0f;
+    }
+
+
+    public void HidePauseUI()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+        pauseUI.SetActive(false);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        Time.timeScale = 1f;
+    }
+
+
+    public void TogglePauseUI()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+        if (pauseUI.activeSelf)
+        {
+            HidePauseUI();
+        }
+        else
+        {
+            ShowPauseUI();
+        }
+    }
+
 
     public UI_HUD hud;
     public void ShowEscapeResultUI(int reward, bool success)
@@ -550,7 +636,6 @@ public class UIManager : MonoBehaviour
         if (inventoryUI) inventoryUI.SetActive(false);
         if (gatherGaugeUI) gatherGaugeUI.SetActive(false);
         if (escapeResultUI) escapeResultUI.SetActive(false);
-        if (shopUI) shopUI.SetActive(false);
         if (upgradeUI) upgradeUI.SetActive(false);
         if (gameOverUI) gameOverUI.SetActive(false);
         if (victoryUI) victoryUI.SetActive(false);
@@ -680,5 +765,29 @@ public class UIManager : MonoBehaviour
         }
         //즉시 1회 반영
         RefreshWeightGauge();
+    }
+
+    public void HandlePauseBack()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+
+        var pause = pauseUI.GetComponent<UI_Pause>();
+        if (pause == null)
+        {
+            return;
+        }
+
+        //UI_Pause 내부에서 현재 패널 상태 판단
+        if (pause.IsInSubPanel)
+        {
+            pause.OnClickBack();
+        }
+        else
+        {
+            HidePauseUI();
+        }
     }
 }

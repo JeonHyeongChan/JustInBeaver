@@ -217,6 +217,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   gatherGaugeUI: {fileID: 0}
   escapeResultUI: {fileID: 0}
+  pauseUI: {fileID: 0}
   gatherGauge: {fileID: 0}
   interactHint: {fileID: 0}
   itemTooltip: {fileID: 0}
