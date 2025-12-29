@@ -182,24 +182,25 @@ public class Inventory_Grid : MonoBehaviour
                 if (slot == null)
                 {
                     continue;
-                }    
-                    
+                }
+
                 if (slot.HasItem() && slot.GetItemId() == itemId && slot.GetCount() < maxStack)
                 {
                     int before = slot.GetCount();
                     slot.TryAddToStack(itemId, addCount, maxStack);
-                    
+
                     int used = slot.GetCount() - before;
                     addCount -= used;
-                    
+
                     if (addCount <= 0)
                     {
-                        UpdatePlayerWeight();
                         return true;
                     }
                 }
             }
         }
+
+        
 
         //남은 수량을 빈 슬롯에 분배
         for (int i = 0; i < slots.Length; i++)
