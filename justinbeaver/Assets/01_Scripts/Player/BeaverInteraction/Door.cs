@@ -19,10 +19,15 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
+        player.SetInputLocked(false);
+        UIManager.Instance?.HideGahterGauge();
+        UIManager.Instance?.GatherGauge?.SetValue(0f);
+
+
         //탈출구
         if (sceneName == escapeSceneName)
         {
-            FindAnyObjectByType<StorageTransfer>(FindObjectsInactive.Include)   //인벤토리속 내용물 창고로 옮ㅂ기ㅣ
+            FindAnyObjectByType<StorageTransfer>(FindObjectsInactive.Include)   //인벤토리속 내용물 창고로 옮기기ㅣ
           ?.TransferInventoryStorage();
      
             RuleManager.Instance?.OnEscapeSuccess();

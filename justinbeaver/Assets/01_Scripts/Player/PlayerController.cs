@@ -442,20 +442,32 @@ public class PlayerController : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        if (isInventoryOpen) //인벤토리 열려있으면 Z 상호작용 금지
+        //Z를 뗐을 때는 잠금 상태여도 무조건 취소 처리
+        if (ctx.canceled)
         {
+            CancelHold();
             return;
-        }    
-            
-        if (inputLocked)
+        }
+
+        //인벤토리 열려있으면 Z 상호작용 금지
+        if (isInventoryOpen) 
         {
             return;
         }
 
+        //홀드 진행 중이 아니라면 잠금 상태에서는 시작 금지
+        if (inputLocked && !isHoldingInteract)
+        {
+            return;
+        }
+            
+
         var detector = GetComponent<PlayerInteractDetector>();
         if (detector == null)
+        {
             return;
-
+        }
+            
         //홀드 시작
         if (ctx.started)
         {
