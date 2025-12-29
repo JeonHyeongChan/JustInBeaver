@@ -195,5 +195,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 0}
-  minCount: 1
+  minCount: 0
   maxCount: 1

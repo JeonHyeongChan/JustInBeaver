@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!208 &2431739719670452456
 NavMeshObstacle:
