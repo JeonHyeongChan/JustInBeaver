@@ -74,8 +74,8 @@ public class UI_Upgrade : MonoBehaviour
         if (stats == null)
         {
             SetText(gatherSpeedText, "Gather Speed: -");
-            SetText(strengthLevelText, "Strength Lv: -");
-            SetText(strengthCostText, " ");
+            SetText(strengthLevelText, "Strength Lv: 1");
+            SetText(strengthCostText, "Wood x3, Stone x2");
             if (strengthUpgradeButton) strengthUpgradeButton.interactable = false;
             return;
         }
