@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6307436748589977909}
   - component: {fileID: 3901362391679405840}
   - component: {fileID: 4465892375240897202}
-  - component: {fileID: -2976668780662089183}
+  - component: {fileID: 421656822408135581}
   - component: {fileID: -802928889504282687}
   - component: {fileID: 3798507593429097038}
   - component: {fileID: 5055632558232554970}
@@ -182,7 +182,7 @@ MonoBehaviour:
   gatherDuration: 10
   requiredHomeLevel: 1
   lockedMessage: The house level is low.
---- !u!114 &-2976668780662089183
+--- !u!114 &421656822408135581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
   minCount: 3
-  maxCount: 3
+  maxCount: 0
 --- !u!65 &-802928889504282687
 BoxCollider:
   m_ObjectHideFlags: 0

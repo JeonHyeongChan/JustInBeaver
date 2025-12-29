@@ -3,8 +3,8 @@
 public class DropTable : MonoBehaviour
 {
     public ItemData dropItem;
-    public int minCount = 1;
-    public int maxCount = 1;
+    public int minCount = 0;
+    public int maxCount = 0;
 
     public void Drop(Vector3 pos)
     {
@@ -13,16 +13,14 @@ public class DropTable : MonoBehaviour
             Debug.LogError($"[DropTable] dropItem Null {name}");
             return;
         }
-
-        int count = Random.Range(minCount, maxCount + 1);
-
+        int count = minCount+maxCount;
         for (int i = 0; i < count; i++)
         {
             ItemManager.Instance.SpawnPickupByItemId(
                 dropItem.itemId,
                 pos + Random.insideUnitSphere * 0.3f
             );
-            
+
             SoundManager.Instance?.PlaySFX(dropItem.spawnSFX); // 사운드
         }
     }
