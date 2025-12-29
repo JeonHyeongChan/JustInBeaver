@@ -67,6 +67,8 @@ public class UI_TitleInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            SoundManager.Instance?.PlaySFX(SFXType.ButtonClick); // 사운드
+
             if (currentIndex == 0)
                 OnNewGame();
             else if (currentIndex == 1)
