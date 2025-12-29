@@ -180,7 +180,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.43, y: 0.9, z: 2.99}
-  m_Center: {x: 0.00006404519, y: 0.39080134, z: 0.25987172}
+  m_Center: {x: 0.00006404519, y: -0.2, z: 0.25987172}
 --- !u!208 &-3072169662741812761
 NavMeshObstacle:
   m_ObjectHideFlags: 0
