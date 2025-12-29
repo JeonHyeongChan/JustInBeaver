@@ -41,6 +41,9 @@
     //업그레이드
     HouseUpgrade, // 완료
     StatUpgrade, // 완료
+    
+    //리셋
+    Reset
 
     //알림음 (튜토용)
     //내용

@@ -82,6 +82,9 @@ public class HomeManager : MonoBehaviour
         StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
         
         currentLevel = data.targetLevel;
+
+        SoundManager.Instance?.PlaySFX(SFXType.HouseUpgrade);
+
         ApplyHouseLevel(currentLevel);
 
         return true;
@@ -89,9 +92,7 @@ public class HomeManager : MonoBehaviour
 
     private void ApplyHouseLevel(int level)
     {
-        Debug.Log($"House Upgrade -> {level}");
-
-        SoundManager.Instance?.PlaySFX(SFXType.HouseUpgrade);
+        Debug.Log($"House Upgrade -> {level}");        
         
         ApplyFarmingItems(level);
 
@@ -107,6 +108,9 @@ public class HomeManager : MonoBehaviour
         Debug.Log($"House level Reset");
 
         currentLevel = 1;
+
+        SoundManager.Instance?.PlaySFX(SFXType.Reset);
+
         ApplyHouseLevel(currentLevel);
     }
     
