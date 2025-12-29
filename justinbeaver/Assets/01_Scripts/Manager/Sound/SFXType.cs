@@ -18,7 +18,7 @@
     DropMetal, // 완료
 
     //버튼
-    ButtonConfirm,
+    ButtonClick,
     ButtonBack,
     //ButtonMove,
 

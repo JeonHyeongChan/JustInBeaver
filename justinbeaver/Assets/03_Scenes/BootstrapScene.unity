@@ -674,6 +674,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3ba0a35fc81e85543a25b2d5e7e4c694, type: 3}
   - type: 23
     clip: {fileID: 8300000, guid: 05693211c3d65be46bbf8a91ed063344, type: 3}
+  - type: 9
+    clip: {fileID: 8300000, guid: f8acb56b33dfa1042966a847a554dd9a, type: 3}
   loopSFXSource: {fileID: 2111436110}
   humanFootstepSource: {fileID: 2111436111}
 --- !u!82 &2111436108
