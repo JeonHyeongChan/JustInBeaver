@@ -574,9 +574,64 @@ public class PlayerController : MonoBehaviour
     //일시정지 키
     public void OnPause(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) return;
-        UIManager.Instance?.TogglePauseUI();
+        if (!ctx.performed) 
+        {
+            return;
+        }
+
+        if (UIManager.Instance == null) 
+        {
+            return;
+        }
+
+        //인벤이 열려있을 때 ESC로 인벤 먼저 닫기
+        if (UIManager.Instance.IsInventoryOpen)
+        {
+            UIManager.Instance.SetInventoryOpen(false);
+            return;
+        }
+
+        UIManager.Instance.TogglePauseUI();
     }
+
+
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (UIManager.Instance == null)
+        {
+            return;
+        }    
+            
+        if (!ctx.started)
+        {
+            return;
+        }    
+            
+        //Pause 열려있을 때만 Help 페이지 넘김 처리
+        if (!UIManager.Instance.IsPauseOpen)
+        {
+            return;
+        }
+
+        var help = UIManager.Instance.GetHelpPanel();
+        if (help == null || !help.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        Vector2 vector = ctx.ReadValue<Vector2>();
+        if (vector.x > 0.5f)
+        {
+            help.Next();
+        }    
+            
+        else if (vector.x < -0.5f)
+        {
+            help.Prev();
+        }
+    }
+
+
 
 
     public void SetInventoryOpen(bool open)
