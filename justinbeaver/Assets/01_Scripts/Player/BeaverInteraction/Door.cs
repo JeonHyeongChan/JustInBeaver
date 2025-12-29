@@ -35,12 +35,14 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OnHoldUpdate(PlayerController player, float progress01)
     {
+        player.SetInputLocked(true);
         UIManager.Instance?.ShowGatherGauge();
         UIManager.Instance?.GatherGauge?.SetValue(progress01);
     }
 
     public void OnHoldCancel(PlayerController player)
     {
+        player.SetInputLocked(false);
         UIManager.Instance?.HideGahterGauge();
         UIManager.Instance?.GatherGauge?.SetValue(0f);
     }
