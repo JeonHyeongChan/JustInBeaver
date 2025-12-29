@@ -217,7 +217,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.61, y: 2.26, z: 0.89}
-  m_Center: {x: 0, y: 1.12, z: 0}
+  m_Center: {x: 0, y: 0.22, z: 0}
 --- !u!208 &3798507593429097038
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.61, y: 2.17, z: 0.55}
-  m_Center: {x: 0, y: 0.57, z: 0}
+  m_Center: {x: 0, y: 1.13, z: 0}
 --- !u!1 &2891507678743942013
 GameObject:
   m_ObjectHideFlags: 0
