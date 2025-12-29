@@ -39,8 +39,8 @@
     ItemTrash, // 완료
 
     //업그레이드
-    HouseUpgrade,
-    StatUpgrade,
+    HouseUpgrade, // 완료
+    StatUpgrade, // 완료
 
     //알림음 (튜토용)
     //내용

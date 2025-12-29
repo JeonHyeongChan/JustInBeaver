@@ -85,6 +85,7 @@ public class PlayerStatsManager : MonoBehaviour
         strength += data.addStrength;
         strengthLevel = Mathf.Max(strengthLevel, data.targetLevel);
 
+        SoundManager.Instance?.PlaySFX(SFXType.StatUpgrade); // 사운드
 
         //UI 갱신 이벤트
         OnStatsChanged?.Invoke();
