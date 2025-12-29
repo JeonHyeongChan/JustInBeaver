@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
     private static readonly int HashJump = Animator.StringToHash("Jump");
     private static readonly int HashRoll = Animator.StringToHash("Roll");
 
+    public bool IsGrounded => isGrounded;
+    public bool IsRolling => isRolling;
 
 
     private void Awake()
