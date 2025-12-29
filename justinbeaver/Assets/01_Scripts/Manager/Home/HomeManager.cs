@@ -90,6 +90,8 @@ public class HomeManager : MonoBehaviour
     private void ApplyHouseLevel(int level)
     {
         Debug.Log($"House Upgrade -> {level}");
+
+        SoundManager.Instance?.PlaySFX(SFXType.HouseUpgrade);
         
         ApplyFarmingItems(level);
 
