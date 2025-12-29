@@ -8,14 +8,13 @@ public class UI_Shop : MonoBehaviour
 
     private void Awake()
     {
-        upgradeButton.onClick.AddListener(OnClickUpgradeButton);
-        ExitButton.onClick.AddListener(OnClickExitButton);
+        
     }
 
     void Start()
     {
-  
-        
+        upgradeButton.onClick.AddListener(OnClickUpgradeButton);
+        ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
     private void OnEnable()
