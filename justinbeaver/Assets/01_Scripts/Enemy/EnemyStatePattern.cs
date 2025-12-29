@@ -125,11 +125,18 @@ public class EnemyStatePattern : MonoBehaviour
 
     private void HandleGatherStart(Vector3 anchorPos)
     {
-        Debug.Log("핸들개터스타트");
+        SetAlertTargetPos(anchorPos);
+
+        if (currentState is AlertState)
+        {
+            agent.enabled = true;
+            agent.isStopped = false;
+            agent.SetDestination(alertTargetPos);
+            return;
+        }
+
         if (currentState is SleepState || currentState is IdleState)
         {
-            Debug.Log("갈무리 if");
-            SetAlertTargetPos(anchorPos);
             SetState(new AlertState(this));
         }
     }
