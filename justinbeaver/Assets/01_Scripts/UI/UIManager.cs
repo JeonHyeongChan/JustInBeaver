@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
     public bool IsPauseOpen => pauseUI != null && pauseUI.activeSelf;
     
 
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -623,14 +625,16 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
+
 
     public void TogglePauseUI()
     {
+        Debug.Log($"[Pause] pauseUI={(pauseUI ? pauseUI.name : "NULL")} active={(pauseUI && pauseUI.activeSelf)}");
         if (pauseUI == null)
         {
             return;
         }
+
         if (pauseUI.activeSelf)
         {
             HidePauseUI();
@@ -869,20 +873,20 @@ public class UIManager : MonoBehaviour
 
     private void ForceCloseUIState()
     {
-        // 시간 정상화 (Pause가 켜져있던 상태를 강제로 해제)
+        //시간 정상화 (Pause가 켜져있던 상태를 강제로 해제)
         Time.timeScale = 1f;
 
-        // Pause 패널 강제 OFF
+        //Pause 패널 강제 OFF
         if (pauseUI != null) pauseUI.SetActive(false);
 
         if (shopUI != null) shopUI.SetActive(false);
         if (upgradeUI != null) upgradeUI.SetActive(false);
 
-        // 플레이어 입력 잠금 해제 + 입력맵 Player로 복귀(네가 맵 스위칭 쓰는 경우)
+        //플레이어 입력 잠금 해제 + 입력맵 Player로 복귀(네가 맵 스위칭 쓰는 경우)
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         player?.SetInputLocked(false);
 
-        // UI 선택 초기화
+        //UI 선택 초기화
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
     }
