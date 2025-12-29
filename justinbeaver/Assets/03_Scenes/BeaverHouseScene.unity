@@ -3880,12 +3880,12 @@ MonoBehaviour:
   TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  MinimumDistanceFromTarget: 0.7
+  MinimumDistanceFromTarget: 1.3
   AvoidObstacles:
     Enabled: 1
     DistanceLimit: 0
     MinimumOcclusionTime: 0
-    CameraRadius: 1
+    CameraRadius: 0.1
     UseFollowTarget:
       Enabled: 0
       YOffset: 0
