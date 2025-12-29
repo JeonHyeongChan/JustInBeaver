@@ -87,6 +87,8 @@ public class HomeManager : MonoBehaviour
 
         ApplyHouseLevel(currentLevel);
 
+        UIManager.Instance.HideUpgradeUI();
+
         return true;
     }
 
