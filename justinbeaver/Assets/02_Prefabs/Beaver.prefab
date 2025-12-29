@@ -994,6 +994,7 @@ GameObject:
   - component: {fileID: 6437610915515269419}
   - component: {fileID: 4359417911467395434}
   - component: {fileID: 8476783324362432602}
+  - component: {fileID: 1898579881381135930}
   - component: {fileID: -3660146103931347697}
   - component: {fileID: 7089783657379442201}
   m_Layer: 0
@@ -1392,7 +1393,7 @@ MonoBehaviour:
     m_ActionName: 'Player/ToggleInventory[/Keyboard/tab]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8852819285662168690}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
@@ -1422,6 +1423,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c591f227-c106-4972-aa36-aac3c768a484
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2026462963143823724}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnNavigate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 654da30a-5fc2-48ea-a36d-385d0717d933
+    m_ActionName: 'Player/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2026462963143823724}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 924a619e-2e5c-4882-a475-60450263b9aa
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -1542,6 +1575,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpeedBuff
   hitSpeedMulitiplier: 1.5
   hitSpeedDuration: 3
+--- !u!114 &1898579881381135930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c418338298e5f94aaf21fa133d9d667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitBlinker
+  blinkInterval: 0.08
+  useRendererEnabledToggle: 1
 --- !u!54 &-3660146103931347697
 Rigidbody:
   m_ObjectHideFlags: 0
