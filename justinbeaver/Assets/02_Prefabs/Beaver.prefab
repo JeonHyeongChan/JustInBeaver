@@ -927,6 +927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5007452303679095742}
+  - component: {fileID: 7777165030700907706}
   - component: {fileID: 6191272327527689645}
   - component: {fileID: 485944385309593485}
   - component: {fileID: -8047579269919317896}
@@ -971,6 +972,19 @@ Transform:
   - {fileID: 9084082286203727952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7777165030700907706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f70efb23173d8b4dbbe7651c94d570f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeaverFootstep
+  stepInterval: 0.2
 --- !u!114 &6191272327527689645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,6 +1367,7 @@ MonoBehaviour:
   rollSpeed: 0.05
   rollDuration: 0.01
   rollCooldown: 0.3
+  enableRollInvincible: 1
   rotateSpeed: 10
   animator: {fileID: 7212563134540830779}
   groundMask:
@@ -1373,6 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
+  invincibleDuration: 3
 --- !u!114 &2700360685821782904
 MonoBehaviour:
   m_ObjectHideFlags: 0

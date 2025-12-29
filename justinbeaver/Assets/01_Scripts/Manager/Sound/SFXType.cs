@@ -43,7 +43,10 @@
     StatUpgrade, // 완료
     
     //리셋
-    Reset // 완료
+    Reset, // 완료
+
+    //비버 발소리
+    BeaverMove
 
     //알림음 (튜토용)
     //내용
