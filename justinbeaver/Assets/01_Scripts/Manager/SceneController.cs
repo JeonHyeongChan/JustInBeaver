@@ -62,6 +62,8 @@ public class SceneController : MonoBehaviour
     //추후 씬전환 연출 추가 가능
     private IEnumerator LoadSceneRoutine(string sceneName)
     {
+        yield return null;
+
         AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
 
         while (!oper.isDone)
