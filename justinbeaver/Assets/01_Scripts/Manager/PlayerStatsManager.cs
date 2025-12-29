@@ -134,5 +134,4 @@ public class PlayerStatsManager : MonoBehaviour
     {
         SetCurrentWeight(0f);
     }
-
 }

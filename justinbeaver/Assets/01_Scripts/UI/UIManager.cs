@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -187,16 +188,30 @@ public class UIManager : MonoBehaviour
 
     private void BindInventory()
     {
-        var root = FindAnyObjectByType<InventoryRootMarker>(FindObjectsInactive.Include);
-        if (root == null)
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null)
         {
             inventoryUI = null;
             return;
         }
 
-        inventoryUI = root.gameObject;
-        inventoryUI.SetActive(false); //시작 시 무조건 OFF
+        Transform taget = grid.transform;
+
+        while (taget.parent != null)
+        {
+            if (taget.parent.GetComponent<Canvas>() != null)
+            {
+                break;
+            }
+            taget = taget.parent;
+        }
+        inventoryUI = taget.gameObject;
+
+        //시작 시 강제 OFF
+        inventoryUI.SetActive(false);
+
     }
+
 
     private void BindGameFailUI()
     {
