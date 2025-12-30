@@ -12,6 +12,9 @@ public class EndingCutscene : MonoBehaviour
     private void Awake()
     {
         if (rootUI) rootUI.SetActive(false);
+
+        if (videoPlayer != null)
+            videoPlayer.enabled = true;
     }
 
     public void PlayEnding()
@@ -23,7 +26,7 @@ public class EndingCutscene : MonoBehaviour
             return;
         }
         played = true;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
         if (rootUI)
         {
@@ -35,6 +38,23 @@ public class EndingCutscene : MonoBehaviour
             Debug.LogError("VideoPlayer is NULL");
             return;
         }
+
+        if (!videoPlayer.enabled)
+        {
+            Debug.LogWarning("VideoPlayer was disabled -> enabling it now");
+            videoPlayer.enabled = true;
+        }
+
+        if (!videoPlayer.gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("VideoPlayer GameObject was inactive -> activating it now");
+            videoPlayer.gameObject.SetActive(true);
+        }
+
+        //videoPlayer.prepareCompleted -= OnPrepared;
+        //videoPlayer.loopPointReached -= OnFinished;
+
+
         Debug.Log("Preparing video...");
         videoPlayer.Stop();
         videoPlayer.Prepare();
