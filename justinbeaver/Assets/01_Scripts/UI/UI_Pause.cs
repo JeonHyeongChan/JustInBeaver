@@ -35,14 +35,8 @@ public class UI_Pause : MonoBehaviour
     //옵션
     public void OnClickOption()
     {
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetActive(true);
-        }
-        if (helpPanel != null)
-        {
-            helpPanel.SetActive(false);
-        }
+        SetPanels(main: false, options: true, help: false);
+        Select(firstOptionsButton);
     }
 
 
@@ -88,20 +82,12 @@ public class UI_Pause : MonoBehaviour
 
     private void SetPanels(bool main, bool options, bool help)
     {
-        if (mainPanel != null)
-        {
-            mainPanel.SetActive(main);
-        }
+        Debug.Log($"[UI_Pause] SetPanels main={main} options={options} help={help} | " +
+                  $"mainPanel={(mainPanel ? mainPanel.name : "NULL")} helpPanel={(helpPanel ? helpPanel.name : "NULL")}");
 
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetActive(options);
-        }    
-            
-        if (helpPanel != null)
-        {
-            helpPanel.SetActive(help);
-        }
+        if (mainPanel != null) mainPanel.SetActive(main);
+        if (optionsPanel != null) optionsPanel.SetActive(options);
+        if (helpPanel != null) helpPanel.SetActive(help);
     }
 
     private void Select(Button btn)
