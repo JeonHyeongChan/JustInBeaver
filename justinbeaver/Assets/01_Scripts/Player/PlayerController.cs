@@ -574,7 +574,6 @@ public class PlayerController : MonoBehaviour
     //일시정지 키
     public void OnPause(InputAction.CallbackContext ctx)
     {
-        Debug.Log($"[OnPause] called | phase={ctx.phase}");
 
 
         if (!ctx.performed) 
@@ -593,7 +592,6 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.SetInventoryOpen(false);
             return;
         }
-        Debug.Log("[OnPause] performed → TogglePauseUI");
 
         UIManager.Instance.TogglePauseUI();
     }

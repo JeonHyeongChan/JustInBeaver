@@ -633,10 +633,8 @@ public class UIManager : MonoBehaviour
 
     public void TogglePauseUI()
     {
-        Debug.Log($"[TogglePauseUI] called | pauseUI={(pauseUI ? pauseUI.name : "NULL")} active={(pauseUI && pauseUI.activeSelf)}");
         if (pauseUI == null)
         {
-            Debug.LogWarning("[TogglePauseUI] pauseUI is NULL");
             return;
         }
 
