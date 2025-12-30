@@ -17364,9 +17364,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.84313726, b: 0.7411765, a: 1}
+    m_PressedColor: {r: 1, g: 0.7647059, b: 0.60784316, a: 1}
+    m_SelectedColor: {r: 0.99215686, g: 0.6745098, b: 0.41568628, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -18187,9 +18187,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.84313726, b: 0.7411765, a: 1}
+    m_PressedColor: {r: 1, g: 0.7647059, b: 0.60784316, a: 1}
+    m_SelectedColor: {r: 0.99215686, g: 0.6745098, b: 0.41568628, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -18575,9 +18575,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.84313726, b: 0.7411765, a: 1}
+    m_PressedColor: {r: 1, g: 0.7647059, b: 0.60784316, a: 1}
+    m_SelectedColor: {r: 0.99215686, g: 0.6745098, b: 0.41568628, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -25016,7 +25016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC774\uC804 \u2190 \u2192 \uB2E4\uC74C\nC : \uB2EB\uAE30 \n"
+  m_text: "\uC774\uC804 \u2190 \u2192 \uB2E4\uC74C\nESC : \uB2EB\uAE30 \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50230ac2020fff34296f518f98a2521d, type: 2}
   m_sharedMaterial: {fileID: 3005385958793425524, guid: 50230ac2020fff34296f518f98a2521d, type: 2}
