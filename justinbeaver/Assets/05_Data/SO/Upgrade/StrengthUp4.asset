@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StrengthUp4
   m_EditorClassIdentifier: Assembly-CSharp::StrengthUpgradeData
   targetLevel: 4
-  addStrength: 2
+  addStrength: 3
   requiredMaterials:
   - item: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
     amount: 3
   - item: {fileID: 11400000, guid: f6fee1e6abdd3ec43b066ada30d3785e, type: 2}
-    amount: 2
+    amount: 3

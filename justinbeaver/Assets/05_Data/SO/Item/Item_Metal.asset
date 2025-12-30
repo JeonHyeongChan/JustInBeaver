@@ -17,9 +17,10 @@ MonoBehaviour:
   itemId: 3
   itemName: Metal
   displayName: Metal
-  description: Home Level 3
+  description: "\uC218\uB2EC\uC774 \uB098\uD55C\uD14C \uBB34\uC2A8 \uC9D3\uC744 \uD55C\uAC70\uC57C?\n\uCC28\uAC00\uC6B4
+    \uB098\uBB34\uB3C4 \uC27D\uAC8C \uB2E4\uB4EC\uC5B4\uC9C0\uC796\uC544!\n4kg"
   type: 2
   stackable: 1
   maxStack: 1
-  itemWeight: 1
+  itemWeight: 4
   spawnSFX: 8

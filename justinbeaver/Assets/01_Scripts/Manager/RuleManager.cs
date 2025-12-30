@@ -23,8 +23,10 @@ public class RuleManager : MonoBehaviour
     private GameState currentState = GameState.Playing;
 
     [Header("Rule Data")]
-    private int escapeFailCount = 0;        // 침입 0 ~ 3
-    private int escapeSuccessCount = 0;     // 성공
+    private int escapeFailCount = 0;                // 침입 0 ~ 3
+    private int escapeSuccessCount = 0;             // 성공
+
+    private bool endingTriggered = false;           //엔딩 가드용
 
     //이벤트
     public event Action OnPlayerRespawnRequired;    // 비버 리스폰
@@ -106,10 +108,16 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     private void CheckEndingCondition()
     {
+        if (endingTriggered)
+        {
+            return;
+        }
+            
         //집이 최고레벨인지
         if (HomeManager.Instance != null &&
             HomeManager.Instance.CurrentLevel >= HomeManager.MaxLevel)
         {
+            endingTriggered = true; // 엔딩 트리거 true
             currentState = GameState.EndingReady;
             OnEndingCondition?.Invoke();
         }
@@ -125,6 +133,7 @@ public class RuleManager : MonoBehaviour
             currentState = GameState.Reseting;
             escapeFailCount = 0; // 실패 누적 초기화
             IsTotalReset = true;
+            endingTriggered = false; // 엔딩 트리거 false;
 
             ForceResetSave();
             OnTotalResetRequired?.Invoke();

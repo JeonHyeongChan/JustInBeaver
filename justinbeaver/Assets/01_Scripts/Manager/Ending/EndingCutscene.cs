@@ -1,93 +1,52 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class EndingCutscene : MonoBehaviour
 {
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private GameObject rootUI;      //영상 UI(캔버스) 루트
-    [SerializeField] private bool pauseGame = true;  //재생 중 게임 멈출지 여부
-    [SerializeField] private bool lockPlayerInput = true;
-    private float prevTimeScale = 1f;
+    [SerializeField] private GameObject rootUI;
 
+    private bool played;
 
     private void Awake()
     {
-        if (videoPlayer == null)
-        {
-            videoPlayer = GetComponentInChildren<VideoPlayer>(true);
-        }        
-        if (rootUI != null)
-        {
-            rootUI.SetActive(false);
-        }
+        if (rootUI) rootUI.SetActive(false);
     }
 
-
-    private void OnEnable()
+    public void PlayEnding()
     {
-        if (RuleManager.Instance != null)
-        {
-            RuleManager.Instance.OnEndingCondition += PlayEnding;
-        }
-    }
-
-
-    private void OnDisable()
-    {
-        if (RuleManager.Instance != null)
-        {
-            RuleManager.Instance.OnEndingCondition -= PlayEnding;
-        }
-    }
-
-
-    private void PlayEnding()
-    {
-        if (videoPlayer == null)
+        if (played)
         {
             return;
         }
+        played = true;
+        Time.timeScale = 0f;
 
-        if (rootUI != null)
+        if (rootUI)
         {
             rootUI.SetActive(true);
         }
 
-        //입력 잠금/일시정지
-        if (lockPlayerInput)
+        if (videoPlayer == null)
         {
-            var player = FindAnyObjectByType<PlayerController>();
-            player?.SetInputLocked(true);
+            return;
         }
-
-        if (pauseGame)
-        {
-            prevTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
-        }
-        videoPlayer.loopPointReached -= OnVideoFinished;
-        videoPlayer.loopPointReached += OnVideoFinished;
-        videoPlayer.Play();
+        videoPlayer.Stop();
+        videoPlayer.Prepare();
+        videoPlayer.prepareCompleted += OnPrepared;
+        videoPlayer.loopPointReached += OnFinished;
     }
 
-
-    private void OnVideoFinished(VideoPlayer vp)
+    private void OnPrepared(VideoPlayer vp)
     {
-        //재생 끝났을 때 처리
-        if (pauseGame)
-        {
-            Time.timeScale = prevTimeScale;
-        }
+        vp.prepareCompleted -= OnPrepared;
+        vp.Play();
+    }
 
-        if (lockPlayerInput)
-        {
-            var player = FindAnyObjectByType<PlayerController>();
-            player?.SetInputLocked(false);
-        }
-
-        if (rootUI != null)
-        {
-            rootUI.SetActive(false);
-        }
+    private void OnFinished(VideoPlayer vp)
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("TitleScene");
     }
 }
