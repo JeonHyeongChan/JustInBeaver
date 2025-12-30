@@ -528,19 +528,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //인벤토리 이동 입력 (화살표키)
+    //인벤토리 이동, 도움말 창 이동 입력 (화살표키)
     public void OnMoveUI(InputAction.CallbackContext ctx)
     {
-        if (!isInventoryOpen)
-        {
-            return;
-        }    
-           
         if (!ctx.started)
         {
             return;
         }    
-           
+
         Vector2 v = ctx.ReadValue<Vector2>();
         int x = v.x > 0.5f ? 1 : (v.x < -0.5f ? -1 : 0);
         int y = v.y > 0.5f ? 1 : (v.y < -0.5f ? -1 : 0);
@@ -548,31 +543,25 @@ public class PlayerController : MonoBehaviour
         if (x == 0 && y == 0)
         {
             return;
-        }
-
-        
-        //Pause + Help 열려있으면 Help 페이지 전환
-        if (UIManager.Instance != null &&
-            UIManager.Instance.IsPauseOpen &&
-            UIManager.Instance.GetHelpPanel() != null &&
-            UIManager.Instance.GetHelpPanel().gameObject.activeInHierarchy)
+        }    
+            
+        //Help가 켜져있으면 좌/우로 페이지 전환만
+        var help = UIManager.Instance != null ? UIManager.Instance.GetHelpPanel() : null;
+        bool helpOpen = help != null && help.gameObject.activeInHierarchy;
+        if (helpOpen)
         {
-            Debug.Log($"[MoveUI] x={x} pause={UIManager.Instance.IsPauseOpen} helpActive={UIManager.Instance.GetHelpPanel()?.gameObject.activeSelf}");
-            if (x > 0)
-            {
-                UIManager.Instance.GetHelpPanel().Next();
-            }
-            else
-            {
-                UIManager.Instance.GetHelpPanel().Prev();
-            }
+            Debug.Log($"[MoveUI->Help] x={x}");
+            if (x > 0) help.Next();
+            else if (x < 0) help.Prev();
             return;
         }
 
-        //인벤토리 이동
+        //인벤이 켜져있으면 인벤 커서 이동
         if (UIManager.Instance != null && UIManager.Instance.IsInventoryOpen)
         {
-            UIManager.Instance.MoveInventoryCursor(new Vector2(x, 0));
+            Debug.Log($"[MoveUI->Inventory] x={x} y={y}");
+            UIManager.Instance.MoveInventoryCursor(new Vector2(x, y));
+            return;
         }
     }
 
