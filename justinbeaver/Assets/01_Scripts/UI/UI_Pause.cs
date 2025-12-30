@@ -51,17 +51,9 @@ public class UI_Pause : MonoBehaviour
         SetPanels(main: false, options: false, help: true);
         Select(firstHelpButton);
 
-        var cg = helpPanel != null ? helpPanel.GetComponent<CanvasGroup>() : null;
-        if (cg != null)
-        {
-            cg.alpha = 1f;
-            cg.interactable = true;
-            cg.blocksRaycasts = true;
-        }
-
-        Debug.Log($"[UI_Pause] Help activeSelf={helpPanel?.activeSelf} (after SetPanels)");
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(true);
     }
-
 
     //종료
     public void OnClickQuit()
@@ -86,6 +78,9 @@ public class UI_Pause : MonoBehaviour
     public void OnClickBack()
     {
         ShowMain();
+
+        var player = FindAnyObjectByType<PlayerController>();
+        player?.SetInputLocked(false);
     }
 
 
