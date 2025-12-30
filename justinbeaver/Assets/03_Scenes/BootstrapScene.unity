@@ -244,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a3699c03314674aaff304b2f274540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseInput
-  pauseAction: {fileID: 5392408960784523579, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &799022219
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndingCutscene
   videoPlayer: {fileID: 487703534751360214, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
-  rootUI: {fileID: 0}
+  rootUI: {fileID: 2134859241}
 --- !u!1 &1730322012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,6 +1377,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2134859241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 314080438062114863, guid: e1bad76dd2c1bfb46882e54739ad7f38, type: 3}
+  m_PrefabInstance: {fileID: 1893987263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
