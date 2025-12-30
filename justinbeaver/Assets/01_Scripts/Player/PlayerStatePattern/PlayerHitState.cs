@@ -22,12 +22,12 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
             playerContext.playerController.enabled = false;
         }
 
-        if (playerContext.playerRigid)
-        {
-            //기존 속도 제거
-            playerContext.playerRigid.linearVelocity = Vector3.zero;
-            playerContext.playerRigid.angularVelocity = Vector3.zero;
-        }
+        //if (playerContext.playerRigid)
+        //{
+        //    //기존 속도 제거
+        //    playerContext.playerRigid.linearVelocity = Vector3.zero;
+        //    playerContext.playerRigid.angularVelocity = Vector3.zero;
+        //}
 
         //피격 점멸 시작
         var blinker = playerContext.GetComponent<HitBlinker>();
