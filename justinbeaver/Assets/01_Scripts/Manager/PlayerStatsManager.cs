@@ -47,7 +47,7 @@ public class PlayerStatsManager : MonoBehaviour
     public StrengthUpgradeData GetNextStrengthUpgradeData()
     {
         //strengthLevel 1이면 다음은 index 1 (2레벨 데이터)
-        int index = strengthLevel;
+        int index = strengthLevel - 1;
         if (upgradeData == null || index < 0 || index >= upgradeData.Length)
         {
             return null;
