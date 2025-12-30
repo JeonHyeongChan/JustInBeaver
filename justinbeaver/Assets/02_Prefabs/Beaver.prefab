@@ -997,6 +997,7 @@ GameObject:
   - component: {fileID: 1898579881381135930}
   - component: {fileID: -3660146103931347697}
   - component: {fileID: 7089783657379442201}
+  - component: {fileID: 1360848377649139117}
   m_Layer: 0
   m_Name: Beaver
   m_TagString: Player
@@ -1601,6 +1602,14 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.38, z: 1.0170909}
   m_Center: {x: 0, y: 0.46999997, z: 0.076454595}
+--- !u!81 &1360848377649139117
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852819285662168690}
+  m_Enabled: 1
 --- !u!1 &8943125863728703080
 GameObject:
   m_ObjectHideFlags: 0

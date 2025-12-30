@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ac12642ef456c4081f77dcbfbd310e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  sceneName: 
+  sceneName: BeaverHouseScene
   uiAnchor: {fileID: 2866322617202113007}
   escapeSceneName: BeaverHouseScene
   escapeHoldTime: 2
