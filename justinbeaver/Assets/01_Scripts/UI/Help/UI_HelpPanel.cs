@@ -18,7 +18,6 @@ public class UI_HelpPanel : MonoBehaviour
 
     public void Next()
     {
-        Debug.Log("[Help] Next called");
         if (pages == null || pages.Length == 0)
         {
             return;
@@ -37,7 +36,6 @@ public class UI_HelpPanel : MonoBehaviour
 
     public void Prev()
     {
-        Debug.Log("[Help] Prev called");
         if (pages == null || pages.Length == 0)
         {
             return;

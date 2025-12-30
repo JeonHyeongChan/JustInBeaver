@@ -19,7 +19,7 @@ public class UIInputController : MonoBehaviour
     public void OnSubmit(InputAction.CallbackContext ctx)
     {
         seletedObject = EventSystem.current.currentSelectedGameObject;
-       
+
         if (!ctx.performed)
         {
             return;
@@ -29,8 +29,8 @@ public class UIInputController : MonoBehaviour
         if (Time.unscaledTime < nextSubmitTime)
         {
             return;
-        }    
-            
+        }
+
         //실패 UI
         if (UIManager.Instance != null &&
             UIManager.Instance.gameFailUI != null &&
@@ -48,7 +48,7 @@ public class UIInputController : MonoBehaviour
             UIManager.Instance.ConfirmEscapeSuccess();
             return;
         }
-        
+
         var esc = EventSystem.current;
         if (esc == null)
         {
@@ -68,65 +68,5 @@ public class UIInputController : MonoBehaviour
             button.onClick.Invoke();
             return;
         }
-
-        // if (!IsAnyUIOpen())
-        //     return;
-        //
-
-        //private void Update()
-        //{
-        //    if (GameObject.Find("Canvas") != null)
-        //    {
-        //        EventSystem.current.SetSelectedGameObject(GameObject.Find);
-        //    }
-        //      
-        //        //SelectedObject = EventSystem.current.currentSelectedGameObject;
-        //        Debug.Log(SelectedObject.name);s
-        //    
-        //}
-
-        //if (SelectedObject.name == "Exit")
-        //{
-        //    UIManager.Instance.shopUI.GetComponent<UI_Shop>().OnClickExitButton();
-        //}
-
-        //Debug.Log("OnSubmit2");
-        //if (UIManager.Instance.shopUI.activeSelf)
-        //{
-        //    if (UIManager.Instance.shopUI.activeSelf && UIManager.Instance.gameFailUI == null && UIManager.Instance.gameSuccessUI == null && UIManager.Instance.shopUI != null)
-        //    {
-        //        SelectedObject = EventSystem.current.currentSelectedGameObject;
-        //        if (SelectedObject.name == "Exit")
-        //        {
-        //            UIManager.Instance.shopUI.GetComponent<UI_Shop>().OnClickExitButton();
-        //            return;
-        //        }
-        //        else if (SelectedObject.name == "Upgrade")
-        //        {
-        //            UIManager.Instance.shopUI.GetComponent<UI_Shop>().OnClickUpgradeButton();
-        //            return;
-        //        }
-        //            //Debug.LogWarning("쇼샵 비활성화");
-        //        return;
-        //    }
-        //    if (UIManager.Instance.gameFailUI == null && UIManager.Instance.gameSuccessUI == null && UIManager.Instance.shopUI != null)
-        //    {
-        //        UIManager.Instance.ShowShopUI();
-        //        Debug.LogWarning("쇼샵 활성화");
-        //        return;
-        //    
-        //    }
-        //}
     }
-
-    //private bool IsAnyUIOpen()
-    //{
-    //    if (UIManager.Instance == null) return false;
-    //
-    //    return (UIManager.Instance.shopUI != null && UIManager.Instance.shopUI.activeSelf)
-    //   || (UIManager.Instance.upgradeUI != null && UIManager.Instance.upgradeUI.activeSelf)
-    //   || (UIManager.Instance.gameFailUI != null && UIManager.Instance.gameFailUI.activeSelf)
-    //   || (UIManager.Instance.gameSuccessUI != null && UIManager.Instance.gameSuccessUI.activeSelf);
-    //}
-
 }

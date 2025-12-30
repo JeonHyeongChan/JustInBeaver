@@ -14,8 +14,6 @@ public class UI_StorageBar : MonoBehaviour
         {
             StorageManager.Instance.OnStorageChanged += Refresh;
         }
-        //Refresh();
-        //Invoke(nameof(Refresh), 0f); // 프레임 보정
         StartCoroutine(DelayRefresh());
     }
 

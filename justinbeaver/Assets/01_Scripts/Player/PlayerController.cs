@@ -550,7 +550,6 @@ public class PlayerController : MonoBehaviour
         bool helpOpen = help != null && help.gameObject.activeInHierarchy;
         if (helpOpen)
         {
-            Debug.Log($"[MoveUI->Help] x={x}");
             if (x > 0) help.Next();
             else if (x < 0) help.Prev();
             return;
@@ -559,7 +558,6 @@ public class PlayerController : MonoBehaviour
         //인벤이 켜져있으면 인벤 커서 이동
         if (UIManager.Instance != null && UIManager.Instance.IsInventoryOpen)
         {
-            Debug.Log($"[MoveUI->Inventory] x={x} y={y}");
             UIManager.Instance.MoveInventoryCursor(new Vector2(x, y));
             return;
         }
@@ -607,11 +605,6 @@ public class PlayerController : MonoBehaviour
 
         UIManager.Instance.TogglePauseUI();
     }
-
-
-    
-
-
 
 
     public void SetInventoryOpen(bool open)
