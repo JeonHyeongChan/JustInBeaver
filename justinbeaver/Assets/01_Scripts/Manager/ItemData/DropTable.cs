@@ -10,7 +10,6 @@ public class DropTable : MonoBehaviour
     {
         if (dropItem == null)
         {
-            Debug.LogError($"[DropTable] dropItem Null {name}");
             return;
         }
         int count = minCount+maxCount;
