@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class SupportPhysicsEnabler : MonoBehaviour
 {
     [Header("벽 레이어")]

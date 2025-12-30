@@ -16,8 +16,7 @@ public class IdleState : IEnemyState
         enemy = Enemy;
         agent = enemy.Agent;
         updateInterval = enemy.UpdateInterval;
-        timeSinceLastUpdate = enemy.TimeSinceLastUpdate;
-        //player = enemy.PlayerTrf;
+        timeSinceLastUpdate = enemy.TimeSinceLastUpdate;        
         detectRange = enemy.DetectRange;
         lightView = enemy.LightView;
         animator = enemy.Animator;
@@ -47,22 +46,12 @@ public class IdleState : IEnemyState
             agent.SetDestination(randomPosition);
             timeSinceLastUpdate = 0f;
         }
-
-        //float distance = Vector3.Distance(enemy.transform.position, player.position);
+        
         float distance = Vector3.Distance(enemy.transform.position, enemy.PlayerTrf.position);
-
-        //if (lightView.HasTarget() || distance <= detectRange)
-        //{
-        //    if (lightView.HasTarget())
-        //        enemy.SetAlertTargetPos(lightView.GetFirstTarget().position);
-        //    
-        //    enemy.SetState(new ChaseState(enemy));
-        //}
+        
         if (distance <= detectRange)
         {
             enemy.SetState(new ChaseState(enemy));
-        }
-        //만약 비버 갈무리 이벤트 발생시?
-        //enemy.SetState(new ChaseState(enemy));
+        }        
     }
 }

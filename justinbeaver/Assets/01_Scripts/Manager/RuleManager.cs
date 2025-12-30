@@ -96,8 +96,7 @@ public class RuleManager : MonoBehaviour
 
     private void HandlePlayerDied()
     {
-        OnEscapeFailed();
-        //OnPlayerRespawnRequired?.Invoke();  // 이벤트
+        OnEscapeFailed();        
         UIManager.Instance?.ShowGameFailUI();
     }
 
@@ -146,9 +145,7 @@ public class RuleManager : MonoBehaviour
     }
 
     private void ForceResetSave()
-    {
-        Debug.Log("[RuleManager] Force Reset Save");
-
+    {        
         var data = new SaveData
         {
             houseLevel = 1,

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
+
 public struct CastInfo
 {
     public bool Hit;                // ** 맞았는지 확인

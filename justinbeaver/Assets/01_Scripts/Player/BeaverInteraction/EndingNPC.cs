@@ -24,11 +24,11 @@ public class EndingNPC : MonoBehaviour, IInteractable
 
         if (endingCutscene == null)
         {
-            Debug.LogWarning("[EndingNPC] EndingCutscene not found yet. Will retry on interact.");
+            Debug.LogWarning(" Will retry on interact.");
         }
         else
         {
-            Debug.Log("[EndingNPC] EndingCutscene bound successfully");
+            Debug.Log("EndingCutscene bound successfully");
         }
     }
 
@@ -37,9 +37,7 @@ public class EndingNPC : MonoBehaviour, IInteractable
         Debug.Log("EndingNPC Interact CALLED");
 
         if (RuleManager.Instance == null)
-            return;
-
-        Debug.Log("GameState = " + RuleManager.Instance.GetGameState());
+            return;        
 
         if (RuleManager.Instance.GetGameState() != GameState.EndingReady)
             return;

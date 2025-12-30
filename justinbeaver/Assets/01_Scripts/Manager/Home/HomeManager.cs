@@ -136,12 +136,5 @@ public class HomeManager : MonoBehaviour
     {
         currentLevel = Mathf.Clamp(level, 1, MaxLevel);
         ApplyHouseLevel(currentLevel);
-    }
-
-    private void CheckEndingNPC(int level)
-    {
-        //if (level >= 5)
-        //    .SetActive(true);
-        
-    }  
+    }    
 }

@@ -46,7 +46,7 @@
     Reset, // 완료
 
     //비버 발소리
-    BeaverMove
+    BeaverMove // 완료
 
     //알림음 (튜토용)
     //내용

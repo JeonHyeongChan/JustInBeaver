@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -66,24 +65,15 @@ public class EnemyStatePattern : MonoBehaviour
         hitBox.SetActive(false);
     }
     private void Update()
-    {
-        //if (GameManager.Instance.State != GameState.Playing) return;
+    {       
         if (currentState == null) return;
         currentState.Update();
-
-
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         BindPlayer();   //씬 로드 및 활성화 시 재바인딩
-
-        //if (player == null) return;
-        //gatherSignal = player.GetComponent<PlayerGatherSignal>();
-        //if (gatherSignal == null) return;
-        //gatherSignal.OnGatherStart += HandleGatherStart;
-        //gatherSignal.OnGatherEnd += HandleGatherEnd;
     }
     private void OnDisable()
     {
@@ -120,7 +110,6 @@ public class EnemyStatePattern : MonoBehaviour
             gatherSignal.OnGatherStart += HandleGatherStart;
             gatherSignal.OnGatherEnd += HandleGatherEnd;
         }
-
     }
 
     private void HandleGatherStart(Vector3 anchorPos)

@@ -99,8 +99,7 @@ public class PlayerStatsManager : MonoBehaviour
     /// </summary>
     public void SetCurrentWeight(float weight)
     {
-        CurrentWeight = Mathf.Max(0, weight);
-        Debug.Log($"[Weight] SetCurrentWeight = {CurrentWeight}");
+        CurrentWeight = Mathf.Max(0, weight);        
         OnWeightChanged?.Invoke(CurrentWeight);
         OnStatsChanged?.Invoke();
     }
@@ -119,7 +118,6 @@ public class PlayerStatsManager : MonoBehaviour
             MaxWeight
         );
     }
-
 
   
     public void UpgradeMaxWeight(float amount)

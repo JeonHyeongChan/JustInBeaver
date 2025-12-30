@@ -38,9 +38,7 @@ public class StorageTransfer : MonoBehaviour
         {
             var d = ItemManager.Instance != null ? ItemManager.Instance.GetItem(id) : null;
             return d != null && d.type == ItemType.ingredient;
-        });
-
-        //SaveAfterSuccess(); // 세이브
+        });        
 
         Debug.Log("[StorageTransfer]");
     }
@@ -97,25 +95,5 @@ public class StorageTransfer : MonoBehaviour
         if (_boundRule != null)
             _boundRule.OnEscapeSucceeded -= TransferInventoryStorage;
         _boundRule = null;
-    }
-
-    /// <summary>
-    /// 세이브
-    /// </summary>
-    //private void SaveAfterSuccess()
-    //{
-    //    if (RuleManager.Instance != null && RuleManager.Instance.IsTotalReset)
-    //    {
-    //        Debug.Log("Blocked to TotalReset");
-    //        return;
-    //    }
-    //
-    //    var data = new SaveData();
-    //
-    //    data.houseLevel = HomeManager.Instance.CurrentLevel;
-    //    data.failCountAtcurrentLevel = RuleManager.Instance.GetEscapeFailCount();
-    //    data.storedItems = StorageManager.Instance.ExportSaveData();
-    //
-    //    SaveManager.Save(data);
-    //}
+    }   
 }

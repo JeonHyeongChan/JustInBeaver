@@ -11,29 +11,7 @@ public class ShopNPC : MonoBehaviour, IInteractable
     public void Interact(PlayerController player)
     {
         Debug.Log("NPC with talking");
-        UIManager.Instance.ShowShopUI();
-        //  if (HomeManager.Instance == null)
-        //  {
-        //      Debug.LogWarning("HomeManager not found");
-        //      return;
-        //  }
-        //
-        //  if (!HomeManager.Instance.CanUpgrade())
-        //  {
-        //      Debug.Log("House already at MAX level");
-        //      return;
-        //  }
-        //
-        //  bool success = HomeManager.Instance.TryUpgradeHome();
-        //
-        //  if (success)
-        //  {
-        //      Debug.Log($"House upgrade Lv.{HomeManager.Instance.CurrentLevel}");
-        //  }
-        //  else
-        //  {
-        //      Debug.Log("House upgrade failed");
-        //  }
+        UIManager.Instance.ShowShopUI();        
     }
 
     public void OnHoldCancel(PlayerController player)

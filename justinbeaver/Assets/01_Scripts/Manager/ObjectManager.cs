@@ -68,9 +68,7 @@ public class ObjectManager : MonoBehaviour
 
 
         if (drop != null && drop.dropItem != null)
-        {
-            //int count = drop.minCount + drop.maxCount;
-
+        {           
             //레이를 오브젝트 위에서 아래로 쏴서 바닥 위치를 찾음
             Vector3 rayOrigin = obj.transform.position + Vector3.up * dropRayStartHeight;
             Vector3 baseDropPos = obj.transform.position;
@@ -84,13 +82,6 @@ public class ObjectManager : MonoBehaviour
                 //바닥을 못 찾으면 최소한 지면 쪽으로 과도하게 뜨지 않게
                 baseDropPos = obj.transform.position;
             }
-
-          /*  for (int i = 0; i < count; i++)
-            {
-                Vector3 spawnPos = baseDropPos;
-
-                ItemManager.Instance.SpawnItem(drop.dropItem, spawnPos, Quaternion.identity);
-            }*/
         }
         DespawnObject(obj);
     }

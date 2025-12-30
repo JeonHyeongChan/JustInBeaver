@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
+            Instance = this;            
             SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드
         }
         else
@@ -226,16 +225,11 @@ public class GameManager : MonoBehaviour
         }
 
         if (!SaveManager.HasSave())
-            yield break;
-      
-        //while (ItemManager.Instance == null || StorageManager.Instance == null)
-        //    yield return null;
+            yield break;            
 
         var data = SaveManager.Load();
         if (data == null)
-            yield break;
-
-        //Debug.Log("[Continue] Apply Save Data (Delayed)");
+            yield break;        
 
         HomeManager.Instance.SetLevel(data.houseLevel);
         RuleManager.Instance.SetFailCount(data.failCountAtcurrentLevel);
