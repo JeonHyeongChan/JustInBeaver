@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 public class UI_EscapeResult : MonoBehaviour
@@ -9,7 +9,7 @@ public class UI_EscapeResult : MonoBehaviour
     {
         gameObject.SetActive(true);
         rewardText.text = success
-            ? $"È¹µæ ÀçÈ­: {reward}"
-            : "Å»Ãâ ½ÇÆĞ";
+            ? $"íšë“ ì¬í™”: {reward}"
+            : "íƒˆì¶œ ì‹¤íŒ¨";
     }
 }

@@ -51,10 +51,7 @@ public class PlayerHealth : MonoBehaviour
         var buff = GetComponent<PlayerSpeedBuff>();
         buff?.ApplyHitSpeedBoot();
 
-        Debug.Log("플레이어 이속 증가");
-        Debug.Log($"플레이어 피격: 무적 {invincibleDuration}초 시작");
-
-
+        
         if (currentHealth <= 0)
         {            
             playerContext.playerStateMachine.ChangeState(new PlayerDieState(playerContext));

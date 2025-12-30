@@ -37,7 +37,6 @@ public class UI_Pause : MonoBehaviour
     {
         if (optionsPanel == null)
         {
-            Debug.LogWarning("[UI_Pause] optionsPanel is NULL (not assigned).");
             return;
         }
         SetPanels(main: false, options: true, help: false);
@@ -66,7 +65,6 @@ public class UI_Pause : MonoBehaviour
         }   
         else
         {
-            Debug.Log("Exit Game");
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
             #else
@@ -92,11 +90,6 @@ public class UI_Pause : MonoBehaviour
 
     private void SetPanels(bool main, bool options, bool help)
     {
-        Debug.Log($"[UI_Pause] SetPanels main={main} options={options} help={help} | " +
-                  $"mainPanel={(mainPanel ? mainPanel.name : "NULL")} " +
-                  $"optionsPanel={(optionsPanel ? optionsPanel.name : "NULL")} " +
-                  $"helpPanel={(helpPanel ? helpPanel.name : "NULL")}");
-
         if (mainPanel != null) mainPanel.SetActive(main);
         if (optionsPanel != null) optionsPanel.SetActive(options);
         if (helpPanel != null) helpPanel.SetActive(help);

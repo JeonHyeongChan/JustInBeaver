@@ -141,7 +141,6 @@ public class UIManager : MonoBehaviour
 
         if (gatherGauge == null)
         {
-            Debug.Log("GatherGauge Not Found in this Scene");
             gatherGaugeUI = null;
             return;
         }
@@ -157,7 +156,6 @@ public class UIManager : MonoBehaviour
 
         if (interactHint == null)
         {
-            Debug.Log("InteractHint Not Found in this Scene");
             return;
         }
 
@@ -222,7 +220,6 @@ public class UIManager : MonoBehaviour
 
     private void BindGameFailUI()
     {
-        Debug.Log("BindGameFailUI");
         gameFailUI = null;
 
         var marker = FindAnyObjectByType<GameFailUIMarker>(FindObjectsInactive.Include);
@@ -238,7 +235,6 @@ public class UIManager : MonoBehaviour
 
     private void BindGameSuccessUI()
     {
-        Debug.Log("BindGameSuccessUI");
         gameSuccessUI = null;
 
         var marker = FindAnyObjectByType<GameSuccessUIMarker>(FindObjectsInactive.Include);
@@ -470,7 +466,6 @@ public class UIManager : MonoBehaviour
 
     public void ConfirmGameFail()
     {
-        Debug.Log("ConfirmGameFail CLICKED");
 
         if (gameFailUI != null)
             gameFailUI.SetActive(false);
@@ -582,7 +577,6 @@ public class UIManager : MonoBehaviour
     }
     public void ConfirmEscapeSuccess()
     {
-        Debug.Log("ConfirmEscapeSuccess CLICKED");
 
         if (gameSuccessUI != null)
             gameSuccessUI.SetActive(false);

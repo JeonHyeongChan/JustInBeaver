@@ -126,7 +126,6 @@ public class Inventory_Grid : MonoBehaviour
         var slot = slots[selectedIndex];
         if (slot == null || !slot.HasItem())
         {
-            Debug.Log("버릴 아이템 없음");
             return;
         }    
         string itemId = slot.GetItemId();
@@ -225,7 +224,6 @@ public class Inventory_Grid : MonoBehaviour
             }
         }
 
-        Debug.Log("인벤토리 가득 참");
         return false;
     }
 
