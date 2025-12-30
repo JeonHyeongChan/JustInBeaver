@@ -475,6 +475,7 @@ public class UIManager : MonoBehaviour
 
         if (gameFailUI != null)
             gameFailUI.SetActive(false);
+        RunLootTracker.Instance?.Clear();
 
         GameManager.Instance.HandlePlayerRespawn();
     }
