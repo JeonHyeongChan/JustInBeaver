@@ -36,6 +36,7 @@ public class UI_Upgrade : MonoBehaviour
     private void OnEnable()
     {
         Refresh();
+        ReselectImmediate();
     }
 
     private void OnClickStrengthUpgrade()
@@ -47,23 +48,27 @@ public class UI_Upgrade : MonoBehaviour
 
         Refresh();
         UIManager.Instance?.RefreshWeightGauge();
-        StartCoroutine(Reselect());
+        //StartCoroutine(Reselect());
+        if (gameObject.activeInHierarchy)
+            ReselectImmediate();
     }
-    private IEnumerator Reselect()
-    {
-        yield return null; // next frame
-        if (EventSystem.current == null) yield break;
 
-        // 우선 힘강화 버튼이 아직 눌릴 수 있으면 그걸 잡고
-        if (strengthUpgradeButton != null && strengthUpgradeButton.interactable)
-            EventSystem.current.SetSelectedGameObject(strengthUpgradeButton.gameObject);
-        // 아니면 집 업글 버튼
-        else if (houseUpgradeButton != null && houseUpgradeButton.interactable)
-            EventSystem.current.SetSelectedGameObject(houseUpgradeButton.gameObject);
-        // 아니면 닫기 버튼  제발
-        else if (exitButton != null)
-            EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
-    }
+    //private IEnumerator Reselect()
+    //{
+    //    yield return null; // next frame
+    //    if (EventSystem.current == null) yield break;
+    //
+    //    // 우선 힘강화 버튼이 아직 눌릴 수 있으면 그걸 잡고
+    //    if (strengthUpgradeButton != null && strengthUpgradeButton.interactable)
+    //        EventSystem.current.SetSelectedGameObject(strengthUpgradeButton.gameObject);
+    //    // 아니면 집 업글 버튼
+    //    else if (houseUpgradeButton != null && houseUpgradeButton.interactable)
+    //        EventSystem.current.SetSelectedGameObject(houseUpgradeButton.gameObject);
+    //    // 아니면 닫기 버튼  제발
+    //    else if (exitButton != null)
+    //        EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
+    //}
+
     private void OnClickHouseUpgrade()
     {
         var home = HomeManager.Instance;
@@ -71,12 +76,26 @@ public class UI_Upgrade : MonoBehaviour
 
         home.TryUpgradeHome(); 
         Refresh();
-        StartCoroutine(Reselect());
+        //StartCoroutine(Reselect());
+        if (gameObject.activeInHierarchy)
+            ReselectImmediate();
     }
 
     private void OnClickExit()
     {
         UIManager.Instance?.HideUpgradeUI();
+    }
+
+    private void ReselectImmediate()
+    {
+        if (EventSystem.current == null) return;
+
+        if (strengthUpgradeButton != null && strengthUpgradeButton.interactable)
+            EventSystem.current.SetSelectedGameObject(strengthUpgradeButton.gameObject);
+        else if (houseUpgradeButton != null && houseUpgradeButton.interactable)
+            EventSystem.current.SetSelectedGameObject(houseUpgradeButton.gameObject);
+        else if (exitButton != null)
+            EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
     }
 
     public void Refresh()
