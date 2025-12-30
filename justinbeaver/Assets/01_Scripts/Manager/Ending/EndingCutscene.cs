@@ -82,6 +82,9 @@ public class EndingCutscene : MonoBehaviour
     private void OnFinished(VideoPlayer vp)
     {
         Time.timeScale = 1f;
+
+        SaveManager.Delete();
+
         SoundManager.Instance?.MuteBGM(false);
 
         ResetState();
