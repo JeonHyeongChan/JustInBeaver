@@ -3,11 +3,11 @@ using System.IO;
 
 /// <summary>
 /// 게임 저장 / 불러오기
-/// 에디터: JSON으로, 빌드: AES 암호화로
+/// Editor: JSON, Build: AES 암호화
 /// </summary>
 public static class SaveManager
 {
-    //저장 파일 경로
+    // 저장 파일 경로
     // Application.persistentDataPath:
     // Windows: AppData/LocalLow/폴더명/게임명
     private static string SavePath =>
@@ -16,62 +16,54 @@ public static class SaveManager
     /// <summary>
     /// 저장
     /// </summary>
-    /// <param name="data"></param>
     public static void Save(SaveData data)
     {
         try
         {
-            string json = JsonUtility.ToJson(data, true); // JSON 문자열로 변환
+            string json = JsonUtility.ToJson(data, true); // JSON 문자열 변환
 
 #if UNITY_EDITOR
-            // 에디터에서는 사람이 읽을 수 있게 JSON 그대로 저장
             File.WriteAllText(SavePath, json);
 #else
-            // 빌드에서는 암호화 저장
-            File.WriteAllText(SavePath, CryptoUtil.Encrypt(json));
+            string encrypted = CryptoUtil.Encrypt(json);
+            File.WriteAllText(SavePath, encrypted);
 #endif
-
-            Debug.Log("Save Success");
+            Debug.Log($"[SaveManager] Save Success → {SavePath}");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Save Failed: {e.Message}");
+            Debug.LogError($"[SaveManager] Save Failed: {e.Message}");
         }
     }
 
     /// <summary>
     /// 불러오기
     /// </summary>
-    /// <returns></returns>
     public static SaveData Load()
     {
-        if (!File.Exists(SavePath)) // 없으면 새게임
+        if (!File.Exists(SavePath))
             return null;
 
         try
         {
-            string data = File.ReadAllText(SavePath); // 문자열 읽어옴
+            string raw = File.ReadAllText(SavePath); // 문자열 읽어오기
 
 #if UNITY_EDITOR
-            return JsonUtility.FromJson<SaveData>(data);
+            return JsonUtility.FromJson<SaveData>(raw);
 #else
-            string json = CryptoUtil.Decrypt(data);
+            string json = CryptoUtil.Decrypt(raw);
             return JsonUtility.FromJson<SaveData>(json);
 #endif
         }
         catch
         {
-            Debug.LogWarning("Save file corrupted. Deleting.");
-
-            Delete(); // 파일에 문제 있으면 삭제 후 새게임으로 유도
+            Debug.LogWarning("[SaveManager] Save file corrupted. Deleting.");
+            Delete(); // 문자 파일 삭제 후 새게임 유도
             return null;
         }
     }
 
-    public static bool HasSave()
-    {
-        return File.Exists(SavePath);
-    }
+    public static bool HasSave() => File.Exists(SavePath);
 
     public static void Delete()
     {
