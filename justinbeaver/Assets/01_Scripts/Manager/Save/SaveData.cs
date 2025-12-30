@@ -6,7 +6,6 @@ public class SaveData
 {
     public int houseLevel;
     public int failCountAtcurrentLevel;
-
     public List<StoredItem> storedItems = new();
 }
 
