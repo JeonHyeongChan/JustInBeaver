@@ -17,9 +17,10 @@ MonoBehaviour:
   itemId: 4
   itemName: Glass
   displayName: Glass
-  description: Home Level 4
+  description: "\uBC14\uAE65\uC774 \uBCF4\uC774\uB294 \uD22C\uBA85\uD55C \uB098\uBB34.\n\uB2E4\uB4EC\uC744
+    \uB550 \uC138\uC2EC\uD55C \uC8FC\uC758\uAC00 \uD544\uC694\uD558\uB2E4.\n2kg"
   type: 2
   stackable: 1
   maxStack: 1
-  itemWeight: 1
+  itemWeight: 2
   spawnSFX: 7

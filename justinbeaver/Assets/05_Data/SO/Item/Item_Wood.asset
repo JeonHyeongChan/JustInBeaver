@@ -17,7 +17,8 @@ MonoBehaviour:
   itemId: 1
   itemName: Wood
   displayName: Wood
-  description: Home Level 1
+  description: "\uBAA9\uC7AC \uAC00\uAD6C\uB97C \uBCF4\uAE30 \uC88B\uAC8C \uAC00\uACF5\uD588\uB2E4.\n\uD6CC\uB96D\uD55C
+    \uAC74\uCD95 \uC790\uC7AC\uC774\uC790, \uB9DB\uC788\uB294 \uAC04\uC2DD.\n1kg"
   type: 2
   stackable: 1
   maxStack: 1
