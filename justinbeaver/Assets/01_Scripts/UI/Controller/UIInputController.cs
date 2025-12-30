@@ -64,6 +64,7 @@ public class UIInputController : MonoBehaviour
         var button = selected.GetComponent<Button>();
         if (button != null && button.interactable)
         {
+            nextSubmitTime = Time.unscaledTime + submitCooldown;
             button.onClick.Invoke();
             return;
         }

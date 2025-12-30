@@ -533,14 +533,14 @@ public class UIManager : MonoBehaviour
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
-        var button = upgradeUI.GetComponentInChildren<Button>();
-        if (button != null)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(button.gameObject);
-        }
+        EventSystem.current.SetSelectedGameObject(null);
+        StartCoroutine(DelaySelectFirstButton());
     }
-
+    private IEnumerator DelaySelectFirstButton()
+    {
+        yield return null; // 다음 프레임
+        FocusFirstSelectable(upgradeUI);
+    }
     public void HideShopUI()
     {
         if (shopUI != null)
