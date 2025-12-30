@@ -616,12 +616,16 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(false);
         Time.timeScale = 1f;
 
-        var player = FindAnyObjectByType<PlayerController>();
-        player?.SetInputLocked(false);
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        if (player != null)
+        {
+            player.SetInputLocked(false);
+        }
 
         if (EventSystem.current != null)
+        {
             EventSystem.current.SetSelectedGameObject(null);
-
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -629,7 +633,6 @@ public class UIManager : MonoBehaviour
 
     public void TogglePauseUI()
     {
-        Debug.Log($"[Pause] pauseUI={(pauseUI ? pauseUI.name : "NULL")} active={(pauseUI && pauseUI.activeSelf)}");
         if (pauseUI == null)
         {
             return;
@@ -825,11 +828,11 @@ public class UIManager : MonoBehaviour
     private void StopPlayerMotion()
     {
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
-        if (player == null)
-        {
-            return;
-        }
+        if (player == null) return;
+
         player.SetInputLocked(true);
+
+        // Rigidbody 기반 정지
         var rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -837,6 +840,7 @@ public class UIManager : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
+
 
 
     //첫번째 버튼 찾기

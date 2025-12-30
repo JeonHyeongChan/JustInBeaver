@@ -528,19 +528,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //인벤토리 이동 입력 (화살표키)
+    //인벤토리 이동, 도움말 창 이동 입력 (화살표키)
     public void OnMoveUI(InputAction.CallbackContext ctx)
     {
-        if (!isInventoryOpen)
-        {
-            return;
-        }    
-           
         if (!ctx.started)
         {
             return;
         }    
-           
+
         Vector2 v = ctx.ReadValue<Vector2>();
         int x = v.x > 0.5f ? 1 : (v.x < -0.5f ? -1 : 0);
         int y = v.y > 0.5f ? 1 : (v.y < -0.5f ? -1 : 0);
@@ -550,7 +545,24 @@ public class PlayerController : MonoBehaviour
             return;
         }    
             
-        UIManager.Instance?.MoveInventoryCursor(new Vector2(x, y));
+        //Help가 켜져있으면 좌/우로 페이지 전환만
+        var help = UIManager.Instance != null ? UIManager.Instance.GetHelpPanel() : null;
+        bool helpOpen = help != null && help.gameObject.activeInHierarchy;
+        if (helpOpen)
+        {
+            Debug.Log($"[MoveUI->Help] x={x}");
+            if (x > 0) help.Next();
+            else if (x < 0) help.Prev();
+            return;
+        }
+
+        //인벤이 켜져있으면 인벤 커서 이동
+        if (UIManager.Instance != null && UIManager.Instance.IsInventoryOpen)
+        {
+            Debug.Log($"[MoveUI->Inventory] x={x} y={y}");
+            UIManager.Instance.MoveInventoryCursor(new Vector2(x, y));
+            return;
+        }
     }
 
 
@@ -574,6 +586,8 @@ public class PlayerController : MonoBehaviour
     //일시정지 키
     public void OnPause(InputAction.CallbackContext ctx)
     {
+
+
         if (!ctx.performed) 
         {
             return;
@@ -595,41 +609,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnNavigate(InputAction.CallbackContext ctx)
-    {
-        if (UIManager.Instance == null)
-        {
-            return;
-        }    
-            
-        if (!ctx.started)
-        {
-            return;
-        }    
-            
-        //Pause 열려있을 때만 Help 페이지 넘김 처리
-        if (!UIManager.Instance.IsPauseOpen)
-        {
-            return;
-        }
-
-        var help = UIManager.Instance.GetHelpPanel();
-        if (help == null || !help.gameObject.activeInHierarchy)
-        {
-            return;
-        }
-
-        Vector2 vector = ctx.ReadValue<Vector2>();
-        if (vector.x > 0.5f)
-        {
-            help.Next();
-        }    
-            
-        else if (vector.x < -0.5f)
-        {
-            help.Prev();
-        }
-    }
+    
 
 
 
