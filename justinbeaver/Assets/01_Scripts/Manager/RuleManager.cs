@@ -170,5 +170,7 @@ public class RuleManager : MonoBehaviour
     public void SetFailCount(int count)
     {
         escapeFailCount = Mathf.Max(0, count);
+
+        OnEscapeFailedVisual?.Invoke(escapeFailCount);
     }
 }
