@@ -619,23 +619,33 @@ public class UIManager : MonoBehaviour
 
     public void HidePauseUI()
     {
-        if (pauseUI == null) return;
+        if (pauseUI == null)
+        {
+            return;
+        }
 
         pauseUI.SetActive(false);
         Time.timeScale = 1f;
 
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        bool keepLocked = HasAnyModalOpenExceptPause();
+
         if (player != null)
         {
-            player.SetInputLocked(false);
+            player.SetInputLocked(keepLocked);
         }
+        RestoreFocusToTopmostUI();
 
-        if (EventSystem.current != null)
+        if (keepLocked)
         {
-            EventSystem.current.SetSelectedGameObject(null);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
 
@@ -901,5 +911,76 @@ public class UIManager : MonoBehaviour
         //UI 선택 초기화
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
+    }
+
+
+    private bool HasAnyModalOpenExceptPause()
+    {
+        //pauseUI 제외, 플레이어 조작을 막아야 하는 UI들 체크
+        if (inventoryUI != null && inventoryUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (shopUI != null && shopUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (upgradeUI != null && upgradeUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (gameFailUI != null && gameFailUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (gameSuccessUI != null && gameSuccessUI.activeSelf)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    private void RestoreFocusToTopmostUI()
+    {
+        // 우선순위, 실패/성공 > 업그레이드 > 상점 > 인벤
+        if (gameFailUI != null && gameFailUI.activeSelf)
+        {
+            FocusFirstSelectable(gameFailUI);
+            return;
+        }
+
+        if (gameSuccessUI != null && gameSuccessUI.activeSelf)
+        {
+            FocusFirstSelectable(gameSuccessUI);
+            return;
+        }
+
+        if (upgradeUI != null && upgradeUI.activeSelf)
+        {
+            FocusFirstSelectable(upgradeUI);
+            return;
+        }
+
+        if (shopUI != null && shopUI.activeSelf)
+        {
+            FocusFirstSelectable(shopUI);
+            return;
+        }
+
+        if (inventoryUI != null && inventoryUI.activeSelf)
+        {
+            FocusFirstSelectable(inventoryUI);
+            return;
+        }
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }

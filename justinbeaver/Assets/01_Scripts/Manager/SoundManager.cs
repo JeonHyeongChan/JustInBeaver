@@ -229,4 +229,12 @@ public class SoundManager : MonoBehaviour
         if (humanFootstepSource.isPlaying)
             humanFootstepSource.Stop();
     }
+
+    public void MuteBGM(bool mute)
+    {
+        if (bgmSource == null)
+            return;
+
+        bgmSource.mute = mute;
+    }
 }

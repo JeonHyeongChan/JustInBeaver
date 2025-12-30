@@ -11,10 +11,21 @@ public class EndingCutscene : MonoBehaviour
 
     private void Awake()
     {
-        if (rootUI) rootUI.SetActive(false);
+        ResetState();
+    }
+
+    private void ResetState() // 재생 조건 정리
+    {
+        played = false;
+
+        if (rootUI)
+            rootUI.SetActive(false);
 
         if (videoPlayer != null)
-            videoPlayer.enabled = true;
+        {
+            videoPlayer.Stop();
+            videoPlayer.enabled = false;
+        }
     }
 
     public void PlayEnding()
@@ -25,7 +36,10 @@ public class EndingCutscene : MonoBehaviour
         {
             return;
         }
+
         played = true;
+        SoundManager.Instance?.MuteBGM(true);
+
         Time.timeScale = 0f;
 
         if (rootUI)
@@ -49,11 +63,7 @@ public class EndingCutscene : MonoBehaviour
         {
             Debug.LogWarning("VideoPlayer GameObject was inactive -> activating it now");
             videoPlayer.gameObject.SetActive(true);
-        }
-
-        videoPlayer.prepareCompleted -= OnPrepared;
-        videoPlayer.loopPointReached -= OnFinished;
-
+        }        
 
         Debug.Log("Preparing video...");
         videoPlayer.Stop();
@@ -72,6 +82,10 @@ public class EndingCutscene : MonoBehaviour
     private void OnFinished(VideoPlayer vp)
     {
         Time.timeScale = 1f;
+        SoundManager.Instance?.MuteBGM(false);
+
+        ResetState();
+
         SceneManager.LoadScene("TitleScene");
-    }
+    }      
 }
