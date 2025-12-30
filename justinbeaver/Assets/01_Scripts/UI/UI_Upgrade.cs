@@ -74,15 +74,15 @@ public class UI_Upgrade : MonoBehaviour
         if (stats == null)
         {
             SetText(gatherSpeedText, "Gather Speed: -");
-            SetText(strengthLevelText, "Strength Lv: 1");
-            SetText(strengthCostText, "Wood x3, Stone x2");
+            SetText(strengthLevelText, "힘 Lv: 1");
+            SetText(strengthCostText, "Wood x3");
             if (strengthUpgradeButton) strengthUpgradeButton.interactable = false;
             return;
         }
 
         // 현재 수치
         SetText(gatherSpeedText, $"Gather Speed: {stats.Strength:0.0}");
-        SetText(strengthLevelText, $"Strength Lv: {stats.StrengthLevel}");
+        SetText(strengthLevelText, $"힘 Lv: {stats.StrengthLevel}");
 
         // 다음 업그레이드 
         var next = stats.GetNextStrengthUpgradeData();
@@ -111,13 +111,13 @@ public class UI_Upgrade : MonoBehaviour
 
         if (home == null)
         {
-            SetText(houseLevelText, "House Lv: 0");
+            SetText(houseLevelText, "집 Lv: 0");
             SetText(houseCostText, "House Materials: 0");
             if (houseUpgradeButton) houseUpgradeButton.interactable = false;
             return;
         }
 
-        SetText(houseLevelText, $"House Lv: {home.CurrentLevel}");
+        SetText(houseLevelText, $"집 Lv: {home.CurrentLevel}");
 
         var next = home.GetNextUpgradeData();
         if (next == null)
