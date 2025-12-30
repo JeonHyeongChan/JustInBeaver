@@ -738,4 +738,10 @@ public class PlayerController : MonoBehaviour
         jumpLocked = true;
         isRolling = false;
     }
+
+    public bool IsHoldingEscapeHold()
+    {
+        //탈출(RequiresHold) 진행 중인지
+        return isHoldingInteract && holdingTarget != null && holdingTarget.RequiresHold;
+    }
 }

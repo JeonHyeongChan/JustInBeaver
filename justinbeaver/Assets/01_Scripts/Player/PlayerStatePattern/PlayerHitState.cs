@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class PlayerHitState : MonoBehaviour, IPlayerState
 {
     private PlayerContext playerContext;
@@ -17,33 +16,40 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
 
     public void Enter()
     {
-        if (playerContext.playerController)
+        var pc = playerContext != null ? playerContext.playerController : null;
+        bool isEscapingHold = (pc != null) && pc.IsHoldingEscapeHold();
+
+        if (!isEscapingHold && pc != null)
         {
-            playerContext.playerController.enabled = false;
+            pc.enabled = false;
         }
 
-        //if (playerContext.playerRigid)
-        //{
-        //    //기존 속도 제거
-        //    playerContext.playerRigid.linearVelocity = Vector3.zero;
-        //    playerContext.playerRigid.angularVelocity = Vector3.zero;
-        //}
+        //탈출 홀드가 아닐 때만 멈춤 처리
+        if (!isEscapingHold)
+        {
+            var rb = playerContext != null ? playerContext.playerRigid : null;
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
 
         //피격 점멸 시작
-        var blinker = playerContext.GetComponent<HitBlinker>();
+        var blinker = playerContext != null ? playerContext.GetComponent<HitBlinker>() : null;
         if (blinker != null)
         {
             blinker.StartBlink(hitDuration);
         }
 
         // 피격 시 3초 이동속도 버프
-        var buff = playerContext.GetComponent<PlayerSpeedBuff>();
+        var buff = playerContext != null ? playerContext.GetComponent<PlayerSpeedBuff>() : null;
         if (buff != null)
         {
             buff.ApplyHitSpeedBoot();
         }
 
-        var anim = playerContext.GetAnimatorSafe();
+        var anim = playerContext != null ? playerContext.GetAnimatorSafe() : null;
         if (anim != null)
         {
             anim.SetBool(HashHit, true);
@@ -54,31 +60,28 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
 
     public void FixedUpdate()
     {
-        var rigid = playerContext.playerRigid;
+        var rb = playerContext != null ? playerContext.playerRigid : null;
+        if (rb == null) return;
 
-        if (rigid == null)
-        {
-            return;
-        }
+        var pc = playerContext != null ? playerContext.playerController : null;
+        bool isEscapingHold = (pc != null) && pc.IsHoldingEscapeHold();
+        if (isEscapingHold) return; // 탈출 홀드 중에는 y속도 제한도 하지 않음
 
-        var vel = rigid.linearVelocity;
+        var vel = rb.linearVelocity;
         if (vel.y > MaxUpSpeedDuringHit)
         {
             vel.y = MaxUpSpeedDuringHit;
-            rigid.linearVelocity = vel;
+            rb.linearVelocity = vel;
         }
     }
 
-
     public void Update()
     {
-        if (Time.time < endTime)
-        {
-            return;
-        }    
-            
+        if (Time.time < endTime) return;
+
         //HP 확인
-        if (playerContext.playerhealth != null && playerContext.playerhealth.currentHealth <= 0)
+        if (playerContext != null && playerContext.playerhealth != null &&
+            playerContext.playerhealth.currentHealth <= 0)
         {
             playerContext.playerStateMachine.ChangeState(new PlayerDieState(playerContext));
         }
@@ -88,14 +91,24 @@ public class PlayerHitState : MonoBehaviour, IPlayerState
         }
     }
 
-    
     public void Exit()
     {
         //피격 점멸 종료   
-        var blinker = playerContext.GetComponent<HitBlinker>();
+        var blinker = playerContext != null ? playerContext.GetComponent<HitBlinker>() : null;
         if (blinker != null)
         {
             blinker.StopBlink();
+        }
+
+        var anim = playerContext != null ? playerContext.GetAnimatorSafe() : null;
+        if (anim != null)
+        {
+            anim.SetBool(HashHit, false);
+        }
+
+        if (playerContext != null && playerContext.playerController != null)
+        {
+            playerContext.playerController.enabled = true;
         }
     }
 }
