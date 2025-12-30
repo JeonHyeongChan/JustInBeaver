@@ -7468,7 +7468,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u2190\u2191\u2192\u2193 : \uC774\uB3D9  Shift  : \uAD6C\uB974\uAE30 
     Tab : \uC778\uBCA4\uD1A0\uB9AC \uC5F4\uAE30\nZ : \uC0C1\uD638\uC791\uC6A9  X
-    : \uC544\uC774\uD15C \uBC84\uB9AC\uAE30  C : \uB2EB\uAE30"
+    : \uAC08\uBB34\uB9AC  C : \uC544\uC774\uD15C \uBC84\uB9AC\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50230ac2020fff34296f518f98a2521d, type: 2}
   m_sharedMaterial: {fileID: 3005385958793425524, guid: 50230ac2020fff34296f518f98a2521d, type: 2}
