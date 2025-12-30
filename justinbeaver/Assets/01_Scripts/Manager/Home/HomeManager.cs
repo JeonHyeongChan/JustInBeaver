@@ -102,6 +102,8 @@ public class HomeManager : MonoBehaviour
 
         OnHouseLevelChanged?.Invoke(level); // 이벤트
 
+        GameManager.Instance?.SaveGame();
+
         //엔딩 NPC 활성화 체크                
     }
 
@@ -124,7 +126,13 @@ public class HomeManager : MonoBehaviour
     private void ApplyFarmingItems(int level)
     {
         //ObjectManager
-    }    
+    }
+
+    public void SetLevel(int level)
+    {
+        currentLevel = Mathf.Clamp(level, 1, MaxLevel);
+        ApplyHouseLevel(currentLevel);
+    }
 
     private void CheckEndingNPC(int level)
     {

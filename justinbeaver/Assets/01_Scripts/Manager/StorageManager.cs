@@ -43,6 +43,17 @@ public class StorageManager : MonoBehaviour
     {
         //전체 초기화: 창고에 저장된 모든 재료를 0으로 만듬
         storageItems.Clear();
+
+        //var data = new SaveData
+        //{
+        //    houseLevel = 1,
+        //    failCountAtcurrentLevel = 0,
+        //    storedItems = new List<StoredItem>()
+        //};
+
+        //SaveManager.Save(data); // 빈 세이브로 덮어씌우기
+
+        //SaveManager.Delete(); // 리셋시 세이브파일 삭제
         OnStorageChanged?.Invoke();
     }
 
@@ -135,6 +146,41 @@ public class StorageManager : MonoBehaviour
 
             if (storageItems[cost.item] <= 0)
                 storageItems.Remove(cost.item);
+        }
+
+        OnStorageChanged?.Invoke();
+    }
+
+    public List<StoredItem> ExportSaveData()
+    {
+        var list = new List<StoredItem>();
+
+        foreach (var temp in storageItems)
+        {
+            list.Add(new StoredItem
+            {
+                itemId = temp.Key.itemId,
+                count = temp.Value
+            });
+        }
+
+        return list;
+    }
+
+    public void ImportSaveData(List<StoredItem> items)
+    {
+        storageItems.Clear();
+
+        if (items == null)
+            return;
+
+        foreach (var item in items)
+        {
+            var data = Resolve(item.itemId);
+            if (data == null)
+                continue;
+
+            storageItems[data] = item.count;
         }
 
         OnStorageChanged?.Invoke();
