@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -50,8 +49,8 @@ public class UIManager : MonoBehaviour
 
     public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
     public bool IsPauseOpen => pauseUI != null && pauseUI.activeSelf;
-    
 
+    private bool freezeByEscapeSuccess = false;
 
 
     private void Awake()
@@ -491,13 +490,29 @@ public class UIManager : MonoBehaviour
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
+
+        //게임 정지 처리
+        if (!freezeByEscapeSuccess)
+        {
+            freezeByEscapeSuccess = true;
+
+            //시간 멈춤
+            Time.timeScale = 0f;
+
+            // 커서 표시
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         var button = gameSuccessUI.GetComponentInChildren<Button>();
         if (button != null)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
-       
+
+        //UI 포커스
+        FocusFirstSelectable(gameSuccessUI);
     }
 
     /// <summary>
@@ -572,8 +587,35 @@ public class UIManager : MonoBehaviour
         if (gameSuccessUI != null)
             gameSuccessUI.SetActive(false);
 
+        //정지 해제
+        if (freezeByEscapeSuccess)
+        {
+            freezeByEscapeSuccess = false;
+            if (!(pauseUI != null && pauseUI.activeSelf))
+            {
+                Time.timeScale = 1f;
+            }
+        }
+
+        var player = FindAnyObjectByType<PlayerController>();
+        bool keepLocked = HasAnyModalOpenExceptPause();
+        player?.SetInputLocked(keepLocked);
+
+        //커서도 동일하게
+        if (keepLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            RestoreFocusToTopmostUI();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(null);
+        }
         GameManager.Instance.HandlePlayerRespawn();
-        RunLootTracker.Instance?.Clear();
     }
 
 
@@ -625,7 +667,11 @@ public class UIManager : MonoBehaviour
         }
 
         pauseUI.SetActive(false);
-        Time.timeScale = 1f;
+
+        if (!freezeByEscapeSuccess)
+        {
+            Time.timeScale = 1f;
+        }
 
         var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         bool keepLocked = HasAnyModalOpenExceptPause();
@@ -646,6 +692,8 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+      
     }
 
 
