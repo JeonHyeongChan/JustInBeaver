@@ -31,6 +31,7 @@ public class RuleManager : MonoBehaviour
     public event Action OnTotalResetRequired;       // 전체 리셋
     public event Action OnEndingCondition;          // 엔딩 조건달성
     public event Action OnEscapeSucceeded;          // 탈출 성공 시
+    public event Action<int> OnEscapeFailedVisual;  // 포크레인
 
     public bool IsTotalReset { get; private set; }
 
@@ -85,6 +86,7 @@ public class RuleManager : MonoBehaviour
 
         Debug.Log($"CurrentFaild: {escapeFailCount}");
 
+        OnEscapeFailedVisual?.Invoke(escapeFailCount);
         GameManager.Instance?.SaveGame();
 
         CheckTotalReset();
