@@ -25,7 +25,10 @@ public class EndingCutscene : MonoBehaviour
         {
             return;
         }
+
         played = true;
+        SoundManager.Instance?.MuteBGM(true);
+
         Time.timeScale = 0f;
 
         if (rootUI)
@@ -72,6 +75,7 @@ public class EndingCutscene : MonoBehaviour
     private void OnFinished(VideoPlayer vp)
     {
         Time.timeScale = 1f;
+        SoundManager.Instance?.MuteBGM(false);
         SceneManager.LoadScene("TitleScene");
     }
 }
