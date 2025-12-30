@@ -548,9 +548,32 @@ public class PlayerController : MonoBehaviour
         if (x == 0 && y == 0)
         {
             return;
-        }    
-            
-        UIManager.Instance?.MoveInventoryCursor(new Vector2(x, y));
+        }
+
+        
+        //Pause + Help 열려있으면 Help 페이지 전환
+        if (UIManager.Instance != null &&
+            UIManager.Instance.IsPauseOpen &&
+            UIManager.Instance.GetHelpPanel() != null &&
+            UIManager.Instance.GetHelpPanel().gameObject.activeInHierarchy)
+        {
+            Debug.Log($"[MoveUI] x={x} pause={UIManager.Instance.IsPauseOpen} helpActive={UIManager.Instance.GetHelpPanel()?.gameObject.activeSelf}");
+            if (x > 0)
+            {
+                UIManager.Instance.GetHelpPanel().Next();
+            }
+            else
+            {
+                UIManager.Instance.GetHelpPanel().Prev();
+            }
+            return;
+        }
+
+        //인벤토리 이동
+        if (UIManager.Instance != null && UIManager.Instance.IsInventoryOpen)
+        {
+            UIManager.Instance.MoveInventoryCursor(new Vector2(x, 0));
+        }
     }
 
 
@@ -597,41 +620,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnNavigate(InputAction.CallbackContext ctx)
-    {
-        if (UIManager.Instance == null)
-        {
-            return;
-        }    
-            
-        if (!ctx.started)
-        {
-            return;
-        }    
-            
-        //Pause 열려있을 때만 Help 페이지 넘김 처리
-        if (!UIManager.Instance.IsPauseOpen)
-        {
-            return;
-        }
-
-        var help = UIManager.Instance.GetHelpPanel();
-        if (help == null || !help.gameObject.activeInHierarchy)
-        {
-            return;
-        }
-
-        Vector2 vector = ctx.ReadValue<Vector2>();
-        if (vector.x > 0.5f)
-        {
-            help.Next();
-        }    
-            
-        else if (vector.x < -0.5f)
-        {
-            help.Prev();
-        }
-    }
+    
 
 
 
