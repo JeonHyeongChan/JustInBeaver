@@ -410,6 +410,11 @@ public class UIManager : MonoBehaviour
 
         grid.RebindSlots();
         bool ok = grid.TryAddItem(itemId);
+        if(ok)
+{
+            RunLootTracker.Instance?.AddItem(itemId, 1);
+        }
+
         return ok;
     }
 
@@ -491,6 +496,7 @@ public class UIManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
+       
     }
 
     /// <summary>
@@ -566,6 +572,7 @@ public class UIManager : MonoBehaviour
             gameSuccessUI.SetActive(false);
 
         GameManager.Instance.HandlePlayerRespawn();
+        RunLootTracker.Instance?.Clear();
     }
 
 
