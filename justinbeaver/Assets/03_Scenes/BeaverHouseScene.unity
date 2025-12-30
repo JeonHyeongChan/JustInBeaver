@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wood x30, Stone x20, Iron x10, Glass x20
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 651a13d301c65f0499a02eb5dcc18eb1, type: 2}
   m_sharedMaterial: {fileID: -4600558591397107315, guid: 651a13d301c65f0499a02eb5dcc18eb1, type: 2}
@@ -5438,7 +5438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: cost
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 651a13d301c65f0499a02eb5dcc18eb1, type: 2}
   m_sharedMaterial: {fileID: -4600558591397107315, guid: 651a13d301c65f0499a02eb5dcc18eb1, type: 2}
