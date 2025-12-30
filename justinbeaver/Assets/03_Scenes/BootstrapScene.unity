@@ -164,6 +164,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StorageManager
   itemDatabase: {fileID: 0}
+--- !u!1001 &185628589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1893987264}
+    m_Modifications:
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -960
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -540
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432478131858422626, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+      propertyPath: m_Name
+      value: EndingVideo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+--- !u!4 &185628590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1117937103739238602, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+  m_PrefabInstance: {fileID: 185628589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &185628591 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 487703534751360214, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+  m_PrefabInstance: {fileID: 185628589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &353897620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007452303679095742, guid: 53252db245b4c244ca8973dde5b59dca, type: 3}
@@ -628,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc3d097c5ebc784cbc4bf86a1c19482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndingCutscene
-  videoPlayer: {fileID: 487703534751360214, guid: 6030e87a055d8ac4b8fee9263c0b2573, type: 3}
+  videoPlayer: {fileID: 185628591}
   rootUI: {fileID: 2134859241}
 --- !u!1 &1730322012
 GameObject:
@@ -808,7 +875,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8038224536813542355, guid: e1bad76dd2c1bfb46882e54739ad7f38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 185628590}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1bad76dd2c1bfb46882e54739ad7f38, type: 3}
 --- !u!224 &1893987264 stripped

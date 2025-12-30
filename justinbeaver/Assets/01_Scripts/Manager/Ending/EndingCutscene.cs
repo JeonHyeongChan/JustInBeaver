@@ -26,7 +26,7 @@ public class EndingCutscene : MonoBehaviour
             return;
         }
         played = true;
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
         if (rootUI)
         {
@@ -51,8 +51,8 @@ public class EndingCutscene : MonoBehaviour
             videoPlayer.gameObject.SetActive(true);
         }
 
-        //videoPlayer.prepareCompleted -= OnPrepared;
-        //videoPlayer.loopPointReached -= OnFinished;
+        videoPlayer.prepareCompleted -= OnPrepared;
+        videoPlayer.loopPointReached -= OnFinished;
 
 
         Debug.Log("Preparing video...");
