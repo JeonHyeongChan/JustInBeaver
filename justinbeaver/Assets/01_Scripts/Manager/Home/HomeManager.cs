@@ -102,6 +102,8 @@ public class HomeManager : MonoBehaviour
 
         OnHouseLevelChanged?.Invoke(level); // 이벤트
 
+        GameManager.Instance?.SaveGame();
+
         //엔딩 NPC 활성화 체크                
     }
 

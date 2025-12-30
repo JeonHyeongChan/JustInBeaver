@@ -29,6 +29,8 @@ public class StorageTransfer : MonoBehaviour
                 continue;
             }
             StorageManager.Instance.AddItems(kv.Key, kv.Value);
+
+            GameManager.Instance?.SaveGame();
         }
 
         //이관된 재료는 인벤에서 제거
@@ -38,7 +40,7 @@ public class StorageTransfer : MonoBehaviour
             return d != null && d.type == ItemType.ingredient;
         });
 
-        SaveAfterSuccess(); // 세이브
+        //SaveAfterSuccess(); // 세이브
 
         Debug.Log("[StorageTransfer]");
     }
@@ -100,14 +102,20 @@ public class StorageTransfer : MonoBehaviour
     /// <summary>
     /// 세이브
     /// </summary>
-    private void SaveAfterSuccess()
-    {
-        var data = new SaveData();
-
-        data.houseLevel = HomeManager.Instance.CurrentLevel;
-        data.failCountAtcurrentLevel = RuleManager.Instance.GetEscapeFailCount();
-        data.storedItems = StorageManager.Instance.ExportSaveData();
-
-        SaveManager.Save(data);
-    }
+    //private void SaveAfterSuccess()
+    //{
+    //    if (RuleManager.Instance != null && RuleManager.Instance.IsTotalReset)
+    //    {
+    //        Debug.Log("Blocked to TotalReset");
+    //        return;
+    //    }
+    //
+    //    var data = new SaveData();
+    //
+    //    data.houseLevel = HomeManager.Instance.CurrentLevel;
+    //    data.failCountAtcurrentLevel = RuleManager.Instance.GetEscapeFailCount();
+    //    data.storedItems = StorageManager.Instance.ExportSaveData();
+    //
+    //    SaveManager.Save(data);
+    //}
 }

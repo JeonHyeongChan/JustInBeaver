@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -31,6 +32,7 @@ public class RuleManager : MonoBehaviour
     public event Action OnEndingCondition;          // 엔딩 조건달성
     public event Action OnEscapeSucceeded;          // 탈출 성공 시
 
+    public bool IsTotalReset { get; private set; }
 
     private void Awake()
     {
@@ -67,7 +69,6 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeSuccess()
     {
-
         escapeSuccessCount++;
         OnEscapeSucceeded?.Invoke();
         UIManager.Instance?.ShowEscapeSuccessUI();
@@ -83,6 +84,8 @@ public class RuleManager : MonoBehaviour
         escapeFailCount++;
 
         Debug.Log($"CurrentFaild: {escapeFailCount}");
+
+        GameManager.Instance?.SaveGame();
 
         CheckTotalReset();
     }
@@ -119,9 +122,30 @@ public class RuleManager : MonoBehaviour
         {
             currentState = GameState.Reseting;
             escapeFailCount = 0; // 실패 누적 초기화
+            IsTotalReset = true;
 
+            ForceResetSave();
             OnTotalResetRequired?.Invoke();
         }
+    }
+
+    public void ClearTotalResetPoint()
+    {
+        IsTotalReset = false;
+    }
+
+    private void ForceResetSave()
+    {
+        Debug.Log("[RuleManager] Force Reset Save");
+
+        var data = new SaveData
+        {
+            houseLevel = 1,
+            failCountAtcurrentLevel = 0,
+            storedItems = new List<StoredItem>()
+        };
+
+        SaveManager.Save(data);
     }
 
     //==============일단 읽기전용==============

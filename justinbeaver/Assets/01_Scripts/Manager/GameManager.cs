@@ -84,6 +84,16 @@ public class GameManager : MonoBehaviour
         //게임 초기화
         if (scene.name == "BeaverHouseScene")
         {
+            if (RuleManager.Instance.IsTotalReset)
+            {
+                InitializeGame(); // 리셋시 새게임으로 강제하기
+                StorageManager.Instance?.ImportSaveData(null);
+                RuleManager.Instance.ClearTotalResetPoint();
+
+                IsContinue = false;
+                return;
+            }
+
             if (IsContinue)
             {
                 StartCoroutine(ApplyContinueDataWhenReady()); // 세이브체크
@@ -208,33 +218,63 @@ public class GameManager : MonoBehaviour
     /// 이어하기 적용
     /// </summary>
     private IEnumerator ApplyContinueDataWhenReady()
-    {
+    {      
+        if (RuleManager.Instance.IsTotalReset) // 리셋 중이면 금지
+        {
+            Debug.Log("[Continue] Blocked due to TotalReset");
+            yield break;
+        }
+
         if (!SaveManager.HasSave())
             yield break;
-
-        while (ItemManager.Instance == null || StorageManager.Instance == null)
-            yield return null;
+      
+        //while (ItemManager.Instance == null || StorageManager.Instance == null)
+        //    yield return null;
 
         var data = SaveManager.Load();
         if (data == null)
             yield break;
 
-        Debug.Log("[Continue] Apply Save Data (Delayed)");
+        //Debug.Log("[Continue] Apply Save Data (Delayed)");
 
         HomeManager.Instance.SetLevel(data.houseLevel);
         RuleManager.Instance.SetFailCount(data.failCountAtcurrentLevel);
         StorageManager.Instance.ImportSaveData(data.storedItems);
 
         yield return null; // UI 바인딩 프레임 보장
-
-        //InitializeGame();
-
-        //var bar = FindAnyObjectByType<UI_StorageBar>(FindObjectsInactive.Include);
-        //bar?.Refresh(); // UI 강제보정
     }
 
     public void SetContinue()
     {
         IsContinue = true;
+    }
+
+    /// <summary>
+    /// 세이브
+    /// </summary>
+    public void SaveGame()
+    {
+        if (RuleManager.Instance == null ||
+            StorageManager.Instance == null ||
+            HomeManager.Instance == null)
+            return;
+
+        if (RuleManager.Instance.IsTotalReset)
+            return; // 리셋 중에는 저장 금지
+
+        var data = new SaveData
+        {
+            houseLevel = HomeManager.Instance.CurrentLevel,
+            failCountAtcurrentLevel = RuleManager.Instance.GetEscapeFailCount(),
+            storedItems = StorageManager.Instance.ExportSaveData()
+        };
+
+        SaveManager.Save(data);
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("[GameManager] Application Quit → Save");
+        SaveGame();
     }
 }
