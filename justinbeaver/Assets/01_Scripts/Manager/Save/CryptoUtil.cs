@@ -6,7 +6,7 @@ public class CryptoUtil
 {
     //JustINBeaver 전용 AES Key (32 bytes)
     private static readonly byte[] Key =
-        Encoding.UTF8.GetBytes("JUSTINBEAVER_AES_KEY_32BYTE!");
+        Encoding.UTF8.GetBytes("JUSTINBEAVER_AES_KEY_32BYTE!!");
 
     //JustINBeaver 전용 AES IV (16 bytes)
     private static readonly byte[] IV =
