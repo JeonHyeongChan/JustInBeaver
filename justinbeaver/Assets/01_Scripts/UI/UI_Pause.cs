@@ -35,14 +35,13 @@ public class UI_Pause : MonoBehaviour
     //옵션
     public void OnClickOption()
     {
-        if (optionsPanel != null)
+        if (optionsPanel == null)
         {
-            optionsPanel.SetActive(true);
+            Debug.LogWarning("[UI_Pause] optionsPanel is NULL (not assigned).");
+            return;
         }
-        if (helpPanel != null)
-        {
-            helpPanel.SetActive(false);
-        }
+        SetPanels(main: false, options: true, help: false);
+        Select(firstOptionsButton);
     }
 
 
@@ -51,6 +50,16 @@ public class UI_Pause : MonoBehaviour
     {
         SetPanels(main: false, options: false, help: true);
         Select(firstHelpButton);
+
+        var cg = helpPanel != null ? helpPanel.GetComponent<CanvasGroup>() : null;
+        if (cg != null)
+        {
+            cg.alpha = 1f;
+            cg.interactable = true;
+            cg.blocksRaycasts = true;
+        }
+
+        Debug.Log($"[UI_Pause] Help activeSelf={helpPanel?.activeSelf} (after SetPanels)");
     }
 
 
@@ -88,22 +97,15 @@ public class UI_Pause : MonoBehaviour
 
     private void SetPanels(bool main, bool options, bool help)
     {
-        if (mainPanel != null)
-        {
-            mainPanel.SetActive(main);
-        }
+        Debug.Log($"[UI_Pause] SetPanels main={main} options={options} help={help} | " +
+                  $"mainPanel={(mainPanel ? mainPanel.name : "NULL")} " +
+                  $"optionsPanel={(optionsPanel ? optionsPanel.name : "NULL")} " +
+                  $"helpPanel={(helpPanel ? helpPanel.name : "NULL")}");
 
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetActive(options);
-        }    
-            
-        if (helpPanel != null)
-        {
-            helpPanel.SetActive(help);
-        }
+        if (mainPanel != null) mainPanel.SetActive(main);
+        if (optionsPanel != null) optionsPanel.SetActive(options);
+        if (helpPanel != null) helpPanel.SetActive(help);
     }
-
     private void Select(Button btn)
     {
         if (btn == null)
@@ -133,5 +135,4 @@ public class UI_Pause : MonoBehaviour
             return false;
         }
     }
-
 }
