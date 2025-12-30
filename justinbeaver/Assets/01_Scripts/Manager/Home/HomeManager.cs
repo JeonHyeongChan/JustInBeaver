@@ -104,7 +104,11 @@ public class HomeManager : MonoBehaviour
 
         GameManager.Instance?.SaveGame();
 
-        //엔딩 NPC 활성화 체크                
+        //엔딩 NPC 활성화 체크
+        if (level >= MaxLevel)
+        {
+            RuleManager.Instance?.ForceEndingReady();
+        }
     }
 
     private void ResetHouseLevel()
@@ -139,15 +143,5 @@ public class HomeManager : MonoBehaviour
         //if (level >= 5)
         //    .SetActive(true);
         
-    }
-
-    //private bool HasEnoughMaterials(HouseUpgradeData data)
-    //{
-    //
-    //}
-
-    //private void ConsumeMaterials(HouseUpgradeData data)
-    //{
-    //
-    //}
+    }  
 }

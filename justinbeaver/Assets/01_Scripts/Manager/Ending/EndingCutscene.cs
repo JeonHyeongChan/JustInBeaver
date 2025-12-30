@@ -16,6 +16,8 @@ public class EndingCutscene : MonoBehaviour
 
     public void PlayEnding()
     {
+        Debug.Log("PlayEnding called");
+
         if (played)
         {
             return;
@@ -30,8 +32,10 @@ public class EndingCutscene : MonoBehaviour
 
         if (videoPlayer == null)
         {
+            Debug.LogError("VideoPlayer is NULL");
             return;
         }
+        Debug.Log("Preparing video...");
         videoPlayer.Stop();
         videoPlayer.Prepare();
         videoPlayer.prepareCompleted += OnPrepared;
@@ -40,6 +44,7 @@ public class EndingCutscene : MonoBehaviour
 
     private void OnPrepared(VideoPlayer vp)
     {
+        Debug.Log("Prepared, playing video");
         vp.prepareCompleted -= OnPrepared;
         vp.Play();
     }

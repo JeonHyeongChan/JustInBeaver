@@ -173,4 +173,14 @@ public class RuleManager : MonoBehaviour
 
         OnEscapeFailedVisual?.Invoke(escapeFailCount);
     }
+
+
+    public void ForceEndingReady()
+    {
+        if (endingTriggered) return;
+
+        endingTriggered = true;
+        currentState = GameState.EndingReady;
+        OnEndingCondition?.Invoke();
+    }
 }
