@@ -246,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 373984140552414170, guid: f4d1aeea91e627848adf45e6205ff8e7, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 9d32b8851cc95bb468880b411bfba045, type: 2}
+      objectReference: {fileID: 23800000, guid: 0eecb2e3d24e43a43ba79a688cdcda2c, type: 2}
     - target: {fileID: 7197843822809367640, guid: f4d1aeea91e627848adf45e6205ff8e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.03
@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapFloor_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8334135473154113335, guid: f4d1aeea91e627848adf45e6205ff8e7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d0da0bc40ef412c4da6d356ff6dafbb6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
