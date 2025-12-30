@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
 public class UI_Upgrade : MonoBehaviour
 {
@@ -48,26 +47,10 @@ public class UI_Upgrade : MonoBehaviour
 
         Refresh();
         UIManager.Instance?.RefreshWeightGauge();
-        //StartCoroutine(Reselect());
+        
         if (gameObject.activeInHierarchy)
             ReselectImmediate();
-    }
-
-    //private IEnumerator Reselect()
-    //{
-    //    yield return null; // next frame
-    //    if (EventSystem.current == null) yield break;
-    //
-    //    // 우선 힘강화 버튼이 아직 눌릴 수 있으면 그걸 잡고
-    //    if (strengthUpgradeButton != null && strengthUpgradeButton.interactable)
-    //        EventSystem.current.SetSelectedGameObject(strengthUpgradeButton.gameObject);
-    //    // 아니면 집 업글 버튼
-    //    else if (houseUpgradeButton != null && houseUpgradeButton.interactable)
-    //        EventSystem.current.SetSelectedGameObject(houseUpgradeButton.gameObject);
-    //    // 아니면 닫기 버튼  제발
-    //    else if (exitButton != null)
-    //        EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
-    //}
+    }    
 
     private void OnClickHouseUpgrade()
     {
@@ -75,8 +58,8 @@ public class UI_Upgrade : MonoBehaviour
         if (home == null) return;
 
         home.TryUpgradeHome(); 
-        Refresh();
-        //StartCoroutine(Reselect());
+        Refresh();        
+
         if (gameObject.activeInHierarchy)
             ReselectImmediate();
     }
