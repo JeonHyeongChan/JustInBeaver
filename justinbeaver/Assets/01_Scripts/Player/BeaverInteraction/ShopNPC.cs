@@ -2,7 +2,7 @@
 
 public class ShopNPC : MonoBehaviour, IInteractable
 {
-    public string InteractText => "[Z] Upgrade House";
+    public string InteractText => "[Z]키를 눌러 대화하기";
     public Transform UIAnchor => transform;
 
     public bool RequiresHold => false;

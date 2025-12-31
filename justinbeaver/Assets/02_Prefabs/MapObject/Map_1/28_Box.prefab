@@ -144,7 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &5594438150072610149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,8 +169,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6606983988620045233}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 9
+  m_Mass: 90
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -185,7 +186,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!65 &-1620949590331049223
 BoxCollider:
@@ -215,7 +216,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6606983988620045233}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.120000005, y: 0.10700001, z: 0.095000006}

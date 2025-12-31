@@ -9,7 +9,7 @@ public class CaptureObject : MonoBehaviour, IPoolable
     [Range(1, 5)] public int requiredHomeLevel = 1;
 
     [TextArea]
-    public string lockedMessage = "The house level is low.";
+    public string lockedMessage = "집 업그레이드 레벨이 낮습니다";
 
     private DropTable dropTable;
 
@@ -56,7 +56,7 @@ public class CaptureObject : MonoBehaviour, IPoolable
         {
             return lockedMessage;
         }
-        return $"House level {requiredHomeLevel} need more";
+        return $"집 업그레이드 레벨 {requiredHomeLevel} 필요";
     }
 
 

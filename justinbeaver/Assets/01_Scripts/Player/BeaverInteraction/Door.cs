@@ -14,7 +14,7 @@ public class Door : MonoBehaviour, IInteractable
     public float HoldDuration => RequiresHold ? escapeHoldTime : 0f;
 
     public string InteractText => RequiresHold
-        ? $"[Z] Hold to Go {sceneName}" : $"[Z] GO {sceneName}";
+        ? $"[Z]키를 유지하여 {sceneName}으로 이동" : $"[Z]키를 눌러 {sceneName}으로 이동";
     public Transform UIAnchor => uiAnchor ? uiAnchor : transform;
 
     public void Interact(PlayerController player)

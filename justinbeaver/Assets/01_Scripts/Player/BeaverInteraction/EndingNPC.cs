@@ -4,7 +4,7 @@ public class EndingNPC : MonoBehaviour, IInteractable
 {
     [SerializeField] private EndingCutscene endingCutscene;
 
-    public string InteractText => "[Z] Watch Ending";
+    public string InteractText => "[Z]키를 눌러 엔딩 감상";
     public Transform UIAnchor => transform;
 
     public bool RequiresHold => false;

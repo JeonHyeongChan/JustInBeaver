@@ -179,7 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 2
-  lockedMessage: house level 2
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!208 &7776563829277130547
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 
 public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
 {
-    public string InteractText => "[Z] Get Item";
+    public string InteractText => "[Z]키를 눌러 아이템 줍기";
     public Transform UIAnchor => transform;
 
     public bool RequiresHold => false;
