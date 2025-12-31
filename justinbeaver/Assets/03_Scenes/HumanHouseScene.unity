@@ -12665,6 +12665,13 @@ MonoBehaviour:
   upgradeData:
   - {fileID: 11400000, guid: 8a43333b733209d47abcc0650a7f5e9a, type: 2}
   - {fileID: 11400000, guid: 94d4fce29ee5f404ab2efd56bd6f26a9, type: 2}
+  - {fileID: 11400000, guid: 71eb0126b3164374693a15340f0b01c9, type: 2}
+  - {fileID: 11400000, guid: 08243e5efc8836c43a3b87ca5aafdec1, type: 2}
+  - {fileID: 11400000, guid: 5285166c8fe74834a923f27a58235a5f, type: 2}
+  - {fileID: 11400000, guid: 129e964314014c546afbd3620e8b4527, type: 2}
+  - {fileID: 11400000, guid: c6ce564e28030604582c2133449af005, type: 2}
+  - {fileID: 11400000, guid: 92e80ee77de4a02419ad505de72ed45b, type: 2}
+  - {fileID: 11400000, guid: 24ab65339e0ee1f4580192dec436e059, type: 2}
 --- !u!4 &1782731133
 Transform:
   m_ObjectHideFlags: 0

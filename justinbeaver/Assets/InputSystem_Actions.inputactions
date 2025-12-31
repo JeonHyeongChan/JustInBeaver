@@ -855,7 +855,7 @@
                 {
                     "name": "",
                     "id": "7b8840c4-c29b-4c16-9e68-074b1a0ce959",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -866,7 +866,7 @@
                 {
                     "name": "",
                     "id": "a0980b7e-0fbb-41c9-bc42-7513666cb9de",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
