@@ -20,6 +20,10 @@ public class AttackState : IEnemyState
     public void Enter()
     {
         agent.isStopped = true;
+
+        SoundManager.Instance?.PlayRandomSFX(SFXType.HumanAttackUgh,
+            SFXType.HumanAttackYah, SFXType.HumanAttackYiya); // 사운드
+
         //if(만약 플레이어가 없다면 리턴)
         enemy.LightViewOn();
         //플레이어 데미지 보내기 or 처리

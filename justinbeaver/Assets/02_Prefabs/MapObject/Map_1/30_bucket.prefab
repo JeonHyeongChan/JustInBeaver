@@ -284,7 +284,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.73, y: 0.71, z: 0.64}
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!114 &1561835595733961910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +299,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 3
-  lockedMessage: house level 3
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &8934215925595121946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!65 &6906367314979081827
 BoxCollider:
@@ -383,7 +384,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4763703274168841515}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}

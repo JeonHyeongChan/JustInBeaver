@@ -66,8 +66,6 @@ public class HouseSpawner : MonoBehaviour
         }
 
         Beaver.Instance.transform.position = spawn.transform.position;
-        Beaver.Instance.transform.rotation = spawn.transform.rotation;
-
-        Debug.Log("Beaver moved to new house spawn point");
+        Beaver.Instance.transform.rotation = spawn.transform.rotation;       
     }
 }

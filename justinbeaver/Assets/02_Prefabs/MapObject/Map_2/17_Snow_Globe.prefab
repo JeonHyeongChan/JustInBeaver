@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3821073725608237041}
   - component: {fileID: 3996449753644333183}
   - component: {fileID: -2294106853037605496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 17_Snow_Globe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 4
-  lockedMessage: house level 4
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &-2466998720386649052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!65 &3821073725608237041
 BoxCollider:
@@ -217,7 +218,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5196611980992076922}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.095000006, y: 0.13100001, z: 0.1}

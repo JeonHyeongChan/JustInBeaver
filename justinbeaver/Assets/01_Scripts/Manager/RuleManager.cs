@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -22,15 +23,19 @@ public class RuleManager : MonoBehaviour
     private GameState currentState = GameState.Playing;
 
     [Header("Rule Data")]
-    private int escapeFailCount = 0;        // 침입 0 ~ 3
-    private int escapeSuccessCount = 0;     // 성공
+    private int escapeFailCount = 0;                // 침입 0 ~ 3
+    private int escapeSuccessCount = 0;             // 성공
+
+    private bool endingTriggered = false;           //엔딩 가드용
 
     //이벤트
     public event Action OnPlayerRespawnRequired;    // 비버 리스폰
     public event Action OnTotalResetRequired;       // 전체 리셋
     public event Action OnEndingCondition;          // 엔딩 조건달성
     public event Action OnEscapeSucceeded;          // 탈출 성공 시
+    public event Action<int> OnEscapeFailedVisual;  // 포크레인
 
+    public bool IsTotalReset { get; private set; }
 
     private void Awake()
     {
@@ -67,7 +72,6 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     public void OnEscapeSuccess()
     {
-
         escapeSuccessCount++;
         OnEscapeSucceeded?.Invoke();
         UIManager.Instance?.ShowEscapeSuccessUI();
@@ -84,13 +88,15 @@ public class RuleManager : MonoBehaviour
 
         Debug.Log($"CurrentFaild: {escapeFailCount}");
 
+        OnEscapeFailedVisual?.Invoke(escapeFailCount);
+        GameManager.Instance?.SaveGame();
+
         CheckTotalReset();
     }
 
     private void HandlePlayerDied()
     {
-        OnEscapeFailed();
-        //OnPlayerRespawnRequired?.Invoke();  // 이벤트
+        OnEscapeFailed();        
         UIManager.Instance?.ShowGameFailUI();
     }
 
@@ -101,10 +107,16 @@ public class RuleManager : MonoBehaviour
     /// </summary>
     private void CheckEndingCondition()
     {
+        if (endingTriggered)
+        {
+            return;
+        }
+            
         //집이 최고레벨인지
         if (HomeManager.Instance != null &&
             HomeManager.Instance.CurrentLevel >= HomeManager.MaxLevel)
         {
+            endingTriggered = true; // 엔딩 트리거 true
             currentState = GameState.EndingReady;
             OnEndingCondition?.Invoke();
         }
@@ -119,9 +131,29 @@ public class RuleManager : MonoBehaviour
         {
             currentState = GameState.Reseting;
             escapeFailCount = 0; // 실패 누적 초기화
+            IsTotalReset = true;
+            endingTriggered = false; // 엔딩 트리거 false;
 
+            ForceResetSave();
             OnTotalResetRequired?.Invoke();
         }
+    }
+
+    public void ClearTotalResetPoint()
+    {
+        IsTotalReset = false;
+    }
+
+    private void ForceResetSave()
+    {        
+        var data = new SaveData
+        {
+            houseLevel = 1,
+            failCountAtcurrentLevel = 0,
+            storedItems = new List<StoredItem>()
+        };
+
+        SaveManager.Save(data);
     }
 
     //==============일단 읽기전용==============
@@ -130,5 +162,22 @@ public class RuleManager : MonoBehaviour
     public void ResetFailCount()
     {
         escapeFailCount = 0; // 홈매니저가 쓸 실패 카운터 리셋
+    }
+
+    public void SetFailCount(int count)
+    {
+        escapeFailCount = Mathf.Max(0, count);
+
+        OnEscapeFailedVisual?.Invoke(escapeFailCount);
+    }
+
+
+    public void ForceEndingReady()
+    {
+        if (endingTriggered) return;
+
+        endingTriggered = true;
+        currentState = GameState.EndingReady;
+        OnEndingCondition?.Invoke();
     }
 }

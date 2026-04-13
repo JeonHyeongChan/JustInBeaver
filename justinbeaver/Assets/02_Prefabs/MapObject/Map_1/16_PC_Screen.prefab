@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!114 &8363048534172512511
 MonoBehaviour:
@@ -159,7 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 4
-  lockedMessage: house level 4
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!54 &5555223849187212348
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5569287509730315166}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.342, y: 0.24000001, z: 0.076000005}

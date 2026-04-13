@@ -192,7 +192,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.71, y: 0.82, z: 0.7}
-  m_Center: {x: 0, y: 0.32, z: 0}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!114 &3150027173674043724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,8 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 2
-  maxCount: 2
+  minCount: 1
+  maxCount: 1
 --- !u!114 &2227660240031300406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 9
   requiredHomeLevel: 3
-  lockedMessage: house level 3
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!208 &-4512617856700336421
 NavMeshObstacle:
   m_ObjectHideFlags: 0

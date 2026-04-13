@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -66,24 +65,15 @@ public class EnemyStatePattern : MonoBehaviour
         hitBox.SetActive(false);
     }
     private void Update()
-    {
-        //if (GameManager.Instance.State != GameState.Playing) return;
+    {       
         if (currentState == null) return;
         currentState.Update();
-
-
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         BindPlayer();   //씬 로드 및 활성화 시 재바인딩
-
-        //if (player == null) return;
-        //gatherSignal = player.GetComponent<PlayerGatherSignal>();
-        //if (gatherSignal == null) return;
-        //gatherSignal.OnGatherStart += HandleGatherStart;
-        //gatherSignal.OnGatherEnd += HandleGatherEnd;
     }
     private void OnDisable()
     {
@@ -120,16 +110,25 @@ public class EnemyStatePattern : MonoBehaviour
             gatherSignal.OnGatherStart += HandleGatherStart;
             gatherSignal.OnGatherEnd += HandleGatherEnd;
         }
-
     }
 
     private void HandleGatherStart(Vector3 anchorPos)
     {
-        Debug.Log("핸들개터스타트");
+        SetAlertTargetPos(anchorPos);
+
+
+        if (currentState is AlertState)
+        {
+           
+            agent.enabled = true;
+            agent.isStopped = false;
+            agent.SetDestination(alertTargetPos);
+            return;
+        }
+
+     
         if (currentState is SleepState || currentState is IdleState)
         {
-            Debug.Log("갈무리 if");
-            SetAlertTargetPos(anchorPos);
             SetState(new AlertState(this));
         }
     }
@@ -275,5 +274,11 @@ public class EnemyStatePattern : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         animator.SetBool("isSleeping", true);
+    }
+
+    //발소리
+    public bool IsInChaseOrAlert()
+    {
+        return currentState is IdleState || currentState is AlertState;
     }
 }

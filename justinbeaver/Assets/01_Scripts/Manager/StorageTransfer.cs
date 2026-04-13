@@ -29,6 +29,8 @@ public class StorageTransfer : MonoBehaviour
                 continue;
             }
             StorageManager.Instance.AddItems(kv.Key, kv.Value);
+
+            GameManager.Instance?.SaveGame();
         }
 
         //이관된 재료는 인벤에서 제거
@@ -36,7 +38,7 @@ public class StorageTransfer : MonoBehaviour
         {
             var d = ItemManager.Instance != null ? ItemManager.Instance.GetItem(id) : null;
             return d != null && d.type == ItemType.ingredient;
-        });
+        });        
 
         Debug.Log("[StorageTransfer]");
     }
@@ -93,5 +95,5 @@ public class StorageTransfer : MonoBehaviour
         if (_boundRule != null)
             _boundRule.OnEscapeSucceeded -= TransferInventoryStorage;
         _boundRule = null;
-    }
+    }   
 }

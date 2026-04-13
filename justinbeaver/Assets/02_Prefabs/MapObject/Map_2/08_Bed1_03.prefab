@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 515851535365152979}
   - component: {fileID: 3120174866199113042}
   - component: {fileID: -2474060518743549872}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 08_Bed1_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.8404746, y: 0.7816026, z: 2.42457}
   m_Center: {x: 0.0000002682209, y: 0.3908013, z: -0.042966187}
@@ -159,7 +159,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.08, y: 1.06, z: 2.69}
-  m_Center: {x: 0.0000002682209, y: 0.3908013, z: -0.042966187}
+  m_Center: {x: 0.0000002682209, y: -0.33, z: -0.042966187}
 --- !u!114 &6437921372231116034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,9 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e50030b9a734e04090dc943277ad090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
-  dropItem: {fileID: 0}
-  minCount: 3
-  maxCount: 3
+  dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
+  minCount: 1
+  maxCount: 2
 --- !u!114 &3120174866199113042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!208 &-2474060518743549872
 NavMeshObstacle:
   m_ObjectHideFlags: 0

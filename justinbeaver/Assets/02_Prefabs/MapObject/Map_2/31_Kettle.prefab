@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -690772490301720198}
   - component: {fileID: -1403400923853960577}
   - component: {fileID: -4594599130800292151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 31_Kettle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
   requiredHomeLevel: 3
-  lockedMessage: house level 3
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &6854268996640160380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 43d8b5c2c199868488658a8b595b455e, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!54 &-690772490301720198
 Rigidbody:
@@ -238,7 +239,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328393602886850459}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.18100001, y: 0.165, z: 0.12900001}

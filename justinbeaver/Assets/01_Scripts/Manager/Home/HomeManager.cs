@@ -82,14 +82,19 @@ public class HomeManager : MonoBehaviour
         StorageManager.Instance.ConsumeItems(data.requiredMaterials);  //여기까지 
         
         currentLevel = data.targetLevel;
+
+        SoundManager.Instance?.PlaySFX(SFXType.HouseUpgrade);
+
         ApplyHouseLevel(currentLevel);
+
+        UIManager.Instance.HideUpgradeUI();
 
         return true;
     }
 
     private void ApplyHouseLevel(int level)
     {
-        Debug.Log($"House Upgrade -> {level}");
+        Debug.Log($"House Upgrade -> {level}");        
         
         ApplyFarmingItems(level);
 
@@ -97,7 +102,13 @@ public class HomeManager : MonoBehaviour
 
         OnHouseLevelChanged?.Invoke(level); // 이벤트
 
-        //엔딩 NPC 활성화 체크                
+        GameManager.Instance?.SaveGame();
+
+        //엔딩 NPC 활성화 체크
+        if (level >= MaxLevel)
+        {
+            RuleManager.Instance?.ForceEndingReady();
+        }
     }
 
     private void ResetHouseLevel()
@@ -105,6 +116,9 @@ public class HomeManager : MonoBehaviour
         Debug.Log($"House level Reset");
 
         currentLevel = 1;
+
+        SoundManager.Instance?.PlaySFX(SFXType.Reset);
+
         ApplyHouseLevel(currentLevel);
     }
     
@@ -116,22 +130,11 @@ public class HomeManager : MonoBehaviour
     private void ApplyFarmingItems(int level)
     {
         //ObjectManager
-    }    
-
-    private void CheckEndingNPC(int level)
-    {
-        //if (level >= 5)
-        //    .SetActive(true);
-        
     }
 
-    //private bool HasEnoughMaterials(HouseUpgradeData data)
-    //{
-    //
-    //}
-
-    //private void ConsumeMaterials(HouseUpgradeData data)
-    //{
-    //
-    //}
+    public void SetLevel(int level)
+    {
+        currentLevel = Mathf.Clamp(level, 1, MaxLevel);
+        ApplyHouseLevel(currentLevel);
+    }    
 }

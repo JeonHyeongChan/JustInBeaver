@@ -2,7 +2,7 @@
 
 public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
 {
-    public string InteractText => "[Z] Get Item";
+    public string InteractText => "[Z]키를 눌러 아이템 줍기";
     public Transform UIAnchor => transform;
 
     public bool RequiresHold => false;
@@ -50,6 +50,8 @@ public class ItemPickup : MonoBehaviour, IInteractable, IPoolable
             _consumed = false; //인벤토리 가득 참이면 다시 주울 수 있게
             return;
         }
+
+        SoundManager.Instance?.PlaySFX(SFXType.ItemCollect); // 사운드
 
         //풀 반환
         Despawn();

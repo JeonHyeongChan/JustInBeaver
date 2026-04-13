@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 
@@ -16,11 +16,15 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject gatherGaugeUI;
     public GameObject escapeResultUI;
+    public GameObject pauseUI;
+    
 
     public UI_GatherGauge gatherGauge;
     public UI_InteractHint interactHint;
     public UI_ItemTooltip itemTooltip;
     public UI_PlayerHearts playerHeart;
+    public UI_WeightGauge weightGauge;
+    public UI_HelpPanel helpPanel;
 
     private PlayerHealth playerHealth;      //구독 해제용
     private PlayerStatsManager boundStats;
@@ -36,12 +40,17 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject victoryUI;
 
-    public UI_WeightGauge weightGauge;
-
+    
+    private const string homeScene = "BeaverHouseScene";
 
     public UI_GatherGauge GatherGauge => gatherGauge;
-    public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
 
+    public UI_HelpPanel GetHelpPanel() => helpPanel;
+
+    public bool IsInventoryOpen => inventoryUI != null && inventoryUI.activeSelf;
+    public bool IsPauseOpen => pauseUI != null && pauseUI.activeSelf;
+
+    private bool freezeByEscapeSuccess = false;
 
 
     private void Awake()
@@ -96,6 +105,13 @@ public class UIManager : MonoBehaviour
         SetInventoryOpen(false);
         HideItemTooltip();
         HideAllUI();
+        ForceCloseUIState();
+
+        if (scene.name == homeScene)
+        {
+            PlayerStatsManager.Instance?.ResetWeightToZero();
+            RefreshWeightGauge();
+        }
     }
 
     /// <summary>
@@ -114,6 +130,8 @@ public class UIManager : MonoBehaviour
         BindGameSuccessUI();
         BindShopUI();
         BindUpgradeUI();
+        BindPauseUI();
+        BindHelpUI();
     }
 
     private void BindGatherGauge()
@@ -123,7 +141,6 @@ public class UIManager : MonoBehaviour
 
         if (gatherGauge == null)
         {
-            Debug.Log("GatherGauge Not Found in this Scene");
             gatherGaugeUI = null;
             return;
         }
@@ -139,7 +156,6 @@ public class UIManager : MonoBehaviour
 
         if (interactHint == null)
         {
-            Debug.Log("InteractHint Not Found in this Scene");
             return;
         }
 
@@ -177,20 +193,33 @@ public class UIManager : MonoBehaviour
 
     private void BindInventory()
     {
-        var root = FindAnyObjectByType<InventoryRootMarker>(FindObjectsInactive.Include);
-        if (root == null)
+        var grid = FindAnyObjectByType<Inventory_Grid>(FindObjectsInactive.Include);
+        if (grid == null)
         {
             inventoryUI = null;
             return;
         }
 
-        inventoryUI = root.gameObject;
-        inventoryUI.SetActive(false); //시작 시 무조건 OFF
+        Transform taget = grid.transform;
+
+        while (taget.parent != null)
+        {
+            if (taget.parent.GetComponent<Canvas>() != null)
+            {
+                break;
+            }
+            taget = taget.parent;
+        }
+        inventoryUI = taget.gameObject;
+
+        //시작 시 강제 OFF
+        inventoryUI.SetActive(false);
+
     }
+
 
     private void BindGameFailUI()
     {
-        Debug.Log("BindGameFailUI");
         gameFailUI = null;
 
         var marker = FindAnyObjectByType<GameFailUIMarker>(FindObjectsInactive.Include);
@@ -206,7 +235,6 @@ public class UIManager : MonoBehaviour
 
     private void BindGameSuccessUI()
     {
-        Debug.Log("BindGameSuccessUI");
         gameSuccessUI = null;
 
         var marker = FindAnyObjectByType<GameSuccessUIMarker>(FindObjectsInactive.Include);
@@ -242,6 +270,7 @@ public class UIManager : MonoBehaviour
         RefreshWeightGauge(); // 씬 로드 직후 한번 반영
     }
 
+
     private void BindShopUI()
     {
         shopUI = null;
@@ -255,6 +284,7 @@ public class UIManager : MonoBehaviour
         shopUI.SetActive(false);
     }
 
+
     private void BindUpgradeUI()
     {
         upgradeUI = null;
@@ -267,6 +297,32 @@ public class UIManager : MonoBehaviour
         upgradeUI = maker.gameObject;
         upgradeUI.SetActive(false);
     }
+
+
+    private void BindPauseUI()
+    {
+        pauseUI = null;
+        var marker = FindAnyObjectByType<PauseUIMarker>(FindObjectsInactive.Include);
+        if (marker == null)
+        {
+            pauseUI = null;
+            return;
+        }
+
+        pauseUI = marker.gameObject;
+        pauseUI.SetActive(false);
+    }
+
+
+    private void BindHelpUI()
+    {
+        helpPanel = FindAnyObjectByType<UI_HelpPanel>(FindObjectsInactive.Include);
+        if (helpPanel != null)
+        {
+            helpPanel.gameObject.SetActive(false);
+        }
+    }
+
 
     public void ToggleInventory()
     {
@@ -309,6 +365,11 @@ public class UIManager : MonoBehaviour
 
     public void MoveInventoryCursor(Vector2 dir)
     {
+        if (inventoryUI == null || !inventoryUI.activeSelf)
+        {
+            return;
+        }
+            
         var grid = inventoryUI.GetComponentInChildren<Inventory_Grid>(true);
         if (grid == null)
         {
@@ -344,6 +405,11 @@ public class UIManager : MonoBehaviour
 
         grid.RebindSlots();
         bool ok = grid.TryAddItem(itemId);
+        if(ok)
+{
+            RunLootTracker.Instance?.AddItem(itemId, 1);
+        }
+
         return ok;
     }
 
@@ -400,10 +466,10 @@ public class UIManager : MonoBehaviour
 
     public void ConfirmGameFail()
     {
-        Debug.Log("ConfirmGameFail CLICKED");
 
         if (gameFailUI != null)
             gameFailUI.SetActive(false);
+        RunLootTracker.Instance?.Clear();
 
         GameManager.Instance.HandlePlayerRespawn();
     }
@@ -419,47 +485,72 @@ public class UIManager : MonoBehaviour
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
+
+        //게임 정지 처리
+        if (!freezeByEscapeSuccess)
+        {
+            freezeByEscapeSuccess = true;
+
+            //시간 멈춤
+            Time.timeScale = 0f;
+
+            // 커서 표시
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         var button = gameSuccessUI.GetComponentInChildren<Button>();
         if (button != null)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
+
+        //UI 포커스
+        FocusFirstSelectable(gameSuccessUI);
     }
 
+    /// <summary>
+    /// 상점UI
+    /// </summary>
     public void ShowShopUI()
     {
-        if (shopUI != null )
+        if (shopUI == null)
         {
-            shopUI.SetActive(true);
-        }
+            return;
+        }            
+        shopUI.SetActive(true);
+
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
-        var button = shopUI.GetComponentInChildren<Button>();
-        if (button != null)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(button.gameObject);
-        }
+        FocusFirstSelectable(shopUI);
     }
 
+
+    /// <summary>
+    /// 스텟 업그레이드 UI
+    /// </summary>
     public void ShowUpgradeUI()
     {
+      
         if (upgradeUI != null)
         {
+            HideShopUI();
             upgradeUI.SetActive(true);
+          
         }
 
         var player = FindAnyObjectByType<PlayerController>();
         player?.SetInputLocked(true);
 
-        var button = upgradeUI.GetComponentInChildren<Button>();
-        if (button != null)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(button.gameObject);
-        }
+        EventSystem.current.SetSelectedGameObject(null);
+        StartCoroutine(DelaySelectFirstButton());
+    }
+    private IEnumerator DelaySelectFirstButton()
+    {
+        yield return null; // 다음 프레임
+        FocusFirstSelectable(upgradeUI);
     }
     public void HideShopUI()
     {
@@ -486,11 +577,38 @@ public class UIManager : MonoBehaviour
     }
     public void ConfirmEscapeSuccess()
     {
-        Debug.Log("ConfirmEscapeSuccess CLICKED");
 
         if (gameSuccessUI != null)
             gameSuccessUI.SetActive(false);
 
+        //정지 해제
+        if (freezeByEscapeSuccess)
+        {
+            freezeByEscapeSuccess = false;
+            if (!(pauseUI != null && pauseUI.activeSelf))
+            {
+                Time.timeScale = 1f;
+            }
+        }
+
+        var player = FindAnyObjectByType<PlayerController>();
+        bool keepLocked = HasAnyModalOpenExceptPause();
+        player?.SetInputLocked(keepLocked);
+
+        //커서도 동일하게
+        if (keepLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            RestoreFocusToTopmostUI();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(null);
+        }
         GameManager.Instance.HandlePlayerRespawn();
     }
 
@@ -516,6 +634,80 @@ public class UIManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 일시정지 UI
+    /// </summary>
+    public void ShowPauseUI()
+    {
+        if (pauseUI == null) return;
+
+        pauseUI.SetActive(true);
+        StopPlayerMotion();
+        Time.timeScale = 0f;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        FocusFirstSelectable(pauseUI);
+    }
+
+
+
+    public void HidePauseUI()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+
+        pauseUI.SetActive(false);
+
+        if (!freezeByEscapeSuccess)
+        {
+            Time.timeScale = 1f;
+        }
+
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        bool keepLocked = HasAnyModalOpenExceptPause();
+
+        if (player != null)
+        {
+            player.SetInputLocked(keepLocked);
+        }
+        RestoreFocusToTopmostUI();
+
+        if (keepLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+      
+    }
+
+
+    public void TogglePauseUI()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+
+        if (pauseUI.activeSelf)
+        {
+            HidePauseUI();
+        }
+        else
+        {
+            ShowPauseUI();
+        }
+    }
+
 
     public UI_HUD hud;
     public void ShowEscapeResultUI(int reward, bool success)
@@ -537,10 +729,10 @@ public class UIManager : MonoBehaviour
         if (inventoryUI) inventoryUI.SetActive(false);
         if (gatherGaugeUI) gatherGaugeUI.SetActive(false);
         if (escapeResultUI) escapeResultUI.SetActive(false);
-        if (shopUI) shopUI.SetActive(false);
         if (upgradeUI) upgradeUI.SetActive(false);
         if (gameOverUI) gameOverUI.SetActive(false);
         if (victoryUI) victoryUI.SetActive(false);
+        if (pauseUI) pauseUI.SetActive(false);
     }
 
     public Dictionary<string, int> CollectInventoryItems()  //(스토리지 매니저 연동) 인벤 아이템id들을 반환 id => 개수
@@ -667,5 +859,170 @@ public class UIManager : MonoBehaviour
         }
         //즉시 1회 반영
         RefreshWeightGauge();
+    }
+
+    public void HandlePauseBack()
+    {
+        if (pauseUI == null)
+        {
+            return;
+        }
+
+        var pause = pauseUI.GetComponent<UI_Pause>();
+        if (pause == null)
+        {
+            return;
+        }
+
+        //UI_Pause 내부에서 현재 패널 상태 판단
+        if (pause.IsInSubPanel)
+        {
+            pause.OnClickBack();
+        }
+        else
+        {
+            HidePauseUI();
+        }
+    }
+
+    private void StopPlayerMotion()
+    {
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        if (player == null) return;
+
+        player.SetInputLocked(true);
+
+        // Rigidbody 기반 정지
+        var rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+
+
+
+    //첫번째 버튼 찾기
+    private void FocusFirstSelectable(GameObject root)
+    {
+        if (root == null || EventSystem.current == null)
+        {
+            return;
+        }
+
+        var buttons = root.GetComponentsInChildren<Button>(true);
+        Button targetBtn = null;
+        foreach (var button in buttons)
+        {
+            if (button != null && button.gameObject.activeInHierarchy && button.interactable)
+            {
+                targetBtn = button;
+                break;
+            }
+        }
+
+        Selectable target = targetBtn != null
+            ? targetBtn
+            : root.GetComponentInChildren<Selectable>(true);
+
+        if (target == null)
+        {
+            return;
+        }
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(target.gameObject);
+    }
+
+
+    private void ForceCloseUIState()
+    {
+        //시간 정상화 (Pause가 켜져있던 상태를 강제로 해제)
+        Time.timeScale = 1f;
+
+        //Pause 패널 강제 OFF
+        if (pauseUI != null) pauseUI.SetActive(false);
+
+        if (shopUI != null) shopUI.SetActive(false);
+        if (upgradeUI != null) upgradeUI.SetActive(false);
+
+        //플레이어 입력 잠금 해제 + 입력맵 Player로 복귀(네가 맵 스위칭 쓰는 경우)
+        var player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
+        player?.SetInputLocked(false);
+
+        //UI 선택 초기화
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
+
+
+    private bool HasAnyModalOpenExceptPause()
+    {
+        //pauseUI 제외, 플레이어 조작을 막아야 하는 UI들 체크
+        if (inventoryUI != null && inventoryUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (shopUI != null && shopUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (upgradeUI != null && upgradeUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (gameFailUI != null && gameFailUI.activeSelf)
+        {
+            return true;
+        }    
+            
+        if (gameSuccessUI != null && gameSuccessUI.activeSelf)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    private void RestoreFocusToTopmostUI()
+    {
+        // 우선순위, 실패/성공 > 업그레이드 > 상점 > 인벤
+        if (gameFailUI != null && gameFailUI.activeSelf)
+        {
+            FocusFirstSelectable(gameFailUI);
+            return;
+        }
+
+        if (gameSuccessUI != null && gameSuccessUI.activeSelf)
+        {
+            FocusFirstSelectable(gameSuccessUI);
+            return;
+        }
+
+        if (upgradeUI != null && upgradeUI.activeSelf)
+        {
+            FocusFirstSelectable(upgradeUI);
+            return;
+        }
+
+        if (shopUI != null && shopUI.activeSelf)
+        {
+            FocusFirstSelectable(shopUI);
+            return;
+        }
+
+        if (inventoryUI != null && inventoryUI.activeSelf)
+        {
+            FocusFirstSelectable(inventoryUI);
+            return;
+        }
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4965204643756238364}
   - component: {fileID: -422290389917672066}
   - component: {fileID: 2431739719670452456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 31_Bottle_Ink_Closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 3
   requiredHomeLevel: 1
-  lockedMessage: The house level is low.
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &4965204643756238364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 1
+  minCount: 0
   maxCount: 1
 --- !u!208 &2431739719670452456
 NavMeshObstacle:
@@ -216,7 +217,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8749367180167493462}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.035, y: 0.043, z: 0.035}

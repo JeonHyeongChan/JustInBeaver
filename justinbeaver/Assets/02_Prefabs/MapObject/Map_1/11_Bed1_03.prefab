@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1980779379428977086
 Transform:
   m_ObjectHideFlags: 0
@@ -136,8 +136,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.23, y: 1.09, z: 2.89}
-  m_Center: {x: 0.00000002980238, y: 0.3908013, z: -0.042966668}
+  m_Size: {x: 2.23, y: 1.22, z: 2.89}
+  m_Center: {x: 0.00000002980238, y: -0.37, z: -0.042966668}
 --- !u!114 &8637741421755499706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 3
-  maxCount: 3
+  minCount: 1
+  maxCount: 2
 --- !u!114 &7230878647894649396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!208 &2330514032869137535
 NavMeshObstacle:
   m_ObjectHideFlags: 0

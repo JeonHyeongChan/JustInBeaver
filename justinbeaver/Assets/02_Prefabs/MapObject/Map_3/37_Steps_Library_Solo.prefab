@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7601645042352955625}
   - component: {fileID: 3449700723372281139}
   - component: {fileID: 5922473628650789330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 37_Steps_Library_Solo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 2
-  maxCount: 2
+  minCount: 1
+  maxCount: 1
 --- !u!114 &3449700723372281139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 7
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!208 &5922473628650789330
 NavMeshObstacle:
   m_ObjectHideFlags: 0

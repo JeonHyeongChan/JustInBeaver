@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4246018920541978418}
   - component: {fileID: 2490280503019395646}
   - component: {fileID: 5783774525470650070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 08_RoomFurniture_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.51202226, y: 0.7727611, z: 0.44282594}
-  m_Center: {x: -0.0032970458, y: 0.38638055, z: 0.02660358}
+  m_Center: {x: -0.0032970458, y: 0.06, z: 0.02660358}
 --- !u!114 &5958326300106487218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
   requiredHomeLevel: 1
-  lockedMessage: The house level is low.
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &2490280503019395646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 3
-  maxCount: 3
+  minCount: 1
+  maxCount: 2
 --- !u!208 &5783774525470650070
 NavMeshObstacle:
   m_ObjectHideFlags: 0

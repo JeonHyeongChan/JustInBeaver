@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class PlayerStats
 {
     public float CurrentHP = 100;

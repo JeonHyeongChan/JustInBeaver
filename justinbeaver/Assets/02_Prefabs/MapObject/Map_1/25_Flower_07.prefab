@@ -152,7 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 5
   requiredHomeLevel: 4
-  lockedMessage: house level 4
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &6227354506563072097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: b2e6ac228bf5c5649853e5d30d20549f, type: 2}
-  minCount: 2
-  maxCount: 12
+  minCount: 1
+  maxCount: 1
 --- !u!208 &927157566854316309
 NavMeshObstacle:
   m_ObjectHideFlags: 0

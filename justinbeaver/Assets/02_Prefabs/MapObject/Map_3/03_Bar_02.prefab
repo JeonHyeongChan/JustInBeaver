@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2262389113564207047}
   - component: {fileID: 7321912237750016035}
   - component: {fileID: 597383420590330496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 03_Bar_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &2262389113564207047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 3
-  maxCount: 3
+  minCount: 1
+  maxCount: 2
 --- !u!65 &7321912237750016035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.97, y: 1.24, z: 2.31}
-  m_Center: {x: 0.00000013411045, y: 0.566792, z: 0.21034724}
+  m_Center: {x: 0.00000013411045, y: 0.06, z: 0.21034724}
 --- !u!208 &597383420590330496
 NavMeshObstacle:
   m_ObjectHideFlags: 0

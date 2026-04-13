@@ -15,12 +15,18 @@ public class PlayerController : MonoBehaviour
     public float rollDuration = 0.35f;   //구르기 지속 시간
     public float rollCooldown = 0.6f;    //구르기 쿨타임
 
+
+    [Header("구르기 무적")]
+    [SerializeField] private bool enableRollInvincible = true;
+
+
     [Header("회전 설정")]
     public float rotateSpeed = 10f;
 
     [Header("애니메이터")]
     public Animator animator;
 
+    private PlayerHealth playerHealth;
     private Rigidbody rigid;
     private Vector2 moveInput;
     private bool isGrounded;
@@ -44,7 +50,8 @@ public class PlayerController : MonoBehaviour
     private bool gatherLocked;
     private bool inputLocked; //입력 잠금
 
-    private bool IsLocked => inventoryLocked || gatherLocked;
+    private bool IsLocked => inventoryLocked || gatherLocked || inputLocked;
+
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundMask;   //Inspector에서 Ground만 체크
@@ -62,6 +69,8 @@ public class PlayerController : MonoBehaviour
     private static readonly int HashJump = Animator.StringToHash("Jump");
     private static readonly int HashRoll = Animator.StringToHash("Roll");
 
+    public bool IsGrounded => isGrounded;
+    public bool IsRolling => isRolling;
 
 
     private void Awake()
@@ -116,11 +125,19 @@ public class PlayerController : MonoBehaviour
         gatherLocked = false;
         isRolling = false;
         moveInput = Vector2.zero;
+
+        //구르기 무적 정리
+        if (playerHealth != null)
+        {
+            playerHealth.SetRollInvincible(false);
+        }
     }
 
 
     private void Jump()
     {
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverJump); // 사운드
+
         animator?.SetTrigger(HashJump);
 
         Vector3 velocity = rigid.linearVelocity;
@@ -159,11 +176,9 @@ public class PlayerController : MonoBehaviour
         Vector3 currentVel = rigid.linearVelocity;
         Vector3 targetVel = move * finalSpeed;
 
-        rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);
-        Debug.Log($"[Move] mul={mul}, finalSpeed={finalSpeed}");
+        rigid.linearVelocity = new Vector3(targetVel.x, currentVel.y, targetVel.z);        
 
-        var stats = PlayerStatsManager.Instance;
-        Debug.Log($"w={stats?.CurrentWeight}, maxW={stats?.MaxWeight}, penalty={penalty}, finalSpeed={finalSpeed}");
+        var stats = PlayerStatsManager.Instance;       
 
         //회전
         if (move.sqrMagnitude > 0.001f)
@@ -187,8 +202,9 @@ public class PlayerController : MonoBehaviour
         if (isRolling)
         {
             return;
-        }    
+        }
 
+        SoundManager.Instance?.PlaySFX(SFXType.BeaverRoll);
 
         //방향이 없다면 현재 바라보는 방향으로 구르기
         if (desiredDir.sqrMagnitude < 0.001f)
@@ -204,7 +220,14 @@ public class PlayerController : MonoBehaviour
         nextRollTime = Time.time + rollCooldown;
 
 
-        //롤 애니메이션 트리거
+        //구르기 무적 ON
+        if (enableRollInvincible && playerHealth != null)
+        {
+            playerHealth.SetRollInvincible(true);
+        }
+
+
+        //구르기 애니메이션 트리거
         if (animator != null)
         {
             animator.SetTrigger(HashRoll);
@@ -230,6 +253,12 @@ public class PlayerController : MonoBehaviour
         if (Time.time >= rollEndTime)
         {
             isRolling = false;
+
+            //구르기 무적 OFF
+            if (enableRollInvincible && playerHealth != null)
+            {
+                playerHealth.SetRollInvincible(false);
+            }
         }
     }
 
@@ -413,20 +442,32 @@ public class PlayerController : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        if (isInventoryOpen) //인벤토리 열려있으면 Z 상호작용 금지
+        //Z를 뗐을 때는 잠금 상태여도 무조건 취소 처리
+        if (ctx.canceled)
         {
+            CancelHold();
             return;
-        }    
-            
-        if (inputLocked)
+        }
+
+        //인벤토리 열려있으면 Z 상호작용 금지
+        if (isInventoryOpen) 
         {
             return;
         }
 
+        //홀드 진행 중이 아니라면 잠금 상태에서는 시작 금지
+        if (inputLocked && !isHoldingInteract)
+        {
+            return;
+        }
+            
+
         var detector = GetComponent<PlayerInteractDetector>();
         if (detector == null)
+        {
             return;
-
+        }
+            
         //홀드 시작
         if (ctx.started)
         {
@@ -487,29 +528,39 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //인벤토리 이동 입력 (화살표키)
+    //인벤토리 이동, 도움말 창 이동 입력 (화살표키)
     public void OnMoveUI(InputAction.CallbackContext ctx)
     {
-        if (!isInventoryOpen)
+        if (!ctx.started)
         {
             return;
-        }
+        }    
 
-        if (!ctx.performed)
-        {
-            return;
-        }
-        
         Vector2 v = ctx.ReadValue<Vector2>();
         int x = v.x > 0.5f ? 1 : (v.x < -0.5f ? -1 : 0);
         int y = v.y > 0.5f ? 1 : (v.y < -0.5f ? -1 : 0);
-        
+
         if (x == 0 && y == 0)
         {
             return;
+        }    
+            
+        //Help가 켜져있으면 좌/우로 페이지 전환만
+        var help = UIManager.Instance != null ? UIManager.Instance.GetHelpPanel() : null;
+        bool helpOpen = help != null && help.gameObject.activeInHierarchy;
+        if (helpOpen)
+        {
+            if (x > 0) help.Next();
+            else if (x < 0) help.Prev();
+            return;
         }
 
-        UIManager.Instance?.MoveInventoryCursor(new Vector2(x, y));
+        //인벤이 켜져있으면 인벤 커서 이동
+        if (UIManager.Instance != null && UIManager.Instance.IsInventoryOpen)
+        {
+            UIManager.Instance.MoveInventoryCursor(new Vector2(x, y));
+            return;
+        }
     }
 
 
@@ -529,6 +580,32 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance?.SetInventoryOpen(false);
         SetInputLocked(false);
     }
+
+    //일시정지 키
+    public void OnPause(InputAction.CallbackContext ctx)
+    {
+
+
+        if (!ctx.performed) 
+        {
+            return;
+        }
+
+        if (UIManager.Instance == null) 
+        {
+            return;
+        }
+
+        //인벤이 열려있을 때 ESC로 인벤 먼저 닫기
+        if (UIManager.Instance.IsInventoryOpen)
+        {
+            UIManager.Instance.SetInventoryOpen(false);
+            return;
+        }
+
+        UIManager.Instance.TogglePauseUI();
+    }
+
 
     public void SetInventoryOpen(bool open)
     {
@@ -625,5 +702,39 @@ public class PlayerController : MonoBehaviour
 
             isRolling = false;
         }
+    }
+
+    public void ForceDrop(float downVelocity = -15f, bool zeroUpVelocityFirst = true)
+    {
+        if (rigid == null)
+        {
+            return;
+        }
+
+        if (isGrounded)
+        {
+            return;
+        }
+
+        var vel = rigid.linearVelocity;
+
+        //위로 튀는 중이면 y 속도 제거
+        if (zeroUpVelocityFirst && vel.y > 0f)
+        {
+            vel.y = 0f;
+        }
+
+        //아래로 강제 낙하
+        vel.y = Mathf.Min(vel.y, downVelocity);
+        rigid.linearVelocity = vel;
+
+        jumpLocked = true;
+        isRolling = false;
+    }
+
+    public bool IsHoldingEscapeHold()
+    {
+        //탈출(RequiresHold) 진행 중인지
+        return isHoldingInteract && holdingTarget != null && holdingTarget.RequiresHold;
     }
 }

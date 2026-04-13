@@ -26,4 +26,7 @@ public class ItemData : ScriptableObject
 
     [Header("Weight")]
     [Range(1, 5)] public float itemWeight = 1f;
+
+    [Header("Sound")]
+    public SFXType spawnSFX;
 }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4818935886677962760}
   - component: {fileID: -8827791434473558962}
   - component: {fileID: 5332319907672721891}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 33_Book_Row_A (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 4
   requiredHomeLevel: 1
-  lockedMessage: The house level is low.
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!54 &4818935886677962760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650047994294917053}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.37800002, y: 0.13000001, z: 0.072000004}

@@ -13,8 +13,6 @@ public class UI_WeightGauge : MonoBehaviour
 
     public void Refresh(float currentWeight, float maxWeight)
     {
-        Debug.Log($"[WeightUI] Refresh on {gameObject.name} id={GetInstanceID()} ratio={currentWeight / Mathf.Max(1f, maxWeight)}");
-        Debug.Log($"[WeightUI] Refresh cur={currentWeight}, max={maxWeight}, fillImageNull={fillImage == null}");
         float max = Mathf.Max(1f, maxWeight);
         float ratio = Mathf.Clamp01(currentWeight / max);
 

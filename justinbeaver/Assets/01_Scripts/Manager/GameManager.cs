@@ -6,14 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool IsContinue { get; private set; }
+
     public int SelectedMapIndex { get; private set; } = -1;
 
     private void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
+            Instance = this;            
             SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드
         }
         else
@@ -82,7 +83,25 @@ public class GameManager : MonoBehaviour
         //게임 초기화
         if (scene.name == "BeaverHouseScene")
         {
-            InitializeGame();
+            if (RuleManager.Instance.IsTotalReset)
+            {
+                InitializeGame(); // 리셋시 새게임으로 강제하기
+                StorageManager.Instance?.ImportSaveData(null);
+                RuleManager.Instance.ClearTotalResetPoint();
+
+                IsContinue = false;
+                return;
+            }
+
+            if (IsContinue)
+            {
+                StartCoroutine(ApplyContinueDataWhenReady()); // 세이브체크
+                IsContinue = false;
+            }
+            else
+            {
+                InitializeGame(); // 새게임 및 리스폰
+            }
         }
 
         //스폰 위치로 비버 이동
@@ -117,9 +136,12 @@ public class GameManager : MonoBehaviour
         animator.ResetTrigger("Die");
 
         context.playerController.enabled = true;                                // 컨트롤러 활성화
-        context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
 
-        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제        
+        controller.SetInputLocked(false);                                       // 플레이어 입력 잠금 해제
+        controller.SetInventoryLocked(false);                                   // 인벤토리 잠금 해제
+        controller.SetInventoryOpen(false);                                     // 인벤토리 오픈 해제
+
+        context.playerStateMachine.ChangeState(new PlayerNormalState(context)); // 기본 상태로
     }
 
     /// <summary>
@@ -189,5 +211,64 @@ public class GameManager : MonoBehaviour
         Beaver.Instance.transform.rotation = spawnPoint.transform.rotation;
 
         Debug.Log($"{spawnPoint.gameObject.scene.name}");
+    }
+
+    /// <summary>
+    /// 이어하기 적용
+    /// </summary>
+    private IEnumerator ApplyContinueDataWhenReady()
+    {      
+        if (RuleManager.Instance.IsTotalReset) // 리셋 중이면 금지
+        {
+            Debug.Log("[Continue] Blocked due to TotalReset");
+            yield break;
+        }
+
+        if (!SaveManager.HasSave())
+            yield break;            
+
+        var data = SaveManager.Load();
+        if (data == null)
+            yield break;        
+
+        HomeManager.Instance.SetLevel(data.houseLevel);
+        RuleManager.Instance.SetFailCount(data.failCountAtcurrentLevel);
+        StorageManager.Instance.ImportSaveData(data.storedItems);
+
+        yield return null; // UI 바인딩 프레임 보장
+    }
+
+    public void SetContinue()
+    {
+        IsContinue = true;
+    }
+
+    /// <summary>
+    /// 세이브
+    /// </summary>
+    public void SaveGame()
+    {
+        if (RuleManager.Instance == null ||
+            StorageManager.Instance == null ||
+            HomeManager.Instance == null)
+            return;
+
+        if (RuleManager.Instance.IsTotalReset)
+            return; // 리셋 중에는 저장 금지
+
+        var data = new SaveData
+        {
+            houseLevel = HomeManager.Instance.CurrentLevel,
+            failCountAtcurrentLevel = RuleManager.Instance.GetEscapeFailCount(),
+            storedItems = StorageManager.Instance.ExportSaveData()
+        };
+
+        SaveManager.Save(data);
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("[GameManager] Application Quit → Save");
+        SaveGame();
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 [Serializable]
 public struct MaterialCost
 {
-    [Header("Material")]
-    public ItemData item;   // Wood, Stone, Metal, Glass
+    [Header("재료")]
+    public ItemData item;   //Wood, Stone, Metal, Glass
 
-    [Header("Amount")]
+    [Header("수량")]
     public int amount;
 }

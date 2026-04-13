@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3074692999367438174}
   - component: {fileID: 2978291024781347192}
   - component: {fileID: 4578292530698994620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Closet_Fancy_B_Fantasy_Door_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: -802928889504282687}
   - component: {fileID: 3684643505230186008}
   - component: {fileID: -8917389706269000114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 32_Closet_Fancy_B_Fantasy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptureObject
   gatherDuration: 10
   requiredHomeLevel: 1
-  lockedMessage: house level 1
+  lockedMessage: 
+  availableMessage: Press [Z] to Gather.
 --- !u!114 &-2976668780662089183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTable
   dropItem: {fileID: 11400000, guid: 337150e2b858da8498e65b218151db06, type: 2}
-  minCount: 3
-  maxCount: 3
+  minCount: 1
+  maxCount: 2
 --- !u!64 &4908103481484927610
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -240,7 +241,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.61, y: 2.26, z: 0.89}
-  m_Center: {x: 0, y: 1.12, z: 0}
+  m_Center: {x: 0, y: 0.63, z: 0}
 --- !u!54 &3684643505230186008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ GameObject:
   - component: {fileID: 119251548308685524}
   - component: {fileID: 7540064527670080505}
   - component: {fileID: 1657921341181371130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Closet_Fancy_B_Fantasy_Door_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +409,7 @@ GameObject:
   - component: {fileID: 4189047636502082825}
   - component: {fileID: 2096031161391536670}
   - component: {fileID: 5011068599568993490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Closet_Fancy_B_Fantasy_Drawer_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +521,7 @@ GameObject:
   - component: {fileID: 570835689663903152}
   - component: {fileID: 4772368643443899550}
   - component: {fileID: 7351067485420625963}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Closet_Fancy_B_Fantasy_Drawer_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +633,7 @@ GameObject:
   - component: {fileID: 8253046772171023112}
   - component: {fileID: 3116541728607087836}
   - component: {fileID: 1316093509857127728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Closet_Fancy_B_Fantasy_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
